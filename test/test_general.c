@@ -8,8 +8,7 @@
 
 static char *general_test()
 {
-
-	return (0);
+	return (assert_printf("basic format", ft_printf, "Hello, world", FT_NULL));
 }
 
 int main()

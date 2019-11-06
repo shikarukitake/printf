@@ -278,3 +278,57 @@ void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
 	}
 	print_results();
 }
+
+char	*read_file_to_str(FILE *fp)
+{
+	char *buf;
+
+	buf = (char*)malloc(BUF_SIZE);
+	fread(buf, BUF_SIZE, 1, fp);
+	fclose(fp);
+	return (buf);
+}
+
+//
+//char	*get_printf_output(print_func_ptr_t printf_ptr, const char *fmt, ...)
+//{
+//	va_list args;
+//	va_start(args, fmt);
+//
+//	printf_ptr(fmt, args);
+//	return (read_file_to_str(fp));
+////}
+
+char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
+{
+	char *st_output;
+	char *ft_output;
+	va_list args;
+	va_start(args, fmt);
+	FILE *fp1;
+	FILE *fp2;
+
+	fp1 = freopen("FT_OUTPUT", "w", stdout);
+	ft_printf_ptr(fmt, args);
+	ft_output = read_file_to_str(fp1);
+	fclose(fp1);
+	remove("FT_OUTPUT");
+	fp2 = freopen("ST_OUTPUT", "w", stdout);
+	printf(fmt, args);
+	st_output = read_file_to_str(fp2);
+	fclose(fp2);
+	mu_assert_str("[ft] != [st]", ft_output, st_output);
+	return (0);
+}
+
+char	*make_printf_msg(const char *func_name, const char *message, const char *fmt, const char *output)
+{
+	char *msg;
+	char *error;
+
+	msg = (char *)malloc(BUF_SIZE);
+	error = make_full_msg(message, func_name, " -> ");
+	sprintf(msg, "%s : for format str = [%s] %s\n", error, fmt, output);
+	free(error);
+	return (msg);
+}

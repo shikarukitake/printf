@@ -11,14 +11,16 @@ include_directories(general/libft/includes)
 add_executable(Usage other/main_usage.c)
 
 # Libft with getline
-file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/libft/ft_*.c")
-set(LIBFT_FILES ${LIBFT_FILES} ${PROJECT_SOURCE_DIR}/libft/get_next_line.c)
-
+file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
+set(LIBFT_FILES ${LIBFT_FILES} ${PROJECT_SOURCE_DIR}/general/libft/get_next_line.c)
+add_library(ft STATIC ${LIBFT_FILES})
 
 
 #printf
 set(PRINTF_FILES general/ft_printf.c)
-add_library(ftprintf STATIC ${PRINTF_FILES})
+add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES})
+
+
 
 #printf general test
 add_executable(printf_general_test test/test_general.c)
