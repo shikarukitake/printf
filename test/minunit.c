@@ -285,19 +285,8 @@ char	*read_file_to_str(FILE *fp)
 
 	buf = (char*)malloc(BUF_SIZE);
 	fread(buf, BUF_SIZE, 1, fp);
-	fclose(fp);
 	return (buf);
 }
-
-//
-//char	*get_printf_output(print_func_ptr_t printf_ptr, const char *fmt, ...)
-//{
-//	va_list args;
-//	va_start(args, fmt);
-//
-//	printf_ptr(fmt, args);
-//	return (read_file_to_str(fp));
-////}
 
 char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
 {
@@ -305,20 +294,29 @@ char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
 	char *ft_output;
 	va_list args;
 	va_start(args, fmt);
-	FILE *fp1;
-	FILE *fp2;
-
-	fp1 = freopen("FT_OUTPUT", "w", stdout);
+	FILE *ft_fp;
+	FILE *st_fp;
+	
+	st_fp = fopen("ST_OUTPUT", "wr");
+	vfprintf(st_fp, fmt, args);
+	fclose(st_fp);
+	st_fp = fopen("ST_OUTPUT", "r+");
+	st_output = read_file_to_str(st_fp);
+	fclose(st_fp);
+	remove("ST_OUTPUT");
+	int old_stdout = dup(fileno(stdout));  // Consider dup(STDOUT_FILENO) or dup(fileno(stdout))
+	ft_fp = freopen("FT_OUTPUT", "a", stdout);
 	ft_printf_ptr(fmt, args);
-	ft_output = read_file_to_str(fp1);
-	fclose(fp1);
+	fclose(stdout);
+	fclose(ft_fp);
+	ft_fp = fopen("FT_OUTPUT", "r");
+	ft_output = read_file_to_str(ft_fp);
+	fclose(ft_fp);
 	remove("FT_OUTPUT");
-	fp2 = freopen("ST_OUTPUT", "w", stdout);
-	printf(fmt, args);
-	st_output = read_file_to_str(fp2);
-	fclose(fp2);
+	ft_fp = fdopen(old_stdout, "w");
+	*stdout = *ft_fp; // Unreliable!
 	mu_assert_str("[ft] != [st]", ft_output, st_output);
-	return (0);
+ 	return (0);
 }
 
 char	*make_printf_msg(const char *func_name, const char *message, const char *fmt, const char *output)
@@ -326,9 +324,9 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 	char *msg;
 	char *error;
 
-	msg = (char *)malloc(BUF_SIZE);
+	msg = (char*)malloc(BUF_SIZE);
 	error = make_full_msg(message, func_name, " -> ");
-	sprintf(msg, "%s : for format str = [%s] %s\n", error, fmt, output);
+	sprintf(msg, "%s: %sformat = {%s}, test_output = {%s}%s", error, KYEL, fmt, output, KWHT);
 	free(error);
 	return (msg);
 }

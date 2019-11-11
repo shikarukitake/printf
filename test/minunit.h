@@ -93,6 +93,6 @@ char	*make_ui_msg(char* message, unsigned f1, unsigned f2, const char* fname);
 
 #define mu_assert_prf(message, program, args, file) do {if (test_program_and_file(program, args, file)) {return make_full_msg(message, __FUNCTION_NAME__, " -> ");} } while (0)
 
-//#define mu_assert_printf(message, ft_printf, fmt, args...) do { char *output;if ((output = assert_printf(ft_printf, fmt, args))){return make_printf_msg(__FUNCTION_NAME__, message, fmt, output);}} while(0)
+#define mu_assert_printf(message, ft_printf, fmt, args...) do { char *output; if ((output = assert_printf(ft_printf, fmt, args))){return make_printf_msg(__FUNCTION_NAME__, message, fmt, output);}} while(0)
 
 #endif

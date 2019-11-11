@@ -8,7 +8,9 @@
 
 static char *general_test()
 {
-	return (assert_printf("basic format", ft_printf, "Hello, world", FT_NULL));
+	mu_assert_printf("basic format test", ft_printf, "%s", "Hello, world!");
+	//mu_assert_printf("NULL argument", ft_printf, "%s = %s", "wat", "WTF?!");
+	return (0);
 }
 
 int main()
