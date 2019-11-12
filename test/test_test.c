@@ -18,7 +18,13 @@ static char *another_general_test()
 	return (0);
 }
 
+static char *check_number()
+{
+	mu_assert_printf("two arguments", ft_printf, "%d", 1);
+	return (0);
+}
+
 int main()
 {
-	test_all("General", 2,  another_general_test, general_test);
+	test_all("another_general_test", 3, another_general_test, general_test, check_number);
 }

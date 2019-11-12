@@ -33,6 +33,10 @@ add_executable(printf_simple_str_test test/simple_str_test.c)
 target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libmu.a)
 target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libftprintf.a)
 
+#printf simple num test
+add_executable(printf_simple_num_test test/test_nums.c)
+target_link_libraries(printf_simple_num_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(printf_simple_num_test ${PROJECT_BINARY_DIR}/libftprintf.a)
 # minunit
 
 add_library(mu STATIC test/minunit.c test/capture.c)

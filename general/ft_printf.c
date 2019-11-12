@@ -20,7 +20,12 @@ int		ft_printf(const char *format, ...)
 			if (format[i] == 's')
 				ft_putstr(va_arg(args, char*));
 		}
+		else
+		{
+			ft_putchar(format[i]);
+		}
 		i++;
 	}
+	va_end(args);
 	return (0);
 }
