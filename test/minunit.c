@@ -307,42 +307,16 @@ char	*get_printf_output(const char *fmt, ...)
 	return (st_output);
 }
 
-int g_stdout = 0;
 
-int		duplicate_stdout()
+char 	*mu_compare_printf_output(const char *ft_output, const char *st_output)
 {
-	if (g_stdout == 0)
-		g_stdout = fileno(stdout);
-	int old_stdout = dup(g_stdout);
-	freopen("FT_OUTPUT", "a", stdout);
-	return (old_stdout);
-}
-
-void	return_stdout(int old_stdout)
-{
-	FILE *ft_fp;
-
-	fclose(stdout);
-	ft_fp = fdopen(old_stdout, "w");
-	*stdout = *ft_fp; // Unreliable!
-	g_stdout = old_stdout;
-}
-
-char 	*mu_compare_printf_output(const char *st_output)
-{
-	char *ft_output;
-	FILE *ft_fp;
 	char *cmp_result;
 
-	ft_fp = fopen("FT_OUTPUT", "r");
-	ft_output = read_file_to_str(ft_fp);
-	fclose(ft_fp);
-	remove("FT_OUTPUT");
 	if (strcmp(ft_output, st_output) != 0)
 	{
 		cmp_result = (char*)malloc(MU_BUF_SIZE);
 		bzero(cmp_result, MU_BUF_SIZE);
-		sprintf(cmp_result, "[ft] != [st] : [%s] != [%s]", ft_output, st_output);
+		sprintf(cmp_result, "ft[%s] != st[%s]", ft_output, st_output);
 		return (cmp_result);
 	}
  	return (0);
@@ -355,7 +329,7 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 
 	msg = (char*)malloc(MU_BUF_SIZE);
 	error = make_full_msg(message, func_name, " -> ");
-	sprintf(msg, "%s: format = {%s}, test_output = {%s}", error, fmt, output);
+	sprintf(msg, "%s:\n\t format = {%s}\n\t test_output = %s", error, fmt, output);
 	free(error);
 	return (msg);
 }

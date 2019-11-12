@@ -35,4 +35,4 @@ target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libftprintf.a
 
 # minunit
 
-add_library(mu STATIC test/minunit.c)
+add_library(mu STATIC test/minunit.c test/capture.c)
