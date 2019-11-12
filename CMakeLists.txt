@@ -23,9 +23,15 @@ add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES})
 
 
 #printf general test
-add_executable(printf_general_test test/test_general.c)
-target_link_libraries(printf_general_test ${PROJECT_BINARY_DIR}/libmu.a)
-target_link_libraries(printf_general_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_executable(printf_test_test test/test_test.c)
+target_link_libraries(printf_test_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(printf_test_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+
+
+#printf simple str test
+add_executable(printf_simple_str_test test/simple_str_test.c)
+target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libftprintf.a)
 
 # minunit
 

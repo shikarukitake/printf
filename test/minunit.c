@@ -22,7 +22,7 @@ int g_tests_run = 0;
 char*	make_full_msg(const char* msg, const char* fname, const char* sep) {
     char* full_msg;
     
-    full_msg = (char*)malloc(BUF_SIZE);
+    full_msg = (char*)malloc(MU_BUF_SIZE);
     sprintf(full_msg, "%s %s %s",  fname, sep, msg);
     return full_msg;
 }
@@ -57,7 +57,7 @@ void test_all(const char *test_suite, int n, ...) {
 char* make_str_msg(char* msg, const char* s1, const char* s2, const char* fname) {
     char *full_msg;
 
-    full_msg = (char *)malloc(BUF_SIZE);
+    full_msg = (char *)malloc(MU_BUF_SIZE);
     if (!full_msg)
         return (NULL);
     sprintf(full_msg, "%s -> %s: %s != %s", fname, msg, s1, s2);
@@ -65,26 +65,26 @@ char* make_str_msg(char* msg, const char* s1, const char* s2, const char* fname)
 }
 
 char* make_int_msg(char* message, int  i1, int i2, const char* fname){
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %d != %d", fname, message, i1, i2);
     return msg;
 }
 
 char* make_flt_msg(char* message, double f1, double f2, const char* fname) {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %.2f != %.2f", fname, message, f1, f2);
     return msg;
 }
 
 char* make_ui_msg(char* message, unsigned f1, unsigned f2, const char* fname) {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %u != %u", fname, message, f1, f2);
     return msg;
 }
 
 char *make_mem_msg(char *message, const void *m1, const void *m2, size_t n, const char *fname)
 {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     char s1[n + 1];
     char s2[n + 1];
     memcpy(s1, m1, n);
@@ -120,11 +120,11 @@ int 	is_file_empty(const char *file_name)
 {
 	ssize_t size;
 	int fd;
-	char buf[BUF_SIZE];
+	char buf[MU_BUF_SIZE];
 
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		return (-1);
-	size = read(fd, buf, BUF_SIZE);
+	size = read(fd, buf, MU_BUF_SIZE);
 	return (size == 0);
 }
 
@@ -147,8 +147,8 @@ void generate_unique_name(char *name, const char *filename, const char *prefix)
 
 char 	*assert_files(const char *file1, const char *file2)
 {
-	char diff_file[BUF_SIZE];
-	char cmd_buff[BUF_SIZE];
+	char diff_file[MU_BUF_SIZE];
+	char cmd_buff[MU_BUF_SIZE];
 	static char *error_msg;
 
 	cmd_buff[0] = '\0';
@@ -168,9 +168,9 @@ char 	*assert_files(const char *file1, const char *file2)
 char	*test_program_and_file(const char *prog_name, const char *args, const char *file_name)
 {
 	int fd;
-	char cmd_buff[BUF_SIZE];
+	char cmd_buff[MU_BUF_SIZE];
 	int ret;
-	char test_file[BUF_SIZE];
+	char test_file[MU_BUF_SIZE];
 	char *result;
 	char *error_msg;
 	
@@ -283,22 +283,19 @@ char	*read_file_to_str(FILE *fp)
 {
 	char *buf;
 
-	buf = (char*)malloc(BUF_SIZE);
-	bzero(buf, BUF_SIZE);
-	fread(buf, BUF_SIZE, 1, fp);
+	buf = (char*)malloc(MU_BUF_SIZE);
+	bzero(buf, MU_BUF_SIZE);
+	fread(buf, MU_BUF_SIZE, 1, fp);
 	return (buf);
 }
 
-char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
+char	*get_printf_output(const char *fmt, ...)
 {
 	char *st_output;
-	char *ft_output;
 	va_list args;
-	va_list ft_args;
-	va_start(args, fmt);
-	FILE *ft_fp;
 	FILE *st_fp;
-	
+
+	va_start(args, fmt);
 	st_fp = fopen("ST_OUTPUT", "wr");
 	vfprintf(st_fp, fmt, args);
 	va_end(args);
@@ -307,19 +304,47 @@ char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
 	st_output = read_file_to_str(st_fp);
 	fclose(st_fp);
 	remove("ST_OUTPUT");
-	int old_stdout = dup(fileno(stdout));  // Consider dup(STDOUT_FILENO) or dup(fileno(stdout))
-	ft_fp = freopen("FT_OUTPUT", "a", stdout);
-	va_start(ft_args, fmt);
-	ft_printf_ptr(fmt, ft_args);
-	va_end(ft_args);
+	return (st_output);
+}
+
+int g_stdout = 0;
+
+int		duplicate_stdout()
+{
+	if (g_stdout == 0)
+		g_stdout = fileno(stdout);
+	int old_stdout = dup(g_stdout);
+	freopen("FT_OUTPUT", "a", stdout);
+	return (old_stdout);
+}
+
+void	return_stdout(int old_stdout)
+{
+	FILE *ft_fp;
+
 	fclose(stdout);
 	ft_fp = fdopen(old_stdout, "w");
 	*stdout = *ft_fp; // Unreliable!
+	g_stdout = old_stdout;
+}
+
+char 	*mu_compare_printf_output(const char *st_output)
+{
+	char *ft_output;
+	FILE *ft_fp;
+	char *cmp_result;
+
 	ft_fp = fopen("FT_OUTPUT", "r");
 	ft_output = read_file_to_str(ft_fp);
 	fclose(ft_fp);
 	remove("FT_OUTPUT");
-	mu_assert_str("[ft] != [st]", ft_output, st_output);
+	if (strcmp(ft_output, st_output) != 0)
+	{
+		cmp_result = (char*)malloc(MU_BUF_SIZE);
+		bzero(cmp_result, MU_BUF_SIZE);
+		sprintf(cmp_result, "[ft] != [st] : [%s] != [%s]", ft_output, st_output);
+		return (cmp_result);
+	}
  	return (0);
 }
 
@@ -328,7 +353,7 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 	char *msg;
 	char *error;
 
-	msg = (char*)malloc(BUF_SIZE);
+	msg = (char*)malloc(MU_BUF_SIZE);
 	error = make_full_msg(message, func_name, " -> ");
 	sprintf(msg, "%s: format = {%s}, test_output = {%s}", error, fmt, output);
 	free(error);
