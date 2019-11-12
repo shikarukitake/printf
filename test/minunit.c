@@ -282,12 +282,10 @@ void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
 char	*read_file_to_str(FILE *fp)
 {
 	char *buf;
-	size_t size;
-	
+
 	buf = (char*)malloc(BUF_SIZE);
 	bzero(buf, BUF_SIZE);
 	fread(buf, BUF_SIZE, 1, fp);
-	buf[size] = '\0';
 	return (buf);
 }
 
