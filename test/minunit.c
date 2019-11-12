@@ -282,9 +282,12 @@ void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
 char	*read_file_to_str(FILE *fp)
 {
 	char *buf;
-
+	size_t size;
+	
 	buf = (char*)malloc(BUF_SIZE);
+	bzero(buf, BUF_SIZE);
 	fread(buf, BUF_SIZE, 1, fp);
+	buf[size] = '\0';
 	return (buf);
 }
 
@@ -293,12 +296,14 @@ char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
 	char *st_output;
 	char *ft_output;
 	va_list args;
+	va_list ft_args;
 	va_start(args, fmt);
 	FILE *ft_fp;
 	FILE *st_fp;
 	
 	st_fp = fopen("ST_OUTPUT", "wr");
 	vfprintf(st_fp, fmt, args);
+	va_end(args);
 	fclose(st_fp);
 	st_fp = fopen("ST_OUTPUT", "r+");
 	st_output = read_file_to_str(st_fp);
@@ -306,15 +311,16 @@ char 	*assert_printf(print_func_ptr_t ft_printf_ptr, const char *fmt, ...)
 	remove("ST_OUTPUT");
 	int old_stdout = dup(fileno(stdout));  // Consider dup(STDOUT_FILENO) or dup(fileno(stdout))
 	ft_fp = freopen("FT_OUTPUT", "a", stdout);
-	ft_printf_ptr(fmt, args);
+	va_start(ft_args, fmt);
+	ft_printf_ptr(fmt, ft_args);
+	va_end(ft_args);
 	fclose(stdout);
-	fclose(ft_fp);
+	ft_fp = fdopen(old_stdout, "w");
+	*stdout = *ft_fp; // Unreliable!
 	ft_fp = fopen("FT_OUTPUT", "r");
 	ft_output = read_file_to_str(ft_fp);
 	fclose(ft_fp);
 	remove("FT_OUTPUT");
-	ft_fp = fdopen(old_stdout, "w");
-	*stdout = *ft_fp; // Unreliable!
 	mu_assert_str("[ft] != [st]", ft_output, st_output);
  	return (0);
 }
@@ -326,7 +332,7 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 
 	msg = (char*)malloc(BUF_SIZE);
 	error = make_full_msg(message, func_name, " -> ");
-	sprintf(msg, "%s: %sformat = {%s}, test_output = {%s}%s", error, KYEL, fmt, output, KWHT);
+	sprintf(msg, "%s: format = {%s}, test_output = {%s}", error, fmt, output);
 	free(error);
 	return (msg);
 }
