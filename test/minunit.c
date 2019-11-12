@@ -22,7 +22,7 @@ int g_tests_run = 0;
 char*	make_full_msg(const char* msg, const char* fname, const char* sep) {
     char* full_msg;
     
-    full_msg = (char*)malloc(BUF_SIZE);
+    full_msg = (char*)malloc(MU_BUF_SIZE);
     sprintf(full_msg, "%s %s %s",  fname, sep, msg);
     return full_msg;
 }
@@ -57,7 +57,7 @@ void test_all(const char *test_suite, int n, ...) {
 char* make_str_msg(char* msg, const char* s1, const char* s2, const char* fname) {
     char *full_msg;
 
-    full_msg = (char *)malloc(BUF_SIZE);
+    full_msg = (char *)malloc(MU_BUF_SIZE);
     if (!full_msg)
         return (NULL);
     sprintf(full_msg, "%s -> %s: %s != %s", fname, msg, s1, s2);
@@ -65,26 +65,26 @@ char* make_str_msg(char* msg, const char* s1, const char* s2, const char* fname)
 }
 
 char* make_int_msg(char* message, int  i1, int i2, const char* fname){
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %d != %d", fname, message, i1, i2);
     return msg;
 }
 
 char* make_flt_msg(char* message, double f1, double f2, const char* fname) {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %.2f != %.2f", fname, message, f1, f2);
     return msg;
 }
 
 char* make_ui_msg(char* message, unsigned f1, unsigned f2, const char* fname) {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     sprintf (msg, "%s -> %s: %u != %u", fname, message, f1, f2);
     return msg;
 }
 
 char *make_mem_msg(char *message, const void *m1, const void *m2, size_t n, const char *fname)
 {
-    char* msg = malloc(BUF_SIZE);
+    char* msg = malloc(MU_BUF_SIZE);
     char s1[n + 1];
     char s2[n + 1];
     memcpy(s1, m1, n);
@@ -120,11 +120,11 @@ int 	is_file_empty(const char *file_name)
 {
 	ssize_t size;
 	int fd;
-	char buf[BUF_SIZE];
+	char buf[MU_BUF_SIZE];
 
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		return (-1);
-	size = read(fd, buf, BUF_SIZE);
+	size = read(fd, buf, MU_BUF_SIZE);
 	return (size == 0);
 }
 
@@ -147,8 +147,8 @@ void generate_unique_name(char *name, const char *filename, const char *prefix)
 
 char 	*assert_files(const char *file1, const char *file2)
 {
-	char diff_file[BUF_SIZE];
-	char cmd_buff[BUF_SIZE];
+	char diff_file[MU_BUF_SIZE];
+	char cmd_buff[MU_BUF_SIZE];
 	static char *error_msg;
 
 	cmd_buff[0] = '\0';
@@ -168,9 +168,9 @@ char 	*assert_files(const char *file1, const char *file2)
 char	*test_program_and_file(const char *prog_name, const char *args, const char *file_name)
 {
 	int fd;
-	char cmd_buff[BUF_SIZE];
+	char cmd_buff[MU_BUF_SIZE];
 	int ret;
-	char test_file[BUF_SIZE];
+	char test_file[MU_BUF_SIZE];
 	char *result;
 	char *error_msg;
 	
@@ -277,4 +277,59 @@ void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
 		mu_run_test_timeout(seconds, va_arg(funcs, test_func_ptr_t));
 	}
 	print_results();
+}
+
+char	*read_file_to_str(FILE *fp)
+{
+	char *buf;
+
+	buf = (char*)malloc(MU_BUF_SIZE);
+	bzero(buf, MU_BUF_SIZE);
+	fread(buf, MU_BUF_SIZE, 1, fp);
+	return (buf);
+}
+
+char	*get_printf_output(const char *fmt, ...)
+{
+	char *st_output;
+	va_list args;
+	FILE *st_fp;
+
+	va_start(args, fmt);
+	st_fp = fopen("ST_OUTPUT", "wr");
+	vfprintf(st_fp, fmt, args);
+	va_end(args);
+	fclose(st_fp);
+	st_fp = fopen("ST_OUTPUT", "r+");
+	st_output = read_file_to_str(st_fp);
+	fclose(st_fp);
+	remove("ST_OUTPUT");
+	return (st_output);
+}
+
+
+char 	*mu_compare_printf_output(const char *ft_output, const char *st_output)
+{
+	char *cmp_result;
+
+	if (strcmp(ft_output, st_output) != 0)
+	{
+		cmp_result = (char*)malloc(MU_BUF_SIZE);
+		bzero(cmp_result, MU_BUF_SIZE);
+		sprintf(cmp_result, "ft[%s] != st[%s]", ft_output, st_output);
+		return (cmp_result);
+	}
+ 	return (0);
+}
+
+char	*make_printf_msg(const char *func_name, const char *message, const char *fmt, const char *output)
+{
+	char *msg;
+	char *error;
+
+	msg = (char*)malloc(MU_BUF_SIZE);
+	error = make_full_msg(message, func_name, " -> ");
+	sprintf(msg, "%s:\n\t format = {%s}\n\t test_output = %s", error, fmt, output);
+	free(error);
+	return (msg);
 }

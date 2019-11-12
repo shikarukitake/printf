@@ -22,17 +22,20 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
-#define BUF_SIZE 1024
+#define MU_BUF_SIZE 1024
 
 #define MU_TRUE	1
 #define MU_FALSE 0
 
 #include <string.h>
+#include "capture.h"
 
 extern int g_tests_run;
 extern int g_tests_failed;
 
-typedef char*(*test_func_ptr_t)(void);
+typedef char* (*test_func_ptr_t)(void);
+
+typedef int (*print_func_ptr_t)(const char *fmt, ...);
 
 typedef	struct	s_test_func
 {
@@ -42,6 +45,12 @@ typedef	struct	s_test_func
 }				t_test_func;
 
 void	test_all(const char *msg, int n, ...);
+
+char	*get_printf_output(const char *fmt, ...);
+
+char	*make_printf_msg(const char *func_name, const char *message, const char *fmt, const char *output);
+
+char 	*mu_compare_printf_output(const char *ft_output, const char *st_output);
 
 void	test_all_with_time(const char *test_suite, int n, ...);
 
@@ -86,5 +95,35 @@ char	*make_ui_msg(char* message, unsigned f1, unsigned f2, const char* fname);
 #define mu_assert_files(message, file1, file2) do {if (assert_files(file1, file2)) {return make_full_msg(message, __FUNCTION_NAME__, " -> ");} } while (0)
 
 #define mu_assert_prf(message, program, args, file) do {if (test_program_and_file(program, args, file)) {return make_full_msg(message, __FUNCTION_NAME__, " -> ");} } while (0)
+/*
+#define mu_assert_printf(message, ft_printf, fmt, args...) do { \
+int old;																\
+char *st_output;														\
+char *result;															\
+old = duplicate_stdout();												\
+ft_printf(fmt, args);													\
+return_stdout(old);														\
+st_output = get_printf_output(fmt, args);								\
+result = mu_compare_printf_output(st_output);							\
+if (result)																\
+	return (make_printf_msg(__FUNCTION_NAME__, message, fmt, result));	\
+} while (0)																\
+*/
+//#define mu_assert_printf(message, ft_printf, fmt, args...) do { char *output; if ((output = assert_printf(ft_printf, fmt, args))){return make_printf_msg(__FUNCTION_NAME__, message, fmt, output);}} while(0)
 
+#define mu_assert_printf(message, ft_printf, fmt, args...) do { 		\
+char *st_output;														\
+char *ft_output;														\
+char *result;															\
+capture_stdout();														\
+ft_printf(fmt, args);													\
+ft_output = strdup(capture_stdout_get_buffer());						\
+capture_stdout_destroy();												\
+st_output = get_printf_output(fmt, args);								\
+result = mu_compare_printf_output(ft_output, st_output);							\
+if (result)																\
+	return (make_printf_msg(__FUNCTION_NAME__, message, fmt, result));	\
+} while (0)																\
+	
+	
 #endif
