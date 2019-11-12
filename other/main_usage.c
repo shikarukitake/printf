@@ -3,9 +3,11 @@
 //
 
 #include <stdio.h>
+#include <limits.h>
 
 int main()
 {
-	printf("line");
+
+	printf("%%d ", 35);
 	return (0);
 }

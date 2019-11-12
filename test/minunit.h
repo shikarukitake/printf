@@ -26,6 +26,7 @@
 
 #define MU_TRUE	1
 #define MU_FALSE 0
+#define MU_NULL ((void*)0)
 
 #include <string.h>
 #include "capture.h"

@@ -10,7 +10,12 @@ static char *check_number()
 	return (0);
 }
 
+static char *check_long_simple_number()
+{
+	mu_assert_printf("float num", ft_printf, "pi = %lld", 2147483649);
+}
+
 int main()
 {
-	test_all("another_general_test", 1, check_number);
+	test_all("another_general_test", 2, check_number, check_long_simple_number);
 }
