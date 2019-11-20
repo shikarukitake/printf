@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(general)
 include_directories(test)
 include_directories(general/libft/includes)
+include_directories(general/includes)
 
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
@@ -17,7 +18,7 @@ add_library(ft STATIC ${LIBFT_FILES})
 
 
 #printf
-set(PRINTF_FILES general/ft_printf.c)
+file(GLOB_RECURSE PRINTF_FILES "${PROJECT_SOURCE_DIR}/general/srcs/*.c")
 add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES})
 
 

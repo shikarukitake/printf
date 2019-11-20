@@ -2,7 +2,7 @@
 // Created by Sole Dagger on 12/11/2019.
 //
 #include "minunit.h"
-#include "ft_stdio.h"
+#include "ft_printf.h"
 
 static char *check_number()
 {
@@ -12,7 +12,8 @@ static char *check_number()
 
 static char *check_long_simple_number()
 {
-	mu_assert_printf("float num", ft_printf, "pi = %lld", 2147483649);
+	mu_assert_printf("long long num", ft_printf, "num = %lld", 2147483649);
+	return (0);
 }
 
 int main()

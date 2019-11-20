@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 12/11/2019.
 //
 #include "minunit.h"
-#include "ft_stdio.h"
+#include "ft_printf.h"
 
 static char *simple_test()
 {
