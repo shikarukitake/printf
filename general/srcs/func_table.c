@@ -3,6 +3,7 @@
 //
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
 void 	(*g_func_table[4])(const char *, va_list) = {
 		ft_putempty,
@@ -11,28 +12,35 @@ void 	(*g_func_table[4])(const char *, va_list) = {
 		ft_putpercent
 };
 
-void	call_func(const char *format, va_list args, int offset)
-{
-	g_func_table[get_id(format + offset + 1)](format + offset + 1, args);
-}
-
-int 	get_flag_id(char flag)
+int 	get_type_id_in_table(char flag)
 {
 	if (flag == 's')
 		return (FT_PRINTF_STR);
 	if (flag == 'd')
-		return (FT_PRINTF_D);
+		return (FT_PRINTF_DIGIT);
 	if (flag == '%')
 		return (FT_PRINTF_PERCENT);
 	else
 		return (FT_PRINTF_EMPTY);
 }
 
-int	get_id(const char *spec)
+int	get_func_id(const char *fmt)
 {
-	t_pair *p;
+	t_pair	*p;
+	int		flag_id;
 
-	if((p = ft_strfind(spec, g_specificators)))
-		return (get_flag_id(spec[p->x]));
+	if((p = ft_strfind(fmt, g_specificators)))
+	{
+		flag_id = get_type_id_in_table(fmt[p->x]);
+		free(p);
+		return (flag_id);
+	}
 	return (0);
 }
+void	call_func(const char *format, va_list args, int offset)
+{
+	g_func_table[get_func_id(format + offset + 1)](format + offset + 1, args);
+}
+
+
+

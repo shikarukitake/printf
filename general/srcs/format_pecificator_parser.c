@@ -4,7 +4,8 @@
 
 #include "ft_printf.h"
 
-int		get_format_length(const char *format)
+int		get_format_spec_length(const char *format)
 {
 	return (ft_strcspn(format, g_specificators));
 }
+

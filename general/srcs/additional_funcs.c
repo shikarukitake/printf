@@ -12,7 +12,7 @@ void	ft_putempty(const char *fmt, va_list args)
 
 void	ft_putpercent(const char *fmt, va_list args)
 {
-	(void)fmt;
+	((void)fmt);
 	(void)(args);
 	ft_putchar('%');
 }

@@ -13,5 +13,10 @@ typedef struct s_pair
 
 t_pair		*ft_strfind(const char *str, const char *charset);
 
+typedef enum	e_bool
+{
+	FALSE,
+	TRUE
+}				t_bool;
 
 #endif //PRINTF_UTIL_H

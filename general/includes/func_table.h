@@ -7,8 +7,8 @@
 
 void	call_func(const char *format, va_list args, int offset);
 
-int		get_flag_id(char flag);
+int		get_type_id_in_table(char flag);
 
-int		get_id(const char *spec);
+int		get_func_id(const char *fmt);
 
 #endif //PRINTF_FUNC_TABLE_H
