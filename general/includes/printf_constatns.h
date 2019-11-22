@@ -10,7 +10,8 @@
 #define FT_PRINTF_PERCENT 3
 #define FT_PRINTF_EMPTY 0
 
-static const char *g_specificators = "cpsdiouxX";
+const char *g_type_specificators = "cpsdiouxXaAeEfFgG";
 
+const char *g_flags = "-+ #0";
 
 #endif //PRINTF_PRINTF_CONSTATNS_H

@@ -15,7 +15,7 @@ int		ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			call_func(format, args, i);
+			call_print_func(format, args, i);
 			i += get_format_spec_length(format + i);
 		}
 		else

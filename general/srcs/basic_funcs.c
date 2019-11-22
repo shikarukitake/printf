@@ -11,5 +11,7 @@ void	ft_putstr_args(const char *fmt, va_list args)
 
 void	ft_putnum_args(const char *fmt, va_list args)
 {
+	t_spec *spec;
+	spec = parse_format(fmt);
 	ft_putnbr((va_arg(args, int)));
 }

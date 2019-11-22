@@ -5,7 +5,7 @@
 #ifndef PRINTF_FUNC_TABLE_H
 #define PRINTF_FUNC_TABLE_H
 
-void	call_func(const char *format, va_list args, int offset);
+void	call_print_func(const char *format, va_list args, int offset);
 
 int		get_type_id_in_table(char flag);
 
