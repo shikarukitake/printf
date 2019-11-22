@@ -39,7 +39,7 @@ typedef		struct	s_spec
 
 }					t_spec;
 
-int		get_format_spec_length(const char *format);
+ssize_t	get_format_spec_length(const char *format);
 
 t_spec	*parse_format(const char *format);
 

@@ -16,6 +16,8 @@
 # include "additional_funcs.h"
 # include "func_table.h"
 # include "fill_flags.h"
+# include "width_parser.h"
+#include "percision_parser.h"
 
 int		ft_printf(const char *format, ...);
 
