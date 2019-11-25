@@ -1,6 +1,7 @@
 //
 // Created by Aletha Yellin on 22/11/2019.
 //
+#include <stdlib.h>
 #include "ft_printf.h"
 
 int is_precision(char ch)
@@ -21,7 +22,12 @@ ssize_t		fill_precision(const char *format, t_spec *spec)
 			spec->precision.is_asterisk = TRUE;
 		else
 		{
-			end =
+			end = ft_str_func_find(format, is_precision);
+			if (end == -1)
+				return (-1);
+			tmp = ft_strsub(format, 0, end);
+			spec->precision.value = ft_atoi(tmp);
+			free(tmp);
 		}
 	}
 	return (i);

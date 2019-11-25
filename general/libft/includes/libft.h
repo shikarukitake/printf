@@ -130,6 +130,8 @@ void			ft_str_shift_left(char *str, size_t from);
 char			*ft_strjoinf(char *s1, char *s2, int flag);
 char			*ft_strsubf(char **ps, size_t start, size_t len);
 ssize_t			ft_strcspn(const char *s, const char *charset);
+ssize_t			ft_str_func_find(const char *s, int (*f)(char ch));
+
 /*
  **	Memory:
 */
