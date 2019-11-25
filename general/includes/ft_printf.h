@@ -15,10 +15,12 @@
 # include "additional_funcs.h"
 # include "func_table.h"
 # include "specificator.h"
-# include "format_parser.h"
+# include "spec_format_parser.h"
 # include "fill_flags.h"
 # include "width_parser.h"
 # include "precision_parser.h"
+# include "size_parser.h"
+# include "type_parser.h"
 
 int		ft_printf(const char *format, ...);
 

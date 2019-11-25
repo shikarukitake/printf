@@ -10,8 +10,12 @@
 # define FT_PRINTF_PERCENT 3
 # define FT_PRINTF_EMPTY 0
 
-static const char *g_type_specificators = "cpsdiouxXaAeEfFgG";
+#define MAX_SIZE_SPECS 8
+
+static const char *g_type_specs = "cpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";
+
+static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "hh", "h", "ll", "j", "z", "t", "L"};
 
 #endif //PRINTF_PRINTF_CONSTATNS_H

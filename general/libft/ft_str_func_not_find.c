@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_func_find.c                                 :+:      :+:    :+:   */
+/*   ft_str_func_not_find.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@
  ** in the string for which the function returned 0
 */
 
-ssize_t		ft_str_func_find(const char *s, int (*f)(char ch))
+ssize_t		ft_str_func_not_find(const char *s, int (*f)(char ch))
 {
 	ssize_t i;
 

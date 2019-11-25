@@ -130,7 +130,7 @@ void			ft_str_shift_left(char *str, size_t from);
 char			*ft_strjoinf(char *s1, char *s2, int flag);
 char			*ft_strsubf(char **ps, size_t start, size_t len);
 ssize_t			ft_strcspn(const char *s, const char *charset);
-ssize_t			ft_str_func_find(const char *s, int (*f)(char ch));
+ssize_t			ft_str_func_not_find(const char *s, int (*f)(char ch));
 
 /*
  **	Memory:
@@ -170,5 +170,6 @@ int				get_next_line(const int fd, char **line);
 
 void			ft_init_arr(char *arr, size_t size, int value);
 int				ft_int_arr_cmp(int *a1, int *a2, size_t size);
+void 			ft_exit(void *mem, const char *msg);
 
 #endif

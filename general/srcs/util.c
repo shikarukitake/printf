@@ -36,3 +36,19 @@ t_pair		*ft_strfind(const char *str, const char *charset)
 	}
 	return (NULL);
 }
+
+ssize_t		ft_arr_find(const char **str_arr, size_t size, const char *s)
+{
+	ssize_t i;
+
+	i = 0;
+	if (!s)
+		return (-1);
+	while (i < size)
+	{
+		if (ft_strcmp(str_arr[i], s) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}

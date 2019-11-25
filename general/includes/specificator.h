@@ -36,4 +36,6 @@ typedef		struct	s_spec
 
 }					t_spec;
 
+t_spec	*init_spec();
+
 #endif //PRINTF_SPECIFICATOR_H

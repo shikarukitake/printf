@@ -10,13 +10,13 @@ int		is_width(char c)
 	return (c == '*') || (ft_isdigit(c));
 }
 
-int		fill_width(const char *format, t_spec *spec)
+int		parse_width(const char *format, t_spec *spec)
 {
 	char	*tmp;
 	ssize_t	end;
 
 	tmp = NULL;
-	end = ft_str_func_find(format, is_width);
+	end = ft_str_func_not_find(format, is_width);
 	if (end == -1)
 		return (0);
 	tmp = ft_strsub(format, 0, end);

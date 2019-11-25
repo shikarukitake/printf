@@ -4,14 +4,15 @@
 
 #include "ft_printf.h"
 
-void	ft_putstr_args(const char *fmt, va_list args)
+void	ft_print_str(const char *fmt, va_list args)
 {
 	ft_putstr(va_arg(args, char *));
 }
 
-void	ft_putnum_args(const char *fmt, va_list args)
+void	ft_print_num(const char *fmt, va_list args)
 {
 	t_spec *spec;
-	spec = parse_format(fmt);
+	spec = parse_spec_format(fmt);
+
 	ft_putnbr((va_arg(args, int)));
 }

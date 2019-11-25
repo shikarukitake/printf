@@ -7,8 +7,8 @@
 
 void 	(*g_func_table[4])(const char *, va_list) = {
 		ft_putempty,
-		ft_putstr_args,
-		ft_putnum_args,
+		ft_print_str,
+		ft_print_num,
 		ft_putpercent
 };
 
@@ -29,7 +29,7 @@ int	get_func_id(const char *fmt)
 	t_pair	*p;
 	int		flag_id;
 
-	if((p = ft_strfind(fmt, g_type_specificators)))
+	if((p = ft_strfind(fmt, g_type_specs)))
 	{
 		flag_id = get_type_id_in_table(fmt[p->x]);
 		free(p);

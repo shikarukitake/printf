@@ -1,6 +1,7 @@
 //
 // Created by Aletha Yellin on 22/11/2019.
 //
+
 #include "ft_printf.h"
 
 int is_flag(char c)
@@ -8,7 +9,7 @@ int is_flag(char c)
 	return (c == '0') || (c == '+') || (c == ' ') || (c == '#') || (c == '-');
 }
 //TODO: if flags are repeated?
-int fill_flags(const char *format, t_spec *spec)
+int parse_flags(const char *format, t_spec *spec)
 {
 	size_t i;
 
