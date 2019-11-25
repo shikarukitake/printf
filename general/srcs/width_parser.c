@@ -10,25 +10,6 @@ int		is_width(char c)
 	return (c == '*') || (ft_isdigit(c));
 }
 
-/*
- ** Returns the position of the character in the string for which the function returned 0
-*/
-// TODO: move to util.h or to libft.h
-ssize_t 	ft_str_func_find(const char *str, int(*func)(char ch))
-{
-	ssize_t i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!func(str[i]))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-
 int		fill_width(const char *format, t_spec *spec)
 {
 	char	*tmp;

@@ -24,9 +24,10 @@ ssize_t		fill_precision(const char *format, t_spec *spec)
 		{
 			end = ft_str_func_find(format, is_precision);
 			if (end == -1)
-				return (-1);
+				return (0);
 			tmp = ft_strsub(format, 0, end);
 			spec->precision.value = ft_atoi(tmp);
+			i += ft_strlen(tmp);
 			free(tmp);
 		}
 	}

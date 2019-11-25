@@ -18,6 +18,8 @@ t_spec	*parse_format(const char *format)
 
 	i = 0;
 	spec = ft_memalloc(sizeof(t_spec));
+	if (!spec)
+		return (NULL);
 	i += fill_flags(format, spec);
 	i += fill_width(format + i, spec);
 	i += fill_precision(format + i, spec);

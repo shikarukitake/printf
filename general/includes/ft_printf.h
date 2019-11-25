@@ -11,13 +11,14 @@
 # include "printf_constatns.h"
 # include "basic_funcs.h"
 # include "additional_funcs.h"
-# include "format_parser.h"
 # include "util.h"
 # include "additional_funcs.h"
 # include "func_table.h"
+# include "specificator.h"
+# include "format_parser.h"
 # include "fill_flags.h"
 # include "width_parser.h"
-#include "percision_parser.h"
+# include "precision_parser.h"
 
 int		ft_printf(const char *format, ...);
 
