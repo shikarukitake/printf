@@ -27,13 +27,13 @@ int 	get_type_id_in_table(char flag)
 int	get_func_id(const char *fmt)
 {
 	t_pair	*p;
-	int		flag_id;
+	int		func_id;
 
 	if((p = ft_strfind(fmt, g_type_specs)))
 	{
-		flag_id = get_type_id_in_table(fmt[p->x]);
+		func_id = get_type_id_in_table(fmt[p->x]);
 		free(p);
-		return (flag_id);
+		return (func_id);
 	}
 	return (0);
 }

@@ -13,6 +13,6 @@ void	ft_print_num(const char *fmt, va_list args)
 {
 	t_spec *spec;
 	spec = parse_spec_format(fmt);
-
+	if (spec->type)
 	ft_putnbr((va_arg(args, int)));
 }
