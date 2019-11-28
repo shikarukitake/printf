@@ -3,6 +3,7 @@
 //
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
 void	ft_print_s(const char *fmt, va_list args)
 {
@@ -20,18 +21,17 @@ void	ft_print_d(const char *fmt, va_list args)
 	i = 0;
 	spec = parse_spec_format(fmt);  // may be in other place
 	fill_spec_from_vargs(spec, args); //may be in other place
-	value  = va_arg(args, long long);
-
 
 	if (spec->flags['-'] == TRUE)
 	{
-		i += print_signed_int_value(value, spec);
+		i += print_signed_digit(args, spec);
 		fill_field(i, spec);
 	}
 	else
 	{
 
 	}
+	free(spec);
 }
 
 void	ft_print_o(const char *fmt, va_list args)

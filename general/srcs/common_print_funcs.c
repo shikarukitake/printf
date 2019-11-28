@@ -4,11 +4,16 @@
 
 #include "common_print_funcs.h"
 
+#define MAX_ULL_BUF_SIZE (sizeof(unsigned long long) * 8 + 1)
+
 void fill_field(int i, t_spec *spec)
 {
 	char ch;
 
-	ch = (spec->flags['0'] == TRUE) ? ' ' : '0';
+	if (ft_strchr(g_int_type_specs, spec->type))
+		ch = ' ';
+	else
+		ch = (spec->flags['0'] == TRUE) ? ' ' : '0';
 	while (i < spec->width.value)
 	{
 		ft_putchar(ch);
@@ -16,20 +21,11 @@ void fill_field(int i, t_spec *spec)
 	}
 }
 
-int print_signed_int_value(long long value, t_spec *spec)
+size_t print_signed_digit(va_list varg, t_spec *spec)
 {
-	if (spec->flags['+'] == TRUE && value > 0)
-		ft_putchar('+');
-	if (!spec->size.value[0])
-		ft_putnbr((int)value);
-	else if (spec->size.value[0] == 'h' && spec->size.value[1] == 'h')
-		ft_putnbr((signed char)value);
-	else if (spec->size.value[0] == 'h')
-		ft_putnbr((signed short int)value);
-	else if (spec->size.value[0] == 'l' && spec->size.value[1] == 'l')
-		ft_putll(value);
-	else if (spec->size.value[0] == 'l')
-		ft_putll((long)value);
+	char	buffer[MAX_ULL_BUF_SIZE];
 
-	return (0);
+	ft_bzero(buffer, MAX_ULL_BUF_SIZE);
+	return (call_sd_print_func(varg, spec, buffer));
+
 }

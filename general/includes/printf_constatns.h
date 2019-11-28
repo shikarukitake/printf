@@ -12,6 +12,8 @@ static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";
 
+static const char *g_int_type_specs = "diouxX";
+
 static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "hh", "h", "ll", "j", "z", "t", "L"};
 
 #endif //PRINTF_PRINTF_CONSTATNS_H

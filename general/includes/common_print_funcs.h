@@ -8,8 +8,8 @@
 #include "ft_printf.h"
 
 
-void fill_field(int i, t_spec *spec);
+void	fill_field(int i, t_spec *spec);
 
-int print_signed_int_value(long long value, t_spec *spec);
+size_t	print_signed_digit(va_list value, t_spec *spec);
 
 #endif //PRINTF_COMMON_PRINT_FUNCS_H

@@ -22,7 +22,8 @@
 # include "size_parser.h"
 # include "type_parser.h"
 # include "common_print_funcs.h"
-# include "ll_print_func_table.h"
+# include "signed_digit_func_table.h"
+# include "print_digits_funcs.h"
 
 int		ft_printf(const char *format, ...);
 

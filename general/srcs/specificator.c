@@ -8,7 +8,7 @@
 t_spec	*init_spec()
 {
 	t_spec	*new;
-	char	i;
+	int		i;
 
 	i = 0;
 	new = malloc(sizeof(t_spec));
