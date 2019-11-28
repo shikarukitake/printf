@@ -11,6 +11,31 @@ void	ft_print_s(const char *fmt, va_list args)
 
 void	ft_print_d(const char *fmt, va_list args)
 {
+	t_spec		*spec;
+	long long	value;
+	char		*num;
+	char 		sign;
+	int 		i;
+
+	i = 0;
+	spec = parse_spec_format(fmt);  // may be in other place
+	fill_spec_from_vargs(spec, args); //may be in other place
+	value  = va_arg(args, long long);
+
+
+	if (spec->flags['-'] == TRUE)
+	{
+		i += print_signed_int_value(value, spec);
+		fill_field(i, spec);
+	}
+	else
+	{
+
+	}
+}
+
+void	ft_print_o(const char *fmt, va_list args)
+{
 	t_spec *spec;
 
 	spec = parse_spec_format(fmt);

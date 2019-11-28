@@ -21,6 +21,8 @@
 # include "precision_parser.h"
 # include "size_parser.h"
 # include "type_parser.h"
+# include "common_print_funcs.h"
+# include "ll_print_func_table.h"
 
 int		ft_printf(const char *format, ...);
 

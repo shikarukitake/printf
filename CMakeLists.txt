@@ -48,6 +48,12 @@ target_link_libraries(just_percent_test ${PROJECT_BINARY_DIR}/libmu.a)
 target_link_libraries(just_percent_test ${PROJECT_BINARY_DIR}/libftprintf.a)
 add_dependencies(just_percent_test mu ft ftprintf)
 
+#printf only d test
+add_executable(d_simple_test test/d_tests/simple_d_test.c)
+target_link_libraries(d_simple_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(d_simple_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(d_simple_test mu ft ftprintf)
+
 #add_executable(all_tests test/all_tests.c)
 #add_dependencies(all_tests just_percent_test printf_simple_num_test printf_simple_str_test printf_test_test)
 

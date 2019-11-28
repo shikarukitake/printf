@@ -35,5 +35,5 @@ ssize_t		parse_precision(const char *format, t_spec *spec)
 			return (i);
 		}
 	}
-	return (1);
+	return (0);
 }

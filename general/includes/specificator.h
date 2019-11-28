@@ -8,7 +8,6 @@ typedef		struct	s_width
 {
 	int		value;
 	t_bool	is_asterisk;
-
 }					t_width;
 
 typedef		struct	s_percision
@@ -24,7 +23,7 @@ typedef 	struct	s_size
 	char value[3];
 }					t_size;
 
-#define MAX_FLAGS 5
+#define MAX_FLAGS 255
 
 typedef		struct	s_spec
 {

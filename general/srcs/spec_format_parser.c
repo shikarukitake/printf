@@ -4,6 +4,14 @@
 
 #include "ft_printf.h"
 
+void		fill_spec_from_vargs(t_spec *spec, va_list vargs)
+{
+	if (spec->width.is_asterisk == TRUE)
+		spec->width.value = va_arg(vargs, int);
+	else if (spec->precision.is_asterisk == TRUE)
+		spec->precision.value = va_arg(vargs, int);
+}
+
 ssize_t		get_spec_format_length(const char *format)
 {
 	ssize_t end_of_format;
