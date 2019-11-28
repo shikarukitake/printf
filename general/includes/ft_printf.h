@@ -13,7 +13,7 @@
 # include "additional_funcs.h"
 # include "util.h"
 # include "additional_funcs.h"
-# include "func_table.h"
+# include "type_func_table.h"
 # include "specificator.h"
 # include "spec_format_parser.h"
 # include "fill_flags.h"

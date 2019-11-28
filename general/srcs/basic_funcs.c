@@ -4,15 +4,16 @@
 
 #include "ft_printf.h"
 
-void	ft_print_str(const char *fmt, va_list args)
+void	ft_print_s(const char *fmt, va_list args)
 {
 	ft_putstr(va_arg(args, char *));
 }
 
-void	ft_print_num(const char *fmt, va_list args)
+void	ft_print_d(const char *fmt, va_list args)
 {
 	t_spec *spec;
+
 	spec = parse_spec_format(fmt);
-	if (spec->type)
+	if (spec->size.value[0] == 'l' && spec->size.value[1] == 'l')
 	ft_putnbr((va_arg(args, int)));
 }
