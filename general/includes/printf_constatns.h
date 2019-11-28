@@ -8,7 +8,7 @@
 
 #define MAX_SIZE_SPECS 8
 
-static const char *g_type_specs = "cpsdiouxXaAeEfFgG";
+static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";
 

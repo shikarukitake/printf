@@ -21,6 +21,7 @@
 # define FT_INT_MIN (-2147483647 -1)
 # define FT_INT_MIN_STR "-2147483648"
 # define FT_INT_MAX (2147483647)
+# define FT_LONG_LONG_MIN_STR "9223372036854775807"
 # define FT_CHAR_MAX 128
 # define FT_NULL ((void*)0)
 # define FT_SIZE_T_MAX  (18446744073709551615u)
@@ -171,5 +172,14 @@ int				get_next_line(const int fd, char **line);
 void			ft_init_arr(char *arr, size_t size, int value);
 int				ft_int_arr_cmp(int *a1, int *a2, size_t size);
 void 			ft_exit(void *mem, const char *msg);
+
+
+/*
+ ** printf functions
+ */
+
+char			*ft_lltoa(long long ll, char *str, int base);
+void			ft_putll_fd(long long l, const int fd);
+void			ft_putll(long long l);
 
 #endif

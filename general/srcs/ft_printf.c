@@ -10,8 +10,6 @@ int		ft_printf(const char *format, ...)
 	va_start(args, format);
 	size_t i;
 
-	if (!was_table_init)
-		init_func_table();
 	i = 0;
 	while (format[i])
 	{

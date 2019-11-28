@@ -7,8 +7,8 @@
 
 void	call_print_func(const char *format, va_list args, int offset);
 
-int		get_type_id_in_table(char flag);
+int 	init_func_table();
 
-int		get_func_id(const char *fmt);
+int		get_type_func_id(const char *fmt);
 
 #endif //PRINTF_TYPE_FUNC_TABLE_H

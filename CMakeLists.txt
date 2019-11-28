@@ -14,6 +14,8 @@ add_executable(Usage other/main_usage.c)
 
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
+file(GLOB_RECURSE LIBFT_ADD_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*/ft_*.c")
+set(LIBFT_FILES ${LIBFT_FILES} ${LIBFT_ADD_FILES})
 set(LIBFT_FILES ${LIBFT_FILES} ${PROJECT_SOURCE_DIR}/general/libft/get_next_line.c)
 add_library(ft STATIC ${LIBFT_FILES})
 

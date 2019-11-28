@@ -15,5 +15,7 @@ void	ft_print_d(const char *fmt, va_list args)
 
 	spec = parse_spec_format(fmt);
 	if (spec->size.value[0] == 'l' && spec->size.value[1] == 'l')
-	ft_putnbr((va_arg(args, int)));
+		ft_putll(va_arg(args, long long));
+	else
+		ft_putnbr((va_arg(args, int)));
 }
