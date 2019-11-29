@@ -46,3 +46,30 @@ void	ft_print_o(const char *fmt, va_list args)
 	else
 		ft_putnbr((va_arg(args, int)));
 }
+
+
+void	ft_print_x(const char *fmt, va_list args)
+{
+	t_spec		*spec;
+	int 		i;
+	char 		buffer[MAX_LL_BUFF_SIZE];
+
+	i = 0;
+	spec = parse_spec_format(fmt);  // may be in other place
+	fill_spec_from_vargs(spec, args); //may be in other place
+	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
+	if (spec->flags['-'] == TRUE)
+	{
+		i += print_hex_digit(args, spec);
+		fill_field(i, spec);
+	}
+	else
+	{
+		get_hex_digit(args, spec, buffer);
+		fill_field(ft_strlen(buffer), spec);
+		if (spec->flags['+'] == TRUE)
+			ft_putchar('+');
+		ft_putstr(buffer);
+	}
+	free(spec);
+}
