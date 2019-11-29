@@ -8,7 +8,7 @@
 typedef struct s_convert_args
 {
 	int		is_signed;
-	char	*(*i_convert)(int, char*, int);
+	char	*(*i_convert)(int, char*, int, char);
 	char 	*(*ll_convert)(long long, char *, int, char);
 	int		base;
 	char	a;
