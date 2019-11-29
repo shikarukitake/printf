@@ -178,8 +178,10 @@ void 			ft_exit(void *mem, const char *msg);
  ** printf functions
  */
 
-char			*ft_lltoa(long long ll, char *str, int base);
+char			*ft_lltoa(long long ll, char *str);
 void			ft_putll_fd(long long l, const int fd);
 void			ft_putll(long long l);
+char			*ft_itoa_base(int value, char *buffer, int base, char a);
+char			*ft_lltoa_base(long long ll, char *str, int base, char a);
 
 #endif

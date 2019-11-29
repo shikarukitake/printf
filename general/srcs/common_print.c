@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 29/11/2019.
 //
 
-#include "common_print_funcs.h"
+#include "common_print.h"
 
 #define MAX_ULL_BUF_SIZE (sizeof(unsigned long long) * 8 + 1)
 

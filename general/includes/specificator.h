@@ -4,6 +4,8 @@
 #ifndef PRINTF_SPECIFICATOR_H
 #define PRINTF_SPECIFICATOR_H
 
+#include "util.h"
+
 typedef		struct	s_width
 {
 	int		value;

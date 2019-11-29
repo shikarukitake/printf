@@ -8,6 +8,7 @@
 static char *simple_test()
 {
 	mu_assert_printf("test1", ft_printf, "%x", 123);
+	mu_assert_printf("test2", ft_printf, "%llx", 1234);
 	return (0);
 }
 

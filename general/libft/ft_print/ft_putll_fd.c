@@ -11,7 +11,7 @@ void	ft_putll_fd(long long l, const int fd)
 	{
 		if (l == LONG_LONG_MIN)
 		{
-			ft_putstr_fd(ft_lltoa(l, NULL, 10), fd);
+			ft_putstr_fd(ft_lltoa(l, NULL), fd);
 			return ;
 		}
 		l = -l;

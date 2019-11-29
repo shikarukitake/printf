@@ -9,7 +9,7 @@
 
 static int g_was_table_init = 0;
 
-void 	(*g_type_func_table[MAX_TYPE_FUNC_TABLE])(const char *, va_list);
+void 	(*g_type_func_table[MAX_TYPE_FUNC_TABLE])(t_spec *, va_list);
 
 int 	init_func_table()
 {
@@ -56,10 +56,14 @@ int		get_type_func_id(const char *fmt)
 void	call_print_func(const char *format, va_list args, int offset)
 {
 	int id;
+	t_spec *spec;
 
 	init_func_table();
+	spec = parse_spec_format(format);
+	fill_spec_from_vargs(spec, args);
 	id  = get_type_func_id(format + offset + 1);
-	g_type_func_table[id](format + offset + 1, args);
+	g_type_func_table[id](spec, args);
+	free(spec);
 }
 
 

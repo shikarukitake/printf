@@ -25,7 +25,7 @@ size_t get_sl(va_list vargs, t_spec *spec, char *buffer)
 
 	size = 0;
 	l_v = va_arg(vargs, long);
-	ft_lltoa(l_v, buffer, 10);
+	ft_lltoa(l_v, buffer);
 	if (l_v < 0 && spec->flags['+'] == TRUE)
 		spec->flags['+'] = FALSE;
 	size += ft_strlen(buffer);
@@ -39,7 +39,7 @@ size_t get_sll(va_list vargs, t_spec *spec, char *buffer)
 
 	size = 0;
 	ll_v = va_arg(vargs, long long);
-	ft_lltoa(ll_v, buffer, 10);
+	ft_lltoa(ll_v, buffer);
 	if (ll_v < 0 && spec->flags['+'] == TRUE)
 		spec->flags['+'] = FALSE;
 	size += ft_strlen(buffer);
