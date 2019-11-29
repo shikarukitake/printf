@@ -29,6 +29,7 @@
 # include "get_sd.h"
 # include "get_hex_table.h"
 # include "get_hex.h"
+# include "generic_table.h"
 
 int		ft_printf(const char *format, ...);
 

@@ -4,7 +4,7 @@
 
 #include "ft_printf.h"
 
-size_t get_hex(va_list vargs, t_spec *spec, char *buffer)
+void get_hex(va_list vargs, t_convert_args *args, char *buffer)
 {
 	int		i_v;
 	size_t	size;

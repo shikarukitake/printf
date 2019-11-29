@@ -5,7 +5,9 @@
 #ifndef PRINTF_GET_HEX_H
 #define PRINTF_GET_HEX_H
 
-size_t get_hex(va_list vargs, t_spec *spec, char *buffer);
+#include "generic_table.h"
+
+void	get_hex(va_list vargs, t_convert_args *args, char *buffer)
 
 size_t get_hex_l(va_list vargs, t_spec *spec, char *buffer);
 
