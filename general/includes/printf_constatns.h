@@ -8,6 +8,8 @@
 
 #define MAX_SIZE_SPECS 8
 
+#define MAX_LL_BUFF_SIZE (sizeof(long long) * 8 + 1)
+
 static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";

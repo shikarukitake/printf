@@ -26,6 +26,6 @@ size_t print_signed_digit(va_list varg, t_spec *spec)
 	char	buffer[MAX_ULL_BUF_SIZE];
 
 	ft_bzero(buffer, MAX_ULL_BUF_SIZE);
-	return (call_sd_print_func(varg, spec, buffer));
+	return (call_print_sd_func(varg, spec, buffer));
 
 }
