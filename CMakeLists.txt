@@ -6,37 +6,68 @@ set(CMAKE_C_STANDARD 11)
 include_directories(general)
 include_directories(test)
 include_directories(general/libft/includes)
+include_directories(general/includes)
+include_directories(test/libmu)
 
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
 
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
+file(GLOB_RECURSE LIBFT_ADD_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*/ft_*.c")
+set(LIBFT_FILES ${LIBFT_FILES} ${LIBFT_ADD_FILES})
 set(LIBFT_FILES ${LIBFT_FILES} ${PROJECT_SOURCE_DIR}/general/libft/get_next_line.c)
 add_library(ft STATIC ${LIBFT_FILES})
 
-
 #printf
-set(PRINTF_FILES general/ft_printf.c)
+file(GLOB_RECURSE PRINTF_FILES "${PROJECT_SOURCE_DIR}/general/srcs/*.c")
 add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES})
-
-
+add_dependencies(ftprintf ft)
 
 #printf general test
-add_executable(printf_test_test test/test_test.c)
+add_executable(printf_test_test test/basic/test_test.c)
 target_link_libraries(printf_test_test ${PROJECT_BINARY_DIR}/libmu.a)
 target_link_libraries(printf_test_test ${PROJECT_BINARY_DIR}/libftprintf.a)
-
+add_dependencies(printf_test_test mu ft ftprintf)
 
 #printf simple str test
-add_executable(printf_simple_str_test test/simple_str_test.c)
+add_executable(printf_simple_str_test test/basic/simple_str_test.c)
 target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libmu.a)
 target_link_libraries(printf_simple_str_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(printf_simple_str_test mu ft ftprintf)
 
 #printf simple num test
-add_executable(printf_simple_num_test test/test_nums.c)
+add_executable(printf_simple_num_test test/basic/nums_test.c)
 target_link_libraries(printf_simple_num_test ${PROJECT_BINARY_DIR}/libmu.a)
 target_link_libraries(printf_simple_num_test ${PROJECT_BINARY_DIR}/libftprintf.a)
-# minunit
+add_dependencies(printf_simple_num_test mu ft ftprintf)
 
-add_library(mu STATIC test/minunit.c test/capture.c)
+#printf only procent test
+add_executable(just_percent_test test/basic/just_percent_test.c)
+target_link_libraries(just_percent_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(just_percent_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(just_percent_test mu ft ftprintf)
+
+#printf only d test
+add_executable(d_simple_test test/d_tests/simple_d_test.c)
+target_link_libraries(d_simple_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(d_simple_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(d_simple_test mu ft ftprintf)
+
+#printf only x test
+add_executable(x_simple_test test/x_tests/simple_x_test.c)
+target_link_libraries(x_simple_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(x_simple_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(x_simple_test mu ft ftprintf)
+
+#printf only u test
+add_executable(u_simple_test test/u_tests/simple_u_test.c)
+target_link_libraries(u_simple_test ${PROJECT_BINARY_DIR}/libmu.a)
+target_link_libraries(u_simple_test ${PROJECT_BINARY_DIR}/libftprintf.a)
+add_dependencies(u_simple_test mu ft ftprintf)
+
+#add_executable(all_tests test/all_tests.c)
+#add_dependencies(all_tests just_percent_test printf_simple_num_test printf_simple_str_test printf_test_test)
+
+# minunit
+add_library(mu STATIC test/libmu/minunit.c test/libmu/capture.c)

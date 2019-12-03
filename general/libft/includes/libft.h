@@ -21,6 +21,7 @@
 # define FT_INT_MIN (-2147483647 -1)
 # define FT_INT_MIN_STR "-2147483648"
 # define FT_INT_MAX (2147483647)
+# define FT_LONG_LONG_MIN_STR "9223372036854775807"
 # define FT_CHAR_MAX 128
 # define FT_NULL ((void*)0)
 # define FT_SIZE_T_MAX  (18446744073709551615u)
@@ -32,7 +33,8 @@
 # define FT_TRUE 1
 # define FT_FALSE 0
 
-typedef unsigned char	t_uchar;
+typedef unsigned char		t_uchar;
+typedef	unsigned long long	t_ull;
 
 /*
  ** Part1:
@@ -129,6 +131,8 @@ ssize_t			ft_strchri(const char *s, char c);
 void			ft_str_shift_left(char *str, size_t from);
 char			*ft_strjoinf(char *s1, char *s2, int flag);
 char			*ft_strsubf(char **ps, size_t start, size_t len);
+ssize_t			ft_strcspn(const char *s, const char *charset);
+ssize_t			ft_str_func_not_find(const char *s, int (*f)(char ch));
 
 /*
  **	Memory:
@@ -168,5 +172,19 @@ int				get_next_line(const int fd, char **line);
 
 void			ft_init_arr(char *arr, size_t size, int value);
 int				ft_int_arr_cmp(int *a1, int *a2, size_t size);
+void 			ft_exit(void *mem, const char *msg);
+
+
+/*
+ ** printf functions
+ */
+
+char			*ft_lltoa(long long ll, char *str);
+void			ft_putll_fd(long long l, const int fd);
+void			ft_putll(long long l);
+char			*ft_itoa_base(int value, char *buffer, int base, char a);
+char			*ft_lltoa_base(long long ll, char *str, int base, char a);
+char			*ft_uitoa_base(unsigned int value, char *buffer, int base, char a);
+char			*ft_ulltoa_base(t_ull ull, char *str, int base, char a);
 
 #endif

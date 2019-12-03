@@ -3,7 +3,7 @@
 //
 
 #include "minunit.h"
-#include "ft_stdio.h"
+#include "ft_printf.h"
 
 static char *basic_str(void)
 {

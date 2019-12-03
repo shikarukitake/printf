@@ -2,8 +2,7 @@
 // Created by Aletha Yellin on 06/11/2019.
 //
 
-#include "ft_stdio.h"
-#include <stdarg.h>
+#include "ft_printf.h"
 
 int		ft_printf(const char *format, ...)
 {
@@ -16,14 +15,11 @@ int		ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i++;
-			if (format[i] == 's')
-				ft_putstr(va_arg(args, char*));
+			call_print_func(format, args, i);
+			i += get_spec_format_length(format + i);
 		}
 		else
-		{
 			ft_putchar(format[i]);
-		}
 		i++;
 	}
 	va_end(args);

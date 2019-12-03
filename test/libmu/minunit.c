@@ -3,6 +3,7 @@
  ** http://www.jera.com/techinfo/jtns/jtn002.html
  ** and extended by @ayellin
 */
+
 #include "minunit.h"
 #include <string.h>
 #include <stdlib.h>
@@ -306,7 +307,6 @@ char	*get_printf_output(const char *fmt, ...)
 	remove("ST_OUTPUT");
 	return (st_output);
 }
-
 
 char 	*mu_compare_printf_output(const char *ft_output, const char *st_output)
 {

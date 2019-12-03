@@ -3,9 +3,13 @@
 //
 
 #include <stdio.h>
+#include <limits.h>
 
 int main()
 {
-	printf("line");
+
+	int a;
+
+	printf("x = %p", &a);
 	return (0);
 }
