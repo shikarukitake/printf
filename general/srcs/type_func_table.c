@@ -25,6 +25,7 @@ int 	init_type_func_table()
 	g_type_func_table['i'] = ft_print_d; // is it right?
 	g_type_func_table['X'] = ft_print_X;
 	g_type_func_table['u'] = ft_print_u;
+	g_type_func_table['c'] = ft_print_c;
 	/*
 	g_type_func_table['n'] = ft_print_n;
 	g_type_func_table['a'] = ft_print_A;
@@ -34,7 +35,6 @@ int 	init_type_func_table()
 	g_type_func_table['F'] = ft_print_f;
 	g_type_func_table['g'] = ft_print_g;
 	g_type_func_table['G'] = ft_print_g;
-	g_type_func_table['c'] = ft_print_c;
 	 */
 	return (1);
 }

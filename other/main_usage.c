@@ -8,6 +8,8 @@
 int main()
 {
 
-	printf("%%d ", 35);
+	int a;
+
+	printf("x = %p", &a);
 	return (0);
 }
