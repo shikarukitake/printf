@@ -1,9 +1,9 @@
 //
-// Created by Aletha Yellin on 29/11/2019.
+// Created by Aletha Yellin on 03/12/2019.
 //
 
-#ifndef PRINTF_GENERIC_TABLE_H
-#define PRINTF_GENERIC_TABLE_H
+#ifndef PRINTF_CONVERT_H
+#define PRINTF_CONVERT_H
 
 typedef struct s_convert_args
 {
@@ -23,5 +23,4 @@ typedef struct s_to_str
 
 }				t_to_str;
 
-
-#endif //PRINTF_GENERIC_TABLE_H
+#endif //PRINTF_CONVERT_H

@@ -5,6 +5,8 @@
 #ifndef PRINTF_UTIL_H
 #define PRINTF_UTIL_H
 
+#include <string.h>
+
 typedef struct s_pair
 {
 	size_t x;
