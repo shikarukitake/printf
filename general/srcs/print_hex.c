@@ -6,6 +6,7 @@
 #include "printf_constatns.h"
 #include "get_hex.h"
 #include "common_print.h"
+#include "libft.h"
 
 void	ft_print_x(t_spec *spec, va_list args)
 {

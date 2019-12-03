@@ -11,7 +11,7 @@ static int g_was_table_init = 0;
 
 void 	(*g_type_func_table[MAX_TYPE_FUNC_TABLE])(t_spec *, va_list);
 
-int 	init_func_table()
+int 	init_type_func_table()
 {
 	if (g_was_table_init)
 		return (0);
@@ -22,13 +22,12 @@ int 	init_func_table()
 	g_type_func_table['%'] = ft_print_percent;
 	g_type_func_table['x'] = ft_print_x;
 	g_type_func_table['o'] = ft_print_o;
-	g_type_func_table['O'] = ft_print_O;
 	g_type_func_table['i'] = ft_print_d; // is it right?
 	g_type_func_table['X'] = ft_print_X;
-	/*
-	
-	g_type_func_table['o'] = ft_print_o;
 	g_type_func_table['u'] = ft_print_u;
+	/*
+
+
 
 
 	g_type_func_table['n'] = ft_print_n;
@@ -44,25 +43,12 @@ int 	init_func_table()
 	return (1);
 }
 
-int		get_type_func_id(const char *fmt)
-{
-	t_pair	*p;
-	int		func_id;
-
-	if((p = ft_strfind(fmt, g_type_specs)))
-	{
-		func_id = fmt[p->x];
-		free(p);
-		return (func_id);
-	}
-	return (0);
-}
 void	call_print_func(const char *format, va_list args, int offset)
 {
 	int id;
 	t_spec *spec;
 
-	init_func_table();
+	init_type_func_table();
 	spec = parse_spec_format(format + offset + 1);
 	fill_spec_from_vargs(spec, args);
 	id = spec->type == -1 ? 0 : spec->type;

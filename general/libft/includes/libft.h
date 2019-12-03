@@ -33,7 +33,8 @@
 # define FT_TRUE 1
 # define FT_FALSE 0
 
-typedef unsigned char	t_uchar;
+typedef unsigned char		t_uchar;
+typedef	unsigned long long	t_ull;
 
 /*
  ** Part1:
@@ -183,5 +184,7 @@ void			ft_putll_fd(long long l, const int fd);
 void			ft_putll(long long l);
 char			*ft_itoa_base(int value, char *buffer, int base, char a);
 char			*ft_lltoa_base(long long ll, char *str, int base, char a);
+char			*ft_uitoa_base(unsigned int value, char *buffer, int base, char a);
+char			*ft_ulltoa_base(t_ull ull, char *str, int base, char a);
 
 #endif

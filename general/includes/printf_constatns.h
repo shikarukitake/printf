@@ -18,6 +18,12 @@ static const char *g_int_type_specs = "diouxX";
 
 static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
 
+typedef unsigned long long	t_ull;
+typedef unsigned long		t_ul;
+typedef unsigned char		t_uc;
+typedef unsigned int		t_ui;
+typedef unsigned short		t_us;
+
 #define LL_KEY 1
 
 #define HH_KEY 3
