@@ -26,10 +26,6 @@ int 	init_type_func_table()
 	g_type_func_table['X'] = ft_print_X;
 	g_type_func_table['u'] = ft_print_u;
 	/*
-
-
-
-
 	g_type_func_table['n'] = ft_print_n;
 	g_type_func_table['a'] = ft_print_A;
 	g_type_func_table['e'] = ft_print_e;
@@ -45,8 +41,8 @@ int 	init_type_func_table()
 
 void	call_print_func(const char *format, va_list args, int offset)
 {
-	int id;
-	t_spec *spec;
+	int		id;
+	t_spec	*spec;
 
 	init_type_func_table();
 	spec = parse_spec_format(format + offset + 1);

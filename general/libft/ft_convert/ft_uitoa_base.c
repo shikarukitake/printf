@@ -8,7 +8,7 @@ char	*ft_uitoa_base(unsigned int value, char *buffer, int base, char a)
 	int				i;
 
 	n = value;
-	i = 2; //TODO: ATTENTNTION!
+	i = 1; //TODO: ATTENTNTION!
 	while ((n /= base) >= 1)
 		i++;
 	buffer[i] = '\0';
