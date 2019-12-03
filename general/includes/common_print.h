@@ -10,6 +10,6 @@
 
 void	fill_field(int i, t_spec *spec);
 
-size_t	print_signed_digit(va_list value, t_spec *spec);
+void	ft_put_sd_buf(char *buf, t_spec *spec);
 
 #endif //PRINTF_COMMON_PRINT_H

@@ -16,6 +16,10 @@ static const char *g_flags = "-+ #0";
 
 static const char *g_int_type_specs = "diouxX";
 
-static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "hh", "h", "ll", "j", "z", "t", "L"};
+static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
+
+#define LL_KEY 1
+
+#define HH_KEY 3
 
 #endif //PRINTF_PRINTF_CONSTATNS_H

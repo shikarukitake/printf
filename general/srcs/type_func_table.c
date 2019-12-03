@@ -21,7 +21,7 @@ int 	init_func_table()
 	g_type_func_table['d'] = ft_print_d;
 	g_type_func_table['%'] = ft_print_percent;
 	g_type_func_table['x'] = ft_print_x;
-	g_type_func_table['X'] = ft_print_X;
+	//g_type_func_table['X'] = ft_print_X;
 	/*
 	g_type_func_table['i'] = ft_print_i;
 	g_type_func_table['o'] = ft_print_o;
@@ -60,9 +60,9 @@ void	call_print_func(const char *format, va_list args, int offset)
 	t_spec *spec;
 
 	init_func_table();
-	spec = parse_spec_format(format);
+	spec = parse_spec_format(format + offset + 1);
 	fill_spec_from_vargs(spec, args);
-	id  = get_type_func_id(format + offset + 1);
+	id = spec->type == -1 ? 0 : spec->type;
 	g_type_func_table[id](spec, args);
 	free(spec);
 }

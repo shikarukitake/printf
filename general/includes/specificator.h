@@ -21,8 +21,8 @@ typedef		struct	s_percision
 
 typedef 	struct	s_size
 {
-	int id;
-	char value[3];
+	int		id;
+	char	value[3];
 }					t_size;
 
 #define MAX_FLAGS 255

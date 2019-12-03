@@ -22,13 +22,10 @@
 # include "size_parser.h"
 # include "type_parser.h"
 # include "common_print.h"
-# include "print_sd_table.h"
-# include "print_sd.h"
 # include "basic_conversion.h"
 # include "get_sd_table.h"
-# include "get_sd.h"
 # include "get_hex_table.h"
-# include "get_hex.h"
+# include "get_digit.h"
 # include "generic_table.h"
 
 int		ft_printf(const char *format, ...);

@@ -4,8 +4,6 @@
 
 #include "common_print.h"
 
-#define MAX_ULL_BUF_SIZE (sizeof(unsigned long long) * 8 + 1)
-
 void fill_field(int i, t_spec *spec)
 {
 	char ch;
@@ -21,11 +19,29 @@ void fill_field(int i, t_spec *spec)
 	}
 }
 
-size_t print_signed_digit(va_list varg, t_spec *spec)
+void	ft_put_sd_buf(char *buf, t_spec *spec)
 {
-	char	buffer[MAX_ULL_BUF_SIZE];
+	int i;
+	int is_sign;
 
-	ft_bzero(buffer, MAX_ULL_BUF_SIZE);
-	return (call_print_sd_func(varg, spec, buffer));
-
+	i = 0;
+	is_sign = (buf[0] != '-' && spec->flags['+'] == TRUE);
+	if (spec->flags['-'] == TRUE)
+	{
+		i += ft_strlen(buf);
+		if (is_sign)
+		{
+			ft_putchar('+');
+			i++;
+		}
+		ft_putstr(buf);
+		fill_field(i, spec);
+	}
+	else
+	{
+		fill_field(ft_strlen(buf) + is_sign, spec);
+		if (is_sign)
+			ft_putchar('+');
+		ft_putstr(buf);
+	}
 }
