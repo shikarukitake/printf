@@ -9,5 +9,5 @@ void		get_p(va_list va_args, t_spec *spec, char *buffer)
     t_conv	args;
 
     args = (t_conv) {0 , 16, 'a'};
-    get_general_d(va_args, args, spec, buffer);
+    get_general_ptr(va_args, args, spec, buffer);
 }
