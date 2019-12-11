@@ -23,3 +23,12 @@ void	ft_print_d(t_spec *spec, va_list args)
 	get_sd(args, spec, buffer);
 	ft_put_sd_buf(buffer, spec);
 }
+
+void    ft_print_p(t_spec *spec, va_list args)
+{
+    char        buffer[MAX_P_BUFF_SIZE];
+
+    ft_bzero(buffer, MAX_P_BUFF_SIZE);
+    get_p(args, spec, buffer);
+    ft_put_ud_buf(buffer, spec);
+}

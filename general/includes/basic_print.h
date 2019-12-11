@@ -13,4 +13,6 @@ void	ft_print_d(t_spec *spec, va_list args);
 
 void	ft_print_c(t_spec* spec, va_list args);
 
+void    ft_print_p(t_spec *spec, va_list args);
+
 #endif //PRINTF_BASIC_PRINT_H
