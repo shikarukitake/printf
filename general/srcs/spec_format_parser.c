@@ -21,7 +21,7 @@ ssize_t		get_spec_format_length(const char *format)
 
 t_spec	*parse_spec_format(const char *spc_fmt)
 {
-	t_spec *spec;
+	t_spec  *spec;
 	size_t  i;
 
 	i = 0;
