@@ -5,7 +5,10 @@
 #ifndef PRINTF_UTIL_H
 #define PRINTF_UTIL_H
 
-#include <string.h>
+# include <string.h>
+# ifdef __linux__
+#  include <sys/types.h>
+# endif
 
 typedef struct s_pair
 {

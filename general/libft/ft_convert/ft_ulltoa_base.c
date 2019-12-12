@@ -45,7 +45,7 @@ char	*ft_ulltoa_base(t_ull ull, char *str, int base, char a)
 
 	i = 0;
 	if (!str)
-		str = ft_strnew(ULONG_LONG_MAX_DIGITS);
+		str = ft_strnew(ULLONG_MAX_DIGITS);
 	if (ft_is_border(ull, str))
 		return (str);
 	if (36 < base || 2 > base)

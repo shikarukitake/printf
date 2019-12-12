@@ -6,17 +6,24 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 13:46:58 by ayellin           #+#    #+#             */
-/*   Updated: 2019/10/26 11:28:57 by ayellin          ###   ########.fr       */
+/*   Updated: 2019/12/12 20:41:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# ifdef __linux__
-#  include <sys/types.h>
-# endif
 # include <string.h>
+# include <limits.h>
+
+# ifdef __linux__
+#	include <sys/types.h>
+#	define LONG_LONG_MIN LLONG_MIN
+#	define OPEN_MAX 1024
+# endif
+
+typedef unsigned char		t_uchar;
+typedef	unsigned long long	t_ull;
 
 # define FT_INT_MIN (-2147483647 -1)
 # define FT_INT_MIN_STR "-2147483648"
@@ -26,6 +33,8 @@
 # define FT_NULL ((void*)0)
 # define FT_SIZE_T_MAX  (18446744073709551615u)
 # define FT_NEAR_LLONG_MAX (922337203685477580ul)
+# define ULLONG_MAX_DIGITS (sizeof(t_ull) * 8 + 1)
+# define FT_LONG_LONG_MIN LONG_LONG_MIN
 
 # define MIN(x, y) ((x) < (y) ? (x) : (y))
 # define MAX(x, y) ((x) > (y) ? (x) : (y))
@@ -33,8 +42,7 @@
 # define FT_TRUE 1
 # define FT_FALSE 0
 
-typedef unsigned char		t_uchar;
-typedef	unsigned long long	t_ull;
+
 
 /*
  ** Part1:

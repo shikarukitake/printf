@@ -65,3 +65,9 @@ void	ft_put_ud_buf(char *buf, t_spec *spec)
 		ft_putstr(buf);
 	}
 }
+
+void	ft_put_hex_buf(char *buf, t_spec *spec)
+{
+	ft_putstr(HEX_SMALL_PREFIX);
+	ft_put_sd_buf(buf, spec);
+}

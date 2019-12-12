@@ -5,7 +5,8 @@
 #include "libft.h"
 #include <limits.h>
 
-#define ULONG_LONG_MAX_DIGITS (sizeof(long long) * 8 + 1)
+
+
 
 typedef struct s_lldiv
 {
@@ -44,7 +45,7 @@ static int	ft_is_border(long long *value, int *is_neg, char *str)
 	if (*value < 0)
 	{
 		*is_neg = 1;
-		if (*value == LONG_LONG_MIN)
+		if (*value == FT_LONG_LONG_MIN)
 		{
 			ft_strcpy(str, FT_LONG_LONG_MIN_STR);
 			return (1);
@@ -62,7 +63,7 @@ char	*ft_lltoa_base(long long ll, char *str, int base, char a)
 	is_neg = 0;
 	i = 0;
 	if (!str)
-		str = ft_strnew(ULONG_LONG_MAX_DIGITS);
+		str = ft_strnew(ULLONG_MAX_DIGITS);
 	if (36 < base || 2 > base)
 		base = 10;
 	if (ft_is_border(&ll, &is_neg, str))
