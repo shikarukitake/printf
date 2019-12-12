@@ -14,4 +14,6 @@ void	ft_put_sd_buf(char *buf, t_spec *spec);
 
 void	ft_put_ud_buf(char *buf, t_spec *spec);
 
+void	ft_put_hex_buf(char *buf, t_spec *spec);
+
 #endif //PRINTF_COMMON_PRINT_H

@@ -12,7 +12,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <time.h>
-#include <pthread.h>
+#ifndef __linux__
+# include <pthread.h>
+#endif
 /* for ETIMEDOUT */
 #include <errno.h>
 
@@ -193,92 +195,87 @@ char	*test_program_and_file(const char *prog_name, const char *args, const char 
 	return (result);
 }
 
-pthread_mutex_t calculating = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t done = PTHREAD_COND_INITIALIZER;
+//pthread_mutex_t calculating = PTHREAD_MUTEX_INITIALIZER;
+//pthread_cond_t done = PTHREAD_COND_INITIALIZER;
+//
+//void *expensive_call(void *function_struct)
+//{
+//	int oldtype;
+//	t_test_func *f;
+//
+//	/* allow the thread to be killed at any time */
+//	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
+//
+//	/* ... calculations and expensive io here, for example:
+//	 * infinitely loop
+//	 */
+//	f = (t_test_func*)function_struct;
+//	f->result = f->fp();
+//	/* wake up the caller if we've completed in time */
+//	pthread_cond_signal(&done);
+//	return NULL;
+//}
 
-void *expensive_call(void *function_struct)
-{
-	int oldtype;
-	t_test_func *f;
-
-	/* allow the thread to be killed at any time */
-	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
-
-	/* ... calculations and expensive io here, for example:
-	 * infinitely loop
-	 */
-	f = (t_test_func*)function_struct;
-	f->result = f->fp();
-	/* wake up the caller if we've completed in time */
-	pthread_cond_signal(&done);
-	return NULL;
-}
-
-static char *test_func()
-{
-	printf("in thread");
-	return (0);
-}
-
-/* note: this is not thread safe as it uses a global condition/mutex */
-static char *test_timeout(const int sec, test_func_ptr_t func)
-{
-
-	struct timespec max_wait;
-	struct timespec abs_time;
-	pthread_t tid;
-	int err;
-	t_test_func	*f;
-
-	f = (t_test_func*) malloc(sizeof(t_test_func));
-	f->fp = func;
-	pthread_mutex_lock(&calculating);
-	memset(&max_wait, 0, sizeof(max_wait));
-	/* wait at most 2 seconds */
-	max_wait.tv_sec = sec;
-	/* pthread cond_timedwait expects an absolute time to wait until */
-	clock_gettime(CLOCK_REALTIME, &abs_time);
-	abs_time.tv_sec += max_wait.tv_sec;
-	abs_time.tv_nsec += max_wait.tv_nsec;
-
-	pthread_create(&tid, NULL, expensive_call, f);
-
-	/* pthread_cond_timedwait can return spuriously: this should
-	 * be in a loop for production code
-	 */
-	err = pthread_cond_timedwait(&done, &calculating, &abs_time);
-	if (err == ETIMEDOUT)
-		f->result = strdup("TIMEOUT");
-	if (!err)
-		pthread_mutex_unlock(&calculating);
-	return (f->result);
-}
-
-void	test_all_with_time(const char *test_suite, int n, ...)
-{
-	t_test_func tf;
-
-	printf("%s~~~~TESTING_SUITE[%s] ~~~~\n", KMAG, test_suite);
-	va_list funcs;
-	va_start(funcs, n);
-	tf = va_arg(funcs, t_test_func);
-	for (int i = 0; i < n; i++) {
-		mu_run_test_timeout(tf.seconds, tf.fp);
-	}
-	print_results();
-}
-
-void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
-{
-	va_list funcs;
-
-	printf("%s~~~~TESTING_SUITE[%s] WITH TIMEOUT[%d] ~~~~\n", KMAG, test_suite, seconds);
-	va_start(funcs, n);
-	for (int i = 0; i < n; i++) {
-		mu_run_test_timeout(seconds, va_arg(funcs, test_func_ptr_t));
-	}
-	print_results();
-}
+///*
+///* note: this is not thread safe as it uses a global condition/mutex */
+//static char *test_timeout(const int sec, test_func_ptr_t func)
+//{
+//
+//	struct timespec max_wait;
+//	struct timespec abs_time;
+//	pthread_t tid;
+//	int err;
+//	t_test_func	*f;
+//
+//	f = (t_test_func*) malloc(sizeof(t_test_func));
+//	f->fp = func;
+//	pthread_mutex_lock(&calculating);
+//	memset(&max_wait, 0, sizeof(max_wait));
+//	/* wait at most 2 seconds */
+//	max_wait.tv_sec = sec;
+//	/* pthread cond_timedwait expects an absolute time to wait until */
+//	clock_gettime(CLOCK_REALTIME, &abs_time);
+//	abs_time.tv_sec += max_wait.tv_sec;
+//	abs_time.tv_nsec += max_wait.tv_nsec;
+//
+//	pthread_create(&tid, NULL, expensive_call, f);
+//
+//	/* pthread_cond_timedwait can return spuriously: this should
+//	 * be in a loop for production code
+//	 */
+//	err = pthread_cond_timedwait(&done, &calculating, &abs_time);
+//	if (err == ETIMEDOUT)
+//		f->result = strdup("TIMEOUT");
+//	if (!err)
+//		pthread_mutex_unlock(&calculating);
+//	return (f->result);
+//}
+//
+//void	test_all_with_time(const char *test_suite, int n, ...)
+//{
+//	t_test_func tf;
+//
+//	printf("%s~~~~TESTING_SUITE[%s] ~~~~\n", KMAG, test_suite);
+//	va_list funcs;
+//	va_start(funcs, n);
+//	tf = va_arg(funcs, t_test_func);
+//	for (int i = 0; i < n; i++) {
+//		mu_run_test_timeout(tf.seconds, tf.fp);
+//	}
+//	print_results();
+//}
+//
+//void	test_all_with_certain_time(const char *test_suite, int seconds, int n, ...)
+//{
+//	va_list funcs;
+//
+//	printf("%s~~~~TESTING_SUITE[%s] WITH TIMEOUT[%d] ~~~~\n", KMAG, test_suite, seconds);
+//	va_start(funcs, n);
+//	for (int i = 0; i < n; i++) {
+//		mu_run_test_timeout(seconds, va_arg(funcs, test_func_ptr_t));
+//	}
+//	print_results();
+//}
 
 char	*read_file_to_str(FILE *fp)
 {

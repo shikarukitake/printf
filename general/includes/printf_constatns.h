@@ -19,7 +19,7 @@ static const char *g_int_type_specs = "diouxX";
 
 static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
 
-//TODO: printf stdint constants are allowed?
+//TODO: stdint constants are allowed for printf?
 
 typedef unsigned long long	t_ull;
 typedef unsigned long		t_ul;
@@ -27,8 +27,11 @@ typedef unsigned char		t_uc;
 typedef unsigned int		t_ui;
 typedef unsigned short		t_us;
 
-#define LL_KEY 1
+#define HEX_SMALL_PREFIX  "0x"
 
-#define HH_KEY 3
+#define HEX_UPPER_PREFIX "0X"
+
+#define BIN_PREFIX	"0b"
+
 
 #endif //PRINTF_PRINTF_CONSTATNS_H
