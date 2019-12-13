@@ -8,6 +8,7 @@ int is_flag(char c)
 {
 	return (ft_strchr(g_flags, c) != NULL);
 }
+
 //TODO: if flags are repeated?
 int parse_flags(const char *format, t_spec *spec)
 {

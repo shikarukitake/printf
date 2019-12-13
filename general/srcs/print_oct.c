@@ -4,7 +4,7 @@
 
 #include "ft_printf.h"
 
-void	ft_print_o(t_spec *spec, va_list args)
+void	ft_print_o(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_LL_BUFF_SIZE];
 

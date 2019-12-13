@@ -8,6 +8,6 @@
 #include "specificator.h"
 #include <stdarg.h>
 
-void		get_hex(va_list va_args, t_spec *spec, char *buffer, char letter);
+void		get_hex(va_list *va_args, t_spec *spec, char *buffer, char letter);
 
 #endif //PRINTF_GET_HEX_H

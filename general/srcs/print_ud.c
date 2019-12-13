@@ -8,7 +8,7 @@
 #include "libft.h"
 #include "common_print.h"
 
-void	ft_print_u(t_spec *spec, va_list args)
+void	ft_print_u(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_LL_BUFF_SIZE];
 

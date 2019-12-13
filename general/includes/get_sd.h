@@ -8,6 +8,6 @@
 #include <stdarg.h>
 #include "specificator.h"
 
-void		get_sd(va_list va_args, t_spec *spec, char *buffer);
+void		get_sd(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif //PRINTF_GET_SD_H

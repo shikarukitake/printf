@@ -45,5 +45,5 @@ ADD_EXECUTABLE_MU_TEST(d_simple_test test/d_tests/simple_d_test.c)
 ADD_EXECUTABLE_MU_TEST(x_simple_test test/x_tests/simple_x_test.c)
 ADD_EXECUTABLE_MU_TEST(u_simple_test test/u_tests/simple_u_test.c)
 ADD_EXECUTABLE_MU_TEST(p_simple_test test/p_tests/simple_p_test.c)
-
+ADD_EXECUTABLE_MU_TEST(f_simple_test test/f_tests/simple_f_test.c)
 

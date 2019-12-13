@@ -6,10 +6,10 @@
 #include "convert.h"
 #include "get_digit.h"
 
-void	get_oct(va_list vargs, t_spec *spec, char *buffer, char letter)
+void	get_oct(va_list *vargs, t_spec *spec, char *buffer, char letter)
 {
-	t_conv	args;
+	t_conv	conv;
 
-	args = (t_conv) {0 , 8, letter};
-	get_general_d(vargs, args, spec, buffer);
+    conv = (t_conv) {0 , 8, letter};
+	get_general_d(vargs, &conv, spec, buffer);
 }

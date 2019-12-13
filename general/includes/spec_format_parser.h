@@ -11,7 +11,7 @@ ssize_t	get_spec_format_length(const char *format);
 
 t_spec	*parse_spec_format(const char *spc_fmt);
 
-void	fill_spec_from_vargs(t_spec *spec, va_list vargs);
+void	fill_spec_from_vargs(t_spec *spec, va_list *vargs);
 
 #define MINUS_FLAG_ID 0
 #define PLUS_FLAG_ID  1

@@ -34,6 +34,7 @@
 # include "print_ud.h"
 # include "get_p.h"
 
+//TODO: write right #include to all .c files
 
 int		ft_printf(const char *format, ...);
 

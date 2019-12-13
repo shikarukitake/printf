@@ -7,6 +7,6 @@
 
 #include "ft_printf.h"
 
-void	ft_print_o(t_spec *spec, va_list args);
+void	ft_print_o(t_spec *spec, va_list *args);
 
 #endif //PRINTF_PRINT_OCT_H
