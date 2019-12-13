@@ -330,3 +330,4 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 	free(error);
 	return (msg);
 }
+
