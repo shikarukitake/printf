@@ -5,6 +5,7 @@
 */
 
 #include "minunit.h"
+#include "file_work.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -331,3 +332,7 @@ char	*make_printf_msg(const char *func_name, const char *message, const char *fm
 	return (msg);
 }
 
+void    test_all_suites(const char *dir)
+{
+    go_and_exec(dir, ".mt");
+}

@@ -26,5 +26,5 @@ static char *check_number()
 
 int main()
 {
-	test_all("another_general_test", 3, another_general_test, general_test, check_number);
+	test_all("Basic Test", 3, another_general_test, general_test, check_number);
 }

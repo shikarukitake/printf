@@ -45,6 +45,8 @@ typedef	struct	s_test_func
 	char			*result;
 }				t_test_func;
 
+void    test_all_suites(const char *dir);
+
 void	test_all(const char *msg, int n, ...);
 
 char	*get_printf_output(const char *fmt, ...);

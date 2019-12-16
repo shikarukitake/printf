@@ -18,5 +18,5 @@ static char *check_long_simple_number()
 
 int main()
 {
-	test_all("another_general_test", 2, check_number, check_long_simple_number);
+	test_all("NUMS TEST", 2, check_number, check_long_simple_number);
 }

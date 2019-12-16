@@ -8,7 +8,7 @@
 static char *basic_str(void)
 {
 	mu_assert_printf("first test", ft_printf, "%s", "Hello");
-	return (0);
+    return (0);
 }
 
 
