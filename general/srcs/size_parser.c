@@ -4,15 +4,17 @@
 
 #include "ft_printf.h"
 
-ssize_t 	parse_size(const char *format, t_spec *spec)
+int parse_size(const char *format, t_spec *spec)
 {
-	ssize_t	i;
+	int		i;
 	char 	*tmp;
-	char j;
+	char	j;
 
 	i = -1;
 	j = 0;
 	tmp = spec->size.value;
+	if(format[0] == '%')
+		return (0);
 	while (!ft_strchr(g_type_specs, format[++i]))
 		tmp[j++] = format[i];
 	tmp[j] = '\0';

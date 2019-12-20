@@ -15,6 +15,7 @@ void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 ssize_t		get_spec_format_length(const char *format)
 {
 	ssize_t end_of_format;
+
 	end_of_format = ft_strcspn(format, g_type_specs);
 	return (end_of_format == -1 ? 1 : end_of_format);
 }

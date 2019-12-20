@@ -6,13 +6,16 @@
 
 int		parse_type(const char *format, t_spec *spec)
 {
-	int		i;
 	char	*ptr;
 
-	i = 0;
-	ptr = ft_strchr(g_type_specs, format[i]);
+	ptr = ft_strchr(g_type_specs, format[0]);
 	if (!ptr)
 	{
+		if(format[0] == '%')
+		{
+			spec->type = '%';
+			return (1);
+		}
 		spec->type = -1;
 		return (0);
 	}

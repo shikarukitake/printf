@@ -11,9 +11,9 @@
 
 void		ft_exit(void *mem, const char *msg)
 {
-	if (!msg)
+	if (msg)
 		ft_putstr_fd(msg, FT_STDERR);
-	if (!mem)
+	if (mem)
 		free(mem);
 	exit(FT_ERROR_EXIT);
 }

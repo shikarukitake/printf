@@ -39,15 +39,17 @@ function(ADD_EXECUTABLE_MU_TEST EXEC_NAME PATH)
     add_dependencies(${EXEC_NAME}.mt mu ft ftprintf)
 endfunction(ADD_EXECUTABLE_MU_TEST)
 
-ADD_EXECUTABLE_MU_TEST(printf_general test/basic/basic_test.c)
-ADD_EXECUTABLE_MU_TEST(printf_simple_str_test test/s_tests/simple_s_test.c)
-ADD_EXECUTABLE_MU_TEST(printf_simple_num_test test/basic/nums_test.c)
-ADD_EXECUTABLE_MU_TEST(just_percent_test test/basic/percent_test.c)
+ADD_EXECUTABLE_MU_TEST(general_test test/basic/basic_test.c)
+ADD_EXECUTABLE_MU_TEST(str_test test/s_tests/simple_s_test.c)
+ADD_EXECUTABLE_MU_TEST(num_test test/basic/nums_test.c)
+ADD_EXECUTABLE_MU_TEST(percent_test test/basic/percent_test.c)
 ADD_EXECUTABLE_MU_TEST(d_simple_test test/d_tests/simple_d_test.c)
 ADD_EXECUTABLE_MU_TEST(x_simple_test test/x_tests/simple_x_test.c)
 ADD_EXECUTABLE_MU_TEST(u_simple_test test/u_tests/simple_u_test.c)
 ADD_EXECUTABLE_MU_TEST(p_simple_test test/p_tests/simple_p_test.c)
 ADD_EXECUTABLE_MU_TEST(f_simple_test test/f_tests/simple_f_test.c)
+ADD_EXECUTABLE_MU_TEST(wrong_test test/wrong/spec_error.c)
+
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})
@@ -58,3 +60,4 @@ endfunction(ADD_EXECUTABLE_MAIN_TEST)
 
 
 ADD_EXECUTABLE_MAIN_TEST(MAIN_TEST test/general/main_test.c)
+
