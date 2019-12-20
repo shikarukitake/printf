@@ -7,8 +7,12 @@
 
 static char *test_simple()
 {
-    mu_assert_printf("test1", ft_printf, "%f", 123);
-    return (0);
+	double d;
+
+	mu_assert_printf("test1", ft_printf, "%f", 123);
+    d = 123;
+	mu_assert_printf("test2", ft_printf, "%f", d);
+	return (0);
 }
 
 int main()

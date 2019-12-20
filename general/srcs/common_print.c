@@ -73,9 +73,15 @@ void	ft_put_hex_buf(char *buf, t_spec *spec)
 	ft_put_sd_buf(buf, spec);
 }
 
+int is_need_zero(t_float *f)
+{
+	return (1);
+
+}
+
 void	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 {
-	if (f->d < 0 || f->ld < 0)
+	if (is_need_zero(f))
 		ft_putchar('0');
 	ft_put_sd_buf(buf, spec);
 }

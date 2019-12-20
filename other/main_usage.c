@@ -10,7 +10,7 @@ int main()
 
 	double a;
 
-	a = 3.14;
+	a = 123;
 	printf("double = %f", a);
 	return (0);
 }
