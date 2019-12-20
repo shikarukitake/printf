@@ -3,13 +3,14 @@
 //
 
 #include "get_f.h"
-#include <convert.h>
+#include "convert.h"
 #include "get_float.h"
+#include "ft_float.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer)
+t_float		get_f(va_list *va_args, t_spec *spec, char *buffer)
 {
     t_conv	args;
 
     args = (t_conv) {0 , 10, 'a'};
-    get_general_float(va_args, &args, spec, buffer);
+	return (get_general_float(va_args, &args, spec, buffer));
 }

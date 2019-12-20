@@ -8,8 +8,9 @@
 int main()
 {
 
-	int a;
+	double a;
 
-	printf("x = %p", &a);
+	a = 3.14;
+	printf("double = %f", a);
 	return (0);
 }

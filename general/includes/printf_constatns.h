@@ -11,6 +11,8 @@
 
 #define MAX_P_BUFF_SIZE (sizeof (void*) * 8  + 1)
 
+#define MAX_LD_BUF_SIZE (sizeof(long double) * 8 + 1)
+
 static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";

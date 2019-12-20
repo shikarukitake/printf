@@ -5,6 +5,7 @@
 #include "libft.h"
 #include "printf_constatns.h"
 #include "specificator.h"
+#include "ft_float.h"
 
 void fill_field(int i, t_spec *spec)
 {
@@ -69,5 +70,12 @@ void	ft_put_ud_buf(char *buf, t_spec *spec)
 void	ft_put_hex_buf(char *buf, t_spec *spec)
 {
 	ft_putstr(HEX_SMALL_PREFIX);
+	ft_put_sd_buf(buf, spec);
+}
+
+void	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
+{
+	if (f->d < 0 || f->ld < 0)
+		ft_putchar('0');
 	ft_put_sd_buf(buf, spec);
 }

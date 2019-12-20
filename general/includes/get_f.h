@@ -6,8 +6,9 @@
 #define PRINTF_GET_F_H
 
 #include <stdarg.h>
-#include <specificator.h>
+#include "specificator.h"
+#include "ft_float.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer);
+t_float		get_f(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif //PRINTF_GET_F_H
