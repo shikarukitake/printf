@@ -114,6 +114,11 @@ if (result)																\
 */
 //#define mu_assert_printf(message, ft_printf, fmt, args...) do { char *output; if ((output = assert_printf(ft_printf, fmt, args))){return make_printf_msg(__FUNCTION_NAME__, message, fmt, output);}} while(0)
 
+
+char 	*mu_compare_printf_return(int ft_ret, int st_ret);
+int	get_printf_ret(const char *fmt, ...);
+
+
 #define mu_assert_printf(message, ft_printf, fmt, args...) do { 		\
 char *st_output;														\
 char *ft_output;														\
@@ -123,10 +128,23 @@ ft_printf(fmt, args);													\
 ft_output = strdup(capture_stdout_get_buffer());						\
 capture_stdout_destroy();												\
 st_output = get_printf_output(fmt, args);								\
-result = mu_compare_printf_output(ft_output, st_output);							\
+result = mu_compare_printf_output(ft_output, st_output);			    \
 if (result)																\
 	return (make_printf_msg(__FUNCTION_NAME__, message, fmt, result));	\
 } while (0)																\
-	
+
+#define mu_assert_printf_return(message, ft_printf, fmt, args...) do { 	\
+																		\
+char *result;                                                           \
+int st_ret = 0;															\
+int ft_ret = 0;                                                          \
+capture_stdout();														\
+ft_ret = ft_printf(fmt, args);											\
+capture_stdout_destroy();												\
+st_ret = get_printf_ret(fmt, args);									\
+result = mu_compare_printf_return(ft_ret, st_ret);			    		\
+if (result)																\
+	return (make_printf_msg(__FUNCTION_NAME__, message, fmt, result));	\
+} while (0)																\
 	
 #endif

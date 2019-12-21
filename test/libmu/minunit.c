@@ -320,6 +320,37 @@ char 	*mu_compare_printf_output(const char *ft_output, const char *st_output)
  	return (0);
 }
 
+int	get_printf_ret(const char *fmt, ...)
+{
+	va_list args;
+	FILE *st_fp;
+	int ret_value;
+
+	ret_value = 0;
+	va_start(args, fmt);
+	st_fp = fopen("ST_OUTPUT", "wr");
+	ret_value = vfprintf(st_fp, fmt, args);
+	va_end(args);
+	fclose(st_fp);
+	st_fp = fopen("ST_OUTPUT", "r+");
+	fclose(st_fp);
+	remove("ST_OUTPUT");
+	return (ret_value);
+}
+char 	*mu_compare_printf_return(int ft_ret, int st_ret)
+{
+	char *cmp_result;
+
+	if (ft_ret != st_ret)
+	{
+		cmp_result = (char*)malloc(MU_BUF_SIZE);
+		bzero(cmp_result, MU_BUF_SIZE);
+		sprintf(cmp_result, "ft[%d] != st[%d]", ft_ret, st_ret);
+		return (cmp_result);
+	}
+	return (0);
+}
+
 char	*make_printf_msg(const char *func_name, const char *message, const char *fmt, const char *output)
 {
 	char *msg;
