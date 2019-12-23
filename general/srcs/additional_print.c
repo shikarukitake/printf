@@ -4,15 +4,17 @@
 
 #include "ft_printf.h"
 
-void	ft_print_empty(t_spec *spec, va_list *args)
+int	ft_print_empty(t_spec *spec, va_list *args)
 {
 	((void)spec);
 	((void)args);
+	return (0);
 }
 
-void	ft_print_percent(t_spec *spec, va_list *args)
+int	ft_print_percent(t_spec *spec, va_list *args)
 {
 	((void)spec);
 	(void)(args);
 	ft_putchar('%');
+	return (1);
 }

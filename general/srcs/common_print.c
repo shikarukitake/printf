@@ -22,7 +22,7 @@ void fill_field(int i, t_spec *spec)
 	}
 }
 
-void	ft_put_sd_buf(char *buf, t_spec *spec)
+int		ft_put_sd_buf(char *buf, t_spec *spec)
 {
 	int i;
 	int is_sign;
@@ -47,6 +47,7 @@ void	ft_put_sd_buf(char *buf, t_spec *spec)
 			ft_putchar('+');
 		ft_putstr(buf);
 	}
+	return (i); // Maybe wrong
 }
 
 void	ft_put_ud_buf(char *buf, t_spec *spec)
@@ -67,10 +68,10 @@ void	ft_put_ud_buf(char *buf, t_spec *spec)
 	}
 }
 
-void	ft_put_hex_buf(char *buf, t_spec *spec)
+int	ft_put_hex_buf(char *buf, t_spec *spec)
 {
 	ft_putstr(HEX_SMALL_PREFIX);
-	ft_put_sd_buf(buf, spec);
+	return (ft_put_sd_buf(buf, spec));
 }
 
 int is_need_zero(t_float *f)
@@ -79,9 +80,9 @@ int is_need_zero(t_float *f)
 
 }
 
-void	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
+int	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 {
 	if (is_need_zero(f))
 		ft_putchar('0');
-	ft_put_sd_buf(buf, spec);
+	return(ft_put_sd_buf(buf, spec));
 }

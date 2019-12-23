@@ -8,11 +8,11 @@
 #include "ft_float.h"
 #include "printf_constatns.h"
 
-void    ft_print_f(t_spec *spec, va_list *args)
+int    ft_print_f(t_spec *spec, va_list *args)
 {
 	char	buffer[MAX_LD_BUF_SIZE];
 	t_float	f;
 
 	f = get_f(args, spec, buffer);
-	ft_put_float_buf(buffer, spec, &f);
+	return (ft_put_float_buf(buffer, spec, &f));
 }

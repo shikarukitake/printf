@@ -8,6 +8,6 @@
 #include "specificator.h"
 #include "stdarg.h"
 
-void    ft_print_f(t_spec *spec, va_list *args);
+int    ft_print_f(t_spec *spec, va_list *args);
 
 #endif //PRINTF_FLOAT_PRINT_H
