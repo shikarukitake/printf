@@ -3,6 +3,8 @@
 //
 
 #include "basic_print.h"
+#include "ft_print_char.h"
+#include "wchar.h"
 
 int		ft_print_s(t_spec* spec, va_list *args)
 {
@@ -10,7 +12,10 @@ int		ft_print_s(t_spec* spec, va_list *args)
     int i;
 
     i = 0;
-	tmp = va_arg(*args, char *);
+    if (spec->size.id == -1)
+	    tmp = va_arg(*args, char *);
+    else if (spec->size.value[0] == 'l')
+        return (ft_print_ws(spec, args));
 	if (spec->precision.value == -1)
 	{
         ft_putstr(tmp);
@@ -29,8 +34,11 @@ int		ft_print_s(t_spec* spec, va_list *args)
 
 int		ft_print_c(t_spec* spec, va_list *args)
 {
-	ft_putchar(va_arg(*args, int));
-	return (1);
+    if (spec->size.id == -1)
+	    ft_putchar(va_arg(*args, int));
+    else if (spec->size.value[0] == 'L')
+	    ft_putwchar((wchar_t)va_arg(*args, wint_t));
+    return (1);
 }
 
 int	ft_print_d(t_spec *spec, va_list *args)
