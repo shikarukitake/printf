@@ -50,6 +50,8 @@ ADD_EXECUTABLE_MU_TEST(p_simple_test test/p_tests/simple_p_test.c)
 ADD_EXECUTABLE_MU_TEST(f_simple_test test/f_tests/simple_f_test.c)
 #ADD_EXECUTABLE_MU_TEST(wrong_test test/wrong/spec_error.c)
 ADD_EXECUTABLE_MU_TEST(return_value_test test/basic/return_value.c)
+ADD_EXECUTABLE_MU_TEST(wiki_test test/basic/wiki_test.c)
+
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})
@@ -60,4 +62,4 @@ endfunction(ADD_EXECUTABLE_MAIN_TEST)
 
 
 ADD_EXECUTABLE_MAIN_TEST(MAIN_TEST test/general/main_test.c)
-
+ADD_EXECUTABLE_MAIN_TEST(COLOR_TEST test/bonus/color_test.c)

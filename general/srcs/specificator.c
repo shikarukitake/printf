@@ -20,5 +20,7 @@ t_spec	*init_spec()
 	new->precision.value = -1;
 	while (i < MAX_FLAGS)
 		new->flags[i++] = FALSE;
+	new->settings.color_id = -1;
+	new->settings.fd = 1;
 	return (new);
 }

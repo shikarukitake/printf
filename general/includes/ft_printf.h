@@ -7,10 +7,8 @@
 
 # include <stdarg.h>
 
-# include "libft.h"
 # include "printf_constatns.h"
 # include "basic_print.h"
-# include "additional_print.h"
 # include "util.h"
 # include "additional_print.h"
 # include "type_func_table.h"

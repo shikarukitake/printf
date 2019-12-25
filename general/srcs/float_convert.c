@@ -16,7 +16,7 @@ t_float convert_f(va_list *args, t_spec *spec)
 
 	if (spec->type == -1)
 		v.d = va_arg(*args, double);
-
+    return (v);
 }
 
 

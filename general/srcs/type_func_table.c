@@ -28,6 +28,7 @@ int 	init_type_func_table()
 	g_type_func_table['c'] = ft_print_c;
     g_type_func_table['p'] = ft_print_p;
 	g_type_func_table['f'] = ft_print_f;
+    g_type_func_table['q'] = ft_print_color;
 	/*
 	g_type_func_table['a'] = ft_print_A;
 	g_type_func_table['e'] = ft_print_e;

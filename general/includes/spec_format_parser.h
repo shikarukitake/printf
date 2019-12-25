@@ -6,8 +6,9 @@
 #define PRINTF_SPEC_FORMAT_PARSER_H
 
 #include "ft_printf.h"
+#include "parse_settings.h"
 
-ssize_t	get_spec_format_length(const char *format);
+int     get_spec_format_length(const char *format);
 
 t_spec	*parse_spec_format(const char *spc_fmt);
 

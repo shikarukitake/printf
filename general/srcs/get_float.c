@@ -20,4 +20,5 @@ t_float        get_general_float(va_list *va_args, t_conv *conv, t_spec *spec, c
 		f.ld = va_arg(*va_args, long double);
 		ft_ldtoa_base(f.ld, buffer, conv->base, conv->a);
 	}
+    return (f);
 }

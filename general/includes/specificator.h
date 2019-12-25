@@ -5,6 +5,7 @@
 #define PRINTF_SPECIFICATOR_H
 
 #include "util.h"
+#include "print_settings.h"
 
 typedef		struct	s_width
 {
@@ -29,11 +30,12 @@ typedef 	struct	s_size
 
 typedef		struct	s_spec
 {
-	t_bool		flags[MAX_FLAGS];
-	char		type;
-	t_width		width;
-	t_precision precision;
-	t_size		size;
+	t_bool              flags[MAX_FLAGS];
+	char                type;
+	t_width             width;
+	t_precision         precision;
+	t_size              size;
+	t_print_settings    settings;
 
 }					t_spec;
 

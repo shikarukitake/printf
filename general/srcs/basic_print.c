@@ -2,16 +2,29 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#include "ft_printf.h"
-
+#include "basic_print.h"
 
 int		ft_print_s(t_spec* spec, va_list *args)
 {
 	char *tmp;
+    int i;
 
+    i = 0;
 	tmp = va_arg(*args, char *);
-	ft_putstr(tmp);
-	return (ft_strlen(tmp));
+	if (spec->precision.value == -1)
+	{
+        ft_putstr(tmp);
+        return (ft_strlen(tmp));
+    }
+	else
+    {
+	    while (i < spec->precision.value)
+        {
+	        ft_putchar(tmp[i]);
+	        i++;
+        }
+	    return (i);
+    }
 }
 
 int		ft_print_c(t_spec* spec, va_list *args)

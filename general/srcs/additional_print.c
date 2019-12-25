@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#include "ft_printf.h"
+#include "additional_print.h"
 
 int	ft_print_empty(t_spec *spec, va_list *args)
 {
@@ -17,4 +17,9 @@ int	ft_print_percent(t_spec *spec, va_list *args)
 	(void)(args);
 	ft_putchar('%');
 	return (1);
+}
+
+int	ft_print_color(t_spec *spec, va_list *args)
+{
+    return (6);
 }
