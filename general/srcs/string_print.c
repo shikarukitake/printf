@@ -35,8 +35,7 @@ int		ft_print_ws(t_spec* spec, va_list *args)
     int i;
 
     i = 0;
-    if (spec->size.id == -1)
-        tmp = va_arg(*args, wchar_t *);
+    tmp = va_arg(*args, wchar_t *);
     if (spec->precision.value == -1)
     {
         ft_putwstr(tmp);
