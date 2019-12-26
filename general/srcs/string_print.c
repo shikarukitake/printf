@@ -1,6 +1,6 @@
 //
 // Created by Aletha Yellin on 25/12/2019.
-//
+// TODO: put it to libft
 #include "specificator.h"
 #include <stdarg.h>
 #include <wchar.h>
