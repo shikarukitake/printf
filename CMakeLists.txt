@@ -15,6 +15,9 @@ include_directories(test/libmu)
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
 
+# Usage example of floating point numbers
+add_executable(Float other/float_usage.c)
+
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
 file(GLOB_RECURSE LIBFT_ADD_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*/ft_*.c")
@@ -51,7 +54,7 @@ ADD_EXECUTABLE_MU_TEST(f_simple_test test/f_tests/simple_f_test.c)
 #ADD_EXECUTABLE_MU_TEST(wrong_test test/wrong/spec_error.c)
 ADD_EXECUTABLE_MU_TEST(return_value_test test/basic/return_value.c)
 ADD_EXECUTABLE_MU_TEST(wiki_test test/basic/wiki_test.c)
-
+ADD_EXECUTABLE_MU_TEST(utf8_test test/s_tests/utf8_test.c)
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})
