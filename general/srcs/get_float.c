@@ -11,14 +11,9 @@ t_float        get_general_float(va_list *va_args, t_conv *conv, t_spec *spec, c
 
 	init_float(&f);
 	if (spec->size.id == -1)
-	{
-		f.d = va_arg(*va_args, double);
-		ft_dtoa_base(f.d, buffer, conv->base, conv->a);
-	}
+		f.ld = (long double)va_arg(*va_args, double);
 	else if (spec->size.value[0] == 'L')
-	{
 		f.ld = va_arg(*va_args, long double);
-		ft_ldtoa_base(f.ld, buffer, conv->base, conv->a);
-	}
+	ft_dtoa(f.ld, buffer);
     return (f);
 }

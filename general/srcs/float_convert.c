@@ -10,15 +10,6 @@
 #include "convert.h"
 
 
-t_float convert_f(va_list *args, t_spec *spec)
-{
-	t_float v;
-
-	if (spec->type == -1)
-		v.d = va_arg(*args, double);
-    return (v);
-}
-
 
 void reverse(char *str, int len)
 {

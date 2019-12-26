@@ -5,9 +5,6 @@
 #include "libft.h"
 #include <limits.h>
 
-
-
-
 typedef struct s_lldiv
 {
 	long long qout;

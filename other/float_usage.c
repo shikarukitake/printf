@@ -175,12 +175,47 @@ unsigned long get_float_part(unsigned long m, unsigned e, char *buf)
     ft_strrev(buf);
 }
 
+char	*ft_itoa_base(int value, char *buffer, int base, char a)
+{
+    long	n;
+    int		sign;
+    int		i;
+
+    n = (value < 0) ? -(long)value : value;
+    sign = (value < 0 && base == 10) ? -1 : 0;
+    i = (sign == -1) ? 2 : 1;
+    while ((n /= base) >= 1)
+        i++;
+    buffer[i] = '\0';
+    n = (value < 0) ? -(long)value : value;
+    while (i-- + sign)
+    {
+        buffer[i] = (n % base < 10) ? n % base + '0' : n % base + a - 10;
+        n /= base;
+    }
+    (i == 0) ? buffer[i] = '-' : 0;
+    return (buffer);
+}
+
 void count_float_part(const char *float_part, char *result)
 {
-    unsigned int base;
+    int             i;
+    unsigned int    n;
+    float           res;
 
-    base = 1;
-
+    i = 0;
+    n = 1;
+    res = 0;
+    while (float_part[i])
+    {
+        if (float_part[i] == '1')
+            res = res + (1.0 / ft_power(2, n));
+        n++;
+        i++;
+    }
+    res = res * ft_power(10, i);
+    ft_itoa_base((int)res, result, 10, 'a');
+//    printf("Float result = %f\n", res);
 }
 
 #define TEST_BUF_SIZE 4096

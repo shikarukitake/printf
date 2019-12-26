@@ -10,34 +10,12 @@
 typedef struct s_float
 {
 	long double		ld;
-	double			d;
 	int				is_up;
 	unsigned long	exp;
 	unsigned long	man;
 	int				sign;
 
 }				t_float;
-
-
-typedef union {
-    float f;
-    struct {
-        unsigned int mantisa : 23;
-        unsigned int exponent : 8;
-        unsigned int sign : 1;
-    } parts;
-} float_cast;
-
-
-typedef union {
-    double d;
-    struct {
-        unsigned long   mantisa : 52;
-        unsigned int    exponent : 11;
-        unsigned int    sign : 1;
-    } parts;
-} double_cast;
-
 
 typedef union {
     long double ld;
@@ -50,5 +28,6 @@ typedef union {
 
 void init_float(t_float *f);
 
+void    ft_dtoa(long double ld, char *buffer);
 
 #endif //PRINTF_FT_FLOAT_H

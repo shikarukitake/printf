@@ -74,15 +74,30 @@ int	ft_put_hex_buf(char *buf, t_spec *spec)
 	return (ft_put_sd_buf(buf, spec));
 }
 
-int is_need_zero(t_float *f)
+int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 {
-	return (1);
+    int i;
+    int float_nums;
 
-}
-
-int	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
-{
-	if (is_need_zero(f))
-		ft_putchar('0');
-	return(ft_put_sd_buf(buf, spec));
+	i = 0;
+	float_nums = -1;
+	while (buf[i] != '.')
+    {
+	    ft_putchar(buf[i]);
+	    i++;
+    }
+	while (buf[i])
+    {
+	    ft_putchar(buf[i]);
+	    float_nums++;
+	    i++;
+    }
+	if (spec->precision.value == -1 && float_nums < 6)
+    {
+	    while (float_nums < 6)
+	    {
+            ft_putchar('0');
+            float_nums++;
+        }
+    }
 }
