@@ -9,15 +9,6 @@
 
 int main()
 {
-
-	double a;
-
-	a = 123.45;
-	printf("double = %E\n", a);
-	float_cast cast = {.f = a};
-
-	printf("sign = %d\n", cast.parts.sign);
-    printf("mantissa = %d\n", cast.parts.mantisa);
-    printf("exponent = %d\n", cast.parts.exponent);
+    printf("%d%", 123);
 	return (0);
 }

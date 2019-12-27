@@ -8,20 +8,20 @@
 #include "common_print.h"
 #include "libft.h"
 
-void	ft_print_x(t_spec *spec, va_list *args)
+int     ft_print_x(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_LL_BUFF_SIZE];
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_hex(args, spec, buffer, 'a');
-	ft_put_sd_buf(buffer, spec);
+    return (ft_put_sd_buf(buffer, spec));
 }
 
-void	ft_print_X(t_spec *spec, va_list *args)
+int     ft_print_X(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_LL_BUFF_SIZE];
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_hex(args, spec, buffer, 'A');
-	ft_put_sd_buf(buffer, spec);
+    return (ft_put_sd_buf(buffer, spec));
 }

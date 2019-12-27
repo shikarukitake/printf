@@ -11,7 +11,14 @@ static char *simple_test()
 	return (0);
 }
 
+static char *nums_test()
+{
+    mu_assert_printf_return("d nums return", ft_printf, "%d", 12345);
+    return (0);
+}
+
+
 int main()
 {
-	test_all("RETURN VALUES", 1, simple_test);
+	test_all("RETURN VALUES", 2, simple_test, nums_test);
 }

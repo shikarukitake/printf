@@ -44,8 +44,12 @@ int		ft_put_sd_buf(char *buf, t_spec *spec)
 	{
 		fill_field(ft_strlen(buf) + is_sign, spec);
 		if (is_sign)
-			ft_putchar('+');
+		{
+            ft_putchar('+');
+            i+=1;
+        }
 		ft_putstr(buf);
+		i+= ft_strlen(buf);
 	}
 	return (i); // Maybe wrong
 }

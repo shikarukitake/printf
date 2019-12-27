@@ -35,6 +35,6 @@
 
 //TODO: write right #include to all .c files
 
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *fmt, ...);
 
 #endif //PRINTF_FT_PRINTF_H

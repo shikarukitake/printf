@@ -6,7 +6,7 @@
 #define PRINTF_SPEC_FORMAT_PARSER_H
 
 #include "ft_printf.h"
-#include "parse_settings.h"
+#include "color_settings.h"
 
 int     get_spec_format_length(const char *format);
 

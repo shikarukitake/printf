@@ -11,8 +11,14 @@ static char *test_simple()
 	return (0);
 }
 
+static char *test_two_d()
+{
+    mu_assert_printf("test with 2 digits", ft_printf, "%d != %d", 202020, 20);
+    return (0);
+}
+
 int main()
 {
-	test_all("SIMPLE D TESTS", 1 ,test_simple);
+	test_all("SIMPLE D TESTS", 2 ,test_simple, test_two_d);
 	return (0);
 }

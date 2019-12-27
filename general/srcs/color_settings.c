@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 25/12/2019.
 //
 
-#include "parse_settings.h"
+#include "color_settings.h"
 
 const t_str_pair g_colors[] = {{"nrm", KNRM},
                                {"red", KRED},

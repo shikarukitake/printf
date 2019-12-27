@@ -16,7 +16,6 @@ size_t ft_wstrlen(wchar_t *str)
     return (l);
 }
 
-
 void    ft_putwstr(wchar_t *str)
 {
     size_t i;

@@ -8,7 +8,6 @@
 #include "ft_float.h"
 #include "printf_constatns.h"
 #include "libft.h"
-#include "printf_constatns.h"
 
 int    ft_print_f(t_spec *spec, va_list *args)
 {

@@ -46,6 +46,10 @@ void    ft_putwchar(wchar_t wch)
 {
     if (wch <= 127)
         ft_putchar(wch);
-    else if (wch > 127 && wch < 2047)
+    else if (wch > 127 && wch <= 2047)
         ft_put_oct2(wch);
+    else if (wch > 2047 && wch < 65535)
+        ft_put_oct3(wch);
+    else if (wch > 65535 && wch < 1114111)
+        ft_put_oct4(wch);
 }

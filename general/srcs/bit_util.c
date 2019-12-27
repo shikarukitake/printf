@@ -35,25 +35,3 @@ unsigned long bin_to_dec(unsigned long b)
     }
     return (dec_value);
 }
-
-#include <stdlib.h>
-
-char * view_bin(unsigned long b)
-{
-    char *str;
-    int i;
-
-    i = 0;
-    str = (char*)malloc(1000);
-    while (b)
-    {
-        if (b & 1u)
-            str[i++] = '1';
-        else
-            str[i++] = '0';
-        b >>= 1;
-    }
-    str[i] = '\0';
-    ft_strrev(str);
-    return (str);
-}

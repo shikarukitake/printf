@@ -33,7 +33,6 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     }
     m >>= count;
     m >>= count_bits(m) - exp - 1;
-    view_bin(m);
     result = bin_to_dec(m);
     ft_ulltoa_base(result, buf, 10, 'a');
 }
