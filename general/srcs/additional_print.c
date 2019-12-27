@@ -21,5 +21,7 @@ int	ft_print_percent(t_spec *spec, va_list *args)
 
 int	ft_print_color(t_spec *spec, va_list *args)
 {
+    ((void)spec);
+    ((void)args);
     return (6);
 }

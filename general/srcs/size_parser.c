@@ -8,7 +8,7 @@ int parse_size(const char *format, t_spec *spec)
 {
 	int		i;
 	char 	*tmp;
-	char	j;
+	int     j;
 
 	i = -1;
 	j = 0;

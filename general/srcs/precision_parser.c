@@ -20,7 +20,7 @@ int		parse_precision(const char *format, t_spec *spec)
 	{
 		if (format[1] == '*')
 		{
-			spec->precision.is_asterisk = TRUE;
+			spec->precision.is_asterisk = TRUE; // get from va_arg?
 			return (2);
 		}
 		else

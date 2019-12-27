@@ -16,8 +16,19 @@ static char *test_simple()
 	return (0);
 }
 
+static char *test_simple2()
+{
+    double d;
+
+    d =  0.15625;
+    mu_assert_printf("test1", ft_printf, "%f", d);
+    d = -0.123;
+    mu_assert_printf("test2", ft_printf, "%f", d);
+    return (0);
+}
+
 int main()
 {
-    test_all("SIMPLE F TESTS", 1, test_simple);
+    test_all("SIMPLE F TESTS", 2, test_simple, test_simple2);
     return (0);
 }

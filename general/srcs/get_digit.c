@@ -35,5 +35,6 @@ void	get_general_ud(va_list *vargs, t_conv *conv, t_spec *spec, char *buf)
 
 void	get_general_ptr(va_list *vargs, t_conv *conv, t_spec *spec, char *buf)
 {
+        ((void)spec);
         ft_ulltoa_base((size_t)va_arg(*vargs, size_t*), buf, conv->base, conv->a);
 }

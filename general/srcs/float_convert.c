@@ -8,9 +8,7 @@
 #include <stdarg.h>
 #include "specificator.h"
 #include "convert.h"
-
-
-
+/*
 void reverse(char *str, int len)
 {
 	int i=0, j=len-1, temp;
@@ -57,7 +55,6 @@ void ft_ldtoa_base(long double val, char *buf, int base, char a)
 	}
 }
 
-
 void ft_dtoa_base(double val, char *buf, int base, char a)
 {
 	int				i;
@@ -76,3 +73,4 @@ void ft_dtoa_base(double val, char *buf, int base, char a)
 		i_to_str((int)f_part, buf + i + 1, afterpoint);
 	}
 }
+ */

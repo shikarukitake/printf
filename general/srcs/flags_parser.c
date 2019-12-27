@@ -16,6 +16,6 @@ int parse_flags(const char *format, t_spec *spec)
 
 	i = 0;
 	while (is_flag(format[i]))
-		spec->flags[format[i++]] = TRUE;
+		spec->flags[(int)format[i++]] = TRUE;
 	return (i);
 }

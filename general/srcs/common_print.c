@@ -80,6 +80,7 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
     int float_nums;
 
 	i = 0;
+    ((void)f);
 	float_nums = -1;
 	while (buf[i] != '.')
     {

@@ -6,7 +6,7 @@
 #    By: ayellin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/25 14:21:49 by ayellin           #+#    #+#              #
-#    Updated: 2019/10/26 15:04:29 by ayellin          ###   ########.fr        #
+#    Updated: 2019/12/27 17:10:48 by ayellin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,29 +20,29 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =  ft_printf.c
+SRC = additional_print.c ft_print_char.c get_p.c print_settings.c type_parser.c basic_print.c ft_printf.c get_sd.c        print_ud.c util.c common_print.c get_digit.c get_ud.c size_parser.c width_parser.c flags_parser.c get_f.c           parse_settings.c spec_format_parser.c float_convert.c get_float.c precision_parser.c specificator.c float_print.c get_hex.c print_hex.c string_print.c ft_float.c get_oct.c print_oct.c type_func_table.c bit_util.c 
 
-OBJ = $(SRC:.c=.o)
+LIBFT_SRC = libft/ft_convert/ft_itoa_base.c libft/ft_convert/ft_lltoa_base.c libft/ft_convert/ft_ulltoa_base.c libft/ft_atoi.c libft/ft_exit.c libft/ft_bzero.c libft/ft_isdigit.c libft/ft_power.c libft/ft_memalloc.c libft/ft_putchar.c libft/ft_putstr.c libft/ft_str_func_not_find.c libft/ft_strcat.c libft/ft_strchr.c libft/ft_strcmp.c libft/ft_strcspn.c libft/ft_strlen.c libft/ft_strrev.c libft/ft_strsub.c libft/ft_isspace.c libft/ft_memcmp.c libft/ft_putchar_fd.c libft/ft_putstr_fd.c libft/ft_strcpy.c libft/ft_strnew.c libft/ft_strncpy.c libft/ft_convert/ft_uitoa_base.c
 
-INC = ./$(LIBFT_DIR)/includes/
+SRCS = $(addprefix srcs/, $(SRC)) $(LIBFT_SRC)
+
+OBJ = $(SRCS:.c=.o)
+
+LIBFT_INC = ./libft/includes/
+
+INC = ./includes/
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
+$(NAME): $(OBJ)
 	ar -rc $(NAME) $(OBJ)
 
 %.o: %.c
-	    $(CC) $(CFLAGS) -I $(INC) -c -o $@ $<
-
-$(LIBFT_DIR)/$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
-
+	    $(CC) $(CFLAGS) -I$(LIBFT_INC) -I$(INC) -c -o $@ $<
 clean:
 	rm -f $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(LIBFT_DIR)/$(LIBFT)
 
 re: fclean all
