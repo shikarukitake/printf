@@ -13,6 +13,8 @@
 
 #define MAX_LD_BUF_SIZE (sizeof(long double) * 8 + 1)
 
+#define MAX_FLOAT_BUFF_SIZE 4096
+
 static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
 static const char *g_flags = "-+ #0";

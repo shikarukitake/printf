@@ -10,8 +10,9 @@ static char *test_simple()
 	double d;
 
 	d =  881.15625;
-	//mu_assert_printf("test1", ft_printf, "%f", 123);
-	mu_assert_printf("test2", ft_printf, "%f", d);
+	mu_assert_printf("test1", ft_printf, "%f", d);
+	d = -881.123;
+    mu_assert_printf("test2", ft_printf, "%f", d);
 	return (0);
 }
 

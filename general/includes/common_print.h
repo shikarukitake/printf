@@ -8,14 +8,14 @@
 #include "specificator.h"
 #include "ft_float.h"
 
-void	fill_field(int i, t_spec *spec);
+void    fill_field(int i, t_spec *spec);
 
-int	ft_put_sd_buf(char *buf, t_spec *spec);
+int     ft_put_sd_buf(char *buf, t_spec *spec);
 
-int	ft_put_ud_buf(char *buf, t_spec *spec);
+int     ft_put_ud_buf(char *buf, t_spec *spec);
 
-int	ft_put_hex_buf(char *buf, t_spec *spec);
+int     ft_put_hex_buf(char *buf, t_spec *spec);
 
-int	ft_put_float_buf(char *buf, t_spec *spec, t_float *f);
+int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f);
 
 #endif //PRINTF_COMMON_PRINT_H

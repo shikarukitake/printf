@@ -100,4 +100,5 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
             float_nums++;
         }
     }
+    return (i + float_nums);
 }

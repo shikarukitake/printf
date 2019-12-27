@@ -5,8 +5,7 @@
 #include "ft_float.h"
 #include "libft.h"
 #include "bits_util.h"
-
-#define FLOAT_MAX_BUF_SIZE 4096
+#include "printf_constatns.h"
 
 #define EXP_SHIFT 16383
 
@@ -70,40 +69,68 @@ void    get_float_bits(unsigned long m, unsigned e, char *buf)
 
 void    get_float_part(unsigned long mantissa, unsigned exp, char *buf)
 {
-    char            bin_buf[FLOAT_MAX_BUF_SIZE];
+    char            bin_buf[MAX_FLOAT_BUFF_SIZE];
     int             i;
     unsigned int    n;
-    float           res;
+    long double     res;
 
     i = 0;
     n = 1;
     res = 0;
-    ft_bzero(bin_buf, FLOAT_MAX_BUF_SIZE);
+    ft_bzero(bin_buf, MAX_FLOAT_BUFF_SIZE);
     get_float_bits(mantissa, exp, bin_buf);
-    while (bin_buf[i])
+    while (bin_buf[i] && i < 30)
     {
         if (bin_buf[i] == '1')
-            res = res + (1.0 / ft_power(2, n));
+            res = res + (1.0 / ft_power(2, n)); // need long arithmetic there
         n++;
         i++;
     }
-    res = res * ft_power(10, i);
-    ft_itoa_base((int)res, buf, 10, 'a');
+    if(i > 6)
+        i = 6;
+    res = res * ft_power(10, i); // need long arithmetic there
+    ft_itoa_base((t_ull)res, buf, 10, 'a');
 }
+
+char    a_plus_one(char a)
+{
+    return (char)(a - '0' + '1');
+}
+
+void    round_float(char *float_buf)
+{
+    size_t  i;
+    int     add;
+
+    i = ft_strlen(float_buf) - 1;
+    add = 0;
+    while (float_buf[i] > '5' && float_buf[i] != '.')
+    {
+        float_buf[i] = (char)(float_buf[i] == '9' ? '0' : a_plus_one(float_buf[i]));
+        i--;
+        add = 1;
+    }
+    if (add)
+        float_buf[i] = a_plus_one(float_buf[i]);
+}
+
 
 void    ft_dtoa(long double ld, char *buffer)
 {
-    char int_part_buf[FLOAT_MAX_BUF_SIZE];
-    char float_part_buf[FLOAT_MAX_BUF_SIZE];
+    char int_part_buf[MAX_FLOAT_BUFF_SIZE];
+    char float_part_buf[MAX_FLOAT_BUFF_SIZE];
     long_double_cast ldc;
 
     ldc = (long_double_cast) {.ld = ld};
     ldc.parts.exponent -= EXP_SHIFT;
-    ft_bzero(int_part_buf, FLOAT_MAX_BUF_SIZE);
-    ft_bzero(float_part_buf, FLOAT_MAX_BUF_SIZE);
+    ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
+    ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
     get_int_part(ldc.parts.mantisa, ldc.parts.exponent, int_part_buf);
     get_float_part(ldc.parts.mantisa, ldc.parts.exponent, float_part_buf);
-    ft_strcpy(buffer, int_part_buf);
+    if (ld < 0)
+        buffer[0] = '-';
+    ft_strcat(buffer, int_part_buf);
     ft_strcat(buffer, ".");
     ft_strcat(buffer, float_part_buf);
+    round_float(buffer);
 }
