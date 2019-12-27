@@ -25,6 +25,8 @@ int		ft_printf(const char *fmt, ...)
 			ft_putchar(fmt[i]);
 			count++;
 		}
+		if (!fmt[i])
+            break;
 		i++;
 	}
 	va_end(args);

@@ -49,9 +49,14 @@ int	call_print_func(const char *format, va_list *vargs, int offset)
 
 	count = 0;
 	init_type_func_table();
-	spec = parse_spec_format(format + offset + 1);
-	fill_spec_from_vargs(spec, vargs);
-	id = spec->type == -1 ? 0 : spec->type;
+	if (*(format + offset + 1) != '\0')
+	{
+        spec = parse_spec_format(format + offset + 1);
+        fill_spec_from_vargs(spec, vargs);
+        id = spec->type == -1 ? 0 : spec->type;
+    }
+	else
+        return (0);
 	count = g_type_func_table[id](spec, vargs);
 	free(spec);
 	return (count);

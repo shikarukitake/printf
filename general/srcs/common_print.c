@@ -20,6 +20,11 @@ void fill_field(int i, t_spec *spec)
 		ft_putchar(ch);
 		i++;
 	}
+	while (i < spec->precision.value)
+    {
+	    ft_putchar('0');
+	    i++;
+    }
 }
 
 int		ft_put_sd_buf(char *buf, t_spec *spec)

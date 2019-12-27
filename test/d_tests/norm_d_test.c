@@ -10,6 +10,7 @@ static char *test_simple()
 {
     int num = 1234567;
     mu_assert_printf("test1", ft_printf, "%d%", num);
+    mu_assert_printf("test2", ft_printf, "%.*d", 10, num);
     return (0);
 }
 
