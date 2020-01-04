@@ -11,8 +11,8 @@
 int is_wh(t_spec *spec)
 {
 	return (!ft_strchr(g_int_type_specs, spec->type)
-			|| spec->flags['-'] == TRUE);
-			//|| (spec->precision.value != 0 && spec->width.value != 0));
+			|| spec->flags['-'] == TRUE
+			|| ((spec->width.value != 0) && spec->width.value > spec->precision.value));
 }
 
 void fill_field(int i, t_spec *spec)
