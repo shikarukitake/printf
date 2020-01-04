@@ -7,11 +7,19 @@
 #include "specificator.h"
 #include "ft_float.h"
 
+
+int is_wh(t_spec *spec)
+{
+	return (!ft_strchr(g_int_type_specs, spec->type)
+			|| spec->flags['-'] == TRUE);
+			//|| (spec->precision.value != 0 && spec->width.value != 0));
+}
+
 void fill_field(int i, t_spec *spec)
 {
 	char ch;
 
-	if (ft_strchr(g_int_type_specs, spec->type))
+	if (is_wh(spec))
 		ch = ' ';
 	else
 		ch = (spec->flags['0'] == TRUE) ? ' ' : '0';
