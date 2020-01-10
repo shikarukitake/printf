@@ -6,6 +6,7 @@
 
 #include "util.h"
 #include "print_settings.h"
+#include <stdlib.h>
 
 typedef		struct	s_width
 {

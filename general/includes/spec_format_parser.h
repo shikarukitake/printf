@@ -7,6 +7,13 @@
 
 #include "ft_printf.h"
 #include "color_settings.h"
+#include "printf_constatns.h"
+#include "size_parser.h"
+#include "precision_parser.h"
+#include "type_parser.h"
+#include "width_parser.h"
+#include "flags_parse.h"
+
 
 int     get_spec_format_length(const char *format);
 

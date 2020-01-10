@@ -5,8 +5,11 @@
 #ifndef PRINTF_GET_OCT_H
 #define PRINTF_GET_OCT_H
 
-#include "specificator.h"
+
 #include <stdarg.h>
+#include "convert.h"
+#include "get_digit.h"
+#include "specificator.h"
 
 void	get_oct(va_list *vargs, t_spec *spec, char *buffer, char letter);
 

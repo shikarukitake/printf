@@ -3,8 +3,7 @@
 //
 
 #include "get_oct.h"
-#include "convert.h"
-#include "get_digit.h"
+
 
 void	get_oct(va_list *vargs, t_spec *spec, char *buffer, char letter)
 {

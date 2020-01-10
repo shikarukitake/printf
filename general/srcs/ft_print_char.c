@@ -2,10 +2,7 @@
 // Created by Aletha Yellin on 25/12/2019.
 //
 
-#include "libft.h"
-#include <stddef.h>
-#include <unistd.h>
-
+#include "ft_print_char.h"
 
 #define PREFIX1  128
 #define PREFIX2  192

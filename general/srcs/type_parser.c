@@ -2,7 +2,9 @@
 // Created by Aletha Yellin on 25/11/2019.
 //
 
-#include "ft_printf.h"
+#include "printf_constatns.h"
+#include "specificator.h"
+#include "libft.h"
 
 int		parse_type(const char *format, t_spec *spec)
 {

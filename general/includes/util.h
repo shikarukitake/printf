@@ -10,6 +10,8 @@
 #  include <sys/types.h>
 # endif
 
+#include "libft.h"
+
 typedef struct s_pair
 {
 	size_t x;

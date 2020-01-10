@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 29/11/2019.
 //
 
-#include "ft_printf.h"
+#include "get_sd.h"
 
 void		get_sd(va_list *va_args, t_spec *spec, char *buffer)
 {

@@ -6,6 +6,9 @@
 #define PRINTF_FT_PRINT_CHAR_H
 
 # include <wchar.h>
+# include "libft.h"
+# include <stddef.h>
+# include <unistd.h>
 
 void    ft_putwchar(wchar_t wch);
 

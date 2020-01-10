@@ -7,6 +7,8 @@
 
 #include <stdarg.h>
 #include "specificator.h"
+#include "convert.h"
+#include "get_digit.h"
 
 void		get_sd(va_list *va_args, t_spec *spec, char *buffer);
 

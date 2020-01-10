@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 25/11/2019.
 //
 
-#include "ft_printf.h"
+#include "size_parser.h"
 
 int parse_size(const char *format, t_spec *spec)
 {

@@ -2,8 +2,7 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#include "ft_printf.h"
-#include <stdlib.h>
+#include "type_func_table.h"
 
 #define MAX_TYPE_FUNC_TABLE 255
 
@@ -29,7 +28,7 @@ int 	init_type_func_table()
     g_type_func_table['p'] = ft_print_p;
 	g_type_func_table['f'] = ft_print_f;
     g_type_func_table['q'] = ft_print_color;
-	/*
+    /*
 	g_type_func_table['a'] = ft_print_A;
 	g_type_func_table['e'] = ft_print_e;
 	g_type_func_table['E'] = ft_print_E;
@@ -37,8 +36,9 @@ int 	init_type_func_table()
 	g_type_func_table['F'] = ft_print_f;
 	g_type_func_table['g'] = ft_print_g;
 	g_type_func_table['G'] = ft_print_g;
-	 */
-	return (1);
+	*/
+    return (1);
+
 }
 
 int	call_print_func(const char *format, va_list *vargs, int offset)

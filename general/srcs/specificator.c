@@ -2,8 +2,8 @@
 // Created by Aletha Yellin on 25/11/2019.
 //
 
-#include "ft_printf.h"
-#include <stdlib.h>
+#include "specificator.h"
+
 
 t_spec	*init_spec()
 {

@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 22/11/2019.
 //
 
-#include "ft_printf.h"
+#include "flags_parse.h"
 
 int is_flag(char c)
 {

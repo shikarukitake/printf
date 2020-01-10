@@ -8,6 +8,8 @@
 #include <stdarg.h>
 #include "specificator.h"
 #include "ft_float.h"
+#include "convert.h"
+#include "get_float.h"
 
 t_float		get_f(va_list *va_args, t_spec *spec, char *buffer);
 

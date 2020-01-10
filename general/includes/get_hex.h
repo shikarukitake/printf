@@ -5,8 +5,10 @@
 #ifndef PRINTF_GET_HEX_H
 #define PRINTF_GET_HEX_H
 
-#include "specificator.h"
 #include <stdarg.h>
+#include "specificator.h"
+#include "convert.h"
+#include "get_digit.h"
 
 void		get_hex(va_list *va_args, t_spec *spec, char *buffer, char letter);
 

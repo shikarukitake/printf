@@ -7,6 +7,9 @@
 
 #include "specificator.h"
 #include "ft_float.h"
+#include "libft.h"
+#include "printf_constatns.h"
+#include "specificator.h"
 
 void    fill_field(int i, t_spec *spec);
 

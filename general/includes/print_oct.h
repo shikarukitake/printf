@@ -5,7 +5,11 @@
 #ifndef PRINTF_PRINT_OCT_H
 #define PRINTF_PRINT_OCT_H
 
-#include "ft_printf.h"
+#include <stdarg.h>
+#include "specificator.h"
+#include "get_oct.h"
+#include "convert.h"
+#include "common_print.h"
 
 int	ft_print_o(t_spec *spec, va_list *args);
 

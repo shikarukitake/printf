@@ -15,7 +15,9 @@ int		ft_print_s(t_spec* spec, va_list *args)
     if (spec->size.id == -1)
 	    tmp = va_arg(*args, char *);
     else if (spec->size.value[0] == 'l')
-        return (ft_print_ws(spec, args));
+    {
+		return (ft_print_ws(spec, args));
+	}
 	if (spec->precision.value == -1)
 	{
         ft_putstr(tmp);

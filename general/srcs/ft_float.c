@@ -88,7 +88,7 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf)
     if(i > 6)
         i = 6;
     res = res * ft_power(10, i); // need long arithmetic there
-    ft_itoa_base((t_ull)res, buf, 10, 'a');
+    ft_ulltoa_base((t_ull)res, buf, 10, 'a');
 }
 
 char    a_plus_one(char a)
@@ -103,9 +103,17 @@ void    round_float(char *float_buf)
 
     i = ft_strlen(float_buf) - 1;
     add = 0;
-    while (float_buf[i] > '5' && float_buf[i] != '.')
+    while (float_buf[i] > '5')
     {
-        float_buf[i] = (char)(float_buf[i] == '9' ? '0' : a_plus_one(float_buf[i]));
+    	if (float_buf[i] == '.')
+			return;
+    	if (float_buf[i] == '9')
+        	float_buf[i] = '0';
+    	else
+		{
+    		float_buf[i] = a_plus_one(float_buf[i]);
+			return;
+		}
         i--;
         add = 1;
     }

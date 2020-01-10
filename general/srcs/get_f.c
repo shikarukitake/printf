@@ -3,9 +3,7 @@
 //
 
 #include "get_f.h"
-#include "convert.h"
-#include "get_float.h"
-#include "ft_float.h"
+
 
 t_float		get_f(va_list *va_args, t_spec *spec, char *buffer)
 {

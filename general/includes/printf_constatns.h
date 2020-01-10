@@ -15,13 +15,13 @@
 
 #define MAX_FLOAT_BUFF_SIZE 4096
 
-static const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
+const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
 
-static const char *g_flags = "-+ #0";
+const char *g_flags = "-+ #0";
 
-static const char *g_int_type_specs = "diouxX";
+const char *g_int_type_specs = "diouxX";
 
-static const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
+const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
 
 //TODO: stdint constants are allowed for printf?
 

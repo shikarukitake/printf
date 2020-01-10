@@ -2,11 +2,7 @@
 // Created by Aletha Yellin on 29/11/2019.
 //
 
-#include "libft.h"
-#include "printf_constatns.h"
-#include "specificator.h"
-#include "ft_float.h"
-
+#include "common_print.h"
 
 int is_wh(t_spec *spec)
 {
@@ -67,7 +63,7 @@ int		ft_put_sd_buf(char *buf, t_spec *spec)
 	return (i); // Maybe wrong
 }
 
-void	ft_put_ud_buf(char *buf, t_spec *spec)
+int	ft_put_ud_buf(char *buf, t_spec *spec)
 {
 	int i;
 
@@ -83,6 +79,7 @@ void	ft_put_ud_buf(char *buf, t_spec *spec)
 		fill_field(ft_strlen(buf), spec);
 		ft_putstr(buf);
 	}
+	return (i); //Wrong
 }
 
 int	ft_put_hex_buf(char *buf, t_spec *spec)
@@ -106,6 +103,8 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
     }
 	while (buf[i])
     {
+		if (spec->precision.value != -1 && float_nums == spec->precision.value)
+				break;
 	    ft_putchar(buf[i]);
 	    float_nums++;
 	    i++;

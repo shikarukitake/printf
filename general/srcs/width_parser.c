@@ -2,8 +2,8 @@
 // Created by Aletha Yellin on 22/11/2019.
 //
 
-#include <stdlib.h>
-#include "ft_printf.h"
+
+#include "width_parser.h"
 
 int		is_width(char c)
 {
