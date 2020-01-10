@@ -22,7 +22,7 @@ int     get_spec_format_length(const char *format)
         g_was_color = 0;
         return (5);
     }
-	end_of_format = ft_strcspn(format, g_type_specs);
+	end_of_format = ft_strcspn(format, FT_PRINTF_SPEC_TYPES);
 	return (end_of_format == -1 ? 1 : end_of_format);
 }
 

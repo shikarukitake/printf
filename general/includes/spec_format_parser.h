@@ -13,6 +13,8 @@
 #include "type_parser.h"
 #include "width_parser.h"
 #include "flags_parse.h"
+#include "color_settings.h"
+
 
 
 int     get_spec_format_length(const char *format);

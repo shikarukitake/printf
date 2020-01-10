@@ -6,7 +6,7 @@
 
 int is_flag(char c)
 {
-	return (ft_strchr(g_flags, c) != NULL);
+	return (ft_strchr(FT_PRINTF_FLAGS, c) != NULL);
 }
 
 //TODO: if flags are repeated?

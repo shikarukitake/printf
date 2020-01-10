@@ -11,17 +11,15 @@
 
 #define MAX_P_BUFF_SIZE (sizeof (void*) * 8  + 1)
 
-#define MAX_LD_BUF_SIZE (sizeof(long double) * 8 + 1)
-
 #define MAX_FLOAT_BUFF_SIZE 4096
 
-const char *g_type_specs = "ncpsdiouxXaAeEfFgG";
+#define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgG"
 
-const char *g_flags = "-+ #0";
+#define FT_PRINTF_FLAGS "-+ #0"
 
-const char *g_int_type_specs = "diouxX";
+#define FT_PRINTF_INT_TYPES "diouxX"
 
-const char *g_size_specs[MAX_SIZE_SPECS] = {"l", "ll", "h", "hh", "j", "z", "t", "L"};
+const char *g_size_specs[MAX_SIZE_SPECS];
 
 //TODO: stdint constants are allowed for printf?
 

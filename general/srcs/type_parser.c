@@ -10,7 +10,7 @@ int		parse_type(const char *format, t_spec *spec)
 {
 	char	*ptr;
 
-	ptr = ft_strchr(g_type_specs, format[0]);
+	ptr = ft_strchr(FT_PRINTF_SPEC_TYPES, format[0]);
 	if (!ptr)
 	{
 		if(format[0] == '%')

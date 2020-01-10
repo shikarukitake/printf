@@ -1,10 +1,8 @@
 //
 // Created by Aletha Yellin on 25/12/2019.
 // TODO: put it to libft
-#include "specificator.h"
-#include <stdarg.h>
-#include <wchar.h>
-#include "ft_print_char.h"
+
+#include "print_ws.h"
 
 size_t ft_wstrlen(wchar_t *str)
 {
