@@ -15,6 +15,8 @@
 
 #define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgG"
 
+#define FT_PRINTF_TYPES "ncpsdiouxXaAeEfFgG%"
+
 #define FT_PRINTF_FLAGS "-+ #0"
 
 #define FT_PRINTF_INT_TYPES "diouxX"

@@ -14,6 +14,40 @@ void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 		spec->precision.value = va_arg(*vargs, int);
 }
 
+int 	is_just_percent(const char *format)
+{
+	int type_pos;
+	int next_percent_pos;
+	
+	next_percent_pos = ft_strchri(format + 1, '%');
+	type_pos = ft_strcspn(format, FT_PRINTF_SPEC_TYPES);
+	
+	if (next_percent_pos == -1 && type_pos == -1)
+		return (1);
+	else
+		return (0);
+}
+
+int		is_spec_format(const char *format)
+{
+
+	int type_pos;
+	int next_percent_pos;
+
+	next_percent_pos = ft_strchri(format + 1, '%');
+	type_pos = ft_strcspn(format, FT_PRINTF_SPEC_TYPES);
+	if (next_percent_pos != -1 && type_pos != -1)
+	{
+		if (type_pos > next_percent_pos)
+			return (0);
+		else
+			return (1);
+	}
+	if (next_percent_pos == -1 && type_pos != -1)
+		return (1);
+	return (0);
+}
+
 int     get_spec_format_length(const char *format)
 {
 	int end_of_format;
@@ -22,7 +56,10 @@ int     get_spec_format_length(const char *format)
         g_was_color = 0;
         return (5);
     }
-	end_of_format = ft_strcspn(format, FT_PRINTF_SPEC_TYPES);
+	if (is_spec_format(format))
+		end_of_format = ft_strcspn(format, FT_PRINTF_SPEC_TYPES);
+	else
+		end_of_format = ft_strchri(format + 1, '%') + 1;
 	return (end_of_format == -1 ? 1 : end_of_format);
 }
 

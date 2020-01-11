@@ -21,11 +21,11 @@ static char *example2()
 {
     const double RENT = 3852.99;
     mu_assert_printf("1", ft_printf, "*%8f*", RENT);
-    mu_assert_printf("2", ft_printf, "*%e*", RENT);
+    //mu_assert_printf("2", ft_printf, "*%e*", RENT);
     mu_assert_printf("3", ft_printf, "*%4.2f*", RENT);
     mu_assert_printf("4", ft_printf, "*%3.1f*", RENT);
     mu_assert_printf("5", ft_printf, "*%10.3f*", RENT);
-    mu_assert_printf("6", ft_printf, "*%10.3E*", RENT);
+   // mu_assert_printf("6", ft_printf, "*%10.3E*", RENT);
     mu_assert_printf("7", ft_printf, "*%+4.2f*", RENT);
 
     mu_assert_printf("8", ft_printf, "%x %X %#x", 31, 31, 31);

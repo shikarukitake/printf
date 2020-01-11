@@ -10,9 +10,32 @@ static char *simple_test()
 	return (0);
 }
 
+static char *digit_test()
+{
+	mu_assert_printf("percent and extra digit", ft_printf, "%-5%", MU_NULL);
+	return (0);
+}
+
+static char *digit_test2()
+{
+	mu_assert_printf("two percent and  d", ft_printf, "%-5% %+5d", 123);
+	return (0);
+}
+
+static char *one_percent()
+{
+	mu_assert_printf("one percent and digits", ft_printf, "1%2", MU_NULL);
+	return (0);
+}
+
+static char *only_percent()
+{
+	mu_assert_printf("alone percent", ft_printf, "%", MU_NULL);
+	return (0);
+}
 
 int main(void)
 {
-	test_all("JUST PERCENT", 1, simple_test);
+	test_all("JUST PERCENT", 5, simple_test, digit_test, digit_test2, one_percent, only_percent);
 	return (0);
 }

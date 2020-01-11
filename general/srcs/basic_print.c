@@ -3,8 +3,7 @@
 //
 
 #include "basic_print.h"
-#include "ft_print_char.h"
-#include "wchar.h"
+
 
 int		ft_print_s(t_spec* spec, va_list *args)
 {

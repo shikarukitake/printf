@@ -5,14 +5,18 @@
 #ifndef PRINTF_BASIC_PRINT_H
 #define PRINTF_BASIC_PRINT_H
 
-#include "specificator.h"
+
 #include <stdarg.h>
+#include <wchar.h>
+
 #include "libft.h"
 #include "printf_constatns.h"
 #include "get_sd.h"
 #include "get_p.h"
 #include "common_print.h"
 #include "print_ws.h"
+#include "ft_print_char.h"
+#include "specificator.h"
 
 int     ft_print_s(t_spec *spec, va_list *args);
 
