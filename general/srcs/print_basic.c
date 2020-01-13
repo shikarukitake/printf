@@ -57,5 +57,7 @@ int    ft_print_p(t_spec *spec, va_list *args)
 
     ft_bzero(buffer, MAX_P_BUFF_SIZE);
     get_p(args, spec, buffer);
-	return (ft_put_hex_buf(buffer, spec));
+    spec->flags['#'] = TRUE;
+    spec->type = 'x';
+	return (print_hex_buf(buffer, spec));
 }

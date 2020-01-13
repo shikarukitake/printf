@@ -6,7 +6,7 @@
 
 int is_precision(char ch)
 {
-	return (ch == '.' || ch == '*' || ft_isdigit(ch));
+	return (ft_isdigit(ch));
 }
 
 int		parse_precision(const char *format, t_spec *spec)
@@ -18,6 +18,7 @@ int		parse_precision(const char *format, t_spec *spec)
 	i = 0;
 	if (format[i] == '.')
 	{
+		spec->precision.is_dot =TRUE;
 		if (format[1] == '*')
 		{
 			spec->precision.is_asterisk = TRUE; // get from va_arg?
@@ -26,7 +27,7 @@ int		parse_precision(const char *format, t_spec *spec)
 		else
 		{
 			end = ft_str_func_not_find(format, is_precision);
-			if (end == -1)
+			if (end <= 0)
 				return (0);
 			tmp = ft_strsub(format, 1, end - 1);
 			spec->precision.value = ft_atoi(tmp);
@@ -34,6 +35,7 @@ int		parse_precision(const char *format, t_spec *spec)
 			free(tmp);
 			return (i + 1);
 		}
+
 	}
 	return (0);
 }

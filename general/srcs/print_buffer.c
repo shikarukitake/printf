@@ -6,7 +6,7 @@
 
 int is_wh(t_spec *spec)
 {
-	return (!ft_strchr(FT_PRINTF_INT_TYPES, spec->type)
+	return	(!ft_strchr(FT_PRINTF_INT_TYPES, spec->type)
 			|| spec->flags['-'] == TRUE
 			|| ((spec->width.value != 0) && spec->width.value > spec->precision.value));
 }
@@ -85,27 +85,7 @@ int	ft_put_ud_buf(char *buf, t_spec *spec)
 	return (i + ft_strlen(buf)); //Wrong
 }
 
-int put_hex_prefix(const char *buf, t_spec *spec)
-{
-	if (spec->flags['#'] ==TRUE && buf[0] != '0')
-	{
-		if (spec->type == 'x')
-			ft_putstr(HEX_SMALL_PREFIX);
-		else if (spec->type == 'X')
-			ft_putstr(HEX_BIG_PREFIX);
-		return (2);
-	}
-	return (0);
-}
 
-int	ft_put_hex_buf(char *buf, t_spec *spec)
-{
-	int i;
-
-	i = 0;
-	i += put_hex_prefix(buf, spec);
-	return (ft_put_sd_buf(buf, spec) + i);
-}
 
 int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 {

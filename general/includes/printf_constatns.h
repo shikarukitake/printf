@@ -11,6 +11,8 @@
 
 #define MAX_P_BUFF_SIZE (sizeof (void*) * 8  + 1)
 
+#define MAX_HEX_BUF_SIZE (sizeof(unsigned long long) * 8 +1)
+
 #define MAX_FLOAT_BUFF_SIZE 4096
 
 #define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgG"

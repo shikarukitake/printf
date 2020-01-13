@@ -17,6 +17,7 @@
 #include "print_ws.h"
 #include "ft_putwchar.h"
 #include "specificator.h"
+#include "print_hex_buf.h"
 
 int     ft_print_s(t_spec *spec, va_list *args);
 

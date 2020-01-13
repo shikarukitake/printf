@@ -18,6 +18,7 @@ typedef		struct	s_percision
 {
 	int		value;
 	t_bool	is_asterisk;
+	t_bool	is_dot;
 
 }					t_precision;
 

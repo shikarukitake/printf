@@ -17,7 +17,10 @@ t_spec	*init_spec()
 	new->type = -1;
 	new->size.id = -1;
 	new->width.value = -1;
+	new->width.is_asterisk = FALSE;
 	new->precision.value = -1;
+	new->precision.is_asterisk = FALSE;
+	new->precision.is_dot = FALSE;
 	while (i < MAX_FLAGS)
 		new->flags[i++] = FALSE;
 	new->settings.color_id = -1;
