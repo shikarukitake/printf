@@ -4,7 +4,7 @@
 
 #include "spec_format_parser.h"
 
-int         g_was_color = 0;
+static int         g_was_color = 0;
 
 void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 {

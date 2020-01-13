@@ -9,7 +9,7 @@
 #include "specificator.h"
 #include "get_oct.h"
 #include "convert.h"
-#include "common_print.h"
+#include "print_buffer.h"
 
 int	ft_print_o(t_spec *spec, va_list *args);
 

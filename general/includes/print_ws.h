@@ -8,7 +8,7 @@
 #include "specificator.h"
 #include <stdarg.h>
 #include <wchar.h>
-#include "ft_print_char.h"
+#include "ft_putwchar.h"
 
 int		ft_print_ws(t_spec* spec, va_list *args);
 

@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#include "basic_print.h"
+#include "print_basic.h"
 
 
 int		ft_print_s(t_spec* spec, va_list *args)

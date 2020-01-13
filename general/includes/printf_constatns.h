@@ -33,7 +33,7 @@ typedef unsigned short		t_us;
 
 #define HEX_SMALL_PREFIX  "0x"
 
-#define HEX_UPPER_PREFIX "0X"
+#define HEX_BIG_PREFIX "0X"
 
 #define BIN_PREFIX	"0b"
 

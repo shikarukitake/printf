@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#include "additional_print.h"
+#include "print_other.h"
 
 int	ft_print_empty(t_spec *spec, va_list *args)
 {

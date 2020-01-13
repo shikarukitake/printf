@@ -2,14 +2,14 @@
 // Created by Aletha Yellin on 25/12/2019.
 //
 
-#include "ft_print_char.h"
+#include "ft_putwchar.h"
 
 #define PREFIX1  128
 #define PREFIX2  192
 #define PREFIX3  224
 #define PREFIX4  240
 
-void    ft_put_oct4(wchar_t wchar)
+static void    ft_put_oct4(wchar_t wchar)
 {
     unsigned int buf[4];
 
@@ -20,7 +20,7 @@ void    ft_put_oct4(wchar_t wchar)
     write(1, buf, 4);
 }
 
-void    ft_put_oct3(wchar_t wchar)
+static void    ft_put_oct3(wchar_t wchar)
 {
     unsigned int buf[3];
 
@@ -30,7 +30,7 @@ void    ft_put_oct3(wchar_t wchar)
     write(1, buf, 3);
 }
 
-void    ft_put_oct2(wchar_t wchar)
+static void    ft_put_oct2(wchar_t wchar)
 {
     unsigned int buf[2];
 

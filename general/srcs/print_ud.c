@@ -6,7 +6,7 @@
 #include "printf_constatns.h"
 #include "get_ud.h"
 #include "libft.h"
-#include "common_print.h"
+#include "print_buffer.h"
 
 int     ft_print_u(t_spec *spec, va_list *args)
 {

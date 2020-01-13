@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 29/11/2019.
 //
 
-#include "common_print.h"
+#include "print_buffer.h"
 
 int is_wh(t_spec *spec)
 {
@@ -11,10 +11,12 @@ int is_wh(t_spec *spec)
 			|| ((spec->width.value != 0) && spec->width.value > spec->precision.value));
 }
 
-void fill_field(int i, t_spec *spec)
+int fill_field(int i, t_spec *spec)
 {
 	char ch;
+	int count;
 
+	count = i;
 	if (is_wh(spec))
 		ch = ' ';
 	else
@@ -29,6 +31,7 @@ void fill_field(int i, t_spec *spec)
 	    ft_putchar('0');
 	    i++;
     }
+	return (i - count);
 }
 
 int		ft_put_sd_buf(char *buf, t_spec *spec)
@@ -47,15 +50,15 @@ int		ft_put_sd_buf(char *buf, t_spec *spec)
 			i++;
 		}
 		ft_putstr(buf);
-		fill_field(i, spec);
+		i += fill_field(i, spec);
 	}
 	else
 	{
-		fill_field(ft_strlen(buf) + is_sign, spec);
+		i += fill_field(ft_strlen(buf) + is_sign, spec);
 		if (is_sign)
 		{
             ft_putchar('+');
-            i+=1;
+            i++;
         }
 		ft_putstr(buf);
 		i+= ft_strlen(buf);
@@ -72,20 +75,36 @@ int	ft_put_ud_buf(char *buf, t_spec *spec)
 	{
 		i += ft_strlen(buf);
 		ft_putstr(buf);
-		fill_field(i, spec);
+		i += fill_field(i, spec);
 	}
 	else
 	{
-		fill_field(ft_strlen(buf), spec);
+		i += fill_field(ft_strlen(buf), spec);
 		ft_putstr(buf);
 	}
-	return (i); //Wrong
+	return (i + ft_strlen(buf)); //Wrong
+}
+
+int put_hex_prefix(const char *buf, t_spec *spec)
+{
+	if (spec->flags['#'] ==TRUE && buf[0] != '0')
+	{
+		if (spec->type == 'x')
+			ft_putstr(HEX_SMALL_PREFIX);
+		else if (spec->type == 'X')
+			ft_putstr(HEX_BIG_PREFIX);
+		return (2);
+	}
+	return (0);
 }
 
 int	ft_put_hex_buf(char *buf, t_spec *spec)
 {
-	ft_putstr(HEX_SMALL_PREFIX);
-	return (ft_put_sd_buf(buf, spec));
+	int i;
+
+	i = 0;
+	i += put_hex_prefix(buf, spec);
+	return (ft_put_sd_buf(buf, spec) + i);
 }
 
 int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
