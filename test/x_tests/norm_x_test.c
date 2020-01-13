@@ -19,10 +19,24 @@ static char *simple_neg_test()
 	return (0);
 }
 
+static char *zero_test()
+{
+	mu_assert_printf("test1", ft_printf, "%.x", 0);
+	mu_assert_printf("test2", ft_printf, "%#.0x", 0);
+	return (0);
+}
+
+static char *width_test()
+{
+	mu_assert_printf("test1", ft_printf, "%10x", 123);
+	mu_assert_printf("test2", ft_printf, "%010x", 123);
+	mu_assert_printf("test3", ft_printf, "%#10x", 123);
+	return (0);
+}
 
 
 int main()
 {
-	test_all("SIMPLE X", 2, simple_test, simple_neg_test);
+	test_all("NORM X", 4, simple_test, simple_neg_test, zero_test, width_test);
 	return (0);
 }
