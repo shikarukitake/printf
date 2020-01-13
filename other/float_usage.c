@@ -4,10 +4,9 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include <includes/ft_float.h>
 #include "ft_float.h"
 #include <string.h>
-
+#include "libft.h"
 char		*ft_strrev(char *str)
 {
     size_t i;
@@ -58,27 +57,6 @@ void get_bits(unsigned long n, char *buffer)
     ft_strrev(buffer);
 }
 
-int	ft_power(int base, unsigned int pow)
-{
-    if (pow == 0)
-        return (1);
-    else
-        return (ft_power(base, pow - 1) * base);
-}
-
-unsigned long set_mask(unsigned int count)
-{
-    unsigned long mask;
-
-    mask = ft_power(count, 2);
-//    while (count)
-//    {
-//        mask <<=1;
-//        mask = mask & 1u;
-//        count--;
-//    }
-    return (mask);
-}
 
 unsigned int    get_bits_count(unsigned long n)
 {
@@ -130,21 +108,6 @@ unsigned long bin_to_dec(unsigned long b)
     return (dec_value);
 }
 
-unsigned long copy_n_bits(unsigned long x, unsigned n)
-{
-    unsigned  long result;
-
-    result = 0;
-    while (n)
-    {
-        result = result | (x & 1u);
-        x >>= 1;
-        result <<= 1;
-        n--;
-    }
-    return (result);
-}
-
 
 unsigned long get_float_part(unsigned long m, unsigned e, char *buf)
 {
@@ -175,27 +138,27 @@ unsigned long get_float_part(unsigned long m, unsigned e, char *buf)
     ft_strrev(buf);
 }
 
-char	*ft_itoa_base(int value, char *buffer, int base, char a)
-{
-    long	n;
-    int		sign;
-    int		i;
-
-    n = (value < 0) ? -(long)value : value;
-    sign = (value < 0 && base == 10) ? -1 : 0;
-    i = (sign == -1) ? 2 : 1;
-    while ((n /= base) >= 1)
-        i++;
-    buffer[i] = '\0';
-    n = (value < 0) ? -(long)value : value;
-    while (i-- + sign)
-    {
-        buffer[i] = (n % base < 10) ? n % base + '0' : n % base + a - 10;
-        n /= base;
-    }
-    (i == 0) ? buffer[i] = '-' : 0;
-    return (buffer);
-}
+//char	*ft_itoa_base(int value, char *buffer, int base, char a)
+//{
+//    long	n;
+//    int		sign;
+//    int		i;
+//
+//    n = (value < 0) ? -(long)value : value;
+//    sign = (value < 0 && base == 10) ? -1 : 0;
+//    i = (sign == -1) ? 2 : 1;
+//    while ((n /= base) >= 1)
+//        i++;
+//    buffer[i] = '\0';
+//    n = (value < 0) ? -(long)value : value;
+//    while (i-- + sign)
+//    {
+//        buffer[i] = (n % base < 10) ? n % base + '0' : n % base + a - 10;
+//        n /= base;
+//    }
+//    (i == 0) ? buffer[i] = '-' : 0;
+//    return (buffer);
+//}
 
 void count_float_part(const char *float_part, char *result)
 {

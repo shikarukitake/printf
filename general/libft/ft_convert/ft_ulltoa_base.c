@@ -9,7 +9,7 @@ typedef struct s_ulldiv
 
 }				t_ulldiv;
 
-static t_ulldiv Ull_div(t_ull value, int base)
+static t_ulldiv ull_div(t_ull value, int base)
 {
 	t_ulldiv r;
 

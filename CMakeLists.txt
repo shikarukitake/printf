@@ -71,3 +71,6 @@ ADD_EXECUTABLE_MAIN_TEST(COLOR_TEST test/bonus/color_test.c)
 add_executable(ManualTesting test/manual_test/manual_usage.c)
 target_link_libraries(ManualTesting ${PROJECT_BINARY_DIR}/libftprintf.a)
 add_dependencies(ManualTesting mu ft ftprintf)
+
+add_executable(HexPlay test/x_tests/hex_play.c)
+add_executable(HexPlay2 test/x_tests/hex_convert_play.c)

@@ -7,7 +7,7 @@
 void	get_general_d(va_list *vargs, t_conv *conv, t_spec *spec, char *buf)
 {
 	if (spec->size.id == -1)
-		ft_uitoa_base(va_arg(*vargs, int), buf, conv->base, conv->a);
+		ft_itoa_base(va_arg(*vargs, int), buf, conv->base, conv->a);
 	else if (spec->size.value[0] == 'l' && spec->size.value[1] == 'l')
 		ft_lltoa_base(va_arg(*vargs, long long), buf, conv->base, conv->a);
 	else if (spec->size.value[0] == 'l')
