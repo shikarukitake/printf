@@ -73,3 +73,4 @@ char	*ft_lltoa_base(long long ll, char *str, int base, char a)
 	ft_strrev(str);
 	return (str);
 }
+

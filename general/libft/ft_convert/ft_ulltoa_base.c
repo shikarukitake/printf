@@ -23,7 +23,7 @@ static char	ft_convert(t_ull *ll, int base, char a)
 	t_ulldiv r;
 	char ch;
 
-	r = Ull_div(*ll, base);
+	r = ull_div(*ll, base);
 	*ll = r.qout;
 	ch = (char)(r.rem + ((9L < r.rem) ? (a - 10L) : '0'));
 	return (ch);

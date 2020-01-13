@@ -9,6 +9,4 @@ unsigned int    count_bits(unsigned long n);
 
 unsigned long   bin_to_dec(unsigned long b);
 
-char * view_bin(unsigned long b);
-
 #endif //PRINTF_BITS_UTIL_H
