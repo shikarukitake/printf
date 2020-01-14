@@ -47,8 +47,21 @@ static char *neg_flag_test()
 	return (0);
 }
 
+static char *minus_flag_test()
+{
+	mu_assert_printf("minus", ft_printf, "%-5x", 42);
+	return (0);
+}
+
 int main()
 {
-	test_all("NORM X", 6, simple_test, simple_neg_test, zero_test, width_test, checker_test, neg_flag_test);
+	test_all("NORM X", 7,
+			simple_test,
+			simple_neg_test,
+			zero_test,
+			width_test,
+			checker_test,
+			neg_flag_test,
+			minus_flag_test);
 	return (0);
 }

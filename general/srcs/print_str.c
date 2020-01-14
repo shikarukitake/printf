@@ -4,10 +4,19 @@
 
 #include "print_str.h"
 
-int fill_str_field(int i, t_spec *spec)
+int fill_str_field(const char *str, t_spec *spec)
 {
 	int count;
+	int i;
 
+	if (spec->precision.value == -1)
+		i = ft_strlen(str);
+	else
+	{
+		i = spec->precision.value;
+		if (ft_strlen(str) == 0)
+			i = 0;
+	}
 	count = i;
 	while (i < spec->width.value)
 	{
@@ -30,22 +39,24 @@ int		print_str(char *str, t_spec *spec)
 		ft_putstr("(null)");
 		return (6);
 	}
+	if (spec->flags['-'] == FALSE)
+		i += fill_str_field(str, spec);
 	if (spec->precision.value == -1)
 	{
-		i += fill_str_field(ft_strlen(str), spec);
 		ft_putstr(str);
-		return (ft_strlen(str) + i);
+		i +=ft_strlen(str);
 	}
 	else
 	{
-		i += fill_str_field(spec->precision.value, spec);
 		while (j < spec->precision.value && j < (int)ft_strlen(str))
 		{
 			ft_putchar(str[j++]);
 			i++;
 		}
-		return (i);
 	}
+	if (spec->flags['-'] == TRUE)
+		i += fill_str_field(str, spec);
+	return (i);
 }
 
 int		ft_print_s(t_spec* spec, va_list *args) {

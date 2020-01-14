@@ -57,6 +57,8 @@ ADD_EXECUTABLE_MU_TEST(wiki_test test/basic/wiki_test.c)
 ADD_EXECUTABLE_MU_TEST(utf8_test test/s_tests/utf8_test.c)
 ADD_EXECUTABLE_MU_TEST(d_norm_test test/d_tests/norm_d_test.c)
 ADD_EXECUTABLE_MU_TEST(x_norm_test test/x_tests/norm_x_test.c)
+ADD_EXECUTABLE_MU_TEST(s_norm_test test/s_tests/norm_s_test.c)
+
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})
