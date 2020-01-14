@@ -43,5 +43,6 @@ typedef unsigned short		t_us;
 
 #define BIN_PREFIX	"0b"
 
+#define OCT_PREFIX "0"
 
 #endif //PRINTF_PRINTF_CONSTANTS_H

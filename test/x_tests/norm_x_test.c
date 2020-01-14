@@ -53,15 +53,23 @@ static char *minus_flag_test()
 	return (0);
 }
 
+static char *wp_test()
+{
+	mu_assert_printf("width and precision test", ft_printf, "%10.5x", 42);
+	mu_assert_printf("precision more than width", ft_printf, "%5.10x", 42);
+	return (0);
+}
+
 int main()
 {
-	test_all("NORM X", 7,
+	test_all("NORM X", 8,
 			simple_test,
 			simple_neg_test,
 			zero_test,
 			width_test,
 			checker_test,
 			neg_flag_test,
-			minus_flag_test);
+			minus_flag_test,
+			wp_test);
 	return (0);
 }

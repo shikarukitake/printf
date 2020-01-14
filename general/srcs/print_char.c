@@ -4,7 +4,7 @@
 
 #include "print_char.h"
 
-int fill_null_field(t_spec *spec)
+static int fill_null_field(t_spec *spec)
 {
 	int count;
 	int i;
@@ -21,7 +21,7 @@ int fill_null_field(t_spec *spec)
 	return (i - count);
 }
 
-int print_null_char(t_spec *spec)
+static int print_null_char(t_spec *spec)
 {
 	int i;
 
@@ -35,7 +35,7 @@ int print_null_char(t_spec *spec)
 	return (i);
 }
 
-int print_char(int c, t_spec *spec)
+static int print_char(int c, t_spec *spec)
 {
 	char buf[MAX_CHAR_BUF_SIZE];
 

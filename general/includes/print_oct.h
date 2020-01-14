@@ -10,7 +10,9 @@
 #include "get_oct.h"
 #include "convert.h"
 #include "print_buffer.h"
+#include "print_oct_buf.h"
 
 int	ft_print_o(t_spec *spec, va_list *args);
+
 
 #endif //PRINTF_PRINT_OCT_H

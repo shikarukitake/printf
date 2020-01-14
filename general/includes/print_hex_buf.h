@@ -12,4 +12,7 @@
 
 int	print_hex_buf(char *buf, t_spec *spec);
 
+int	get_fill_ch(t_spec *spec);
+
+
 #endif //PRINTF_PRINT_HEX_BUF_H

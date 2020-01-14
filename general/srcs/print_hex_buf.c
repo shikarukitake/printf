@@ -27,12 +27,6 @@ static int put_hex_prefix(const char *buf, t_spec *spec, char *dest)
 	return (0);
 }
 
-static	int put_x(char *hex)
-{
-	ft_putstr(hex);
-	return (ft_strlen(hex));
-}
-
 int	get_fill_ch(t_spec *spec)
 {
 	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
@@ -41,7 +35,7 @@ int	get_fill_ch(t_spec *spec)
 		return ' ';
 }
 
-static int fill_hex_field(int i, t_spec *spec)
+int fill_hex_field(int i, t_spec *spec)
 {
 	char ch;
 	int count;
@@ -61,7 +55,7 @@ static int fill_hex_field(int i, t_spec *spec)
 	return (i - count);
 }
 
-int prepare_buf(char *hex, t_spec *spec, char *hex_buf, int *was_prefix)
+static int prepare_buf(char *hex, t_spec *spec, char *hex_buf, int *was_prefix)
 {
 	ft_bzero(hex_buf, MAX_HEX_BUF_SIZE);
 	if (hex[0] == '0' && spec->precision.is_dot == TRUE)
@@ -86,7 +80,7 @@ int	print_hex_buf(char *hex, t_spec *spec)
 	i = 0;
 	if (spec->flags['-'] == TRUE)
 	{
-		i += put_x(hex_buf);
+		i += print_buf(hex_buf);
 		i += fill_hex_field(i, spec);
 	}
 	else
@@ -95,12 +89,12 @@ int	print_hex_buf(char *hex, t_spec *spec)
 		{
 			i += put_hex_prefix(hex, spec, NULL);
 			i += fill_hex_field(ft_strlen(hex) + i, spec);
-			i += put_x(hex);
+			i += print_buf(hex);
 		}
 		else
 		{
 			i += fill_hex_field(ft_strlen(hex_buf), spec);
-			i += put_x(hex_buf);
+			i += print_buf(hex_buf);
 		}
 	}
 	return (i);
