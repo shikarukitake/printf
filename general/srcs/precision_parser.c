@@ -26,10 +26,10 @@ int		parse_precision(const char *format, t_spec *spec)
 		}
 		else
 		{
-			end = ft_str_func_not_find(format, is_precision);
+			end = ft_str_func_not_find(format + 1, is_precision);
 			if (end <= 0)
-				return (0);
-			tmp = ft_strsub(format, 1, end - 1);
+				return (1);
+			tmp = ft_strsub(format, 1, end);
 			spec->precision.value = ft_atoi(tmp);
 			i += ft_strlen(tmp);
 			free(tmp);

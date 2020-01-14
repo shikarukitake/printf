@@ -34,8 +34,20 @@ static char *only_percent()
 	return (0);
 }
 
+static char *one_percent2()
+{
+	mu_assert_printf("percent and precision", ft_printf, "%.0%", MU_NULL);
+	return (0);
+}
+
 int main(void)
 {
-	test_all("JUST PERCENT", 5, simple_test, digit_test, digit_test2, one_percent, only_percent);
+	test_all("JUST PERCENT", 6,
+			simple_test,
+			digit_test,
+			digit_test2,
+			one_percent,
+			one_percent2,
+			only_percent);
 	return (0);
 }

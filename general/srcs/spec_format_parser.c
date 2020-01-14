@@ -83,6 +83,6 @@ t_spec	*parse_spec_format(const char *spc_fmt)
 	i += parse_precision(spc_fmt + i, spec);
 	i += parse_size(spc_fmt + i, spec);
 	if (!parse_type(spc_fmt + i, spec))
-		ft_exit(spec, "there was no type"); // TODO: CHANGE LATER
+		ft_exit(spec, "there was no type\n"); // TODO: CHANGE LATER
 	return (spec);
 }
