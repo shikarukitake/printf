@@ -2,11 +2,9 @@
 // Created by Aletha Yellin on 03/12/2019.
 //
 
-#include "specificator.h"
-#include "printf_constatns.h"
-#include "get_hex.h"
-#include "print_hex_buf.h"
-#include "libft.h"
+
+
+#include "print_hex.h"
 
 int     ft_print_x(t_spec *spec, va_list *args)
 {

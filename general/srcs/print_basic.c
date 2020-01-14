@@ -4,40 +4,6 @@
 
 #include "print_basic.h"
 
-
-int		ft_print_s(t_spec* spec, va_list *args)
-{
-	char *tmp;
-    int i;
-
-    i = 0;
-    if (spec->size.id == -1)
-	    tmp = va_arg(*args, char *);
-    else if (spec->size.value[0] == 'l')
-    {
-		return (ft_print_ws(spec, args));
-	}
-    if (!tmp)
-	{
-    	ft_putstr("(null)");
-		return (6);
-	}
-	if (spec->precision.value == -1)
-	{
-        ft_putstr(tmp);
-        return (ft_strlen(tmp));
-    }
-	else
-    {
-	    while (i < spec->precision.value)
-        {
-	        ft_putchar(tmp[i]);
-	        i++;
-        }
-	    return (i);
-    }
-}
-
 int		ft_print_c(t_spec* spec, va_list *args)
 {
     if (spec->size.id == -1)

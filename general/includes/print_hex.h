@@ -7,6 +7,10 @@
 
 #include "specificator.h"
 #include <stdarg.h>
+#include "printf_constatns.h"
+#include "get_hex.h"
+#include "print_hex_buf.h"
+#include "libft.h"
 
 int	ft_print_x(t_spec *spec, va_list *args);
 

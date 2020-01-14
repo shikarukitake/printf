@@ -5,10 +5,12 @@
 #ifndef PRINTF_PRINT_WS_H
 #define PRINTF_PRINT_WS_H
 
-#include "specificator.h"
+
 #include <stdarg.h>
 #include <wchar.h>
+
 #include "ft_putwchar.h"
+#include "specificator.h"
 
 int		ft_print_ws(t_spec* spec, va_list *args);
 

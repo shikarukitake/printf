@@ -33,6 +33,11 @@ int		ft_print_ws(t_spec* spec, va_list *args)
 
     i = 0;
     tmp = va_arg(*args, wchar_t *);
+    if (!tmp)
+	{
+    	ft_putstr("(null)");
+		return (6);
+	}
     if (spec->precision.value == -1)
     {
         ft_putwstr(tmp);
