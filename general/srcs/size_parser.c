@@ -11,7 +11,7 @@ int is_size(char ch, int n)
 	int i = 0;
 	while (i < MAX_SIZE_SPECS)
 	{
-		if (n < ft_strlen(g_size_specs[i]))
+		if (n < (int)ft_strlen(g_size_specs[i]))
 		{
 			if (ch == g_size_specs[i][n])
 				return (1);

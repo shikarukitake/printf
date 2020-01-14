@@ -7,17 +7,17 @@
 #include "libft.h"
 
 
-int find_percent(const char *format)
-{
-	int		next_percent_pos;
-	int		type_pos;
-
-	next_percent_pos = ft_strchri(format + 1, '%');
-	if (next_percent_pos != -1)
-	{
-
-	}
-}
+//int find_percent(const char *format)
+//{
+//	int		next_percent_pos;
+//	int		type_pos;
+//
+//	next_percent_pos = ft_strchri(format + 1, '%');
+//	if (next_percent_pos != -1)
+//	{
+//
+//	}
+//}
 
 
 int		parse_type(const char *format, t_spec *spec)

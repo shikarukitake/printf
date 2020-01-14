@@ -17,6 +17,11 @@ int		ft_print_s(t_spec* spec, va_list *args)
     {
 		return (ft_print_ws(spec, args));
 	}
+    if (!tmp)
+	{
+    	ft_putstr("(null)");
+		return (6);
+	}
 	if (spec->precision.value == -1)
 	{
         ft_putstr(tmp);
