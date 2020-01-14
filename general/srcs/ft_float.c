@@ -5,7 +5,7 @@
 #include "ft_float.h"
 #include "libft.h"
 #include "bits_util.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 
 #define EXP_SHIFT 16383
 

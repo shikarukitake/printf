@@ -2,8 +2,8 @@
 // Created by Aletha Yellin on 20/11/2019.
 //
 
-#ifndef PRINTF_PRINTF_CONSTATNS_H
-#define PRINTF_PRINTF_CONSTATNS_H
+#ifndef PRINTF_PRINTF_CONSTANTS_H
+#define PRINTF_PRINTF_CONSTANTS_H
 
 #define MAX_SIZE_SPECS 8
 
@@ -18,6 +18,10 @@
 #define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgG"
 
 #define FT_PRINTF_TYPES "ncpsdiouxXaAeEfFgG%"
+
+#define MAX_CHAR_BUF_SIZE 5
+
+#define FT_CHAR_NULL "^@"
 
 #define FT_PRINTF_FLAGS "-+ #0"
 
@@ -40,4 +44,4 @@ typedef unsigned short		t_us;
 #define BIN_PREFIX	"0b"
 
 
-#endif //PRINTF_PRINTF_CONSTATNS_H
+#endif //PRINTF_PRINTF_CONSTANTS_H

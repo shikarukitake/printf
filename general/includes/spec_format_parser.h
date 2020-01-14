@@ -7,7 +7,7 @@
 
 #include "ft_printf.h"
 #include "color_util.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "size_parser.h"
 #include "precision_parser.h"
 #include "type_parser.h"

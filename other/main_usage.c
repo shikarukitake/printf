@@ -4,11 +4,10 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include <includes/ft_float.h>
-#include "ft_float.h"
+
 
 int main()
 {
-    printf("%d%", 123);
+    printf("%2c and text", 0);
 	return (0);
 }

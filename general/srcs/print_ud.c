@@ -3,7 +3,7 @@
 //
 
 #include "specificator.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "get_ud.h"
 #include "libft.h"
 #include "print_buffer.h"

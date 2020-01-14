@@ -10,7 +10,7 @@
 #include <wchar.h>
 
 #include "libft.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "get_sd.h"
 #include "get_p.h"
 #include "print_buffer.h"
@@ -18,12 +18,10 @@
 #include "ft_putwchar.h"
 #include "specificator.h"
 #include "print_hex_buf.h"
-
-int     ft_print_s(t_spec *spec, va_list *args);
+#include "print_str.h"
 
 int     ft_print_d(t_spec *spec, va_list *args);
 
-int     ft_print_c(t_spec *spec, va_list *args);
 
 int    ft_print_p(t_spec *spec, va_list *args);
 

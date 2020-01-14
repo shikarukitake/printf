@@ -7,7 +7,7 @@
 
 #include "specificator.h"
 #include "libft.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 
 int parse_size(const char *format, t_spec *spec);
 

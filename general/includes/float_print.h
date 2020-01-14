@@ -11,7 +11,7 @@
 #include "print_buffer.h"
 #include "float_print.h"
 #include "ft_float.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "libft.h"
 
 int    ft_print_f(t_spec *spec, va_list *args);

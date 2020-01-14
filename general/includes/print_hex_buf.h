@@ -7,7 +7,7 @@
 
 #include "specificator.h"
 #include "libft.h"
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "print_buffer.h"
 
 int	print_hex_buf(char *buf, t_spec *spec);

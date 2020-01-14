@@ -2,7 +2,7 @@
 // Created by dan on 20.12.19.
 //
 
-#include "printf_constatns.h"
+#include "printf_constants.h"
 #include "libft.h"
 #include "ft_float.h"
 #include <stdarg.h>

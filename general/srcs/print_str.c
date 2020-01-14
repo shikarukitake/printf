@@ -35,17 +35,11 @@ int		print_str(char *str, t_spec *spec)
 	i = 0;
 	j = 0;
 	if (!str)
-	{
-		ft_putstr("(null)");
-		return (6);
-	}
+		return (print_buf("(null)"));
 	if (spec->flags['-'] == FALSE)
 		i += fill_str_field(str, spec);
 	if (spec->precision.value == -1)
-	{
-		ft_putstr(str);
-		i +=ft_strlen(str);
-	}
+		i+=print_buf(str);
 	else
 	{
 		while (j < spec->precision.value && j < (int)ft_strlen(str))

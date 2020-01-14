@@ -15,6 +15,7 @@
 #include "spec_format_parser.h"
 #include "print_basic.h"
 #include "float_print.h"
+#include "print_char.h"
 
 int		call_print_func(const char *format, va_list *args, int offset);
 
