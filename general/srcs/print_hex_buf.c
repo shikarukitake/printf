@@ -64,7 +64,6 @@ static int prepare_buf(char *hex, t_spec *spec, char *hex_buf, int *was_prefix)
 		*was_prefix = 0;
 		return (0);
 	}
-
 	*was_prefix = put_hex_prefix(hex, spec, hex_buf);
 	ft_strcat(hex_buf, hex);
 	return (1);

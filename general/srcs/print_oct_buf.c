@@ -34,25 +34,49 @@ int prepare_buf(char *oct, t_spec *spec, char *oct_buf, int *was_prefix)
 	return (1);
 }
 
-int fill_oct_field(int i, t_spec *spec)
+int get_diff(int buf_len, t_spec *spec)
 {
-	char ch;
-	int count;
-	int diff;
+	if (spec->precision.value == -1)
+		return (0);
+	else if (spec->precision.value < buf_len)
+		return (0);
+	return (spec->precision.value - buf_len);
+}
 
-	count = i;
+
+int fill_oct_field_width(int i, t_spec *spec)
+{
+	char	ch;
+	int		len;
+	int		diff;
+
+	len = i;
+	diff = get_diff(i, spec);
 	ch = get_fill_ch(spec);
-	while (i < spec->width.value)
+	while (i + diff < spec->width.value)
 	{
 		ft_putchar(ch);
 		i++;
 	}
-	while (i < spec->precision.value)
-	{
-		ft_putchar('0');
-		i++;
-	}
-	return (i - count);
+	return (i - len);
+}
+
+int fill_oct_precision(char *buf, t_spec *spec)
+{
+	 int diff;
+	 int i;
+	 int len;
+
+	 i = 0;
+	 len = ft_strlen(buf);
+	 diff = get_diff(len, spec);
+	 while (diff > 0)
+	 {
+	 	ft_putchar('0');
+	 	diff--;
+	 	i++;
+	 }
+	return (i);
 }
 
 int	print_oct_buf(char *oct, t_spec *spec)
@@ -65,20 +89,23 @@ int	print_oct_buf(char *oct, t_spec *spec)
 	i = 0;
 	if (spec->flags['-'] == TRUE)
 	{
+		i += fill_oct_precision(oct_buf, spec);
 		i += print_buf(oct_buf);
-		i += fill_oct_field(i, spec);
+		i += fill_oct_field_width(i, spec);
 	}
 	else
 	{
 		if (was_prefix && spec->flags['0'] == TRUE)
 		{
 			i += put_oct_prefix(oct, spec, NULL);
-			i += fill_oct_field(ft_strlen(oct) + i, spec);
+			i += fill_oct_field_width(ft_strlen(oct) + i, spec);
+			i += fill_oct_precision(oct, spec);
 			i += print_buf(oct);
 		}
 		else
 		{
-			i += fill_oct_field(ft_strlen(oct_buf), spec);
+			i += fill_oct_field_width(ft_strlen(oct_buf), spec);
+			i += fill_oct_precision(oct_buf, spec);
 			i += print_buf(oct_buf);
 		}
 	}
