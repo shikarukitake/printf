@@ -5,7 +5,7 @@
 #include "ft_printf.h"
 #include "minunit.h"
 
-//static char *simple_test()
+//static char *extra_wh_test()
 //{
 //	mu_assert_printf("test 1", ft_printf, "%a", 123);
 //	return (0);

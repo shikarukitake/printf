@@ -23,5 +23,5 @@ static char *simple_neg_test()
 
 int main()
 {
-	test_all("SIMPLE X", 2, simple_test, simple_neg_test);
+	test_all("SIMPLE X", 2, extra_wh_test, simple_neg_test);
 }

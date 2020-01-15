@@ -6,7 +6,16 @@
 
 int put_sign_prefix(const char *buf, t_spec *spec, char *dest)
 {
-	if (spec->flags['+'] ==TRUE && buf[0] != '-')
+	int i;
+
+	i = 0;
+	if (spec->flags[' '] == TRUE && spec->flags['+'] == FALSE && buf[0] != '-')
+	{
+		ft_putchar(' ');
+		spec->width.value --;
+		i++;
+	}
+	if (spec->flags['+'] == TRUE && buf[0] != '-')
 	{
 		if (spec->type == 'd')
 		{
@@ -15,7 +24,7 @@ int put_sign_prefix(const char *buf, t_spec *spec, char *dest)
 			else
 				ft_putstr("+");
 		}
-		return (1);
+		i += 1;
 	}
-	return (0);
+	return (i);
 }

@@ -15,5 +15,5 @@ static char *simple_test()
 
 int main()
 {
-	test_all("SIMPLE U", 1, simple_test);
+	test_all("SIMPLE U", 1, extra_wh_test);
 }

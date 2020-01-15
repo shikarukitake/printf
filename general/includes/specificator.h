@@ -12,6 +12,7 @@ typedef		struct	s_width
 {
 	int		value;
 	t_bool	is_asterisk;
+	t_bool	extra_wh;
 }					t_width;
 
 typedef		struct	s_percision
@@ -38,6 +39,7 @@ typedef		struct	s_spec
 	t_precision         precision;
 	t_size              size;
 	t_print_settings    settings;
+	t_bool				extra_wh;
 
 }					t_spec;
 

@@ -4,7 +4,7 @@
 
 #include "print_digit_buf.h"
 
-int is_null_case(char *digit, t_spec *spec)
+int is_null_case(const char *digit, t_spec *spec)
 {
 	int b;
 
@@ -120,5 +120,7 @@ int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
 			i += print_buf(dig_buf);
 		}
 	}
+	if (spec->flags[' '] && spec->type == 'd' && spec->flags['+'] == FALSE && digit[0] != '-')  //SUCH AN AWFUL FT_COSTYL
+		i++;
 	return (i);
 }

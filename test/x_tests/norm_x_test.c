@@ -60,16 +60,24 @@ static char *wp_test()
 	return (0);
 }
 
+static char *wp_zero_test()
+{
+	mu_assert_printf("precision more than width", ft_printf, "%05.10x", 42);
+	return (0);
+}
+
+
 int main()
 {
-	test_all("NORM X", 8,
-			simple_test,
-			simple_neg_test,
-			zero_test,
-			width_test,
-			checker_test,
-			neg_flag_test,
-			minus_flag_test,
-			wp_test);
+	test_all("NORM X", 9,
+			 extra_wh_test,
+			 simple_neg_test,
+			 zero_test,
+			 width_test,
+			 checker_test,
+			 neg_flag_test,
+			 minus_flag_test,
+			 wp_test,
+			 wp_zero_test);
 	return (0);
 }
