@@ -33,7 +33,15 @@ static char *flag_test()
 	return (0);
 }
 
+static char *null_test()
+{
+	mu_assert_printf("zero test 1", ft_printf, "%#.o %#.0o", 0, 0);
+	mu_assert_printf("zero test 1", ft_printf, "%.o %.0o", 0, 0);
+	mu_assert_printf("zero test 1", ft_printf, "%5.o %5.0o", 0, 0);
+	return (0);
+}
+
 int main()
 {
-	test_all("SIMPLE O TESTS", 4, wp_test, basic_test, more_complex_test, flag_test);
+	test_all("SIMPLE O TESTS", 5, wp_test, basic_test, more_complex_test, flag_test, null_test);
 }

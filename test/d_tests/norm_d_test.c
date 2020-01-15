@@ -38,7 +38,7 @@ static char *flags_test()
 	int num = 1234567;
 
 	mu_assert_printf("test1", ft_printf, "%+10.d", num);
-	mu_assert_printf("test_zero", ft_printf, "%010.d", num);
+	mu_assert_printf("test_zero", ft_printf, "%010d", num);
 	mu_assert_printf("test_zero_2", ft_printf, "%010.5d", num);
 	mu_assert_printf("test_wh", ft_printf, "% 10d", num);
 	mu_assert_printf("test_wh_2", ft_printf, "% 10.5d", num);

@@ -4,18 +4,30 @@
 
 #include "print_digit_buf.h"
 
-int prepare_buf(char *oct, t_spec *spec, char *oct_buf, t_put_prefix p)
+int is_null_case(char *digit, t_spec *spec)
+{
+	int b;
+
+	b = (digit[0] == '0' && spec->precision.is_dot == TRUE);
+	if (spec->type == 'x' || spec->type == 'X')
+		return (b);
+	else
+		return (b && spec->flags['#'] == FALSE);
+}
+
+
+int prepare_buf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 {
 	int was_prefix;
 
-	ft_bzero(oct_buf, MAX_HEX_BUF_SIZE);
-	if (oct[0] == '0' && spec->precision.is_dot == TRUE)
+	ft_bzero(dig_buf, MAX_HEX_BUF_SIZE);
+	if (is_null_case(digit, spec))
 	{
-		ft_bzero(oct, MAX_HEX_BUF_SIZE);
+		ft_bzero(digit, MAX_HEX_BUF_SIZE);
 		return (0);
 	}
-	was_prefix = p(oct, spec, oct_buf);
-	ft_strcat(oct_buf, oct);
+	was_prefix = p(digit, spec, dig_buf);
+	ft_strcat(dig_buf, digit);
 	return (was_prefix);
 }
 
