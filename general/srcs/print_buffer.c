@@ -119,9 +119,3 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
     return (i + float_nums);
 }
 
-size_t print_buf(const char *buf)
-{
-	if (buf)
-		ft_putstr(buf);
-	return (ft_strlen(buf));
-}

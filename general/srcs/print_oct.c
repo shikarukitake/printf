@@ -10,5 +10,5 @@ int	ft_print_o(t_spec *spec, va_list *args)
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_oct(args, spec, buffer, 'a');
-	return (print_oct_buf(buffer, spec));
+	return (print_digit_buf(buffer, spec, put_oct_prefix));
 }

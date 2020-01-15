@@ -8,8 +8,8 @@
 #include "specificator.h"
 #include "printf_constants.h"
 #include "print_buffer.h"
-#include "print_hex_buf.h"
 
-int	print_oct_buf(char *oct, t_spec *spec);
+int put_oct_prefix(const char *buf, t_spec *spec, char *dest);
+
 
 #endif //PRINTF_PRINT_OCT_BUF_H

@@ -4,7 +4,7 @@
 
 #include "print_hex_buf.h"
 
-static int put_hex_prefix(const char *buf, t_spec *spec, char *dest)
+int put_hex_prefix(const char *buf, t_spec *spec, char *dest)
 {
 	if (spec->flags['#'] ==TRUE && buf[0] != '0')
 	{
@@ -27,14 +27,7 @@ static int put_hex_prefix(const char *buf, t_spec *spec, char *dest)
 	return (0);
 }
 
-int	get_fill_ch(t_spec *spec)
-{
-	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
-		return '0';
-	else
-		return ' ';
-}
-
+/*
 int fill_hex_field(int i, t_spec *spec)
 {
 	char ch;
@@ -97,4 +90,4 @@ int	print_hex_buf(char *hex, t_spec *spec)
 		}
 	}
 	return (i);
-}
+}*/

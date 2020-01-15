@@ -10,9 +10,8 @@
 #include "printf_constants.h"
 #include "print_buffer.h"
 
-int	print_hex_buf(char *buf, t_spec *spec);
+int put_hex_prefix(const char *buf, t_spec *spec, char *dest);
 
-int	get_fill_ch(t_spec *spec);
 
 
 #endif //PRINTF_PRINT_HEX_BUF_H

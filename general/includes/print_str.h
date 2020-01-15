@@ -9,6 +9,7 @@
 #include <stdarg.h>
 #include "print_ws.h"
 #include "print_buffer.h"
+#include "print_digit_buf.h"
 
 int		ft_print_s(t_spec* spec, va_list *args);
 
