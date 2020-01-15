@@ -120,7 +120,7 @@ int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
 			i += print_buf(dig_buf);
 		}
 	}
-	if (spec->flags[' '] && spec->type == 'd' && spec->flags['+'] == FALSE && digit[0] != '-')  //SUCH AN AWFUL FT_COSTYL
+	if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
 		i++;
 	return (i);
 }

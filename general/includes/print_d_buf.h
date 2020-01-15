@@ -9,7 +9,8 @@
 #include "specificator.h"
 #include "libft.h"
 
-int put_sign_prefix(const char *buf, t_spec *spec, char *dest);
+int		put_sign_prefix(const char *buf, t_spec *spec, char *dest);
 
+int		is_need_wh(const char *buf, t_spec *spec);
 
 #endif //PRINTF_PRINT_D_BUF_H

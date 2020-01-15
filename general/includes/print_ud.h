@@ -7,6 +7,13 @@
 
 #include "specificator.h"
 #include <stdarg.h>
+#include "specificator.h"
+#include "printf_constants.h"
+#include "get_ud.h"
+#include "libft.h"
+#include "print_buffer.h"
+#include "print_digit_buf.h"
+#include "print_d_buf.h"
 
 int	ft_print_u(t_spec *spec, va_list *args);
 

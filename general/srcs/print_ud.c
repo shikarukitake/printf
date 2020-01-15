@@ -2,11 +2,7 @@
 // Created by Aletha Yellin on 03/12/2019.
 //
 
-#include "specificator.h"
-#include "printf_constants.h"
-#include "get_ud.h"
-#include "libft.h"
-#include "print_buffer.h"
+#include "print_ud.h"
 
 int     ft_print_u(t_spec *spec, va_list *args)
 {
@@ -14,5 +10,5 @@ int     ft_print_u(t_spec *spec, va_list *args)
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_ud(args, spec, buffer);
-    return (ft_put_ud_buf(buffer, spec));
+    return (print_digit_buf(buffer, spec, put_sign_prefix));
 }
