@@ -4,8 +4,6 @@
 
 #include "ft_printf.h"
 
-#include <stdio.h>// Debug
-
 
 int		ft_printf(const char *fmt, ...)
 {
@@ -34,5 +32,6 @@ int		ft_printf(const char *fmt, ...)
 		i++;
 	}
 	va_end(args);
+	flush_buffer();
 	return (count);
 }

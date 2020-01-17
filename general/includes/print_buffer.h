@@ -10,6 +10,7 @@
 #include "libft.h"
 #include "printf_constants.h"
 #include "specificator.h"
+#include "put_bch.h"
 
 int   	fill_field(int i, t_spec *spec);
 
