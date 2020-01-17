@@ -14,10 +14,9 @@ int main()
     flush_buffer();
 
     int i = 0;
-    while (i < 100)
+    while (i < 150)
     {
         put_bch('0' + i % 10);
         i++;
     }
-    flush_buffer();
 }

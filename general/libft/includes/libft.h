@@ -16,7 +16,7 @@ typedef	unsigned long long	t_ull;
 # define FT_INT_MIN (-2147483647 -1)
 # define FT_INT_MIN_STR "-2147483648"
 # define FT_INT_MAX (2147483647)
-# define FT_LONG_LONG_MIN_STR "9223372036854775807"
+# define FT_LONG_LONG_MIN_STR "-9223372036854775808"
 # define FT_CHAR_MAX 128
 # define FT_NULL ((void*)0)
 # define FT_SIZE_T_MAX  (18446744073709551615u)

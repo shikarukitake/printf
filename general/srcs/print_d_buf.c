@@ -20,7 +20,7 @@ int put_sign_prefix(const char *buf, t_spec *spec, char *dest)
 	if (is_need_wh(buf, spec))
 	{
 		ft_putchar(' ');
-		spec->width.value --;
+		spec->width.value--;
 		i++;
 	}
 	if (spec->flags['+'] == TRUE && buf[0] != '-')
