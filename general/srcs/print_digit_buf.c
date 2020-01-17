@@ -40,8 +40,10 @@ int get_diff(int buf_len, t_spec *spec)
 	return (spec->precision.value - buf_len);
 }
 
-int	get_fill_ch(t_spec *spec)
+int	get_fill_ch(int len, t_spec *spec)
 {
+    if (spec->flags['0'] == TRUE && spec->type =='d' && spec->precision.value < len && spec->precision.value != -1)
+        return ' ';
 	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
 		return '0';
 	else
@@ -56,7 +58,7 @@ int fill_width_field(int i, t_spec *spec)
 
 	len = i;
 	diff = get_diff(i, spec);
-	ch = get_fill_ch(spec);
+	ch = get_fill_ch(i, spec);
 	while (i + diff < spec->width.value)
 	{
 		ft_putchar(ch);
@@ -120,6 +122,79 @@ int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
 			i += print_buf(dig_buf);
 		}
 	}
+	if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
+		i++;
+	return (i);
+}
+
+
+int	get_fill_sd_ch(t_spec *spec)
+{
+	if (spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
+		return '0';
+	else
+		return ' ';
+}
+
+char get_sign(char *digit, t_spec *spec, char *digit_with_sign)
+{
+
+    ft_bzero(digit_with_sign, MAX_HEX_BUF_SIZE);
+    if (digit[0] == '-')
+    {
+        ft_strcpy(digit, digit + 1);
+        ft_strcpy(digit_with_sign, "-");
+        ft_strcat(digit_with_sign, digit);
+        return '-';
+    }
+    else if (spec->flags['+'] == TRUE)
+    {
+        ft_strcpy(digit_with_sign, "+");
+        ft_strcat(digit_with_sign, digit);
+        return '+';
+    }
+    return ('\0');
+}
+
+int print_sign(char sign)
+{
+    if (sign)
+    {
+        ft_putchar(sign);
+        return (1);
+    }
+    return (0);
+}
+
+#define IS_SIGN(x) (x ? 1 : 0)
+int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
+{
+	int 	i;
+	char    sign;
+	char    digit_with_sign[MAX_HEX_BUF_SIZE];
+
+	i = 0;
+    if (is_need_wh(digit, spec))
+    {
+        ft_putchar(' ');
+        spec->width.value--;
+    }
+	sign = get_sign(digit, spec, digit_with_sign);
+	if (spec->flags['-'] == TRUE)
+    {
+        i += print_sign(sign);
+	    i += fill_precision_field(digit_with_sign, spec);
+        i += print_buf(digit);
+        i += fill_width_field(i, spec);
+    }
+	else
+    {
+        i += fill_width_field(ft_strlen(digit) + IS_SIGN(sign), spec);
+        i += print_sign(sign);
+        i += fill_precision_field(digit, spec);
+        i += print_buf(digit);
+    }
+
 	if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
 		i++;
 	return (i);

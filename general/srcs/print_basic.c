@@ -10,7 +10,7 @@ int	ft_print_d(t_spec *spec, va_list *args)
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_sd(args, spec, buffer);
-	return (print_digit_buf(buffer, spec, put_sign_prefix));
+	return (print_sd_buf(buffer, spec, put_sign_prefix));
 }
 
 int    ft_print_p(t_spec *spec, va_list *args)

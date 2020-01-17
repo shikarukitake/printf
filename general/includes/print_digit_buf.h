@@ -14,4 +14,7 @@ typedef int (*t_put_prefix) (const char *, t_spec *, char *dest);
 
 int			print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp);
 
+int         print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp);
+
+
 #endif //PRINTF_PRINT_DIGIT_BUF_H

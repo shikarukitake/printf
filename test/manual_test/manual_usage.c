@@ -6,5 +6,5 @@
 
 int main()
 {
-	ft_printf("%-5% %+5d", 123);
+	ft_printf("%d", 123);
 }
