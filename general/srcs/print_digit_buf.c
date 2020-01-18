@@ -39,11 +39,16 @@ int get_diff(int buf_len, t_spec *spec)
 	return (spec->precision.value - buf_len);
 }
 
+int is_d_or_i(t_spec *spec)
+{
+    return (spec->type == 'd' ||spec->type == 'i');
+}
+
 int	get_fill_ch(int len, t_spec *spec)
 {
-    if (spec->flags['0'] == TRUE && spec->type =='d' && spec->precision.value < spec->width.value && spec->precision.value != -1)
+    if (spec->flags['0'] == TRUE && is_d_or_i(spec) && spec->precision.value < spec->width.value && spec->precision.value != -1)
         return ' ';
-    if (spec->flags['0'] == TRUE && spec->type =='d' && spec->precision.value < len && spec->precision.value != -1)
+    if (spec->flags['0'] == TRUE && is_d_or_i(spec) && spec->precision.value < len && spec->precision.value != -1)
         return ' ';
 	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
 		return '0';
