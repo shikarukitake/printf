@@ -30,8 +30,14 @@ static char *empty_wp_str_test(void)
 	return (0);
 }
 
+static char *mouli_test(void)
+{
+    mu_assert_printf("test_precision_s_higher_min_width", ft_printf, "%5.4s", "42");
+    return (0);
+}
+
 int main()
 {
-	test_all("NORMAL STR PRINTF TESTS", 3, empty_wp_str_test, wp_flag_str_test, empty_str_test);
+	test_all("NORMAL STR PRINTF TESTS", 4, empty_wp_str_test, wp_flag_str_test, empty_str_test, mouli_test);
 	return (0);
 }
