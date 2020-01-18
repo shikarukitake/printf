@@ -15,7 +15,7 @@ int put_oct_prefix(const char *buf, t_spec *spec, char *dest)
 			else
 				ft_putstr(OCT_PREFIX);
 		}
-		return (2);
+		return (1);
 	}
 	return (0);
 }

@@ -23,6 +23,7 @@ static char *wp_test()
 {
 	mu_assert_printf("width and precision oct", ft_printf, "%10.5o", 123);
 	mu_assert_printf("width and precision oct", ft_printf, "%5.10o", 123);
+	mu_assert_printf("octal precision and flag sharp", ft_printf, "%#.3o", 1);
 	mu_assert_printf("width and precision oct and flag", ft_printf, "%#10.5o", 123);
 	mu_assert_printf("width and precision oct and minus flag", ft_printf, "%-5.10o", 123);
 	return (0);

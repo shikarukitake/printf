@@ -153,13 +153,31 @@ int check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
         return (0);
 }
 
+int prepare_prefixed_pbuf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
+{
+    int was_prefix;
+
+    ft_bzero(dig_buf, MAX_HEX_BUF_SIZE);
+    if (is_null_case(digit, spec))
+    {
+        ft_bzero(digit, MAX_HEX_BUF_SIZE);
+        if (spec->type != 'p')
+            return (0);
+    }
+    was_prefix = p(digit, spec, dig_buf);
+    ft_strcat(dig_buf, digit);
+    return (was_prefix);
+}
+
 int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
     int 	i;
     int		is_prefix;
+    char    prefixed_digit[MAX_HEX_BUF_SIZE];
 
     i = 0;
     is_prefix = check_is_prefix(digit, spec, pp);
+    prepare_prefixed_pbuf(digit, spec, prefixed_digit, pp);
     if (spec->flags['-'] == TRUE)
     {
         i += fill_precision_field(digit, spec);
@@ -181,12 +199,10 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
             i += fill_width_field(ft_strlen(digit) + is_prefix, spec);
             if (is_prefix)
                 i += pp(digit, spec, NULL);
-            i += fill_precision_field(digit, spec);
+            i += fill_precision_field(spec->type == 'o' ? prefixed_digit : digit, spec);
             i += print_buf(digit);
         }
     }
-    if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
-        i++;
     return (i);
 }
 
