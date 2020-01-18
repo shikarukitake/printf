@@ -33,6 +33,11 @@ int prepare_buf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 	return (was_prefix);
 }
 
+int is_oct_prefix(t_spec *spec)
+{
+    return (spec->type == 'o' && spec->flags['#'] == TRUE);
+}
+
 int get_diff(int buf_len, t_spec *spec)
 {
 	if (spec->precision.value == -1 || spec->precision.value < buf_len)
@@ -64,7 +69,7 @@ int fill_width_field(int i, t_spec *spec)
 	int		diff;
 
 	len = i;
-	diff = get_diff(i, spec);
+	diff = get_diff(i, spec) ;
 	ch = get_fill_ch(i, spec);
 	while (i + diff < spec->width.value)
 	{
@@ -83,6 +88,8 @@ int fill_prefix_width_field(int i, t_spec *spec, int prefix)
     len = i;
     diff = get_diff(i, spec);
     ch = get_fill_ch(i + prefix, spec);
+    if (is_oct_prefix(spec) && diff != 0)
+        prefix = 0;
     while (i + diff + prefix < spec->width.value)
     {
         ft_putchar(ch);
@@ -199,7 +206,7 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
     {
         if (is_prefix)
             i += pp(digit, spec, NULL);
-        i += fill_precision_field(digit, spec);
+        i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
         i += print_buf(digit);
         i += fill_width_field(i, spec);
     }
@@ -217,7 +224,7 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
                 i += pp(digit, spec, NULL);
                 i += fill_prefix_width_field((int) ft_strlen(digit), spec, is_prefix);
             }
-            i += fill_precision_field(digit, spec);
+            i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
             i += print_buf(digit);
         }
         else
