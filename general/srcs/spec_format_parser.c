@@ -8,9 +8,13 @@ static int         g_was_color = 0;
 
 void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 {
+    int tmp_width;
+
 	if (spec->width.is_asterisk == TRUE)
 	{
-        spec->width.value = va_arg(*vargs, int);
+        tmp_width = va_arg(*vargs, int);
+        if (spec->width.value == -1)
+            spec->width.value = tmp_width;
         if (spec->width.value < 0)
         {
             spec->flags['-'] = TRUE;
@@ -20,11 +24,13 @@ void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 	if (spec->precision.is_asterisk == TRUE)
 	{
         spec->precision.value = va_arg(*vargs, int);
-        if (spec->precision.value <= 0)
+        if (spec->precision.value < 0)
         {
             spec->precision.value = -1;
             spec->precision.is_dot = FALSE;
         }
+        else if (spec->precision.value == 0)
+            spec->precision.value = -1;
     }
 }
 

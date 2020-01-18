@@ -72,10 +72,15 @@ static char *zero_and_precision_test()
     return (0);
 }
 
+static char *hex_precision_and_flag_sharp()
+{
+    mu_assert_printf("need to be right order", ft_printf, "{%#.5x}", 1);
+    return (0);
+}
 
 int main()
 {
-	test_all("NORM X", 10,
+	test_all("NORM X", 11,
 			 simple_test,
 			 simple_neg_test,
 			 zero_test,
@@ -85,6 +90,7 @@ int main()
 			 minus_flag_test,
 			 wp_test,
 			 wp_zero_test,
-			 zero_and_precision_test);
+			 zero_and_precision_test,
+			 hex_precision_and_flag_sharp);
 	return (0);
 }

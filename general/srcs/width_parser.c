@@ -24,6 +24,9 @@ int		parse_width(const char *format, t_spec *spec)
 			spec->width.is_asterisk = TRUE;
 	else
 			spec->width.value = ft_atoi(tmp);
+	if (ft_isdigit(format[1]) && spec->width.is_asterisk == TRUE)
+	    spec->width.value = ft_atoi(tmp +1);
+
 	free(tmp);
 	return (end);
 }

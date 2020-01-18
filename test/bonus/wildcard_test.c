@@ -11,6 +11,8 @@ static char *mouli_test()
     mu_assert_printf("wildcard for min_width_positive", ft_printf, "%*.*d", 0, 3, 0);
     mu_assert_printf("digit_wildcard and min_width_value3", ft_printf, "{%*.3d}", 5, 0);
     mu_assert_printf("wildcard for precision string negative", ft_printf, "{%.*s}", -5, "42");
+    mu_assert_printf("wildcard for precision string zero", ft_printf, "{%.*s}", 0, "42");
+    mu_assert_printf("digit wildcard amd min width value33", ft_printf, "{%*3d}", 5, 0);
     return (0);
 }
 
