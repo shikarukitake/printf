@@ -197,8 +197,9 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
     prepare_prefixed_pbuf(digit, spec, prefixed_digit, pp);
     if (spec->flags['-'] == TRUE)
     {
+        if (is_prefix)
+            i += pp(digit, spec, NULL);
         i += fill_precision_field(digit, spec);
-        i += pp(digit, spec, NULL);
         i += print_buf(digit);
         i += fill_width_field(i, spec);
     }
@@ -206,8 +207,16 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
     {
         if (is_prefix && spec->flags['0'] == TRUE)
         {
-            i += pp(digit, spec, NULL);
-            i += fill_width_field((int)ft_strlen(digit) + i, spec);
+            if (get_fill_ch(ft_strlen(digit), spec) == ' ')
+            {
+                i += fill_prefix_width_field((int) ft_strlen(digit), spec, is_prefix);
+                i += pp(digit, spec, NULL);
+            }
+            else
+            {
+                i += pp(digit, spec, NULL);
+                i += fill_prefix_width_field((int) ft_strlen(digit), spec, is_prefix);
+            }
             i += fill_precision_field(digit, spec);
             i += print_buf(digit);
         }
