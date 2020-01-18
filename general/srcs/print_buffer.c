@@ -85,8 +85,6 @@ int	ft_put_ud_buf(char *buf, t_spec *spec)
 	return (i + ft_strlen(buf)); //Wrong
 }
 
-
-
 int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 {
     int i;

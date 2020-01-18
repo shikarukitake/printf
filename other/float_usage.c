@@ -115,6 +115,7 @@ unsigned long get_float_part(unsigned long m, unsigned e, char *buf)
     int             count;
     unsigned        i;
     unsigned        max;
+
     mask = 1u;
     count = 0;
     i = 0;
@@ -136,6 +137,7 @@ unsigned long get_float_part(unsigned long m, unsigned e, char *buf)
     }
     buf[i] = '\0';
     ft_strrev(buf);
+    return (0);
 }
 
 //char	*ft_itoa_base(int value, char *buffer, int base, char a)

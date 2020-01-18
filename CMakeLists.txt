@@ -15,8 +15,7 @@ include_directories(test/libmu)
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
 
-# Usage example of floating point numbers
-add_executable(Float other/float_usage.c)
+
 
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
@@ -89,3 +88,8 @@ add_executable(HexPlay2 test/x_tests/hex_convert_play.c)
 add_executable(BufferTest test/buffer_test/b1_test.c)
 target_link_libraries(BufferTest ${PROJECT_BINARY_DIR}/libftprintf.a)
 add_dependencies(BufferTest mu ft ftprintf)
+
+# Usage example of floating point numbers
+add_executable(Float other/float_usage.c)
+target_link_libraries(Float ${PROJECT_BINARY_DIR}/libft.a)
+add_dependencies(Float ft)

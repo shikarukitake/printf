@@ -23,7 +23,6 @@ static char *width_str_test(void)
 static char *flags_str_test(void)
 {
 	mu_assert_printf("0 flag", ft_printf, "%010s world", "hello");
-
 	return (0);
 }
 

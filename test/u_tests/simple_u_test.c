@@ -12,8 +12,14 @@ static char *simple_test()
 	return (0);
 }
 
+static char *u_prec_width_ff_pos_zp()
+{
+    mu_assert_printf("test1", ft_printf, "%08.5u", 34);
+    return (0);
+}
+
 
 int main()
 {
-	test_all("SIMPLE U", 1, simple_test);
+	test_all("SIMPLE U", 2, simple_test, u_prec_width_ff_pos_zp);
 }

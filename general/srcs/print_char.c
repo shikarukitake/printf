@@ -35,7 +35,7 @@ static int print_null_char(t_spec *spec)
 	return (i);
 }
 
-static int print_char(int c, t_spec *spec)
+int print_char(int c, t_spec *spec)
 {
 	char buf[MAX_CHAR_BUF_SIZE];
 

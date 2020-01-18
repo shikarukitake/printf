@@ -15,4 +15,6 @@
 
 int		ft_print_c(t_spec* spec, va_list *args);
 
+int     print_char(int c, t_spec *spec);
+
 #endif //PRINTF_PRINT_CHAR_H

@@ -4,11 +4,21 @@
 
 #include "print_str.h"
 
+char get_str_fill_ch(t_spec *spec)
+{
+    if (spec->type =='s' && spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
+        return '0';
+    else
+        return ' ';
+}
+
 int fill_str_field(const char *str, t_spec *spec)
 {
 	int count;
 	int i;
+	char ch;
 
+	ch = get_str_fill_ch(spec);
 	if (spec->precision.value == -1)
         i = (spec->precision.is_dot == TRUE ? 0 : (int)ft_strlen(str));
 	else
@@ -20,22 +30,25 @@ int fill_str_field(const char *str, t_spec *spec)
 	count = i;
 	while (i < spec->width.value)
 	{
-		ft_putchar(' ');
+		ft_putchar(ch);
 		i++;
 	}
 	return (i - count);
 }
 
+#define NULL_STR "(null)"
 
 int		print_str(char *str, t_spec *spec)
 {
 	int i;
 	int j;
+    char null_str[7];
 
 	i = 0;
 	j = 0;
+	ft_strcpy(null_str, NULL_STR);
 	if (!str)
-		return (print_buf("(null)"));
+		str = null_str;
 	if (spec->flags['-'] == FALSE)
 		i += fill_str_field(str, spec);
 	if (spec->precision.value == -1 && spec->precision.is_dot == FALSE)

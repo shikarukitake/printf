@@ -36,6 +36,27 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     result = bin_to_dec(m);
     ft_ulltoa_base(result, buf, 10, 'a');
 }
+char    *view_bin(unsigned long bin)
+{
+    char            *ptr;
+    unsigned int    mask;
+    int i;
+
+    i = 0;
+    mask =1u;
+    ptr = ft_memalloc(1024);
+    ft_bzero(ptr, 1024);
+    while (bin)
+    {
+        if (bin & 1u)
+          ptr[i++] = '1';
+        else
+            ptr[i++] = '0';
+        bin >>= 1u;
+    }
+    ft_strrev(ptr);
+    return (ptr);
+}
 
 void    get_float_bits(unsigned long m, unsigned e, char *buf)
 {
@@ -43,12 +64,13 @@ void    get_float_bits(unsigned long m, unsigned e, char *buf)
     int             count;
     unsigned        i;
     unsigned        max;
+
     mask = 1u;
     count = 0;
     i = 0;
     while (!(m & mask))
     {
-        mask <<=1;
+        mask <<= 1u;
         count++;
     }
     m >>= count;
@@ -121,18 +143,32 @@ void    round_float(char *float_buf)
         float_buf[i] = a_plus_one(float_buf[i]);
 }
 
+#include "stdio.h" // FOR DEBUG
 
 void    ft_dtoa(long double ld, char *buffer)
 {
     char int_part_buf[MAX_FLOAT_BUFF_SIZE];
     char float_part_buf[MAX_FLOAT_BUFF_SIZE];
+    int is_less_than_one;
     long_double_cast ldc;
 
     ldc = (long_double_cast) {.ld = ld};
-    ldc.parts.exponent -= EXP_SHIFT;
+    if (ldc.parts.exponent < EXP_SHIFT)
+    {
+        is_less_than_one = 1;
+        ldc.parts.exponent = EXP_SHIFT - ldc.parts.exponent;
+    }
+    else
+    {
+        is_less_than_one = 0;
+        ldc.parts.exponent -= EXP_SHIFT;
+    }
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
-    get_int_part(ldc.parts.mantisa, ldc.parts.exponent, int_part_buf);
+    if (!is_less_than_one)
+        get_int_part(ldc.parts.mantisa, ldc.parts.exponent, int_part_buf);
+    else
+        ft_strcpy(int_part_buf, "0");
     get_float_part(ldc.parts.mantisa, ldc.parts.exponent, float_part_buf);
     if (ld < 0)
         buffer[0] = '-';

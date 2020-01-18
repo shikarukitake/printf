@@ -8,6 +8,7 @@
 #include "specificator.h"
 #include <stdarg.h>
 #include "libft.h"
+#include "print_char.h"
 
 int	ft_print_empty(t_spec *spec, va_list *args);
 

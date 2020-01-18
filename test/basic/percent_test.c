@@ -47,15 +47,22 @@ static char *too_much_wh()
 	return (0);
 }
 
+static char *zero_flag_test()
+{
+    mu_assert_printf("percent and zero flag", ft_printf, "%05%", MU_NULL);
+    return (0);
+}
+
 int main(void)
 {
-	test_all("JUST PERCENT", 7,
+	test_all("JUST PERCENT", 8,
 			 simple_test,
 			 digit_test,
 			 digit_test2,
 			 one_percent,
 			 one_percent2,
 			 only_percent,
-			 too_much_wh);
+			 too_much_wh,
+			 zero_flag_test);
 	return (0);
 }
