@@ -40,16 +40,16 @@ int get_diff(int buf_len, t_spec *spec)
 	return (spec->precision.value - buf_len);
 }
 
-int is_d_or_i(t_spec *spec)
+int is_diu(t_spec *spec)
 {
-    return (spec->type == 'd' ||spec->type == 'i');
+    return (spec->type == 'd' ||spec->type == 'i' || spec->type == 'u');
 }
 
 char get_fill_ch(int len, t_spec *spec)
 {
-    if (spec->flags['0'] == TRUE && is_d_or_i(spec) && spec->precision.value < spec->width.value && spec->precision.value != -1)
+    if (spec->flags['0'] == TRUE  && spec->precision.value < spec->width.value && spec->precision.value != -1)
         return ' ';
-    if (spec->flags['0'] == TRUE && is_d_or_i(spec) && spec->precision.value < len && spec->precision.value != -1)
+    if (spec->flags['0'] == TRUE  && spec->precision.value < len && spec->precision.value != -1)
         return ' ';
 	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
 		return '0';
@@ -72,6 +72,23 @@ int fill_width_field(int i, t_spec *spec)
 		i++;
 	}
 	return (i - len);
+}
+
+int fill_prefix_width_field(int i, t_spec *spec, int prefix)
+{
+    char	ch;
+    int		len;
+    int		diff;
+
+    len = i;
+    diff = get_diff(i, spec);
+    ch = get_fill_ch(i + prefix, spec);
+    while (i + diff + prefix < spec->width.value)
+    {
+        ft_putchar(ch);
+        i++;
+    }
+    return (i - len);
 }
 
 int fill_precision_field(char *buf, t_spec *spec)
@@ -196,7 +213,7 @@ int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
         }
         else
         {
-            i += fill_width_field(ft_strlen(digit) + is_prefix, spec);
+            i += fill_prefix_width_field(ft_strlen(digit), spec, is_prefix);
             if (is_prefix)
                 i += pp(digit, spec, NULL);
             i += fill_precision_field(spec->type == 'o' ? prefixed_digit : digit, spec);
