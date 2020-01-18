@@ -8,6 +8,6 @@
 
 int main()
 {
-    printf("% x and text", 1);
+    printf("%x and text", 0);
 	return (0);
 }

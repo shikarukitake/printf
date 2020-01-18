@@ -18,8 +18,15 @@ static char *simple_test()
     return (0);
 }
 
+static char *zero_test()
+{
+    mu_assert_printf("zero pointer test", ft_printf, "%p", 0);
+    return (0);
+}
+
+
 
 int main()
 {
-	test_all("SIMPLE P", 1, extra_wh_test);
+	test_all("SIMPLE P", 2, simple_test, zero_test);
 }

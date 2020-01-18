@@ -4,24 +4,27 @@
 
 #include "print_hex_buf.h"
 
-int put_hex_prefix(const char *buf, t_spec *spec, char *dest)
+void    put_or_copy(char *dest, const char *prefix)
 {
-	if (spec->flags['#'] ==TRUE && buf[0] != '0')
+    if (dest)
+        ft_strcpy(dest, prefix);
+    else
+        ft_putstr(prefix);
+}
+
+int     put_hex_prefix(const char *buf, t_spec *spec, char *dest)
+{
+    if (spec->type == 'p')
+    {
+        put_or_copy(dest, HEX_SMALL_PREFIX);
+        return (2);
+    }
+	if (spec->flags['#'] == TRUE && buf[0] != '0')
 	{
 		if (spec->type == 'x')
-		{
-			if (dest)
-				ft_strcpy(dest, HEX_SMALL_PREFIX);
-			else
-				ft_putstr(HEX_SMALL_PREFIX);
-		}
+			put_or_copy(dest, HEX_SMALL_PREFIX);
 		else if (spec->type == 'X')
-		{
-			if (dest)
-				ft_strcpy(dest, HEX_BIG_PREFIX);
-			else
-				ft_putstr(HEX_BIG_PREFIX);
-		}
+		    put_or_copy(dest, HEX_BIG_PREFIX);
 		return (2);
 	}
 	return (0);

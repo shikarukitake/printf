@@ -19,9 +19,15 @@ static char *simple_neg_test()
 	return (0);
 }
 
+static char *simple_zero_test()
+{
+    mu_assert_printf("test zero case", ft_printf, "%x", 0);
+    return (0);
+}
+
 
 
 int main()
 {
-	test_all("SIMPLE X", 2, extra_wh_test, simple_neg_test);
+	test_all("SIMPLE X", 3, simple_test, simple_neg_test, simple_zero_test);
 }

@@ -20,6 +20,5 @@ int    ft_print_p(t_spec *spec, va_list *args)
     ft_bzero(buffer, MAX_P_BUFF_SIZE);
     get_p(args, spec, buffer);
     spec->flags['#'] = TRUE;
-    spec->type = 'x';
 	return (print_digit_buf(buffer, spec, put_hex_prefix));
 }

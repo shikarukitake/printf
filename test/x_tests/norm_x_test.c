@@ -70,7 +70,7 @@ static char *wp_zero_test()
 int main()
 {
 	test_all("NORM X", 9,
-			 extra_wh_test,
+			 simple_test,
 			 simple_neg_test,
 			 zero_test,
 			 width_test,
