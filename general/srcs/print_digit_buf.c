@@ -10,7 +10,7 @@ int is_null_case(const char *digit, t_spec *spec)
 
 	b = (digit[0] == '0' && spec->precision.is_dot == TRUE
 	        && (spec->precision.value <= 0));
-	if (spec->type == 'x' || spec->type == 'X')
+	if (spec->type == 'x' || spec->type == 'X' || spec->type == 'p')
 		return (b);
 	else
 		return (b && spec->flags['#'] == FALSE);
@@ -25,7 +25,8 @@ int prepare_buf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 	if (is_null_case(digit, spec))
 	{
 		ft_bzero(digit, MAX_HEX_BUF_SIZE);
-		return (0);
+		if (spec->type != 'p')
+		    return (0);
 	}
 	was_prefix = p(digit, spec, dig_buf);
 	ft_strcat(dig_buf, digit);

@@ -9,9 +9,23 @@ static int         g_was_color = 0;
 void		fill_spec_from_vargs(t_spec *spec, va_list *vargs)
 {
 	if (spec->width.is_asterisk == TRUE)
-		spec->width.value = va_arg(*vargs, int);
-	else if (spec->precision.is_asterisk == TRUE)
-		spec->precision.value = va_arg(*vargs, int);
+	{
+        spec->width.value = va_arg(*vargs, int);
+        if (spec->width.value < 0)
+        {
+            spec->flags['-'] = TRUE;
+            spec->width.value = -spec->width.value;
+        }
+    }
+	if (spec->precision.is_asterisk == TRUE)
+	{
+        spec->precision.value = va_arg(*vargs, int);
+        if (spec->precision.value <= 0)
+        {
+            spec->precision.value = -1;
+            spec->precision.is_dot = FALSE;
+        }
+    }
 }
 
 int 	is_just_percent(const char *format)

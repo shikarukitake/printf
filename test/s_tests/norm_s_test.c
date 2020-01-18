@@ -33,6 +33,7 @@ static char *empty_wp_str_test(void)
 static char *mouli_test(void)
 {
     mu_assert_printf("test_precision_s_higher_min_width", ft_printf, "%5.4s", "42");
+    mu_assert_printf("test_precision_s_implicit_precision", ft_printf, "%4.s", "42");
     return (0);
 }
 

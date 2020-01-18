@@ -66,10 +66,16 @@ static char *wp_zero_test()
 	return (0);
 }
 
+static char *zero_and_precision_test()
+{
+    mu_assert_printf("precision and zero", ft_printf, "%.5x", 0);
+    return (0);
+}
+
 
 int main()
 {
-	test_all("NORM X", 9,
+	test_all("NORM X", 10,
 			 simple_test,
 			 simple_neg_test,
 			 zero_test,
@@ -78,6 +84,7 @@ int main()
 			 neg_flag_test,
 			 minus_flag_test,
 			 wp_test,
-			 wp_zero_test);
+			 wp_zero_test,
+			 zero_and_precision_test);
 	return (0);
 }

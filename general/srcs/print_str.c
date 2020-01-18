@@ -10,10 +10,10 @@ int fill_str_field(const char *str, t_spec *spec)
 	int i;
 
 	if (spec->precision.value == -1)
-		i = ft_strlen(str);
+        i = (spec->precision.is_dot == TRUE ? 0 : (int)ft_strlen(str));
 	else
 	{
-		i = spec->precision.value;
+		i = MIN(spec->precision.value, (int)ft_strlen(str));
 		if (ft_strlen(str) == 0)
 			i = 0;
 	}
@@ -38,8 +38,8 @@ int		print_str(char *str, t_spec *spec)
 		return (print_buf("(null)"));
 	if (spec->flags['-'] == FALSE)
 		i += fill_str_field(str, spec);
-	if (spec->precision.value == -1)
-		i+=print_buf(str);
+	if (spec->precision.value == -1 && spec->precision.is_dot == FALSE)
+		i += print_buf(str);
 	else
 	{
 		while (j < spec->precision.value && j < (int)ft_strlen(str))
