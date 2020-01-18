@@ -25,6 +25,5 @@ t_spec	*init_spec()
 		new->flags[i++] = FALSE;
 	new->settings.color_id = -1;
 	new->settings.fd = 1;
-	new->extra_wh = FALSE;
 	return (new);
 }

@@ -8,7 +8,8 @@ int is_null_case(const char *digit, t_spec *spec)
 {
 	int b;
 
-	b = (digit[0] == '0' && spec->precision.is_dot == TRUE);
+	b = (digit[0] == '0' && spec->precision.is_dot == TRUE
+	        && (spec->precision.value <= 0));
 	if (spec->type == 'x' || spec->type == 'X')
 		return (b);
 	else
@@ -33,15 +34,15 @@ int prepare_buf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 
 int get_diff(int buf_len, t_spec *spec)
 {
-	if (spec->precision.value == -1)
-		return (0);
-	else if (spec->precision.value < buf_len)
+	if (spec->precision.value == -1 || spec->precision.value < buf_len)
 		return (0);
 	return (spec->precision.value - buf_len);
 }
 
 int	get_fill_ch(int len, t_spec *spec)
 {
+    if (spec->flags['0'] == TRUE && spec->type =='d' && spec->precision.value < spec->width.value && spec->precision.value != -1)
+        return ' ';
     if (spec->flags['0'] == TRUE && spec->type =='d' && spec->precision.value < len && spec->precision.value != -1)
         return ' ';
 	if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
@@ -168,6 +169,24 @@ int print_sign(char sign)
 
 #define IS_SIGN(x) (x ? 1 : 0)
 
+
+int fill_sign_width_field(int i, t_spec *spec, char sign)
+{
+    char	ch;
+    int		len;
+    int		diff;
+
+    len = i;
+    diff = get_diff(i, spec);
+    ch = get_fill_ch(i + IS_SIGN(sign), spec);
+    while (i + diff + IS_SIGN(sign) < spec->width.value)
+    {
+        ft_putchar(ch);
+        i++;
+    }
+    return (i - len);
+}
+
 int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	int 	i;
@@ -187,7 +206,8 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 	if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);
-	    i += fill_precision_field(IS_SIGN(sign) ? digit_with_sign : digit, spec);
+//	    i += fill_precision_field(IS_SIGN(sign) ? digit_with_sign : digit, spec);
+        i += fill_precision_field(digit, spec);
         i += print_buf(digit);
         i += fill_width_field(i, spec);
     }
@@ -195,13 +215,13 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
     {
 	    if (get_fill_ch((int)ft_strlen(digit) + IS_SIGN(sign), spec) == ' ')
 	    {
-            i += fill_width_field((int) ft_strlen(digit) + IS_SIGN(sign), spec);
+            i += fill_sign_width_field(ft_strlen(digit), spec, sign);
             i += print_sign(sign);
         }
 	    else
         {
-	        i+=print_sign(sign);
-	        i+=fill_width_field((int)ft_strlen(digit) + IS_SIGN(sign), spec);
+	        i += print_sign(sign);
+	        i += fill_sign_width_field(ft_strlen(digit), spec, sign);
         }
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);

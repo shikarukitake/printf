@@ -39,8 +39,6 @@ typedef		struct	s_spec
 	t_precision         precision;
 	t_size              size;
 	t_print_settings    settings;
-	t_bool				extra_wh;
-
 }					t_spec;
 
 t_spec	*init_spec();

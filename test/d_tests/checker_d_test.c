@@ -23,13 +23,28 @@ static char *minus_wp_flag_test()
     return (0);
 }
 
+static char *extra_symbol_test()
+{
+    mu_assert_printf("+ wp test", ft_printf, "%+10.5d", 4242); // --> "    +04242"
+    mu_assert_printf("+ wp test", ft_printf, "%-+10.5d", 4242); // --> "+04242   "
+    return (0);
+}
 
+static char *wp_test()
+{
+    mu_assert_printf("0 0wp test", ft_printf, "%03.2d", 0);
+    mu_assert_printf("1 0wp test", ft_printf, "%03.2d", 1);
+    mu_assert_printf("-1 0wp test", ft_printf, "%03.2d", -1);
+    return (0);
+}
 
 int main()
 {
-    test_all("CHECKER D TESTS", 3,
+    test_all("CHECKER D TESTS", 5,
             plus_zero_flag_test,
             zero_flag_and_minus,
-            minus_wp_flag_test);
+            minus_wp_flag_test,
+            extra_symbol_test,
+            wp_test);
     return (0);
 }
