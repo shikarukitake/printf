@@ -10,5 +10,5 @@ int     ft_print_u(t_spec *spec, va_list *args)
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
 	get_ud(args, spec, buffer);
-    return (print_digit_buf(buffer, spec, put_sign_prefix));
+    return (print_d_buf(buffer, spec, put_sign_prefix));
 }

@@ -45,7 +45,7 @@ int is_d_or_i(t_spec *spec)
     return (spec->type == 'd' ||spec->type == 'i');
 }
 
-int	get_fill_ch(int len, t_spec *spec)
+char get_fill_ch(int len, t_spec *spec)
 {
     if (spec->flags['0'] == TRUE && is_d_or_i(spec) && spec->precision.value < spec->width.value && spec->precision.value != -1)
         return ' ';
@@ -118,7 +118,7 @@ int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
 		if (was_prefix && spec->flags['0'] == TRUE)
 		{
 			i += pp(digit, spec, NULL);
-			i += fill_width_field(ft_strlen(digit) + i, spec);
+			i += fill_width_field((int)ft_strlen(digit) + i, spec);
 			i += fill_precision_field(digit, spec);
 			i += print_buf(digit);
 		}
@@ -134,30 +134,72 @@ int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
 	return (i);
 }
 
-
-int	get_fill_sd_ch(t_spec *spec)
+int check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
-	if (spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
-		return '0';
-	else
-		return ' ';
+    char dest[4];
+    int is_prefix;
+
+    ft_bzero(dest, 4);
+    if (is_null_case(digit, spec))
+    {
+        ft_bzero(digit, MAX_HEX_BUF_SIZE);
+        if (spec->type != 'p')
+            return (0);
+    }
+    is_prefix = pp(digit, spec, dest);
+    if (is_prefix)
+        return (ft_strlen(dest));
+    else
+        return (0);
 }
 
-char get_sign(char *digit, t_spec *spec, char *digit_with_sign)
+int	print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
+{
+    int 	i;
+    int		is_prefix;
+
+    i = 0;
+    is_prefix = check_is_prefix(digit, spec, pp);
+    if (spec->flags['-'] == TRUE)
+    {
+        i += fill_precision_field(digit, spec);
+        i += pp(digit, spec, NULL);
+        i += print_buf(digit);
+        i += fill_width_field(i, spec);
+    }
+    else
+    {
+        if (is_prefix && spec->flags['0'] == TRUE)
+        {
+            i += pp(digit, spec, NULL);
+            i += fill_width_field((int)ft_strlen(digit) + i, spec);
+            i += fill_precision_field(digit, spec);
+            i += print_buf(digit);
+        }
+        else
+        {
+            i += fill_width_field(ft_strlen(digit) + is_prefix, spec);
+            if (is_prefix)
+                i += pp(digit, spec, NULL);
+            i += fill_precision_field(digit, spec);
+            i += print_buf(digit);
+        }
+    }
+    if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
+        i++;
+    return (i);
+}
+
+char get_sign(char *digit, t_spec *spec)
 {
 
-    ft_bzero(digit_with_sign, MAX_HEX_BUF_SIZE);
     if (digit[0] == '-')
     {
         ft_strcpy(digit, digit + 1);
-        ft_strcpy(digit_with_sign, "-");
-        ft_strcat(digit_with_sign, digit);
         return '-';
     }
     else if (spec->flags['+'] == TRUE)
     {
-        ft_strcpy(digit_with_sign, "+");
-        ft_strcat(digit_with_sign, digit);
         return '+';
     }
     return ('\0');
@@ -174,7 +216,6 @@ int print_sign(char sign)
 }
 
 #define IS_SIGN(x) (x ? 1 : 0)
-
 
 int fill_sign_width_field(int i, t_spec *spec, char sign)
 {
@@ -197,7 +238,6 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	int 	i;
 	char    sign;
-	char    digit_with_sign[MAX_HEX_BUF_SIZE];
 
 	i = 0;
     ((void)pp);
@@ -208,11 +248,10 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
         ft_putchar(' ');
         spec->width.value--;
     }
-	sign = get_sign(digit, spec, digit_with_sign);
+	sign = get_sign(digit, spec);
 	if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);
-//	    i += fill_precision_field(IS_SIGN(sign) ? digit_with_sign : digit, spec);
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);
         i += fill_width_field(i, spec);
@@ -232,7 +271,6 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);
     }
-
 	if (is_need_wh(digit, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
 		i++;
 	return (i);
