@@ -32,6 +32,5 @@ int		ft_printf(const char *fmt, ...)
 		i++;
 	}
 	va_end(args);
-	flush_buffer();
 	return (count);
 }

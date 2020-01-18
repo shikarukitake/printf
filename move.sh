@@ -1,12 +1,12 @@
 #!/bin/bash
 
-dir="~/ft_printf/"
+dir="~/ft_printf"
 if [ -n "$1" ]
 then    
     dir=$1
 fi
 
-SRC="${dir}srcs/" 
+SRC="${dir}/srcs/" 
 echo ${SRC}
 echo 'DEBUG'
 cp general/srcs/*.c ${SRC}

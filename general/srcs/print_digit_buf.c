@@ -167,6 +167,7 @@ int print_sign(char sign)
 }
 
 #define IS_SIGN(x) (x ? 1 : 0)
+
 int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	int 	i;
@@ -174,6 +175,9 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 	char    digit_with_sign[MAX_HEX_BUF_SIZE];
 
 	i = 0;
+    ((void)pp);
+    if (is_null_case(digit, spec))
+        ft_bzero(digit, MAX_HEX_BUF_SIZE);
     if (is_need_wh(digit, spec))
     {
         ft_putchar(' ');

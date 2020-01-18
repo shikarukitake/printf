@@ -50,7 +50,7 @@ static char *too_much_wh()
 int main(void)
 {
 	test_all("JUST PERCENT", 7,
-			 extra_wh_test,
+			 simple_test,
 			 digit_test,
 			 digit_test2,
 			 one_percent,
