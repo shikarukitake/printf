@@ -187,19 +187,27 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
 	if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);
-	    i += fill_precision_field(digit_with_sign, spec);
+	    i += fill_precision_field(IS_SIGN(sign) ? digit_with_sign : digit, spec);
         i += print_buf(digit);
         i += fill_width_field(i, spec);
     }
 	else
     {
-        i += fill_width_field(ft_strlen(digit) + IS_SIGN(sign), spec);
-        i += print_sign(sign);
+	    if (get_fill_ch((int)ft_strlen(digit) + IS_SIGN(sign), spec) == ' ')
+	    {
+            i += fill_width_field((int) ft_strlen(digit) + IS_SIGN(sign), spec);
+            i += print_sign(sign);
+        }
+	    else
+        {
+	        i+=print_sign(sign);
+	        i+=fill_width_field((int)ft_strlen(digit) + IS_SIGN(sign), spec);
+        }
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);
     }
 
-	if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
+	if (is_need_wh(digit, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
 		i++;
 	return (i);
 }
