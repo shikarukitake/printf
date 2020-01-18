@@ -27,7 +27,8 @@ unsigned long bin_to_dec(unsigned long b)
     dec_value = 0;
     base = 1;
     temp = b;
-    while (temp) {
+    while (temp)
+    {
         last_digit = temp % 2;
         temp = temp / 2;
         dec_value += last_digit * base;

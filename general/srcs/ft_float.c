@@ -36,6 +36,30 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     result = bin_to_dec(m);
     ft_ulltoa_base(result, buf, 10, 'a');
 }
+
+void bin_to_dec_to_str(unsigned long m, char *buf)
+{
+
+}
+
+void    get_big_int_part(unsigned long m, unsigned exp, char *buf)
+{
+    unsigned long mask;
+    int count;
+    unsigned long result;
+
+    mask = 1u;
+    count = 0;
+    while (!(m & mask))
+    {
+        mask <<=1;
+        count++;
+    }
+    m >>= count;
+    m >>= count_bits(m) - exp - 1;
+    bin_to_dec_to_str(m , buf);
+}
+
 char    *view_bin(unsigned long bin)
 {
     char            *ptr;
