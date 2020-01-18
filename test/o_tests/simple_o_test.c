@@ -5,6 +5,7 @@
 #include "ft_printf.h"
 #include "minunit.h"
 
+#include <limits.h>
 
 static char *basic_test()
 {
@@ -41,7 +42,20 @@ static char *null_test()
 	return (0);
 }
 
+static char *min_max_test()
+{
+    mu_assert_printf("test lo long unsigned max", ft_printf, "%lo, %lo", 0ul, ULONG_MAX);
+    mu_assert_printf("test lo unsigned long long max", ft_printf, "%lo, %lo", 0llu, ULLONG_MAX);
+    return (0);
+}
+
 int main()
 {
-	test_all("SIMPLE O TESTS", 5, wp_test, basic_test, more_complex_test, flag_test, null_test);
+	test_all("SIMPLE O TESTS", 6,
+	        wp_test,
+	        basic_test,
+	        more_complex_test,
+	        flag_test,
+	        null_test,
+	        min_max_test);
 }
