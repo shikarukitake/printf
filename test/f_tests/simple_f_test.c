@@ -56,9 +56,17 @@ static char *test_simple5()
     return (0);
 }
 
+static char *test_ld()
+{
+    long double d;
+
+    d = 43.4399999L;
+    mu_assert_printf("test1", ft_printf, "%Lf", d);
+    return (0);
+}
 
 int main()
 {
-    test_all("SIMPLE F TESTS", 5, test_simple, test_simple2, test_simple3, test_simple4, test_simple5);
+    test_all("SIMPLE F TESTS", 6, test_simple, test_simple2, test_simple3, test_simple4, test_simple5, test_ld);
     return (0);
 }

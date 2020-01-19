@@ -9,7 +9,7 @@
 #include "specificator.h"
 #include "get_oct.h"
 #include "convert.h"
-#include "print_buffer.h"
+#include "print_f_buf.h"
 #include "print_oct_buf.h"
 #include "print_digit_buf.h"
 

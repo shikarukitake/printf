@@ -1,11 +1,14 @@
 //
-// Created by Aletha Yellin on 26/12/2019.
+// Created by dan on 20.12.19.
 //
 
-#include "specificator.h"
-#include "ft_float.h"
+#include "print_float.h"
 
-//int	ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
-//{
-//    return (0);
-//}
+int    ft_print_f(t_spec *spec, va_list *args)
+{
+	char	buffer[MAX_FLOAT_BUFF_SIZE];
+
+	ft_bzero(buffer, MAX_FLOAT_BUFF_SIZE);
+	get_f(args, spec, buffer);
+	return (print_f_buf(buffer, spec));
+}

@@ -264,7 +264,7 @@ int print_sign(char sign)
     return (0);
 }
 
-#define IS_SIGN(x) (x ? 1 : 0)
+
 
 int fill_sign_width_field(int i, t_spec *spec, char sign)
 {

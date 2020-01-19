@@ -193,6 +193,12 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag
     free(result);
 }
 
+//FT COSTYL
+void    zero_case(char *buf)
+{
+    ft_strcpy(buf, "0.0");
+}
+
 void    ft_dtoa(long double ld, char *buffer)
 {
     char int_part_buf[MAX_FLOAT_BUFF_SIZE];
@@ -202,6 +208,11 @@ void    ft_dtoa(long double ld, char *buffer)
 
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
+    if (ld == 0)
+    {
+        zero_case(buffer);
+        return;
+    }
     ldc = (long_double_cast) {.ld = ld};
     if (ldc.parts.exponent >= EXP_SHIFT)
     {

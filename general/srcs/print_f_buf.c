@@ -2,7 +2,7 @@
 // Created by Aletha Yellin on 29/11/2019.
 //
 
-#include "print_buffer.h"
+#include "print_f_buf.h"
 
 void change_first_digits(char *buf)
 {
@@ -107,3 +107,87 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
     return (i + float_nums);
 }
 
+int is_float_null_case(char *f, t_spec *spec)
+{
+    int i;
+
+    if (ft_strcmp(f, "0.0") == 0 && spec->precision.value == -1)
+    {
+        ft_strcpy(f, "0.000000");
+        return (1);
+    }
+
+    return (0);
+}
+
+char get_float_fill_ch(int len, t_spec *spec)
+{
+    len = 0;
+    if(spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
+        return '0';
+    else
+        return ' ';
+}
+
+int fill_float_width_field(int i, t_spec *spec)
+{
+    char	ch;
+    int		len;
+
+    len = i;
+    ch = get_float_fill_ch(i, spec);
+    while (i < spec->width.value)
+    {
+        ft_putchar(ch);
+        i++;
+    }
+    return (i - len);
+}
+
+int fill_float_sign_width_field(int i, t_spec *spec, char sign)
+{
+    char	ch;
+    int		len;
+
+    len = i;
+    ch = get_float_fill_ch(i + IS_SIGN(sign), spec);
+    while (i + IS_SIGN(sign) < spec->width.value)
+    {
+        ft_putchar(ch);
+        i++;
+    }
+    return (i - len);
+}
+
+int	print_f_buf(char *f, t_spec *spec)
+{
+
+    int 	i;
+    char    sign;
+
+    i = 0;
+    is_float_null_case(f, spec);
+    round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
+    sign = get_sign(f, spec);
+    if (spec->flags['-'] == TRUE)
+    {
+        i += print_sign(sign);
+        i += print_buf(f);
+        i += fill_float_width_field(i, spec);
+    }
+    else
+    {
+        if (get_float_fill_ch((int)ft_strlen(f) + IS_SIGN(sign), spec) == ' ')
+        {
+            i += fill_float_sign_width_field(ft_strlen(f), spec, sign);
+            i += print_sign(sign);
+        }
+        else
+        {
+            i += print_sign(sign);
+            i += fill_float_sign_width_field(ft_strlen(f), spec, sign);
+        }
+        i += print_buf(f);
+    }
+    return (i);
+}

@@ -8,7 +8,7 @@
 #include "specificator.h"
 #include "libft.h"
 #include "printf_constants.h"
-#include "print_buffer.h"
+#include "print_f_buf.h"
 
 int put_hex_prefix(const char *buf, t_spec *spec, char *dest);
 

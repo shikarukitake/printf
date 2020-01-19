@@ -2,18 +2,18 @@
 // Created by dan on 20.12.19.
 //
 
-#ifndef PRINTF_FLOAT_PRINT_H
-#define PRINTF_FLOAT_PRINT_H
+#ifndef PRINTF_PRINT_FLOAT_H
+#define PRINTF_PRINT_FLOAT_H
 
 #include "specificator.h"
 #include "stdarg.h"
 #include "get_f.h"
-#include "print_buffer.h"
-#include "float_print.h"
+#include "print_f_buf.h"
+#include "print_float.h"
 #include "ft_float.h"
 #include "printf_constants.h"
 #include "libft.h"
 
 int    ft_print_f(t_spec *spec, va_list *args);
 
-#endif //PRINTF_FLOAT_PRINT_H
+#endif //PRINTF_PRINT_FLOAT_H
