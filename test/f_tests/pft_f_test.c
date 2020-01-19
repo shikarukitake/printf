@@ -31,7 +31,16 @@ static char *wp_test()
     return (0);
 }
 
+static char *wh_flag_test()
+{
+    mu_assert_printf("test1", ft_printf, "% 5.0f", -7.3);
+    mu_assert_printf("test2", ft_printf, "% 5.0f", 7.3);
+    mu_assert_printf("test3", ft_printf, "% 05.0f", 7.3);
+    mu_assert_printf("test 4", ft_printf, "% +05.0f", 7.3);
+    return (0);
+}
+
 int main()
 {
-    test_all("PFT F TESTS",3, round_test, sharp_test, wp_test);
+    test_all("PFT F TESTS",4, round_test, sharp_test, wp_test, wh_flag_test);
 }

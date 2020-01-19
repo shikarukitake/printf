@@ -9,7 +9,7 @@ int is_need_wh(const char *buf, t_spec *spec)
 	return (spec->flags[' '] == TRUE
 			&& spec->flags['+'] == FALSE
 			&& buf[0] != '-'
-			&& (spec->type == 'd' ||spec->type == 'i'));
+			&& (spec->type == 'd' ||spec->type == 'i' || spec->type == 'f'));
 }
 
 int put_sign_prefix(const char *buf, t_spec *spec, char *dest)

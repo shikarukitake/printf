@@ -219,6 +219,8 @@ void remove_dot(char *f, t_spec *spec)
         f[i] = '\0';
 }
 
+
+
 int	print_f_buf(char *f, t_spec *spec)
 {
 
@@ -232,6 +234,11 @@ int	print_f_buf(char *f, t_spec *spec)
         return (1);
     round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
     add_zeros(f, spec);
+    if (is_need_wh(f, spec))
+    {
+        ft_putchar(' ');
+        spec->width.value--;
+    }
     sign = get_sign(f, spec);
     is_dot = (f[ft_strlen(f) - 1] == '.');
     if (spec->flags['-'] == TRUE)
@@ -254,5 +261,7 @@ int	print_f_buf(char *f, t_spec *spec)
         }
         i += print_float_buf(f, spec);
     }
+    if (is_need_wh(f, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
+        i++;
     return (i);
 }

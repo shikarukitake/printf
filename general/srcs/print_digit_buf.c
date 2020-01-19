@@ -320,7 +320,7 @@ int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);
     }
-	if (is_need_wh(digit, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
+	if (is_need_wh(digit, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL maybe error with negative values ???
 		i++;
 	return (i);
 }
