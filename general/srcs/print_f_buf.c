@@ -69,6 +69,8 @@ void    round_float(char *buf, int precision)
             else
                 round_int_part(buf);
         }
+        buf[last] = '\0';
+        return ;
     }
     if (buf[i] > '4' && buf[i - 1] == '.')
         round_int_part(buf);
@@ -195,7 +197,7 @@ void add_zeros(char *buf, t_spec *spec)
 
     precision = get_float_precision(spec);
     f_num = 0;
-    i = ft_strchri(buf, '.') + 1;
+    i = (int)ft_strchri(buf, '.') + 1;
     while (buf[i])
     {
         f_num++;
@@ -207,6 +209,14 @@ void add_zeros(char *buf, t_spec *spec)
         f_num++;
     }
     buf[i] = '\0';
+}
+void remove_dot(char *f, t_spec *spec)
+{
+    int i;
+
+    i = ft_strchri(f, '.');
+    if (i != -1 && spec->precision.value == 0 && spec->flags['#'] == FALSE)
+        f[i] = '\0';
 }
 
 int	print_f_buf(char *f, t_spec *spec)
@@ -221,6 +231,7 @@ int	print_f_buf(char *f, t_spec *spec)
     round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
     add_zeros(f, spec);
     sign = get_sign(f, spec);
+    //remove_dot(f, spec);
     if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);

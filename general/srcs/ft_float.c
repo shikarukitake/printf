@@ -7,6 +7,7 @@
 #include "bits_util.h"
 #include "printf_constants.h"
 #include <stdlib.h>
+#include <float.h>
 
 #define EXP_SHIFT 16383
 
@@ -208,9 +209,14 @@ void    ft_dtoa(long double ld, char *buffer)
 
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
-    if (ld == 0)
+    if (ld == 0 || ld == LDBL_MIN)
     {
         zero_case(buffer);
+        return;
+    }
+    else if (ld == -LDBL_MIN)
+    {
+        ft_strcpy(buffer, "-0.0");
         return;
     }
     ldc = (long_double_cast) {.ld = ld};
