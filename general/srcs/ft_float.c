@@ -6,16 +6,38 @@
 #include "libft.h"
 #include "bits_util.h"
 #include "printf_constants.h"
+#include <stdlib.h>
 
 #define EXP_SHIFT 16383
 
+char *view_bin(unsigned long bin)
+{
+    char            *ptr;
+    unsigned int    mask;
+    int i;
+    i = 0;
+    mask =1u;
+    ptr = ft_memalloc(1024);
+    ft_bzero(ptr, 1024);
+    while (bin)
+    {
+        if (bin & 1u)
+            ptr[i++] = '1';
+        else
+            ptr[i++] = '0';
+        bin >>= 1u;
+    }
+    ft_strrev(ptr);
+    return (ptr);
+}
+
 void init_float(t_float *f)
 {
-	f->ld = 0.0;
-	f->exp = 0;
-	f->is_up = 0;
-	f->man = 0;
-	f->sign = 0;
+    f->ld = 0.0;
+    f->exp = 0;
+    f->is_up = 0;
+    f->man = 0;
+    f->sign = 0;
 }
 
 void get_int_part(unsigned long m, unsigned exp, char *buf)
@@ -28,7 +50,7 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     count = 0;
     while (!(m & mask))
     {
-        mask <<=1;
+        mask <<= 1u;
         count++;
     }
     m >>= count;
@@ -37,69 +59,23 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     ft_ulltoa_base(result, buf, 10, 'a');
 }
 
-void bin_to_dec_to_str(unsigned long m, char *buf)
+void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
 {
-
-}
-
-void    get_big_int_part(unsigned long m, unsigned exp, char *buf)
-{
-    unsigned long mask;
-    int count;
-    unsigned long result;
-
+    unsigned long   mask;
+    int             count;
+    unsigned        i;
+    unsigned        max;
     mask = 1u;
     count = 0;
+    i = 0;
     while (!(m & mask))
     {
         mask <<=1;
         count++;
     }
     m >>= count;
-    m >>= count_bits(m) - exp - 1;
-    bin_to_dec_to_str(m , buf);
-}
-
-char    *view_bin(unsigned long bin)
-{
-    char            *ptr;
-    unsigned int    mask;
-    int i;
-
-    i = 0;
-    mask =1u;
-    ptr = ft_memalloc(1024);
-    ft_bzero(ptr, 1024);
-    while (bin)
-    {
-        if (bin & 1u)
-          ptr[i++] = '1';
-        else
-            ptr[i++] = '0';
-        bin >>= 1u;
-    }
-    ft_strrev(ptr);
-    return (ptr);
-}
-
-void    get_float_bits(unsigned long m, unsigned e, char *buf)
-{
-    unsigned long   mask;
-    int             count;
-    unsigned        i;
-    unsigned        max;
-
     mask = 1u;
-    count = 0;
-    i = 0;
-    while (!(m & mask))
-    {
-        mask <<= 1u;
-        count++;
-    }
-    m >>= count;
-    mask = 1u;
-    max = count_bits(m) - e - 1;
+    max = flag == 1 ? count_bits(m) - e - 1: count_bits(m) + e - 1;
     while (i < max)
     {
         if (m & mask)
@@ -112,92 +88,139 @@ void    get_float_bits(unsigned long m, unsigned e, char *buf)
     ft_strrev(buf);
 }
 
-void    get_float_part(unsigned long mantissa, unsigned exp, char *buf)
+
+t_uchar*   print_mass(t_uchar *mass, int n)
 {
-    char            bin_buf[MAX_FLOAT_BUFF_SIZE];
-    int             i;
-    unsigned int    n;
-    long double     res;
+    t_uchar *new;
+    int     i;
 
     i = 0;
-    n = 1;
-    res = 0;
-    ft_bzero(bin_buf, MAX_FLOAT_BUFF_SIZE);
-    get_float_bits(mantissa, exp, bin_buf);
-    while (bin_buf[i] && i < 30)
+    new = ft_memalloc(n);
+    while (i != n)
     {
-        if (bin_buf[i] == '1')
-            res = res + (1.0 / ft_power(2, n)); // need long arithmetic there
-        n++;
+        new[i] = mass[i] + '0';
         i++;
     }
-    if(i > 6)
-        i = 6;
-    res = res * ft_power(10, i); // need long arithmetic there
-    ft_ulltoa_base((t_ull)res, buf, 10, 'a');
+    return (new);
 }
 
-char    a_plus_one(char a)
+t_uchar*   devide_by_two(t_uchar *devided, int n)
 {
-    return (char)(a - '0' + '1');
-}
+    int i;
 
-void    round_float(char *float_buf)
-{
-    size_t  i;
-    int     add;
-
-    i = ft_strlen(float_buf) - 1;
-    add = 0;
-    while (float_buf[i] > '5')
+    i = 0;
+    while (i != n)
     {
-    	if (float_buf[i] == '.')
-			return;
-    	if (float_buf[i] == '9')
-        	float_buf[i] = '0';
-    	else
-		{
-    		float_buf[i] = a_plus_one(float_buf[i]);
-			return;
-		}
-        i--;
-        add = 1;
+        if (devided[i] % 2 == 1)
+            devided[i + 1] += 10;
+        devided[i] /= 2;
+        i++;
     }
-    if (add)
-        float_buf[i] = a_plus_one(float_buf[i]);
+    return (devided);
 }
 
-#include "stdio.h" // FOR DEBUG
+void   set_res(t_uchar *result, int i, int swap, int *int_part)
+{
+    if (swap < 10)
+        result[i] = swap;
+    else
+    {
+        result[i] = swap - 10;
+        if (i == 0)
+            *int_part += 1;
+        else
+            set_res(result, i - 1, result[i - 1] + 1, int_part);
+    }
+}
+
+int    summ_long(t_uchar *divided, t_uchar *result, int n)
+{
+    int i;
+    int swap;
+    int int_part;
+
+    i = 0;
+    int_part = 0;
+    while(i != n)
+    {
+        swap = result[i] + divided[i];
+        if (swap != 0 && divided[i] != 0)
+            set_res(result, i, swap, &int_part);
+        i++;
+    }
+    return int_part;
+}
+
+void    transform_float_part(const t_uchar *float_part, int n, char *buf)
+{
+    int i;
+
+    i = 0;
+    while (i < n)
+    {
+        buf[i] = (char)(float_part[i] + '0');
+        i++;
+    }
+    buf[i] = '\0';
+}
+
+void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag)
+{
+    char                        bin_buf[MAX_FLOAT_BUFF_SIZE];
+    unsigned long long int      i;
+    unsigned int                n;
+    t_uchar                     *divided;
+    t_uchar                     *result;
+
+    i = 0;
+    ft_bzero(bin_buf, MAX_FLOAT_BUFF_SIZE);
+    get_float_bits(mantissa, exp, bin_buf, flag);
+    n = 0.3 * exp + 800; // Mansur's formula
+    divided = ft_memalloc(n);
+    result = ft_memalloc(n);
+    ft_memset(divided, 0, n);
+    ft_memset(result, 0, n );
+    divided[0] = 5;
+    while (bin_buf[i])
+    {
+        if (bin_buf[i] == '1')
+            summ_long(divided, result, n);
+        i++;
+        divided = devide_by_two(divided, n);
+    }
+    transform_float_part(result, n, buf);
+    free(divided);
+    free(result);
+}
 
 void    ft_dtoa(long double ld, char *buffer)
 {
     char int_part_buf[MAX_FLOAT_BUFF_SIZE];
     char float_part_buf[MAX_FLOAT_BUFF_SIZE];
-    int is_less_than_one;
+    int flag;
     long_double_cast ldc;
 
-    ldc = (long_double_cast) {.ld = ld};
-    if (ldc.parts.exponent < EXP_SHIFT)
-    {
-        is_less_than_one = 1;
-        ldc.parts.exponent = EXP_SHIFT - ldc.parts.exponent;
-    }
-    else
-    {
-        is_less_than_one = 0;
-        ldc.parts.exponent -= EXP_SHIFT;
-    }
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
-    if (!is_less_than_one)
-        get_int_part(ldc.parts.mantisa, ldc.parts.exponent, int_part_buf);
+    ldc = (long_double_cast) {.ld = ld};
+    if (ldc.parts.exponent > EXP_SHIFT)
+    {
+        ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
+        get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
+        flag = 1;
+    }
     else
+    {
+        ldc.parts.exponent = EXP_SHIFT - ldc.parts.exponent;
         ft_strcpy(int_part_buf, "0");
-    get_float_part(ldc.parts.mantisa, ldc.parts.exponent, float_part_buf);
+        flag = 0;
+    }
+
+    get_float_part(ldc.parts.mantissa, ldc.parts.exponent, float_part_buf, flag);
     if (ld < 0)
         buffer[0] = '-';
     ft_strcat(buffer, int_part_buf);
     ft_strcat(buffer, ".");
     ft_strcat(buffer, float_part_buf);
-    round_float(buffer);
 }
+

@@ -20,7 +20,7 @@ typedef struct s_float
 typedef union {
     long double ld;
     struct {
-        unsigned long  mantisa : 64;
+        unsigned long  mantissa : 64;
         unsigned int   exponent : 15;
         unsigned int   sign : 1;
     } parts;
