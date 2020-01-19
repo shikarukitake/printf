@@ -225,13 +225,15 @@ int	print_f_buf(char *f, t_spec *spec)
     int 	i;
     char    sign;
 
+    int is_dot;
+
     i = 0;
     if (is_float_null_case(f, spec))
         return (1);
     round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
     add_zeros(f, spec);
     sign = get_sign(f, spec);
-    //remove_dot(f, spec);
+    is_dot = (f[ft_strlen(f) - 1] == '.');
     if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);
@@ -242,13 +244,13 @@ int	print_f_buf(char *f, t_spec *spec)
     {
         if (get_float_fill_ch((int)ft_strlen(f) + IS_SIGN(sign), spec) == ' ')
         {
-            i += fill_float_sign_width_field(ft_strlen(f), spec, sign);
+            i += fill_float_sign_width_field(ft_strlen(f) - is_dot, spec, sign);
             i += print_sign(sign);
         }
         else
         {
             i += print_sign(sign);
-            i += fill_float_sign_width_field(ft_strlen(f), spec, sign);
+            i += fill_float_sign_width_field(ft_strlen(f) - is_dot, spec, sign);
         }
         i += print_float_buf(f, spec);
     }
