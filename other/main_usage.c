@@ -9,6 +9,6 @@
 int main()
 {
 //    printf("%x and text", 0);
-    printf("%x\n", LDBL_MAX);
+    printf("%Lf\n", LDBL_MIN);
 	return (0);
 }

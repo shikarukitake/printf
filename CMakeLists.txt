@@ -68,6 +68,7 @@ ADD_EXECUTABLE_MU_TEST(wildcard_test test/bonus/wildcard_test.c)
 ADD_EXECUTABLE_MU_TEST(pft_x_test test/x_tests/pft_x_test.c)
 ADD_EXECUTABLE_MU_TEST(pft_o_test test/o_tests/pft_o_test.c)
 ADD_EXECUTABLE_MU_TEST(norm_f_test test/f_tests/norm_f_test.c)
+ADD_EXECUTABLE_MU_TEST(pft_f_test test/f_tests/pft_f_test.c)
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})

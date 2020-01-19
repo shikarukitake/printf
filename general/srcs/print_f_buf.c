@@ -70,6 +70,8 @@ void    round_float(char *buf, int precision)
                 round_int_part(buf);
         }
     }
+    if (buf[i] > '4' && buf[i - 1] == '.')
+        round_int_part(buf);
     buf[last] = '\0';
 }
 
@@ -109,14 +111,12 @@ int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
 
 int is_float_null_case(char *f, t_spec *spec)
 {
-    int i;
 
-    if (ft_strcmp(f, "0.0") == 0 && spec->precision.value == -1)
+    if (ft_strcmp(f, "0.0") == 0 && spec->precision.value <= 0 && spec->precision.is_dot == TRUE)
     {
-        ft_strcpy(f, "0.000000");
+        ft_putchar('0');
         return (1);
     }
-
     return (0);
 }
 
@@ -159,6 +159,56 @@ int fill_float_sign_width_field(int i, t_spec *spec, char sign)
     return (i - len);
 }
 
+int print_float_buf(char *f, t_spec *spec)
+{
+   int i;
+
+   i = 0;
+   while (f[i] != '.')
+   {
+       ft_putchar(f[i]);
+       i++;
+   }
+   if (spec->precision.value != 0)
+   {
+       ft_putstr(f + i);
+       i = ft_strlen(f);
+   }
+   if (spec->precision.value == 0 && spec->flags['#'] == TRUE)
+   {
+       ft_putchar('.');
+       i++;
+   }
+   return (i);
+}
+
+int get_float_precision(t_spec *spec)
+{
+    return (spec->precision.value == -1 ? 6 : spec->precision.value);
+}
+
+void add_zeros(char *buf, t_spec *spec)
+{
+    int i;
+    int f_num;
+    int precision;
+
+    precision = get_float_precision(spec);
+    f_num = 0;
+    i = ft_strchri(buf, '.') + 1;
+    while (buf[i])
+    {
+        f_num++;
+        i++;
+    }
+    while (f_num < precision)
+    {
+        buf[i++] = '0';
+        f_num++;
+    }
+    buf[i] = '\0';
+}
+
 int	print_f_buf(char *f, t_spec *spec)
 {
 
@@ -166,13 +216,15 @@ int	print_f_buf(char *f, t_spec *spec)
     char    sign;
 
     i = 0;
-    is_float_null_case(f, spec);
+    if (is_float_null_case(f, spec))
+        return (1);
     round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
+    add_zeros(f, spec);
     sign = get_sign(f, spec);
     if (spec->flags['-'] == TRUE)
     {
         i += print_sign(sign);
-        i += print_buf(f);
+        i += print_float_buf(f, spec);
         i += fill_float_width_field(i, spec);
     }
     else
@@ -187,7 +239,7 @@ int	print_f_buf(char *f, t_spec *spec)
             i += print_sign(sign);
             i += fill_float_sign_width_field(ft_strlen(f), spec, sign);
         }
-        i += print_buf(f);
+        i += print_float_buf(f, spec);
     }
     return (i);
 }
