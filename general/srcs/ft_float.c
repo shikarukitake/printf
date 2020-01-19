@@ -203,7 +203,7 @@ void    ft_dtoa(long double ld, char *buffer)
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
     ldc = (long_double_cast) {.ld = ld};
-    if (ldc.parts.exponent > EXP_SHIFT)
+    if (ldc.parts.exponent >= EXP_SHIFT)
     {
         ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
         get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);

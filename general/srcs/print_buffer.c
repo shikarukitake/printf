@@ -45,23 +45,32 @@ void    round_float(char *buf, int precision)
 {
     int dot;
     int i;
+    int last;
 
     dot = ft_strchri(buf, '.');
-    i = dot + precision;
+    i = dot + precision + 1;
     buf[i + 1] = '\0';
-    if (buf[i] == '9')
+    last = i;
+    if (buf[i] > '4' && buf[i - 1] != '.' )// && (buf[i - 1] - '0') % 2 != 0)
     {
-        buf[i--] = '0';
-        while (buf[i] == '9')
-        {
-            buf[i] = '0';
-            i--;
-        }
-        if (buf[i] != '.')
+        i--;
+        if (buf[i] != '9')
             buf[i] += 1;
-        else
-            round_int_part(buf);
+        else if (buf[i] == '9')
+        {
+            buf[i--] = '0';
+            while (buf[i] == '9')
+            {
+                buf[i] = '0';
+                i--;
+            }
+            if (buf[i] != '.')
+                buf[i] += 1;
+            else
+                round_int_part(buf);
+        }
     }
+    buf[last] = '\0';
 }
 
 
