@@ -75,7 +75,7 @@ void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
         count++;
     }
     m >>= count;
-    mask = 1u;
+    mask = 1u; // what if count bits == 0 or e >2000 ?
     max = flag == 1 ? count_bits(m) - e - 1: count_bits(m) + e - 1;
     while (i < max)
     {

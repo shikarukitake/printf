@@ -40,7 +40,19 @@ static char *wh_flag_test()
     return (0);
 }
 
+static char *conversion_test()
+{
+
+    mu_assert_printf("test1", ft_printf, "%f", (double)(-2000));
+    return (0);
+}
+
 int main()
 {
-    test_all("PFT F TESTS",4, round_test, sharp_test, wp_test, wh_flag_test);
+    test_all("PFT F TESTS",5,
+            round_test,
+            sharp_test,
+            wp_test,
+            wh_flag_test,
+            conversion_test);
 }
