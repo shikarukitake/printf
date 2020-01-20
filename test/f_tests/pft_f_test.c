@@ -44,7 +44,7 @@ static char *wh_flag_test()
 static char *conversion_test()
 {
 
-    mu_assert_printf("lol", ft_printf, "%f", 0.5);
+    mu_assert_printf("lol", ft_printf, "%f", 12222.5);
     return (0);
 }
 

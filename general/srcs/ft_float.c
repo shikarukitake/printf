@@ -51,6 +51,64 @@ unsigned long   set_bit(unsigned long bin, unsigned n, unsigned long b)
     return (bin);
 }
 
+
+void    multiply_by_2(t_uchar *buf, int size, unsigned n)
+{
+    int carry;
+    int i;
+    int p;
+
+    carry = 0;
+    i = 0;
+    p = 0;
+    while (p < n)
+    {
+        carry = 0;
+        while (i < size)
+        {
+            carry = carry + buf[i] * 2;
+            buf[i] = carry % 10;
+            carry /= 10;
+            i++;
+        }
+        p++;
+    }
+}
+
+int    summ_long(t_uchar *divided, t_uchar *result, int n);
+
+void get_long_int_part(unsigned long m, unsigned e)
+{
+    t_uchar int_part[MAX_FLOAT_BUFF_SIZE];
+    t_uchar result[MAX_FLOAT_BUFF_SIZE];
+    unsigned long mask;
+
+    ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
+    ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
+    int_part[0] = 1;
+    mask = 1u;
+    int n = 300;
+    mask <<= 63lu;
+    e++;
+    while (e)
+    {
+        if ((mask & m) > 0)
+        {
+            multiply_by_2(int_part, n, e);
+            summ_long(int_part, result, n);
+        }
+        mask >>= 1u;
+        e--;
+    }
+    int i;
+
+    i = 0;
+    while ( i < n)
+    {
+
+    }
+}
+
 unsigned long long get_mantissa_int_part(unsigned long m, unsigned e)
 {
     unsigned long mask;
@@ -76,6 +134,8 @@ void get_int_part(unsigned long m, unsigned exp, char *buf)
     result = get_mantissa_int_part(m, exp);
     ft_ulltoa_base(result, buf, 10, 'a');
 }
+
+
 
 //void get_int_part(long double ld,  char *buf)
 //{

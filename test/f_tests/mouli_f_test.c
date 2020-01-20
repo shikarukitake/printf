@@ -13,7 +13,7 @@ static char * small_number_test()
 
 static char *big_number_test()
 {
-    mu_assert_printf("test1", ft_printf, "{%f}", 1444565858585.6465424242242);
+    mu_assert_printf("test1", ft_printf, "{%Lf}", 1444565858585.6465424242242L);
 //    mu_assert_printf("test2", ft_printf, "{%lf}", 1444565444646.6465424242242);
 //    mu_assert_printf("test3", ft_printf, "{%Lf}", 1444565444646.6465424242242);
 
