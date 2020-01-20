@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <float.h>
 
+
 #define EXP_SHIFT 16383
 
 char *view_bin(unsigned long bin)
@@ -41,54 +42,119 @@ void init_float(t_float *f)
     f->sign = 0;
 }
 
-void get_int_part(unsigned long m, unsigned exp, char *buf)
+unsigned long   set_bit(unsigned long bin, unsigned n, unsigned long b)
+{
+    if (b > 0)
+        bin |= (1U<< n);
+    else if (b == 0)
+        bin  &=  ~(1UL << n);
+    return (bin);
+}
+
+unsigned long long get_mantissa_int_part(unsigned long m, unsigned e)
 {
     unsigned long mask;
-    int count;
-    unsigned long result;
+    unsigned long long decimal_part;
 
+    decimal_part = 0;
     mask = 1u;
-    count = 0;
-    while (!(m & mask))
+    mask <<= 63lu;
+    e++;
+    while (e)
     {
-        mask <<= 1u;
-        count++;
+        decimal_part = set_bit(decimal_part, e - 1, m & mask);
+        mask >>= 1u;
+        e--;
     }
-    m >>= count;
-    m >>= count_bits(m) - exp - 1;
-    result = bin_to_dec(m);
+    return (decimal_part);
+}
+
+void get_int_part(unsigned long m, unsigned exp, char *buf)
+{
+    unsigned long long result;
+
+    result = get_mantissa_int_part(m, exp);
     ft_ulltoa_base(result, buf, 10, 'a');
 }
+
+//void get_int_part(long double ld,  char *buf)
+//{
+//    unsigned long result;
+//
+//    result = (unsigned long)ld;
+//    ft_ulltoa_base(result, buf, 10, 'a');
+//}
+
+//void get_int_part(unsigned long m, unsigned exp, char *buf)
+//{
+//    unsigned long mask;
+//    int count;
+//    unsigned long result;
+//
+//    mask = 1u;
+//    count = 0;
+//    while (!(m & mask))
+//    {
+//        mask <<= 1u;
+//        count++;
+//    }
+//    m >>= count;
+//    m >>= count_bits(m) - exp - 1;
+//    result = bin_to_dec(m);
+//    ft_ulltoa_base(result, buf, 10, 'a');
+//}
+
+//void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
+//{
+//    unsigned long   mask;
+//    int             count;
+//    unsigned        i;
+//    unsigned        max;
+//    mask = 1u;
+//    count = 0;
+//    i = 0;
+//    while (!(m & mask))
+//    {
+//        mask <<=1;
+//        count++;
+//    }
+//    m >>= count;
+//    mask = 1u; // what if count bits == 0 or e >2000 ?
+//    max = flag == 1 ? count_bits(m) - e - 1: count_bits(m) + e - 1;
+//    while (i < max)
+//    {
+//        if (m & mask)
+//            buf[i++] = '1';
+//        else
+//            buf[i++] = '0';
+//        m >>= 1;
+//    }
+//    buf[i] = '\0';
+//    ft_strrev(buf);
+//}
+
 
 void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
 {
     unsigned long   mask;
-    int             count;
     unsigned        i;
-    unsigned        max;
+
     mask = 1u;
-    count = 0;
     i = 0;
-    while (!(m & mask))
-    {
-        mask <<=1;
-        count++;
-    }
-    m >>= count;
-    mask = 1u; // what if count bits == 0 or e >2000 ?
-    max = flag == 1 ? count_bits(m) - e - 1: count_bits(m) + e - 1;
-    while (i < max)
+    if (flag)
+        mask = mask << (63lu - (e + 1u));
+    else
+        mask <<= 63u;
+    while (mask)
     {
         if (m & mask)
             buf[i++] = '1';
         else
             buf[i++] = '0';
-        m >>= 1;
+        mask >>= 1;
     }
     buf[i] = '\0';
-    ft_strrev(buf);
 }
-
 
 t_uchar*   print_mass(t_uchar *mass, int n)
 {
@@ -165,6 +231,20 @@ void    transform_float_part(const t_uchar *float_part, int n, char *buf)
     buf[i] = '\0';
 }
 
+void add_float_zeros(char *buf, unsigned exp)
+{
+    char *zeros;
+    zeros = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
+    while (exp != 1)
+    {
+        ft_strcat(zeros, "0");
+        exp--;
+    }
+    ft_strcat(zeros, buf);
+    ft_strcpy(buf, zeros);
+    free(zeros);
+}
+
 void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag)
 {
     char                        bin_buf[MAX_FLOAT_BUFF_SIZE];
@@ -176,6 +256,8 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag
     i = 0;
     ft_bzero(bin_buf, MAX_FLOAT_BUFF_SIZE);
     get_float_bits(mantissa, exp, bin_buf, flag);
+    if (flag == 0)
+        add_float_zeros(bin_buf, exp);
     n = 0.3 * exp + 800; // Mansur's formula
     divided = ft_memalloc(n);
     result = ft_memalloc(n);
@@ -200,6 +282,9 @@ void    zero_case(char *buf)
     ft_strcpy(buf, "0.0");
 }
 
+#include <stdio.h>
+#include <includes/ft_float.h>
+
 void    ft_dtoa(long double ld, char *buffer)
 {
     char int_part_buf[MAX_FLOAT_BUFF_SIZE];
@@ -222,7 +307,9 @@ void    ft_dtoa(long double ld, char *buffer)
     ldc = (long_double_cast) {.ld = ld};
     if (ldc.parts.exponent >= EXP_SHIFT)
     {
+
         ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
+        //get_int_part(ld < 0 ? -ld : ld, int_part_buf);
         get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
         flag = 1;
     }

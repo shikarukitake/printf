@@ -9,6 +9,6 @@
 int main()
 {
 //    printf("%x and text", 0);
-    printf("%Lf\n", -LDBL_MIN);
+    printf("%.10e\n", 0.544444444444);
 	return (0);
 }

@@ -40,10 +40,11 @@ static char *wh_flag_test()
     return (0);
 }
 
+
 static char *conversion_test()
 {
 
-    mu_assert_printf("test1", ft_printf, "%f", (double)(-2000));
+    mu_assert_printf("lol", ft_printf, "%f", 0.5);
     return (0);
 }
 

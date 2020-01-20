@@ -26,7 +26,7 @@ typedef union {
     } parts;
 } long_double_cast;
 
-void init_float(t_float *f);
+void	init_float(t_float *f);
 
 void    ft_dtoa(long double ld, char *buffer);
 

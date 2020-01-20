@@ -6,5 +6,6 @@
 
 int main()
 {
-	ft_printf("%d", 123);
+	ft_printf("%f", 0.000039);
+
 }
