@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <float.h>
 
+#include <stdio.h> //DEBUG
 
 #define EXP_SHIFT 16383
 
@@ -52,11 +53,11 @@ unsigned long   set_bit(unsigned long bin, unsigned n, unsigned long b)
 }
 
 
-void    multiply_by_2(t_uchar *buf, int size, unsigned n)
+void    multiply_by_2(char *buf, int size, unsigned n)
 {
     int carry;
     int i;
-    int p;
+    unsigned p;
 
     carry = 0;
     i = 0;
@@ -64,6 +65,7 @@ void    multiply_by_2(t_uchar *buf, int size, unsigned n)
     while (p < n)
     {
         carry = 0;
+        i = 0;
         while (i < size)
         {
             carry = carry + buf[i] * 2;
@@ -75,39 +77,114 @@ void    multiply_by_2(t_uchar *buf, int size, unsigned n)
     }
 }
 
-int    summ_long(t_uchar *divided, t_uchar *result, int n);
-
-void get_long_int_part(unsigned long m, unsigned e)
+void   set_float_res(char *result, int i, int swap, int *int_part)
 {
-    t_uchar int_part[MAX_FLOAT_BUFF_SIZE];
-    t_uchar result[MAX_FLOAT_BUFF_SIZE];
+    if (swap < 10)
+        result[i] = swap;
+    else
+    {
+        result[i] = swap - 10;
+        set_float_res(result, i + 1, result[i + 1] + 1, int_part);
+    }
+}
+
+int    sum_long_int(char *to_sum, char *result, int n)
+{
+    int i;
+    int swap;
+    int int_part;
+
+    i = 0;
+    int_part = 0;
+
+    while(i != n)
+    {
+        swap = result[i] + to_sum[i];
+        if (swap != 0 && to_sum[i] != 0)
+            set_float_res(result, i, swap, &int_part);
+        i++;
+    }
+    return int_part;
+}
+
+void    transform_long_result(char *buf, char *new_buf, int n)
+{
+    int i;
+    int j;
+    int last;
+
+    last = n - 1;
+    while (last > 0 && buf[last] == 0)
+        last--;
+    i = last;
+    j = 0;
+    while (i >= 0)
+    {
+        new_buf[j++] = (char)(buf[i] + '0');
+        i--;
+    }
+    new_buf[j] = '\0';
+}
+
+void get_long_int_part(unsigned long m, unsigned e, char *buf)
+{
+    char    int_part[MAX_FLOAT_BUFF_SIZE];
+    char    result[MAX_FLOAT_BUFF_SIZE];
+    char    transformed_result[MAX_FLOAT_BUFF_SIZE];
     unsigned long mask;
 
-    ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
+    ft_bzero(transformed_result, MAX_FLOAT_BUFF_SIZE);
+
     ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
     int_part[0] = 1;
     mask = 1u;
-    int n = 300;
+    int n = MAX_FLOAT_BUFF_SIZE;
     mask <<= 63lu;
     e++;
     while (e)
     {
         if ((mask & m) > 0)
         {
-            multiply_by_2(int_part, n, e);
-            summ_long(int_part, result, n);
+            ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
+            int_part[0] = 1;
+            multiply_by_2(int_part, n, e - 1);
+            sum_long_int(int_part, result, n);
         }
         mask >>= 1u;
         e--;
     }
-    int i;
-
-    i = 0;
-    while ( i < n)
-    {
-
-    }
+    transform_long_result(result, buf, n);
 }
+
+//void get_long_int_part(unsigned long m, unsigned e, char *buf)
+//{
+//    char    int_part[MAX_FLOAT_BUFF_SIZE];
+//    char    result[MAX_FLOAT_BUFF_SIZE];
+//    char    transformed_result[MAX_FLOAT_BUFF_SIZE];
+//    unsigned long mask;
+//
+//    ft_bzero(transformed_result, MAX_FLOAT_BUFF_SIZE);
+//
+//    ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
+//    int_part[0] = 1;
+//    mask = 1u;
+//    int n = MAX_FLOAT_BUFF_SIZE;
+//    mask <<= 63lu;
+//    e++;
+//    while (e)
+//    {
+//        if ((mask & m) > 0)
+//        {
+//            ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
+//            int_part[0] = 1;
+//            multiply_by_2(int_part, n, e - 1);
+//            sum_long_int(int_part, result, n);
+//        }
+//        mask >>= 1u;
+//        e--;
+//    }
+//    transform_long_result(result, buf, n);
+//}
 
 unsigned long long get_mantissa_int_part(unsigned long m, unsigned e)
 {
@@ -246,6 +323,7 @@ t_uchar*   devide_by_two(t_uchar *devided, int n)
     return (devided);
 }
 
+
 void   set_res(t_uchar *result, int i, int swap, int *int_part)
 {
     if (swap < 10)
@@ -342,9 +420,6 @@ void    zero_case(char *buf)
     ft_strcpy(buf, "0.0");
 }
 
-#include <stdio.h>
-#include <includes/ft_float.h>
-
 void    ft_dtoa(long double ld, char *buffer)
 {
     char int_part_buf[MAX_FLOAT_BUFF_SIZE];
@@ -370,7 +445,8 @@ void    ft_dtoa(long double ld, char *buffer)
 
         ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
         //get_int_part(ld < 0 ? -ld : ld, int_part_buf);
-        get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
+        get_long_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
+       // get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
         flag = 1;
     }
     else
