@@ -6,9 +6,9 @@
 
 int    ft_print_f(t_spec *spec, va_list *args)
 {
-	char	buffer[MAX_FLOAT_BUFF_SIZE];
+	char	*buffer;
 
-	ft_bzero(buffer, MAX_FLOAT_BUFF_SIZE);
+	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
 	return (print_f_buf(buffer, spec));
 }

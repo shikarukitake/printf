@@ -126,16 +126,69 @@ void    transform_long_result(char *buf, char *new_buf, int n)
     new_buf[j] = '\0';
 }
 
+static void	ch_swap(char *a, char *b)
+{
+    char tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+
+void    float_reverse(char *buf, int n)
+{
+    size_t i;
+    size_t j;
+
+    i = 0;
+    j = n - 1;
+    while (i < j)
+    {
+        ch_swap(buf + i, buf + j);
+        j--;
+        i++;
+    }
+}
+
+char*   divide_float_by_two(char *divided, int n)
+{
+    int i;
+
+    i = 0;
+    if (divided[0] == 1 && divided[1] == 0)
+    {
+        divided[0] = 0;
+        return (NULL);
+    }
+    float_reverse(divided, n);
+    while (i != n)
+    {
+        if (divided[i] == 0)
+        {
+            i++;
+            continue;
+        }
+        if (divided[i] % 2 == 1)
+            divided[i + 1] += 10;
+        divided[i] /= 2;
+        i++;
+    }
+    float_reverse(divided, n);
+    return (divided);
+}
+
 void get_long_int_part(unsigned long m, unsigned e, char *buf)
 {
     char    int_part[MAX_FLOAT_BUFF_SIZE];
     char    result[MAX_FLOAT_BUFF_SIZE];
     char    transformed_result[MAX_FLOAT_BUFF_SIZE];
     unsigned long mask;
+    int was_mult;
 
     ft_bzero(transformed_result, MAX_FLOAT_BUFF_SIZE);
-
     ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
+    was_mult = 0;
     int_part[0] = 1;
     mask = 1u;
     int n = MAX_FLOAT_BUFF_SIZE;
@@ -145,11 +198,17 @@ void get_long_int_part(unsigned long m, unsigned e, char *buf)
     {
         if ((mask & m) > 0)
         {
-            ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
-            int_part[0] = 1;
-            multiply_by_2(int_part, n, e - 1);
+            if (!was_mult)
+            {
+                ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
+                int_part[0] = 1;
+                multiply_by_2(int_part, n, e - 1);
+                was_mult = 1;
+            }
             sum_long_int(int_part, result, n);
         }
+        if (was_mult)
+            divide_float_by_two(int_part, n);
         mask >>= 1u;
         e--;
     }
@@ -337,7 +396,7 @@ void   set_res(char *result, int i, int swap, int *int_part)
     }
 }
 
-int    summ_long(char *divided, t_uchar *result, int n)
+int    summ_long(char *divided, char *result, int n)
 {
     int i;
     int swap;
@@ -421,11 +480,14 @@ void    zero_case(char *buf)
 
 void    ft_dtoa(long double ld, char *buffer)
 {
-    char int_part_buf[MAX_FLOAT_BUFF_SIZE];
-    char float_part_buf[MAX_FLOAT_BUFF_SIZE];
+    char *int_part_buf;
+    char *float_part_buf;
     int flag;
     long_double_cast ldc;
 
+
+    int_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
+    float_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
     ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
     ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
     if (ld == 0 || ld == LDBL_MIN)
@@ -454,8 +516,8 @@ void    ft_dtoa(long double ld, char *buffer)
         ft_strcpy(int_part_buf, "0");
         flag = 0;
     }
-
-    get_float_part(ldc.parts.mantissa, ldc.parts.exponent, float_part_buf, flag);
+    if (ldc.parts.exponent < 63 || flag == 0)
+        get_float_part(ldc.parts.mantissa, ldc.parts.exponent, float_part_buf, flag);
     if (ld < 0)
         buffer[0] = '-';
     ft_strcat(buffer, int_part_buf);
