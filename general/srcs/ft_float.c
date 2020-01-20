@@ -307,8 +307,7 @@ t_uchar*   print_mass(t_uchar *mass, int n)
     }
     return (new);
 }
-
-t_uchar*   devide_by_two(t_uchar *devided, int n)
+char*   devide_by_two(char *devided, int n)
 {
     int i;
 
@@ -324,7 +323,7 @@ t_uchar*   devide_by_two(t_uchar *devided, int n)
 }
 
 
-void   set_res(t_uchar *result, int i, int swap, int *int_part)
+void   set_res(char *result, int i, int swap, int *int_part)
 {
     if (swap < 10)
         result[i] = swap;
@@ -338,7 +337,7 @@ void   set_res(t_uchar *result, int i, int swap, int *int_part)
     }
 }
 
-int    summ_long(t_uchar *divided, t_uchar *result, int n)
+int    summ_long(char *divided, t_uchar *result, int n)
 {
     int i;
     int swap;
@@ -356,7 +355,7 @@ int    summ_long(t_uchar *divided, t_uchar *result, int n)
     return int_part;
 }
 
-void    transform_float_part(const t_uchar *float_part, int n, char *buf)
+void    transform_float_part(const char *float_part, int n, char *buf)
 {
     int i;
 
@@ -388,8 +387,8 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag
     char                        bin_buf[MAX_FLOAT_BUFF_SIZE];
     unsigned long long int      i;
     unsigned int                n;
-    t_uchar                     *divided;
-    t_uchar                     *result;
+    char                     *divided;
+    char                     *result;
 
     i = 0;
     ft_bzero(bin_buf, MAX_FLOAT_BUFF_SIZE);
