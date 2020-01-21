@@ -58,52 +58,57 @@ void   set_float_long_res(char *result, int i, int swap, int *int_part)
     }
 }
 
-//static void	ch_swap(char *a, char *b)
-//{
-//    char tmp;
-//
-//    tmp = *a;
-//    *a = *b;
-//    *b = tmp;
-//}
-//
-//
-//void    reverse(char *buf, int n)
-//{
-//    size_t i;
-//    size_t j;
-//
-//    i = 0;
-//    j = n - 1;
-//    while (i < j)
-//    {
-//        ch_swap(buf + i, buf + j);
-//        j--;
-//        i++;
-//    }
-//}
+static void	ch_swap(char *a, char *b)
+{
+    char tmp;
 
-//char*   divide_float_by_two(char *divided, int n)
-//{
-//    int i;
-//
-//    i = 0;
-//    reverse(divided, n);
-//    while (i != n)
-//    {
-//        if (divided[i] == 0)
-//        {
-//            i++;
-//            continue;
-//        }
-//        if (divided[i] % 2 == 1)
-//            divided[i + 1] += 10;
-//        divided[i] /= 2;
-//        i++;
-//    }
-//    reverse(divided, n);
-//    return (divided);
-//}
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+
+void    reverse(char *buf, int n)
+{
+    size_t i;
+    size_t j;
+
+    i = 0;
+    j = n - 1;
+    while (i < j)
+    {
+        ch_swap(buf + i, buf + j);
+        j--;
+        i++;
+    }
+}
+
+char*   divide_float_by_2(char *divided, int n)
+{
+    int i;
+
+    i = n - 1;
+    if (divided[0] == 1 && divided[1] == 0)
+    {
+        divided[0] = 0;
+        return (NULL);
+    }
+    //reverse(divided, n);
+    while (i >= 0)
+    {
+        if (divided[i] == 0)
+        {
+            i--;
+            continue;
+        }
+        if (divided[i] % 2 == 1 && i != 0)
+            divided[i - 1] += 10;
+        divided[i] /= 2;
+        i--;
+    }
+    //reverse(divided, n);
+    return (divided);
+}
 
 int    sum_long_float_int(char *to_sum, char *result, int n)
 {
@@ -128,26 +133,18 @@ int    sum_long_float_int(char *to_sum, char *result, int n)
 
 int main()
 {
-//    char buf[MAX_BUFF_SIZEE];
-//    char buf2[MAX_BUFF_SIZEE];
 //    char buf3[MAX_BUFF_SIZEE];
 //    char new_buf[MAX_BUFF_SIZEE];
-//    char result[MAX_BUFF_SIZEE];
 //
 //    bzero(new_buf, MAX_BUFF_SIZEE);
-//    bzero(buf, MAX_BUFF_SIZEE);
-//    bzero(buf2, MAX_BUFF_SIZEE);
-//    bzero(result, MAX_BUFF_SIZEE);
 //    bzero(buf3, MAX_BUFF_SIZEE);
 //
-//    buf[0] = 1;
-//    buf2[0] = 1;
 //    buf3[0] = 1;
-//    mult_by_2(buf3, MAX_BUFF_SIZEE, 5);
-//    divide_float_by_two(buf3, MAX_BUFF_SIZEE);
+//    mult_by_2(buf3, MAX_BUFF_SIZEE, 3);
+//    divide_float_by_2(buf3, MAX_BUFF_SIZEE);
 //    transform(buf3, new_buf, MAX_BUFF_SIZEE);
-
-//    ft_printf("32 / 2 = %s\n", new_buf);
+//
+//    printf("32 / 2 = %s\n", new_buf);
 
     ft_printf("%.8Lf\n", LDBL_MAX);
     printf("%.8Lf\n", LDBL_MAX);

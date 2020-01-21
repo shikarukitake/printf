@@ -150,33 +150,59 @@ void    float_reverse(char *buf, int n)
         i++;
     }
 }
-
 char*   divide_float_by_two(char *divided, int n)
 {
     int i;
 
-    i = 0;
+    i = n - 1;
     if (divided[0] == 1 && divided[1] == 0)
     {
-        divided[0] = 0;
+        //divided[0] = 0;
         return (NULL);
     }
-    float_reverse(divided, n);
-    while (i != n)
+    //reverse(divided, n);
+    while (i >= 0)
     {
         if (divided[i] == 0)
         {
-            i++;
+            i--;
             continue;
         }
-        if (divided[i] % 2 == 1)
-            divided[i + 1] += 10;
+        if (divided[i] % 2 == 1 && i != 0)
+            divided[i - 1] += 10;
         divided[i] /= 2;
-        i++;
+        i--;
     }
-    float_reverse(divided, n);
+    //reverse(divided, n);
     return (divided);
 }
+
+//char*   divide_float_by_two(char *divided, int n)
+//{
+//    int i;
+//
+//    i = 0;
+//    if (divided[0] == 1 && divided[1] == 0)
+//    {
+//        divided[0] = 0;
+//        return (NULL);
+//    }
+//    float_reverse(divided, n);
+//    while (i != n)
+//    {
+//        if (divided[i] == 0)
+//        {
+//            i++;
+//            continue;
+//        }
+//        if (divided[i] % 2 == 1)
+//            divided[i + 1] += 10;
+//        divided[i] /= 2;
+//        i++;
+//    }
+//    float_reverse(divided, n);
+//    return (divided);
+//}
 
 void get_long_int_part(unsigned long m, unsigned e, char *buf)
 {
