@@ -28,7 +28,6 @@ int    ft_print_e(t_spec *spec, va_list *args)
 	return (count);
 }
 
-
 int    ft_print_E(t_spec *spec, va_list *args)
 {
 	char	*buffer;
