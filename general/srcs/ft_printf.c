@@ -4,7 +4,6 @@
 
 #include "ft_printf.h"
 
-
 int		ft_printf(const char *fmt, ...)
 {
 	va_list     args;
@@ -19,7 +18,6 @@ int		ft_printf(const char *fmt, ...)
 		if (fmt[i] == '%')
 		{
 			count += call_print_func(fmt, &args, i);
-			//printf( "\n\t[DEBUG]fmt is = %d\n", is_spec_format(fmt + i));
 			i += get_spec_format_length(fmt + i);
 		}
 		else

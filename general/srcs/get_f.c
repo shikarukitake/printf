@@ -4,11 +4,7 @@
 
 #include "get_f.h"
 
-
-t_float		get_f(va_list *va_args, t_spec *spec, char *buffer)
+void		get_f(va_list *va_args, t_spec *spec, char *buffer)
 {
-    t_conv	args;
-
-    args = (t_conv) {0 , 10, 'a'};
-	return (get_general_float(va_args, &args, spec, buffer));
+	get_general_float(va_args, spec, buffer);
 }

@@ -23,5 +23,6 @@ int     ft_print_d(t_spec *spec, va_list *args);
 
 int    ft_print_p(t_spec *spec, va_list *args);
 
+int     ft_print_D(t_spec *spec, va_list *args);
 
 #endif //PRINTF_PRINT_BASIC_H

@@ -4,52 +4,11 @@
 
 #include "ft_float.h"
 #include "libft.h"
-#include "bits_util.h"
 #include "printf_constants.h"
 #include <stdlib.h>
 #include <float.h>
 
-
 #define EXP_SHIFT 16383u
-
-char *view_bin(unsigned long bin)
-{
-    char            *ptr;
-    unsigned int    mask;
-    int i;
-    i = 0;
-    mask =1u;
-    ptr = ft_memalloc(1024);
-    ft_bzero(ptr, 1024);
-    while (bin)
-    {
-        if (bin & 1u)
-            ptr[i++] = '1';
-        else
-            ptr[i++] = '0';
-        bin >>= 1u;
-    }
-    ft_strrev(ptr);
-    return (ptr);
-}
-
-void init_float(t_float *f)
-{
-    f->exp = 0;
-    f->is_up = 0;
-    f->man = 0;
-    f->sign = 0;
-}
-
-unsigned long   set_bit(unsigned long bin, unsigned n, unsigned long b)
-{
-    if (b > 0)
-        bin |= (1U<< n);
-    else if (b == 0)
-        bin  &=  ~(1UL << n);
-    return (bin);
-}
-
 
 void    multiply_by_2(char *buf, int size, unsigned n)
 {
@@ -57,8 +16,6 @@ void    multiply_by_2(char *buf, int size, unsigned n)
     int i;
     unsigned p;
 
-    carry = 0;
-    i = 0;
     p = 0;
     while (p < n)
     {
@@ -124,41 +81,13 @@ void    transform_long_result(char *buf, char *new_buf, int n)
     new_buf[j] = '\0';
 }
 
-static void	ch_swap(char *a, char *b)
-{
-    char tmp;
-
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
-
-
-void    float_reverse(char *buf, int n)
-{
-    size_t i;
-    size_t j;
-
-    i = 0;
-    j = n - 1;
-    while (i < j)
-    {
-        ch_swap(buf + i, buf + j);
-        j--;
-        i++;
-    }
-}
 char*   divide_float_by_two(char *divided, int n)
 {
     int i;
 
     i = n - 1;
     if (divided[0] == 1 && divided[1] == 0)
-    {
-        //divided[0] = 0;
         return (NULL);
-    }
-    //reverse(divided, n);
     while (i >= 0)
     {
         if (divided[i] == 0)
@@ -171,50 +100,24 @@ char*   divide_float_by_two(char *divided, int n)
         divided[i] /= 2;
         i--;
     }
-    //reverse(divided, n);
     return (divided);
 }
 
-//char*   divide_float_by_two(char *divided, int n)
-//{
-//    int i;
-//
-//    i = 0;
-//    if (divided[0] == 1 && divided[1] == 0)
-//    {
-//        divided[0] = 0;
-//        return (NULL);
-//    }
-//    float_reverse(divided, n);
-//    while (i != n)
-//    {
-//        if (divided[i] == 0)
-//        {
-//            i++;
-//            continue;
-//        }
-//        if (divided[i] % 2 == 1)
-//            divided[i + 1] += 10;
-//        divided[i] /= 2;
-//        i++;
-//    }
-//    float_reverse(divided, n);
-//    return (divided);
-//}
 
 void get_long_int_part(unsigned long m, unsigned e, char *buf)
 {
-    char    int_part[MAX_FLOAT_BUFF_SIZE];
-    char    result[MAX_FLOAT_BUFF_SIZE];
+    char            int_part[MAX_FLOAT_BUFF_SIZE];
+    char            result[MAX_FLOAT_BUFF_SIZE];
+    unsigned long   mask;
+    int             was_mult;
+    int             n;
 
-    unsigned long mask;
-    int was_mult;
-
+    n = MAX_FLOAT_BUFF_SIZE;
     ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
     was_mult = 0;
     int_part[0] = 1;
     mask = 1u;
-    int n = MAX_FLOAT_BUFF_SIZE;
+
     mask <<= 63lu;
     e++;
     while (e)
@@ -237,121 +140,6 @@ void get_long_int_part(unsigned long m, unsigned e, char *buf)
     }
     transform_long_result(result, buf, n);
 }
-
-//void get_long_int_part(unsigned long m, unsigned e, char *buf)
-//{
-//    char    int_part[MAX_FLOAT_BUFF_SIZE];
-//    char    result[MAX_FLOAT_BUFF_SIZE];
-//    char    transformed_result[MAX_FLOAT_BUFF_SIZE];
-//    unsigned long mask;
-//
-//    ft_bzero(transformed_result, MAX_FLOAT_BUFF_SIZE);
-//
-//    ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
-//    int_part[0] = 1;
-//    mask = 1u;
-//    int n = MAX_FLOAT_BUFF_SIZE;
-//    mask <<= 63lu;
-//    e++;
-//    while (e)
-//    {
-//        if ((mask & m) > 0)
-//        {
-//            ft_memset(int_part, 0, MAX_FLOAT_BUFF_SIZE);
-//            int_part[0] = 1;
-//            multiply_by_2(int_part, n, e - 1);
-//            sum_long_int(int_part, result, n);
-//        }
-//        mask >>= 1u;
-//        e--;
-//    }
-//    transform_long_result(result, buf, n);
-//}
-
-unsigned long long get_mantissa_int_part(unsigned long m, unsigned e)
-{
-    unsigned long mask;
-    unsigned long long decimal_part;
-
-    decimal_part = 0;
-    mask = 1u;
-    mask <<= 63lu;
-    e++;
-    while (e)
-    {
-        decimal_part = set_bit(decimal_part, e - 1, m & mask);
-        mask >>= 1u;
-        e--;
-    }
-    return (decimal_part);
-}
-
-void get_int_part(unsigned long m, unsigned exp, char *buf)
-{
-    unsigned long long result;
-
-    result = get_mantissa_int_part(m, exp);
-    ft_ulltoa_base(result, buf, 10, 'a');
-}
-
-
-
-//void get_int_part(long double ld,  char *buf)
-//{
-//    unsigned long result;
-//
-//    result = (unsigned long)ld;
-//    ft_ulltoa_base(result, buf, 10, 'a');
-//}
-
-//void get_int_part(unsigned long m, unsigned exp, char *buf)
-//{
-//    unsigned long mask;
-//    int count;
-//    unsigned long result;
-//
-//    mask = 1u;
-//    count = 0;
-//    while (!(m & mask))
-//    {
-//        mask <<= 1u;
-//        count++;
-//    }
-//    m >>= count;
-//    m >>= count_bits(m) - exp - 1;
-//    result = bin_to_dec(m);
-//    ft_ulltoa_base(result, buf, 10, 'a');
-//}
-
-//void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
-//{
-//    unsigned long   mask;
-//    int             count;
-//    unsigned        i;
-//    unsigned        max;
-//    mask = 1u;
-//    count = 0;
-//    i = 0;
-//    while (!(m & mask))
-//    {
-//        mask <<=1;
-//        count++;
-//    }
-//    m >>= count;
-//    mask = 1u; // what if count bits == 0 or e >2000 ?
-//    max = flag == 1 ? count_bits(m) - e - 1: count_bits(m) + e - 1;
-//    while (i < max)
-//    {
-//        if (m & mask)
-//            buf[i++] = '1';
-//        else
-//            buf[i++] = '0';
-//        m >>= 1;
-//    }
-//    buf[i] = '\0';
-//    ft_strrev(buf);
-//}
-
 
 void    get_float_bits(unsigned long m, unsigned e, char *buf, int flag)
 {
@@ -548,27 +336,6 @@ int is_reserved_value(long_double_cast ldc, long double ld, char *fbuf)
         return (1);
     }
 
-//    }
-//    else if (ld == LDBL_NINF)
-//    {
-//        ft_strcpy(fbuf, "[-INF]");
-//        return (1);
-//    }
-//    else if (ld == LDBL_PZERO)
-//    {
-//        ft_strcpy(fbuf, "+0.0");
-//        return (1);
-//    }
-//    else if (ld == LDBL_NZERO)
-//    {
-//        ft_strcpy(fbuf, "-0.0");
-//        return (1);
-//    }
-//    else if (ld == LDBL_NAN)
-//    {
-//        ft_strcpy(fbuf, "[NaN]");
-//        return (1);
-//    }
     return (0);
 }
 

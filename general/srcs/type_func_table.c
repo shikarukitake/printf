@@ -28,15 +28,14 @@ int 	init_type_func_table()
     g_type_func_table['p'] = ft_print_p;
 	g_type_func_table['f'] = ft_print_f;
     g_type_func_table['q'] = ft_print_color;
-    /*
-	g_type_func_table['a'] = ft_print_A;
-	g_type_func_table['e'] = ft_print_e;
-	g_type_func_table['E'] = ft_print_E;
+	g_type_func_table['a'] = ft_print_f;
+	g_type_func_table['e'] = ft_print_f;
+	g_type_func_table['E'] = ft_print_f;
 	g_type_func_table['f'] = ft_print_f;
 	g_type_func_table['F'] = ft_print_f;
-	g_type_func_table['g'] = ft_print_g;
-	g_type_func_table['G'] = ft_print_g;
-	*/
+	g_type_func_table['g'] = ft_print_f;
+	g_type_func_table['G'] = ft_print_f;
+    g_type_func_table['D'] = ft_print_D;
     return (1);
 
 }
@@ -47,7 +46,6 @@ int	call_print_func(const char *format, va_list *vargs, int offset)
 	t_spec	*spec;
 	int		count;
 
-	count = 0;
 	init_type_func_table();
 	if (*(format + offset + 1) != '\0')
 	{

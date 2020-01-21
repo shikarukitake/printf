@@ -254,5 +254,6 @@ int	print_f_buf(char *f, t_spec *spec)
     }
     if (is_need_wh(f, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
         i++;
+//    i += flush_buffer();
     return (i);
 }

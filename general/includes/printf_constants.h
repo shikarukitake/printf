@@ -15,7 +15,7 @@
 
 #define MAX_FLOAT_BUFF_SIZE 5000
 
-#define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgG"
+#define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgGD"
 
 #define FT_PRINTF_TYPES "ncpsdiouxXaAeEfFgG%"
 

@@ -22,3 +22,14 @@ int    ft_print_p(t_spec *spec, va_list *args)
     spec->flags['#'] = TRUE;
 	return (print_d_buf(buffer, spec, put_hex_prefix));
 }
+
+
+int	ft_print_D(t_spec *spec, va_list *args)
+{
+	char 		buffer[MAX_LL_BUFF_SIZE];
+
+	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
+	spec->size.value[0] = 'l';
+	get_sd(args, spec, buffer);
+	return (print_sd_buf(buffer, spec, put_sign_prefix));
+}

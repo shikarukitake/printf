@@ -160,7 +160,8 @@ int main()
 //    double special;
 //    *((unsigned long *)(&special)) = DBL_NAN;
 //    ft_printf("% .7f\n", special);
-        ft_printf("%.0Lf\n", LDBL_MAX);
-        printf("%.0LF\n", LDBL_MAX);
+        ft_printf("%Lf\n", LDBL_MAX);
+
+        //printf("%.0LF\n", LDBL_MAX);
 //    printf("%f\n", (long double)DBL_NINF);
 }

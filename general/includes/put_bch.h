@@ -10,6 +10,8 @@
 
 int     put_bch(char ch);
 
+size_t  put_bstr(char * s);
+
 int     flush_buffer();
 
 #endif //PRINTF_PUT_BCH_H

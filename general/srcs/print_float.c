@@ -7,8 +7,11 @@
 int    ft_print_f(t_spec *spec, va_list *args)
 {
 	char	*buffer;
+    int     count;
 
 	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
-	return (print_f_buf(buffer, spec));
+	count = print_f_buf(buffer, spec);
+	free(buffer);
+	return (count);
 }
