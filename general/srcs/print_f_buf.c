@@ -184,14 +184,6 @@ void add_zeros(char *buf, t_spec *spec)
     }
     buf[i] = '\0';
 }
-void remove_dot(char *f, t_spec *spec)
-{
-    int i;
-
-    i = ft_strchri(f, '.');
-    if (i != -1 && spec->precision.value == 0 && spec->flags['#'] == FALSE)
-        f[i] = '\0';
-}
 
 void add_sing_and_sp(char *f, t_spec *spec)
 {
@@ -212,8 +204,7 @@ int	print_f_buf(char *f, t_spec *spec)
 
     int 	i;
     char    sign;
-
-    int is_dot;
+    int		is_dot;
 
     i = 0;
     if (is_special_value(f))
@@ -252,8 +243,7 @@ int	print_f_buf(char *f, t_spec *spec)
         }
         i += print_float_buf(f, spec);
     }
-    if (is_need_wh(f, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL
+    if (is_need_wh(f, spec) && !IS_SIGN(sign))
         i++;
-//    i += flush_buffer();
     return (i);
 }

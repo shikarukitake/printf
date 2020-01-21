@@ -16,6 +16,6 @@ static char *test_simple()
 
 int main()
 {
-	test_all("SIMPLE D TESTS", 2 ,test_simple, test_two_d);
+	test_all("SIMPLE D TESTS", 1 ,test_simple);
 	return (0);
 }

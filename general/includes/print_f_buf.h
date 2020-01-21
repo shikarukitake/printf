@@ -14,6 +14,9 @@
 #include "print_digit_buf.h"
 #include "print_str.h"
 
+
+void    round_float(char *buf, int precision);
+
 int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f);
 
 int     print_f_buf(char *f, t_spec *spec);

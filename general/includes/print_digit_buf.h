@@ -16,7 +16,7 @@ typedef int (*t_put_prefix) (const char *, t_spec *, char *dest);
 
 int         print_sign(char sign);
 
-size_t print_buf(const char *buf);
+size_t		print_buf(const char *buf);
 
 int         print_sd_buf(char *digit, t_spec *spec);
 

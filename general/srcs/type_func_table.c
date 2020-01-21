@@ -21,7 +21,7 @@ int 	init_type_func_table()
 	g_type_func_table['%'] = ft_print_percent;
 	g_type_func_table['x'] = ft_print_x;
 	g_type_func_table['o'] = ft_print_o;
-	g_type_func_table['i'] = ft_print_d; // is it right?
+	g_type_func_table['i'] = ft_print_d;
 	g_type_func_table['X'] = ft_print_X;
 	g_type_func_table['u'] = ft_print_u;
 	g_type_func_table['c'] = ft_print_c;
@@ -29,8 +29,8 @@ int 	init_type_func_table()
 	g_type_func_table['f'] = ft_print_f;
     g_type_func_table['q'] = ft_print_color;
 	g_type_func_table['a'] = ft_print_f;
-	g_type_func_table['e'] = ft_print_f;
-	g_type_func_table['E'] = ft_print_f;
+	g_type_func_table['e'] = ft_print_e;
+	g_type_func_table['E'] = ft_print_E;
 	g_type_func_table['f'] = ft_print_f;
 	g_type_func_table['F'] = ft_print_f;
 	g_type_func_table['g'] = ft_print_f;
