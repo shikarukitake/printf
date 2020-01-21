@@ -16,23 +16,6 @@ int is_null_case(const char *digit, t_spec *spec)
 		return (b && spec->flags['#'] == FALSE);
 }
 
-
-int prepare_buf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
-{
-	int was_prefix;
-
-	ft_bzero(dig_buf, MAX_HEX_BUF_SIZE);
-	if (is_null_case(digit, spec))
-	{
-		ft_bzero(digit, MAX_HEX_BUF_SIZE);
-		if (spec->type != 'p')
-		    return (0);
-	}
-	was_prefix = p(digit, spec, dig_buf);
-	ft_strcat(dig_buf, digit);
-	return (was_prefix);
-}
-
 int is_oct_prefix(t_spec *spec)
 {
     return (spec->type == 'o' && spec->flags['#'] == TRUE);
@@ -45,10 +28,6 @@ int get_diff(int buf_len, t_spec *spec)
 	return (spec->precision.value - buf_len);
 }
 
-int is_diu(t_spec *spec)
-{
-    return (spec->type == 'd' ||spec->type == 'i' || spec->type == 'u');
-}
 
 char get_fill_ch(int len, t_spec *spec)
 {
@@ -123,40 +102,6 @@ size_t print_buf(const char *buf)
 	return (ft_strlen(buf));
 }
 
-int	print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp)
-{
-	int 	i;
-	char	dig_buf[MAX_HEX_BUF_SIZE];
-	int		was_prefix;
-
-	was_prefix = prepare_buf(digit, spec, dig_buf, pp);
-	i = 0;
-	if (spec->flags['-'] == TRUE)
-	{
-		i += fill_precision_field(dig_buf, spec);
-		i += print_buf(dig_buf);
-		i += fill_width_field(i, spec);
-	}
-	else
-	{
-		if (was_prefix && spec->flags['0'] == TRUE)
-		{
-			i += pp(digit, spec, NULL);
-			i += fill_width_field((int)ft_strlen(digit) + i, spec);
-			i += fill_precision_field(digit, spec);
-			i += print_buf(digit);
-		}
-		else
-		{
-			i += fill_width_field(ft_strlen(dig_buf), spec);
-			i += fill_precision_field(dig_buf, spec);
-			i += print_buf(dig_buf);
-		}
-	}
-	if (is_need_wh(digit, spec))  //SUCH AN AWFUL FT_COSTYL
-		i++;
-	return (i);
-}
 
 int check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
@@ -264,8 +209,6 @@ int print_sign(char sign)
     return (0);
 }
 
-
-
 int fill_sign_width_field(int i, t_spec *spec, char sign)
 {
     char	ch;
@@ -283,13 +226,12 @@ int fill_sign_width_field(int i, t_spec *spec, char sign)
     return (i - len);
 }
 
-int	print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp)
+int	print_sd_buf(char *digit, t_spec *spec)
 {
 	int 	i;
 	char    sign;
 
 	i = 0;
-    ((void)pp);
     if (is_null_case(digit, spec))
         ft_bzero(digit, MAX_HEX_BUF_SIZE);
     if (is_need_wh(digit, spec))

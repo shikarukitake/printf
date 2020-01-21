@@ -18,9 +18,7 @@ int         print_sign(char sign);
 
 size_t print_buf(const char *buf);
 
-int			print_digit_buf(char *digit, t_spec *spec, t_put_prefix pp);
-
-int         print_sd_buf(char *digit, t_spec *spec, t_put_prefix pp);
+int         print_sd_buf(char *digit, t_spec *spec);
 
 int			print_d_buf(char *digit, t_spec *spec, t_put_prefix pp);
 
