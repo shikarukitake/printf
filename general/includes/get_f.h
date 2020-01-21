@@ -10,6 +10,6 @@
 #include "ft_float.h"
 #include "get_float.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer);
+long double get_f(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif //PRINTF_GET_F_H

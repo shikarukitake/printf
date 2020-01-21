@@ -4,7 +4,7 @@
 
 #include "get_float.h"
 
-void        get_general_float(va_list *va_args, t_spec *spec, char *buffer)
+long double        get_general_float(va_list *va_args, t_spec *spec, char *buffer)
 {
     long double value;
 
@@ -14,4 +14,5 @@ void        get_general_float(va_list *va_args, t_spec *spec, char *buffer)
     else if (spec->size.value[0] == 'L')
 		value = va_arg(*va_args, long double);
 	ft_dtoa(value, buffer);
+    return value;
 }

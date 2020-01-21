@@ -12,7 +12,7 @@ static char *test_simple()
 {
 	double d;
 
-	d =  881.15625;
+	d =  881.15655;
 	mu_assert_printf("test1", ft_printf, "%e", d);
 	d = -881.123;
 	mu_assert_printf("test2", ft_printf, "%e", d);
@@ -45,8 +45,8 @@ static char *test_simple4()
 {
 	double d;
 
-	d = 0.000039;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	d = 0.0000390;
+	mu_assert_printf("test1", ft_printf, "%.0f", d);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ static char *test_simple5()
 	double d;
 
 	d = 43.4399999;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "% .3e", d);
 	return (0);
 }
 

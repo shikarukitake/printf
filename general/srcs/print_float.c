@@ -6,36 +6,47 @@
 
 int    ft_print_f(t_spec *spec, va_list *args)
 {
+    t_exp   e;
 	char	*buffer;
     int     count;
 
+    e.flag = 0;
 	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
-	count = print_f_buf(buffer, spec);
+	count = print_f_buf(buffer, spec, e);
 	free(buffer);
 	return (count);
 }
 
+
+
 int    ft_print_e(t_spec *spec, va_list *args)
 {
-	char	*buffer;
-	int     count;
+    t_exp   e;
+    char	*buffer;
+    int     count;
 
-	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
-	get_f(args, spec, buffer);
-	count = print_e_buf(buffer, spec, 'e');
-	free(buffer);
-	return (count);
+    e.flag = 1;
+    e.ch = 'e';
+
+    buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
+    e.value = get_f(args, spec, buffer);
+    count = print_f_buf(buffer, spec, e);
+    free(buffer);
+    return (count);
 }
 
 int    ft_print_E(t_spec *spec, va_list *args)
 {
+    t_exp   e;
 	char	*buffer;
 	int     count;
 
-	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
-	get_f(args, spec, buffer);
-	count = print_e_buf(buffer, spec, 'E');
-	free(buffer);
-	return (count);
+    e.flag = 1;
+    e.ch = 'E';
+    buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
+    e.value = get_f(args, spec, buffer);
+    count = print_f_buf(buffer, spec, e);
+    free(buffer);
+    return (count);
 }

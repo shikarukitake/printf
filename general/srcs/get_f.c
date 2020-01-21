@@ -4,7 +4,7 @@
 
 #include "get_f.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer)
+long double     get_f(va_list *va_args, t_spec *spec, char *buffer)
 {
-	get_general_float(va_args, spec, buffer);
+	return get_general_float(va_args, spec, buffer);
 }

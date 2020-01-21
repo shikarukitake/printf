@@ -198,13 +198,68 @@ void add_sing_and_sp(char *f, t_spec *spec)
         ft_strcpy(f, " inf");
 }
 
-
-int	print_f_buf(char *f, t_spec *spec)
+t_ui shift(char *buf, t_exp e, t_spec *spec)
 {
+    t_ui     count_int;
 
+    count_int = 0;
+    if ((t_ull) e.value == 0)
+        count_int = 0;
+    else
+        while (buf[count_int + 1] != '.')
+            count_int++;
+    if (spec->flags['-'] == TRUE)
+        count_int--;
+    return count_int;
+}
+
+void    transform_to_e(char *buf, t_exp e, t_spec *spec, t_ui count_int)
+{
+    char swap[ft_strlen(buf)];
+    t_ui count;
+
+    ft_bzero(swap, ft_strlen(buf));
+    count = 0;
+    if (spec->flags['-'] == TRUE)
+        swap[count++] = '-';
+    swap[count] = buf[count];
+    swap[++count] = '.';
+    while (count_int != 0)
+    {
+        swap[count + 1] = buf[count];
+        count++;
+        count_int--;
+    }
+    ft_strncat(swap, buf + count + 1, ft_strlen(buf) - count);
+    ft_strcpy(buf, swap);
+
+
+}
+
+void    shift_to_int_part(char *buf, t_exp e, t_spec *spec, t_ui pow)
+{
+    char    swap[ft_strlen(buf)];
+    size_t  count;
+    int  precision;
+
+    count = 0;
+    precision = spec->precision.value == -1 ? 6 : spec->precision.value + 2;
+    if (e.value - (t_ull)e.value > 0 && (t_ull)e.value == 0)
+    {
+        while (*buf == '0' || *buf == '.')
+            buf++;
+//        while
+//        swap[count++] = *buf++;
+        swap[count++] = *buf++;
+    }
+}
+
+int	print_f_buf(char *f, t_spec *spec, t_exp e)
+{
     int 	i;
     char    sign;
     int		is_dot;
+    t_ui    pow;
 
     i = 0;
     if (is_special_value(f))
@@ -214,8 +269,12 @@ int	print_f_buf(char *f, t_spec *spec)
     }
     if (is_float_null_case(f, spec))
         return (1);
-    round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
+    pow = shift(f, e, spec);
+    transform_to_e(f, e, spec, pow);
+    round_float(f, (spec->precision.value == -1 ? 6 : spec->precision.value));
     add_zeros(f, spec);
+//    shift_to_int_part(f, e, spec, pow);
+//    add_eeeeee(f,)
     if (is_need_wh(f, spec))
     {
         ft_putchar(' ');

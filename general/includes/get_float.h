@@ -11,6 +11,6 @@
 #include "ft_float.h"
 #include "float_convert.h"
 
-void   get_general_float(va_list *va_args, t_spec *spec, char *buffer);
+long double get_general_float(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif //PRINTF_GET_FLOAT_H
