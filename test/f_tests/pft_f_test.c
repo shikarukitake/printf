@@ -5,6 +5,7 @@
 
 #include "minunit.h"
 #include "ft_printf.h"
+#include <float.h>
 
 static char * round_test()
 {
@@ -48,12 +49,35 @@ static char *conversion_test()
     return (0);
 }
 
+static char *strange_size_spec()
+{
+    mu_assert_printf("hf", ft_printf, "%hf", 32.22);
+    return (0);
+}
+
+#define DBL_INF    0x7FF0000000000000
+#define DBL_NINF   0xFFF0000000000000
+#define DBL_NAN    0x7FF0000000100000
+#define DBL_PZERO  0x0000000000000000
+#define DBL_NZERO  0x8000000000000000
+
+static char *sp_test()
+{
+    double special;
+    *((unsigned long *)(&special)) = DBL_INF;
+
+    mu_assert_printf(" inf", ft_printf, "% .7f", special);
+    return (0);
+}
+
 int main()
 {
-    test_all("PFT F TESTS",5,
+    test_all("PFT F TESTS",7,
             round_test,
             sharp_test,
             wp_test,
             wh_flag_test,
-            conversion_test);
+            conversion_test,
+            strange_size_spec,
+            sp_test);
 }

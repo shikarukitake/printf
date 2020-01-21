@@ -12,6 +12,7 @@
 #include "specificator.h"
 #include "put_bch.h"
 #include "print_digit_buf.h"
+#include "print_str.h"
 
 int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f);
 

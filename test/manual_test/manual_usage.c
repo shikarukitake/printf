@@ -130,6 +130,17 @@ int    sum_long_float_int(char *to_sum, char *result, int n)
 }
 
 #define MAX_BUFF_SIZEE 10000
+#define DBL_INF    0x7FF0000000000000
+#define DBL_NINF   0xFFF0000000000000
+#define DBL_NAN    0x7FF0000000100000
+#define DBL_PZERO  0x0000000000000000
+#define DBL_NZERO  0x8000000000000000
+
+#define LDBL_INF   0x7FFF0000000000000000L
+#define LDBL_NINF  0xFFFF0000000000000000L
+#define LDBL_NAN   0x7FFF0000000001000000L
+#define LDBL_PZERO 0x00000000000000000000L
+#define LDBL_NZERO 0x80000000000000000000L
 
 int main()
 {
@@ -146,6 +157,10 @@ int main()
 //
 //    printf("32 / 2 = %s\n", new_buf);
 
-    ft_printf("%.8Lf\n", LDBL_MAX);
-    printf("%.8Lf\n", LDBL_MAX);
+//    double special;
+//    *((unsigned long *)(&special)) = DBL_NAN;
+//    ft_printf("% .7f\n", special);
+        ft_printf("%.0Lf\n", LDBL_MAX);
+        printf("%.0LF\n", LDBL_MAX);
+//    printf("%f\n", (long double)DBL_NINF);
 }

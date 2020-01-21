@@ -9,9 +9,8 @@
 #include <stdlib.h>
 #include <float.h>
 
-#include <stdio.h> //DEBUG
 
-#define EXP_SHIFT 16383
+#define EXP_SHIFT 16383u
 
 char *view_bin(unsigned long bin)
 {
@@ -36,7 +35,6 @@ char *view_bin(unsigned long bin)
 
 void init_float(t_float *f)
 {
-    f->ld = 0.0;
     f->exp = 0;
     f->is_up = 0;
     f->man = 0;
@@ -208,11 +206,10 @@ void get_long_int_part(unsigned long m, unsigned e, char *buf)
 {
     char    int_part[MAX_FLOAT_BUFF_SIZE];
     char    result[MAX_FLOAT_BUFF_SIZE];
-    char    transformed_result[MAX_FLOAT_BUFF_SIZE];
+
     unsigned long mask;
     int was_mult;
 
-    ft_bzero(transformed_result, MAX_FLOAT_BUFF_SIZE);
     ft_memset(result, 0, MAX_FLOAT_BUFF_SIZE);
     was_mult = 0;
     int_part[0] = 1;
@@ -498,10 +495,81 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag
     free(result);
 }
 
-//FT COSTYL
-void    zero_case(char *buf)
+int is_inf(long_double_cast ldc)
 {
-    ft_strcpy(buf, "0.0");
+    return (ldc.parts.exponent == 32767u &&
+            ldc.parts.mantissa == 9223372036854775808ul &&
+            ldc.parts.sign == 0u);
+}
+
+int is_ninf(long_double_cast ldc)
+{
+    return (ldc.parts.exponent == 32767u &&
+            ldc.parts.mantissa == 9223372036854775808ul &&
+            ldc.parts.sign == 1u);
+}
+
+int is_nan(long_double_cast ldc)
+{
+    return (ldc.parts.exponent == 32767u &&
+            (ldc.parts.mantissa == 13835058057429647360ul || ldc.parts.mantissa == 8u));
+}
+
+int is_reserved_value(long_double_cast ldc, long double ld, char *fbuf)
+{
+    if (ld == 0 && ldc.parts.sign == 1u)
+    {
+        ft_strcpy(fbuf, "-0.0");
+        return (1);
+    }
+    else if (ld == 0 || ld == LDBL_MIN)
+    {
+        ft_strcpy(fbuf, "0.0");
+        return (1);
+    }
+    else if (ld == -LDBL_MIN)
+    {
+        ft_strcpy(fbuf, "-0.0");
+        return (1);
+    }
+    else if (is_inf(ldc))
+    {
+        ft_strcpy(fbuf, "inf");
+        return (1);
+    }
+    else if (is_ninf(ldc))
+    {
+        ft_strcpy(fbuf, "-inf");
+        return (1);
+    }
+    else if (is_nan(ldc))
+    {
+        ft_strcpy(fbuf, "nan");
+        return (1);
+    }
+
+//    }
+//    else if (ld == LDBL_NINF)
+//    {
+//        ft_strcpy(fbuf, "[-INF]");
+//        return (1);
+//    }
+//    else if (ld == LDBL_PZERO)
+//    {
+//        ft_strcpy(fbuf, "+0.0");
+//        return (1);
+//    }
+//    else if (ld == LDBL_NZERO)
+//    {
+//        ft_strcpy(fbuf, "-0.0");
+//        return (1);
+//    }
+//    else if (ld == LDBL_NAN)
+//    {
+//        ft_strcpy(fbuf, "[NaN]");
+//        return (1);
+//    }
+    return (0);
 }
 
 void    ft_dtoa(long double ld, char *buffer)
@@ -512,42 +580,36 @@ void    ft_dtoa(long double ld, char *buffer)
     long_double_cast ldc;
 
 
-    int_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
-    float_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
-    ft_bzero(int_part_buf, MAX_FLOAT_BUFF_SIZE);
-    ft_bzero(float_part_buf, MAX_FLOAT_BUFF_SIZE);
-    if (ld == 0 || ld == LDBL_MIN)
-    {
-        zero_case(buffer);
-        return;
-    }
-    else if (ld == -LDBL_MIN)
-    {
-        ft_strcpy(buffer, "-0.0");
-        return;
-    }
     ldc = (long_double_cast) {.ld = ld};
+    if (is_reserved_value(ldc, ld, buffer))
+        return;
     if (ldc.parts.exponent >= EXP_SHIFT)
     {
 
         ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
-        //get_int_part(ld < 0 ? -ld : ld, int_part_buf);
+        int_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
         get_long_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
-       // get_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
         flag = 1;
     }
     else
     {
         ldc.parts.exponent = EXP_SHIFT - ldc.parts.exponent;
-        ft_strcpy(int_part_buf, "0");
+        int_part_buf = ft_strdup("0");
         flag = 0;
     }
-    if (ldc.parts.exponent < 63 || flag == 0)
+    if (ldc.parts.exponent < 63u || flag == 0)
+    {
+        float_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
         get_float_part(ldc.parts.mantissa, ldc.parts.exponent, float_part_buf, flag);
+    }
+    else
+        float_part_buf = ft_strdup("0");
     if (ld < 0)
         buffer[0] = '-';
     ft_strcat(buffer, int_part_buf);
     ft_strcat(buffer, ".");
     ft_strcat(buffer, float_part_buf);
+    free(int_part_buf);
+    free(float_part_buf);
 }
 

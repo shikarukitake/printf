@@ -41,11 +41,18 @@ void    round_int_part(char *buf)
     }
 }
 
+int is_special_value(char *buf)
+{
+    return (ft_strcmp(buf, "inf") == 0 || ft_strcmp(buf, "-inf") == 0 ||
+            ft_strcmp(buf, "nan") == 0);
+}
+
 void    round_float(char *buf, int precision)
 {
     int dot;
     int i;
     int last;
+
 
     dot = ft_strchri(buf, '.');
     i = dot + precision + 1;
@@ -77,39 +84,6 @@ void    round_float(char *buf, int precision)
     buf[last] = '\0';
 }
 
-
-int     ft_put_float_buf(char *buf, t_spec *spec, t_float *f)
-{
-    int i;
-    int float_nums;
-
-	i = 0;
-    ((void)f);
-    round_float(buf, spec->precision.value == -1 ? 6 : spec->precision.value);
-	float_nums = -1;
-	while (buf[i] != '.')
-    {
-	    ft_putchar(buf[i]);
-	    i++;
-    }
-	while (buf[i])
-    {
-		if (spec->precision.value != -1 && float_nums == spec->precision.value)
-				break;
-	    ft_putchar(buf[i]);
-	    float_nums++;
-	    i++;
-    }
-	if (spec->precision.value == -1 && float_nums < 6)
-    {
-	    while (float_nums < 6)
-	    {
-            ft_putchar('0');
-            float_nums++;
-        }
-    }
-    return (i + float_nums);
-}
 
 int is_float_null_case(char *f, t_spec *spec)
 {
@@ -219,6 +193,18 @@ void remove_dot(char *f, t_spec *spec)
         f[i] = '\0';
 }
 
+void add_sing_and_sp(char *f, t_spec *spec)
+{
+    if (ft_strcmp(f, "inf") == 0 && spec->flags['+'] == TRUE)
+    {
+        ft_strcpy(f, "+inf");
+        if (spec->flags[' '] == TRUE)
+          ft_strcpy(f, " +inf");
+        return;
+    }
+    else if (ft_strcmp(f, "inf") == 0 && spec->flags[' '] == TRUE)
+        ft_strcpy(f, " inf");
+}
 
 
 int	print_f_buf(char *f, t_spec *spec)
@@ -230,6 +216,11 @@ int	print_f_buf(char *f, t_spec *spec)
     int is_dot;
 
     i = 0;
+    if (is_special_value(f))
+    {
+        add_sing_and_sp(f, spec);
+        return (print_str(f, spec));
+    }
     if (is_float_null_case(f, spec))
         return (1);
     round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
