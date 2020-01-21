@@ -12,7 +12,7 @@ int     ft_print_x(t_spec *spec, va_list *args)
     return (print_d_buf(buffer, spec, put_hex_prefix));
 }
 
-int     ft_print_X(t_spec *spec, va_list *args)
+int     ft_print_xx(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_HEX_BUF_SIZE];
 

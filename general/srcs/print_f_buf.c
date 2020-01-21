@@ -120,14 +120,15 @@ int fill_float_width_field(int i, t_spec *spec)
     return (i - len);
 }
 
+
 int fill_float_sign_width_field(int i, t_spec *spec, char sign)
 {
     char	ch;
     int		len;
 
     len = i;
-    ch = get_float_fill_ch(i + IS_SIGN(sign), spec);
-    while (i + IS_SIGN(sign) < spec->width.value)
+    ch = get_float_fill_ch(i + (sign > 0), spec);
+    while (i + (sign > 0) < spec->width.value)
     {
         ft_putchar(ch);
         i++;
@@ -231,7 +232,7 @@ int	print_f_buf(char *f, t_spec *spec)
     }
     else
     {
-        if (get_float_fill_ch((int)ft_strlen(f) + IS_SIGN(sign), spec) == ' ')
+        if (get_float_fill_ch((int)ft_strlen(f) + (sign > 0), spec) == ' ')
         {
             i += fill_float_sign_width_field(ft_strlen(f) - is_dot, spec, sign);
             i += print_sign(sign);
@@ -243,7 +244,7 @@ int	print_f_buf(char *f, t_spec *spec)
         }
         i += print_float_buf(f, spec);
     }
-    if (is_need_wh(f, spec) && !IS_SIGN(sign))
+    if (is_need_wh(f, spec) && (sign <= 0))
         i++;
     return (i);
 }

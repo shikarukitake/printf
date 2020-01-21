@@ -1,46 +1,55 @@
-//
-// Created by Aletha Yellin on 22/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specificator.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:35:10 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/21 22:39:50 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PRINTF_SPECIFICATOR_H
-#define PRINTF_SPECIFICATOR_H
+# define PRINTF_SPECIFICATOR_H
 
-#include "util.h"
-#include "print_settings.h"
-#include <stdlib.h>
+# include "util.h"
+# include "print_settings.h"
+# include <stdlib.h>
 
-typedef		struct	s_width
+# define MAX_FLAGS 255
+
+typedef struct	s_width
 {
-	int		value;
-	t_bool	is_asterisk;
-	t_bool	extra_wh;
-}					t_width;
+	int			value;
+	t_bool		is_asterisk;
+	t_bool		extra_wh;
+}				t_width;
 
-typedef		struct	s_percision
+typedef struct	s_percision
 {
-	int		value;
-	t_bool	is_asterisk;
-	t_bool	is_dot;
+	int			value;
+	t_bool		is_asterisk;
+	t_bool		is_dot;
 
-}					t_precision;
+}				t_precision;
 
-typedef 	struct	s_size
+typedef struct	s_size
 {
-	int		id;
-	char	value[3];
-}					t_size;
+	int			id;
+	char		value[3];
+}				t_size;
 
-#define MAX_FLAGS 255
-
-typedef		struct	s_spec
+typedef struct	s_spec
 {
-	t_bool              flags[MAX_FLAGS];
-	char                type;
-	t_width             width;
-	t_precision         precision;
-	t_size              size;
-	t_print_settings    settings;
-}					t_spec;
+	t_bool		flags[MAX_FLAGS];
+	char		type;
+	t_width		width;
+	t_precision	precision;
+	t_size		size;
+	int			color_id;
+}				t_spec;
 
-t_spec	*init_spec();
+t_spec			*init_spec();
 
-#endif //PRINTF_SPECIFICATOR_H
+#endif

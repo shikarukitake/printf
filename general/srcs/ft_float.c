@@ -283,29 +283,29 @@ void    get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag
     free(result);
 }
 
-int is_inf(long_double_cast ldc)
+int is_inf(t_ldc ldc)
 {
-    return (ldc.parts.exponent == 32767u &&
-            ldc.parts.mantissa == 9223372036854775808ul &&
-            ldc.parts.sign == 0u);
+    return (ldc.parts.e == 32767u &&
+			ldc.parts.m == 9223372036854775808ul &&
+			ldc.parts.s == 0u);
 }
 
-int is_ninf(long_double_cast ldc)
+int is_ninf(t_ldc ldc)
 {
-    return (ldc.parts.exponent == 32767u &&
-            ldc.parts.mantissa == 9223372036854775808ul &&
-            ldc.parts.sign == 1u);
+    return (ldc.parts.e == 32767u &&
+			ldc.parts.m == 9223372036854775808ul &&
+			ldc.parts.s == 1u);
 }
 
-int is_nan(long_double_cast ldc)
+int is_nan(t_ldc ldc)
 {
-    return (ldc.parts.exponent == 32767u &&
-            (ldc.parts.mantissa == 13835058057429647360ul || ldc.parts.mantissa == 8u));
+    return (ldc.parts.e == 32767u &&
+			(ldc.parts.m == 13835058057429647360ul || ldc.parts.m == 8u));
 }
 
-int is_reserved_value(long_double_cast ldc, long double ld, char *fbuf)
+int is_reserved_value(t_ldc ldc, long double ld, char *fbuf)
 {
-    if (ld == 0 && ldc.parts.sign == 1u)
+    if (ld == 0 && ldc.parts.s == 1u)
     {
         ft_strcpy(fbuf, "-0.0");
         return (1);
@@ -344,30 +344,30 @@ void    ft_dtoa(long double ld, char *buffer)
     char *int_part_buf;
     char *float_part_buf;
     int flag;
-    long_double_cast ldc;
+    t_ldc ldc;
 
 
-    ldc = (long_double_cast) {.ld = ld};
+    ldc = (t_ldc) {.ld = ld};
     if (is_reserved_value(ldc, ld, buffer))
         return;
-    if (ldc.parts.exponent >= EXP_SHIFT)
+    if (ldc.parts.e >= EXP_SHIFT)
     {
 
-        ldc.parts.exponent = ldc.parts.exponent - EXP_SHIFT;
+        ldc.parts.e = ldc.parts.e - EXP_SHIFT;
         int_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
-        get_long_int_part(ldc.parts.mantissa, ldc.parts.exponent, int_part_buf);
+        get_long_int_part(ldc.parts.m, ldc.parts.e, int_part_buf);
         flag = 1;
     }
     else
     {
-        ldc.parts.exponent = EXP_SHIFT - ldc.parts.exponent;
+        ldc.parts.e = EXP_SHIFT - ldc.parts.e;
         int_part_buf = ft_strdup("0");
         flag = 0;
     }
-    if (ldc.parts.exponent < 63u || flag == 0)
+    if (ldc.parts.e < 63u || flag == 0)
     {
         float_part_buf = ft_memalloc(MAX_FLOAT_BUFF_SIZE);
-        get_float_part(ldc.parts.mantissa, ldc.parts.exponent, float_part_buf, flag);
+        get_float_part(ldc.parts.m, ldc.parts.e, float_part_buf, flag);
     }
     else
         float_part_buf = ft_strdup("0");

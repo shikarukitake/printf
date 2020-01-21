@@ -217,8 +217,8 @@ int fill_sign_width_field(int i, t_spec *spec, char sign)
 
     len = i;
     diff = get_diff(i, spec);
-    ch = get_fill_ch(i + IS_SIGN(sign), spec);
-    while (i + diff + IS_SIGN(sign) < spec->width.value)
+    ch = get_fill_ch(i + (sign > 0), spec);
+    while (i + diff + (sign > 0) < spec->width.value)
     {
         ft_putchar(ch);
         i++;
@@ -249,7 +249,7 @@ int	print_sd_buf(char *digit, t_spec *spec)
     }
 	else
     {
-	    if (get_fill_ch((int)ft_strlen(digit) + IS_SIGN(sign), spec) == ' ')
+	    if (get_fill_ch((int)ft_strlen(digit) + (sign > 0), spec) == ' ')
 	    {
             i += fill_sign_width_field(ft_strlen(digit), spec, sign);
             i += print_sign(sign);
@@ -262,7 +262,7 @@ int	print_sd_buf(char *digit, t_spec *spec)
         i += fill_precision_field(digit, spec);
         i += print_buf(digit);
     }
-	if (is_need_wh(digit, spec) && !IS_SIGN(sign))  //SUCH AN AWFUL FT_COSTYL maybe error with negative values ???
+	if (is_need_wh(digit, spec) && (sign <= 0))  //SUCH AN AWFUL FT_COSTYL maybe error with negative values ???
 		i++;
 	return (i);
 }

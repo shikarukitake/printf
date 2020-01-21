@@ -4,9 +4,9 @@
 
 #include "util.h"
 
-ssize_t		ft_arr_find(const char **str_arr, size_t size, const char *s)
+int		ft_arr_find(const char **str_arr, size_t size, const char *s)
 {
-	ssize_t i;
+	int i;
 
 	i = 0;
 	if (!s)

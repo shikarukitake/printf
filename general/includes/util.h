@@ -1,18 +1,21 @@
-//
-// Created by Aletha Yellin on 20/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:33:29 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/21 22:40:45 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PRINTF_UTIL_H
-#define PRINTF_UTIL_H
+# define PRINTF_UTIL_H
 
-# include <string.h>
-# ifdef __linux__
-#  include <sys/types.h>
-# endif
+# include "libft.h"
 
-#include "libft.h"
-
-ssize_t		ft_arr_find(const char **str_arr, size_t size, const char *s);
+int				ft_arr_find(const char **str_arr, size_t size, const char *s);
 
 typedef enum	e_bool
 {
@@ -20,4 +23,4 @@ typedef enum	e_bool
 	TRUE
 }				t_bool;
 
-#endif //PRINTF_UTIL_H
+#endif

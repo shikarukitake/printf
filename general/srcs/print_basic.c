@@ -24,7 +24,7 @@ int    ft_print_p(t_spec *spec, va_list *args)
 }
 
 
-int	ft_print_D(t_spec *spec, va_list *args)
+int	ft_print_dd(t_spec *spec, va_list *args)
 {
 	char 		buffer[MAX_LL_BUFF_SIZE];
 
