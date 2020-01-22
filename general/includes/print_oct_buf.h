@@ -19,4 +19,6 @@
 
 int		put_oct_prefix(const char *buf, t_spec *spec, char *dest);
 
+int		is_oct_prefix(t_spec *spec);
+
 #endif

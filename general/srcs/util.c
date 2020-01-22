@@ -12,6 +12,13 @@
 
 #include "util.h"
 
+size_t		print_buf(const char *buf)
+{
+	if (buf)
+		ft_putstr(buf);
+	return (ft_strlen(buf));
+}
+
 int		ft_arr_find(const char **str_arr, size_t size, const char *s)
 {
 	int i;

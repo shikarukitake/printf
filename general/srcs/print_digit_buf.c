@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 20:03:01 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/22 20:10:24 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/22 20:14:26 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int		is_null_case(const char *digit, t_spec *spec)
 		return (b);
 	else
 		return (b && spec->flags['#'] == FALSE);
-}
-
-int		is_oct_prefix(t_spec *spec)
-{
-	return (spec->type == 'o' && spec->flags['#'] == TRUE);
 }
 
 int		get_diff(int buf_len, t_spec *spec)
@@ -102,13 +97,6 @@ int		fill_precision_field(char *buf, t_spec *spec)
 	return (i);
 }
 
-size_t		print_buf(const char *buf)
-{
-	if (buf)
-		ft_putstr(buf);
-	return (ft_strlen(buf));
-}
-
 int		check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	char	dest[4];
@@ -146,9 +134,9 @@ int		prepare_prefixed_pbuf(char *digit, t_spec *spec, char *dig_buf, t_put_prefi
 
 int		print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
-	int i;
-	int is_prefix;
-	char prefixed_digit[MAX_HEX_BUF_SIZE];
+	int		i;
+	int		is_prefix;
+	char	prefixed_digit[MAX_HEX_BUF_SIZE];
 
 	i = 0;
 	is_prefix = check_is_prefix(digit, spec, pp);

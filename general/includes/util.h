@@ -15,6 +15,8 @@
 
 # include "libft.h"
 
+size_t			print_buf(const char *buf);
+
 int				ft_arr_find(const char **str_arr, size_t size, const char *s);
 
 typedef enum	e_bool
