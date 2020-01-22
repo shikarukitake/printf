@@ -18,15 +18,17 @@
 # include "libft.h"
 # include "print_d_buf.h"
 # include "print_oct_buf.h"
+# include "spec_util.h"
+# include "print_util.h"
 
 typedef int(*t_put_prefix) (const char *, t_spec *, char *dest);
 
-int			print_sign(char sign);
-
-int			print_sd_buf(char *digit, t_spec *spec);
+typedef struct 	s_d_pair
+{
+	char *d;
+	char *pd;
+}				t_d_pair;
 
 int			print_d_buf(char *digit, t_spec *spec, t_put_prefix pp);
-
-char		get_sign(char *digit, t_spec *spec);
 
 #endif
