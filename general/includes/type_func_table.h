@@ -24,6 +24,7 @@
 # include "print_basic.h"
 # include "print_float.h"
 # include "print_char.h"
+# include "printf_constants.h"
 
 int		call_print_func(const char *fmt, va_list *args, int offset);
 

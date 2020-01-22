@@ -15,6 +15,8 @@
 
 # define MAX_SPECS 5
 
+#define MAX_TYPE_FUNC_TABLE 255
+
 # define MAX_LL_BUFF_SIZE 80
 
 # define MAX_P_BUFF_SIZE 80

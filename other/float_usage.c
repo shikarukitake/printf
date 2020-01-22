@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include "ft_float.h"
+#include "ft_ldtoa.h"
 #include <string.h>
 #include "libft.h"
 char		*ft_strrev(char *str)
