@@ -3,8 +3,9 @@ project(printf C)
 set(CMAKE_C_STANDARD 11)
 
 
-set(CMAKE_CXX_FLAGS "-Wall -Werror")
+#set(CMAKE_CXX_FLAGS "-Wall -Werror")
 
+set(CMAKE_C_FLAGS  "-O3")
 #includes
 include_directories(general)
 include_directories(test)
@@ -14,8 +15,6 @@ include_directories(test/libmu)
 
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
-
-
 
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")

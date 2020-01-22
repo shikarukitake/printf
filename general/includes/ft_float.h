@@ -13,6 +13,17 @@
 #ifndef PRINTF_FT_FLOAT_H
 # define PRINTF_FT_FLOAT_H
 
+# include <float.h>
+
+# include "libft.h"
+# include "printf_constants.h"
+# include <stdlib.h>
+# include "long_arithmetic.h"
+#include "get_float_part.h"
+
+
+# define EXP_SHIFT 16383u
+
 typedef	union			u_ldc
 {
 	long double			ld;

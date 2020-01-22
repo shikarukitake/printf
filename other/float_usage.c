@@ -33,8 +33,8 @@ void print_long_double(long double d)
 {
     long_double_cast cast = {.ld = d};
 
-    printf("exponent = %u\n", cast.parts.exponent);
-    printf("mantissa = %lu\n", cast.parts.mantisa);
+    printf("e = %u\n", cast.parts.exponent);
+    printf("m = %lu\n", cast.parts.mantisa);
     printf("sign = %u\n", cast.parts.sign);
 }
 
@@ -200,7 +200,7 @@ void get_char_value(long double ld, char *buffer)
     bzero(buf2, TEST_BUF_SIZE);
 
     get_bits(cast.parts.mantisa, buf2);
-    printf("mantissa = %s\n", buf2);
+    printf("m = %s\n", buf2);
     integer_part = get_int_part(cast.parts.mantisa, exp);
 
     char buf3[TEST_BUF_SIZE];
