@@ -1,17 +1,25 @@
-//
-// Created by Aletha Yellin on 06/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 19:52:38 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 19:53:45 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int		ft_printf(const char *fmt, ...)
 {
-	va_list     args;
-	size_t      i;
+	va_list		args;
+	size_t		i;
 	int			count;
 
 	count = 0;
-    va_start(args, fmt);
+	va_start(args, fmt);
 	i = 0;
 	while (fmt[i])
 	{
@@ -26,7 +34,7 @@ int		ft_printf(const char *fmt, ...)
 			count++;
 		}
 		if (!fmt[i])
-            break;
+			break ;
 		i++;
 	}
 	va_end(args);
