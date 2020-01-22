@@ -6,14 +6,14 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:42:08 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/22 17:45:38 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/22 18:20:45 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ldtoa.h"
-# include "special_float_values.h"
+#include "special_float_values.h"
 
-static void	make_float_buffer(long double ld, char *buf, char *i_part, char *f_part)
+static void	make_ld_buf(long double ld, char *buf, char *i_part, char *f_part)
 {
 	if (ld < 0)
 		buf[0] = '-';
@@ -62,7 +62,7 @@ void		ft_ldtoa(long double ld, char *buffer)
 	ldc = (t_ldc) {.ld = ld};
 	if (is_reserved_value(ldc, ld, buffer))
 		return ;
-	less_than_one =make_int_part(&int_part_buf, &ldc);
+	less_than_one = make_int_part(&int_part_buf, &ldc);
 	make_float_part(&float_part_buf, &ldc, less_than_one);
-	make_float_buffer(ld, buffer, int_part_buf, float_part_buf);
+	make_ld_buf(ld, buffer, int_part_buf, float_part_buf);
 }
