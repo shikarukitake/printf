@@ -89,8 +89,3 @@ void	rev_divide_by_2(char *divided, int n)
 		i --;
 	}
 }
-
-
-
-
-

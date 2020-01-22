@@ -1,13 +1,22 @@
-//
-// Created by dan on 1/14/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_char.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 18:51:52 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 18:55:27 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "print_char.h"
 
-static int fill_null_field(t_spec *spec)
+static int	fill_null_field(t_spec *spec)
 {
 	int count;
 	int i;
+
 	if (spec->precision.value == -1)
 		i = 1;
 	else
@@ -21,7 +30,7 @@ static int fill_null_field(t_spec *spec)
 	return (i - count);
 }
 
-static int print_null_char(t_spec *spec)
+static int	print_null_char(t_spec *spec)
 {
 	int i;
 
@@ -35,16 +44,16 @@ static int print_null_char(t_spec *spec)
 	return (i);
 }
 
-int print_char(int c, t_spec *spec)
+int			print_char(int c, t_spec *spec)
 {
 	char buf[MAX_CHAR_BUF_SIZE];
 
 	ft_bzero(buf, MAX_CHAR_BUF_SIZE);
-	buf[0] = c;
-	return print_str(buf, spec);
+	buf[0] = (char)c;
+	return (print_str(buf, spec));
 }
 
-int		ft_print_c(t_spec* spec, va_list *args)
+int			ft_print_c(t_spec *spec, va_list *args)
 {
 	char c;
 
@@ -52,9 +61,9 @@ int		ft_print_c(t_spec* spec, va_list *args)
 	{
 		c = va_arg(*args, int);
 		if (c == 0)
-			return print_null_char(spec);
+			return (print_null_char(spec));
 		else
-			return print_char(c, spec);
+			return (print_char(c, spec));
 	}
 	else if (spec->size.value[0] == 'L')
 		ft_putwchar((wchar_t)va_arg(*args, wint_t));

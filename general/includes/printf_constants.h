@@ -13,7 +13,7 @@
 #ifndef PRINTF_PRINTF_CONSTANTS_H
 # define PRINTF_PRINTF_CONSTANTS_H
 
-# define MAX_SIZE_SPECS 8
+# define MAX_SPECS 5
 
 # define MAX_LL_BUFF_SIZE 80
 
@@ -53,6 +53,6 @@ typedef unsigned int		t_ui;
 
 typedef unsigned short		t_us;
 
-const char					*g_size_specs[MAX_SIZE_SPECS];
+const char					*g_size_specs[MAX_SPECS];
 
 #endif

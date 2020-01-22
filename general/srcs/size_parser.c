@@ -4,12 +4,12 @@
 
 #include "size_parser.h"
 
-extern const char * g_size_specs[MAX_SIZE_SPECS];
+extern const char * g_size_specs[MAX_SPECS];
 
 int is_size(char ch, int n)
 {
 	int i = 0;
-	while (i < MAX_SIZE_SPECS)
+	while (i < MAX_SPECS)
 	{
 		if (n < (int)ft_strlen(g_size_specs[i]))
 		{
@@ -39,7 +39,7 @@ int parse_size(const char *format, t_spec *spec)
 		i++;
 	}
 	tmp[j] = '\0';
-	spec->size.id = ft_arr_find(g_size_specs, MAX_SIZE_SPECS, tmp);
+	spec->size.id = ft_arr_find(g_size_specs, MAX_SPECS, tmp);
 	if (spec->size.id != -1)
 		return (ft_strlen(tmp));
 	return (0);

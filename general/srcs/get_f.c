@@ -1,10 +1,18 @@
-//
-// Created by Aletha Yellin on 13/12/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_f.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 18:37:51 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 18:38:04 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_f.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer)
+void	get_f(va_list *va_args, t_spec *spec, char *buffer)
 {
 	get_general_float(va_args, spec, buffer);
 }

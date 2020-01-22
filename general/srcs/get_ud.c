@@ -9,6 +9,6 @@ void		get_ud(va_list *va_args, t_spec *spec, char *buffer)
 {
 	t_conv	conv;
 
-    conv = (t_conv) {0 , 10, 'a'};
+    conv = (t_conv){0 , 10, 'a'};
 	get_general_ud(va_args, &conv, spec, buffer);
 }
