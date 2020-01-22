@@ -1,51 +1,58 @@
-//
-// Created by dan on 1/15/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_digit_buf.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 20:03:01 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 20:10:24 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "print_digit_buf.h"
 
-int is_null_case (const char *digit, t_spec *spec)
+int		is_null_case(const char *digit, t_spec *spec)
 {
 	int b;
 
 	b = (digit[0] == '0' && spec->precision.is_dot == TRUE
-		 && (spec->precision.value <= 0));
+		&& (spec->precision.value <= 0));
 	if (spec->type == 'x' || spec->type == 'X' || spec->type == 'p')
 		return (b);
 	else
 		return (b && spec->flags['#'] == FALSE);
 }
 
-int is_oct_prefix (t_spec *spec)
+int		is_oct_prefix(t_spec *spec)
 {
 	return (spec->type == 'o' && spec->flags['#'] == TRUE);
 }
 
-int get_diff (int buf_len, t_spec *spec)
+int		get_diff(int buf_len, t_spec *spec)
 {
 	if (spec->precision.value == -1 || spec->precision.value < buf_len)
 		return (0);
 	return (spec->precision.value - buf_len);
 }
 
-
-char get_fill_ch (int len, t_spec *spec)
+char	get_fill_ch(int len, t_spec *spec)
 {
 	if (spec->flags['0'] == TRUE && spec->precision.value < spec->width.value && spec->precision.value != -1)
-		return ' ';
+		return (' ');
 	if (spec->flags['0'] == TRUE && spec->precision.value < len && spec->precision.value != -1)
-		return ' ';
+		return (' ');
 	if (spec->flags['0'] == TRUE && spec->flags['-'] == FALSE)
-		return '0';
+		return ('0');
 	else
-		return ' ';
+		return (' ');
 }
 
-int fill_width_field (int i, t_spec *spec)
+int		fill_width_field(int i, t_spec *spec)
 {
-	char ch;
-	int len;
-	int diff;
+	char	ch;
+	int		len;
+	int		diff;
 
 	len = i;
 	diff = get_diff(i, spec);
@@ -58,11 +65,11 @@ int fill_width_field (int i, t_spec *spec)
 	return (i - len);
 }
 
-int fill_prefix_width_field (int i, t_spec *spec, int prefix)
+int		fill_prefix_width_field(int i, t_spec *spec, int prefix)
 {
-	char ch;
-	int len;
-	int diff;
+	char	ch;
+	int		len;
+	int		diff;
 
 	len = i;
 	diff = get_diff(i, spec);
@@ -77,7 +84,7 @@ int fill_prefix_width_field (int i, t_spec *spec, int prefix)
 	return (i - len);
 }
 
-int fill_precision_field (char *buf, t_spec *spec)
+int		fill_precision_field(char *buf, t_spec *spec)
 {
 	int diff;
 	int i;
@@ -95,18 +102,17 @@ int fill_precision_field (char *buf, t_spec *spec)
 	return (i);
 }
 
-size_t print_buf (const char *buf)
+size_t		print_buf(const char *buf)
 {
 	if (buf)
 		ft_putstr(buf);
 	return (ft_strlen(buf));
 }
 
-
-int check_is_prefix (char *digit, t_spec *spec, t_put_prefix pp)
+int		check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
-	char dest[4];
-	int is_prefix;
+	char	dest[4];
+	int		is_prefix;
 
 	ft_bzero(dest, 4);
 	if (is_null_case(digit, spec))
@@ -122,7 +128,7 @@ int check_is_prefix (char *digit, t_spec *spec, t_put_prefix pp)
 		return (0);
 }
 
-int prepare_prefixed_pbuf (char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
+int		prepare_prefixed_pbuf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 {
 	int was_prefix;
 
@@ -138,7 +144,7 @@ int prepare_prefixed_pbuf (char *digit, t_spec *spec, char *dig_buf, t_put_prefi
 	return (was_prefix);
 }
 
-int print_d_buf (char *digit, t_spec *spec, t_put_prefix pp)
+int		print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	int i;
 	int is_prefix;
@@ -154,7 +160,8 @@ int print_d_buf (char *digit, t_spec *spec, t_put_prefix pp)
 		i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
 		i += print_buf(digit);
 		i += fill_width_field(i, spec);
-	} else
+	}
+	else
 	{
 		if (is_prefix && spec->flags['0'] == TRUE)
 		{
@@ -162,14 +169,16 @@ int print_d_buf (char *digit, t_spec *spec, t_put_prefix pp)
 			{
 				i += fill_prefix_width_field((int) ft_strlen(digit), spec, is_prefix);
 				i += pp(digit, spec, NULL);
-			} else
+			}
+			else
 			{
 				i += pp(digit, spec, NULL);
-				i += fill_prefix_width_field((int) ft_strlen(digit), spec, is_prefix);
+				i += fill_prefix_width_field((int)ft_strlen(digit), spec, is_prefix);
 			}
 			i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
 			i += print_buf(digit);
-		} else
+		}
+		else
 		{
 			i += fill_prefix_width_field(ft_strlen(digit), spec, is_prefix);
 			if (is_prefix)
@@ -181,21 +190,19 @@ int print_d_buf (char *digit, t_spec *spec, t_put_prefix pp)
 	return (i);
 }
 
-char get_sign (char *digit, t_spec *spec)
+char	get_sign(char *digit, t_spec *spec)
 {
-
 	if (digit[0] == '-')
 	{
 		ft_strcpy(digit, digit + 1);
-		return '-';
-	} else if (spec->flags['+'] == TRUE)
-	{
-		return '+';
+		return ('-');
 	}
+	else if (spec->flags['+'] == TRUE)
+		return ('+');
 	return ('\0');
 }
 
-int print_sign (char sign)
+int		print_sign(char sign)
 {
 	if (sign)
 	{
@@ -205,11 +212,11 @@ int print_sign (char sign)
 	return (0);
 }
 
-int fill_sign_width_field (int i, t_spec *spec, char sign)
+int		fill_sign_width_field(int i, t_spec *spec, char sign)
 {
-	char ch;
-	int len;
-	int diff;
+	char	ch;
+	int		len;
+	int		diff;
 
 	len = i;
 	diff = get_diff(i, spec);
@@ -222,10 +229,10 @@ int fill_sign_width_field (int i, t_spec *spec, char sign)
 	return (i - len);
 }
 
-int print_sd_buf (char *digit, t_spec *spec)
+int		print_sd_buf(char *digit, t_spec *spec)
 {
-	int i;
-	char sign;
+	int		i;
+	char	sign;
 
 	i = 0;
 	if (is_null_case(digit, spec))
@@ -242,13 +249,15 @@ int print_sd_buf (char *digit, t_spec *spec)
 		i += fill_precision_field(digit, spec);
 		i += print_buf(digit);
 		i += fill_width_field(i, spec);
-	} else
+	}
+	else
 	{
-		if (get_fill_ch((int) ft_strlen(digit) + (sign > 0), spec) == ' ')
+		if (get_fill_ch((int)ft_strlen(digit) + (sign > 0), spec) == ' ')
 		{
 			i += fill_sign_width_field(ft_strlen(digit), spec, sign);
 			i += print_sign(sign);
-		} else
+		}
+		else
 		{
 			i += print_sign(sign);
 			i += fill_sign_width_field(ft_strlen(digit), spec, sign);
@@ -256,7 +265,7 @@ int print_sd_buf (char *digit, t_spec *spec)
 		i += fill_precision_field(digit, spec);
 		i += print_buf(digit);
 	}
-	if (is_need_wh(digit, spec) && (sign <= 0))  //SUCH AN AWFUL FT_COSTYL maybe error with negative values ???
+	if (is_need_wh(digit, spec) && (sign <= 0))
 		i++;
 	return (i);
 }
