@@ -44,7 +44,7 @@ t_ul	prepare_vars(char *int_part, char *result, int *was_mult, t_ui *e)
 	return (mask);
 }
 
-void	get_long_int_part(unsigned long m, unsigned e, char *buf)
+void	get_int_part(unsigned long m, unsigned e, char *buf)
 {
 	char			int_part[MAX_F_BUF_SIZE];
 	char			result[MAX_F_BUF_SIZE];

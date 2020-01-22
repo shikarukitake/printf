@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_GET_FLOAT_H
-# define PRINTF_GET_FLOAT_H
+#ifndef PRINTF_FT_LDTOA_H
+# define PRINTF_FT_LDTOA_H
 
 # include <stdarg.h>
 

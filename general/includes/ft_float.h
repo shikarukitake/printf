@@ -35,6 +35,6 @@ typedef	union			u_ldc
 	}					parts;
 }						t_ldc;
 
-void					ft_dtoa(long double ld, char *buffer);
+void					ft_ldtoa(long double ld, char *buffer);
 
 #endif

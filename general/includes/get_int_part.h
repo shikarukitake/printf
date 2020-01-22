@@ -9,6 +9,6 @@
 #include "printf_constants.h"
 #include "long_arithmetic.h"
 
-void	get_long_int_part(unsigned long m, unsigned e, char *buf);
+void	get_int_part(unsigned long m, unsigned e, char *buf);
 
 #endif //PRINTF_GET_INT_PART_H
