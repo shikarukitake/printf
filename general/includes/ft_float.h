@@ -19,8 +19,8 @@
 # include "printf_constants.h"
 # include <stdlib.h>
 # include "long_arithmetic.h"
-#include "get_float_part.h"
-
+# include "get_float_part.h"
+# include "get_int_part.h"
 
 # define EXP_SHIFT 16383u
 

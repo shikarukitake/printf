@@ -11,6 +11,6 @@
 #include "libft.h"
 #include "long_arithmetic.h"
 
-void get_float_part(unsigned long mantissa, unsigned exp, char *buf, int flag);
+void get_float_part(unsigned long m, unsigned exp, char *buf, int flag);
 
 #endif //PRINTF_GET_FLOAT_PART_H

@@ -9,7 +9,7 @@ int    ft_print_f(t_spec *spec, va_list *args)
 	char	*buffer;
     int     count;
 
-	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
+	buffer = ft_memalloc(MAX_F_BUF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
 	count = print_f_buf(buffer, spec);
 	free(buffer);
@@ -21,7 +21,7 @@ int    ft_print_e(t_spec *spec, va_list *args)
 	char	*buffer;
 	int     count;
 
-	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
+	buffer = ft_memalloc(MAX_F_BUF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
 	count = print_e_buf(buffer, spec, 'e');
 	free(buffer);
@@ -33,7 +33,7 @@ int    ft_print_ee(t_spec *spec, va_list *args)
 	char	*buffer;
 	int     count;
 
-	buffer = ft_memalloc(MAX_FLOAT_BUFF_SIZE * 2 + 10);
+	buffer = ft_memalloc(MAX_F_BUF_SIZE * 2 + 10);
 	get_f(args, spec, buffer);
 	count = print_e_buf(buffer, spec, 'E');
 	free(buffer);

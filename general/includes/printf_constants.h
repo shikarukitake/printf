@@ -21,7 +21,7 @@
 
 # define MAX_HEX_BUF_SIZE 80
 
-# define MAX_FLOAT_BUFF_SIZE 5000
+# define MAX_F_BUF_SIZE 5000
 
 # define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgGD"
 

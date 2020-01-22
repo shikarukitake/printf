@@ -6,7 +6,7 @@
 
 void change_first_digits(char *buf)
 {
-    char tmp[MAX_FLOAT_BUFF_SIZE];
+    char tmp[MAX_F_BUF_SIZE];
 
     ft_strcpy(tmp , buf);
     if (tmp[0] != '-')
