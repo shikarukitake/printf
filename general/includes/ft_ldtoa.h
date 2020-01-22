@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_float.h                                        :+:      :+:    :+:   */
+/*   ft_float.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 21:44:16 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 21:44:37 by ayellin          ###   ########.fr       */
+/*   Created: 2020/01/21 21:33:53 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/21 21:40:23 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_FT_LDTOA_H
 # define PRINTF_FT_LDTOA_H
 
-# include <stdarg.h>
+# include <float.h>
 
-# include "specificator.h"
-# include "ft_float.h"
-# include "float_convert.h"
+# include "libft.h"
+# include "printf_constants.h"
+# include <stdlib.h>
+# include "long_arithmetic.h"
+# include "get_float_part.h"
+# include "get_int_part.h"
 
-void	get_general_float(va_list *va_args, t_spec *spec, char *buffer);
+# define EXP_SHIFT 16383u
+
+typedef	union			u_ldc
+{
+	long double			ld;
+	struct
+	{
+		unsigned long	m : 64;
+		unsigned int	e : 15;
+		unsigned int	s : 1;
+	}					parts;
+}						t_ldc;
+
+void					ft_ldtoa(long double ld, char *buffer);
 
 #endif

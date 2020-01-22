@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_f.h                                            :+:      :+:    :+:   */
+/*   get_float.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 21:43:27 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 21:43:45 by ayellin          ###   ########.fr       */
+/*   Created: 2020/01/21 21:44:16 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/21 21:44:37 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_GET_F_H
-# define PRINTF_GET_F_H
+#ifndef PRINTF_GET_FLOAT_H
+# define PRINTF_GET_FLOAT_H
 
 # include <stdarg.h>
+
 # include "specificator.h"
 # include "ft_ldtoa.h"
-# include "get_float.h"
+# include "float_convert.h"
 
-void		get_f(va_list *va_args, t_spec *spec, char *buffer);
+void	get_general_float(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif
