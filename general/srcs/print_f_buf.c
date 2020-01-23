@@ -12,21 +12,6 @@
 
 #include "print_f_buf.h"
 
-int			fill_f_w_field(int i, t_spec *spec, char sign)
-{
-	char	ch;
-	int		len;
-
-	len = i;
-	ch = get_float_fill_ch(spec);
-	while (i + (sign > 0) < spec->width.value)
-	{
-		ft_putchar(ch);
-		i++;
-	}
-	return (i - len);
-}
-
 int			print_float_buf(char *f, t_spec *spec)
 {
 	int i;
@@ -56,19 +41,19 @@ int			print_f_buf(char *f, t_spec *spec, char sign, int is_dot)
 	{
 		i += print_sign(sign);
 		i += print_float_buf(f, spec);
-		i += fill_f_w_field(i, spec, '\0');
+		i += fill_w_field(i, spec, '\0', 0);
 	}
 	else
 	{
 		if (get_float_fill_ch(spec) == ' ')
 		{
-			i += fill_f_w_field((int)ft_strlen(f) - is_dot, spec, sign);
+			i += fill_w_field((int)ft_strlen(f) - is_dot, spec, sign, 0);
 			i += print_sign(sign);
 		}
 		else
 		{
 			i += print_sign(sign);
-			i += fill_f_w_field((int)ft_strlen(f) - is_dot, spec, sign);
+			i += fill_w_field((int)ft_strlen(f) - is_dot, spec, sign, 0);
 		}
 		i += print_float_buf(f, spec);
 	}

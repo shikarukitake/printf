@@ -6,30 +6,30 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 20:03:01 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/22 20:14:26 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:01:05 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print_digit_buf.h"
 
-int		fill_prefix_width_field(int i, t_spec *spec, int prefix)
-{
-	char	ch;
-	int		len;
-	int		diff;
-
-	len = i;
-	diff = get_diff(i, spec);
-	ch = get_fill_ch(i + prefix, spec);
-	if (is_oct_prefix(spec) && diff != 0)
-		prefix = 0;
-	while (i + diff + prefix < spec->width.value)
-	{
-		ft_putchar(ch);
-		i++;
-	}
-	return (i - len);
-}
+//int		fill_prefix_width_field(int i, t_spec *spec, int prefix)
+//{
+//	char	ch;
+//	int		len;
+//	int		diff;
+//
+//	len = i;
+//	diff = get_diff(i, spec);
+//	ch = get_fill_ch(i + prefix, spec);
+//	if (is_oct_prefix(spec) && diff != 0)
+//		prefix = 0;
+//	while (i + diff + prefix < spec->width.value)
+//	{
+//		ft_putchar(ch);
+//		i++;
+//	}
+//	return (i - len);
+//}
 
 int		check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
@@ -85,19 +85,19 @@ int 	print_d_buf_left(t_d_pair *p, t_spec *spec, t_put_prefix pp, int is_prefix)
 	{
 		if (get_fill_ch(ft_strlen(p->d), spec) == ' ')
 		{
-			i += fill_prefix_width_field((int) ft_strlen(p->d), spec, is_prefix);
+			i += fill_w_field((int) ft_strlen(p->d), spec, 0, is_prefix);
 			i += pp(p->d, spec, NULL);
 		}
 		else
 		{
 			i += pp(p->d, spec, NULL);
-			i += fill_prefix_width_field((int)ft_strlen(p->d), spec, is_prefix);
+			i += fill_w_field((int)ft_strlen(p->d), spec, 0, is_prefix);
 		}
 		i += fill_prec_and_print(p->d, p->pd, spec);
 	}
 	else
 	{
-		i += fill_prefix_width_field(ft_strlen(p->d), spec, is_prefix);
+		i += fill_w_field(ft_strlen(p->d), spec, 0, is_prefix);
 		if (is_prefix)
 			i += pp(p->d, spec, NULL);
 		i += fill_prec_and_print(p->d, p->pd, spec);
@@ -121,7 +121,7 @@ int		print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
 			i += pp(digit, spec, NULL);
 		i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
 		i += print_buf(digit);
-		i += fill_width_field(i, spec);
+		i += fill_w_field(i, spec, 0, 0);
 	}
 	else
 	{

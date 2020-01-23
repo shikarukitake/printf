@@ -1,19 +1,27 @@
-//
-// Created by Aletha Yellin on 17/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_buffered_char.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 16:45:40 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/23 16:47:02 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #define MAX_OUTPUT_BUFF_SIZE 10000
 
 #include "put_bch.h"
 #include <unistd.h>
 
-static int g_was_init;
+static int	g_was_init;
 
-char g_printf_buffer[MAX_OUTPUT_BUFF_SIZE];
+char		g_printf_buffer[MAX_OUTPUT_BUFF_SIZE];
 
-static int g_buf_size;
+static int	g_buf_size;
 
-int flush_buffer()
+int			flush_buffer(void)
 {
 	int count;
 
@@ -23,31 +31,31 @@ int flush_buffer()
 	return (count);
 }
 
-void init()
+void		init(void)
 {
 	ft_bzero(g_printf_buffer, MAX_OUTPUT_BUFF_SIZE);
 	g_was_init = 1;
 }
 
-int put_bch(char ch)
+int			put_bch(char ch)
 {
 	int count;
 
 	count = 0;
-	if (! g_was_init)
+	if (!g_was_init)
 		init();
 	if (g_buf_size < MAX_OUTPUT_BUFF_SIZE)
-		g_printf_buffer[g_buf_size ++] = ch;
+		g_printf_buffer[g_buf_size++] = ch;
 	else
 	{
 		count = flush_buffer();
-		count ++;
+		count++;
 		ft_putchar(ch);
 	}
 	return (count);
 }
 
-size_t put_bstr(char *s)
+size_t		put_bstr(char *s)
 {
 	size_t i;
 	size_t all;
@@ -55,6 +63,6 @@ size_t put_bstr(char *s)
 	i = 0;
 	all = 1;
 	while (i < ft_strlen(s))
-		all = put_bch(s[i ++]);
+		all = put_bch(s[i++]);
 	return (all);
 }

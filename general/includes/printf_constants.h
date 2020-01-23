@@ -29,11 +29,7 @@
 
 # define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgGD"
 
-# define FT_PRINTF_TYPES "ncpsdiouxXaAeEfFgG%"
-
 # define MAX_CHAR_BUF_SIZE 5
-
-# define FT_CHAR_NULL "^@"
 
 # define FT_PRINTF_FLAGS "-+ #0"
 
@@ -43,9 +39,9 @@
 
 # define HEX_BIG_PREFIX "0X"
 
-# define BIN_PREFIX	"0b"
-
 # define OCT_PREFIX "0"
+
+#define NULL_STR "(null)"
 
 typedef unsigned long long	t_ull;
 

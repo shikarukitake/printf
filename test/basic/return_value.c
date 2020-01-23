@@ -25,5 +25,5 @@ static char *nw_test()
 
 int main()
 {
-	test_all("RETURN VALUES", 3, extra_wh_test, nums_test, nw_test);
+	test_all("RETURN VALUES", 3, simple_test, nums_test, nw_test);
 }

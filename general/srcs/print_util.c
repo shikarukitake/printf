@@ -1,6 +1,14 @@
-//
-// Created by Aletha Yellin on 22/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 16:47:22 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/23 16:48:21 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "print_util.h"
 
@@ -26,22 +34,35 @@ int		print_sign(char sign)
 	return (0);
 }
 
-int		fill_width_field(int i, t_spec *spec)
+
+
+int 	fill_w_field(int i, t_spec *spec, char sign, int prefix)
 {
 	char	ch;
 	int		len;
 	int		diff;
 
 	len = i;
-	diff = get_diff(i, spec);
-	ch = get_fill_ch(i, spec);
-	while (i + diff < spec->width.value)
+	if (spec->type == 'f')
+	{
+		ch = get_float_fill_ch(spec);
+		diff = 0;
+	}
+	else
+	{
+		diff = get_diff(i, spec);
+		ch = get_fill_ch(i + (sign > 0) + prefix, spec);
+	}
+	if (is_oct_prefix(spec) && diff != 0)
+		prefix = 0;
+	while (i + diff + prefix + (sign > 0) < spec->width.value)
 	{
 		ft_putchar(ch);
 		i++;
 	}
 	return (i - len);
 }
+
 
 int		fill_precision_field(char *buf, t_spec *spec)
 {
@@ -60,4 +81,3 @@ int		fill_precision_field(char *buf, t_spec *spec)
 	}
 	return (i);
 }
-
