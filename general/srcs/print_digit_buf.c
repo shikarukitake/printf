@@ -6,30 +6,11 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 20:03:01 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/23 17:01:05 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:25:22 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print_digit_buf.h"
-
-//int		fill_prefix_width_field(int i, t_spec *spec, int prefix)
-//{
-//	char	ch;
-//	int		len;
-//	int		diff;
-//
-//	len = i;
-//	diff = get_diff(i, spec);
-//	ch = get_fill_ch(i + prefix, spec);
-//	if (is_oct_prefix(spec) && diff != 0)
-//		prefix = 0;
-//	while (i + diff + prefix < spec->width.value)
-//	{
-//		ft_putchar(ch);
-//		i++;
-//	}
-//	return (i - len);
-//}
 
 int		check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 {
@@ -50,7 +31,7 @@ int		check_is_prefix(char *digit, t_spec *spec, t_put_prefix pp)
 		return (0);
 }
 
-int		prepare_prefixed_pbuf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
+int		prepare_pbuf(char *digit, t_spec *spec, char *dig_buf, t_put_prefix p)
 {
 	int was_prefix;
 
@@ -76,29 +57,29 @@ int		fill_prec_and_print(char *digit, char *pdigit, t_spec *spec)
 	return (i);
 }
 
-int 	print_d_buf_left(t_d_pair *p, t_spec *spec, t_put_prefix pp, int is_prefix)
+int		print_d_buf_left(t_d_pair *p, t_spec *spec, t_put_prefix pp, int is_p)
 {
 	int i;
 
 	i = 0;
-	if (is_prefix && spec->flags['0'] == TRUE)
+	if (is_p && spec->flags['0'] == TRUE)
 	{
 		if (get_fill_ch(ft_strlen(p->d), spec) == ' ')
 		{
-			i += fill_w_field((int) ft_strlen(p->d), spec, 0, is_prefix);
+			i += fill_w_field((int)ft_strlen(p->d), spec, 0, is_p);
 			i += pp(p->d, spec, NULL);
 		}
 		else
 		{
 			i += pp(p->d, spec, NULL);
-			i += fill_w_field((int)ft_strlen(p->d), spec, 0, is_prefix);
+			i += fill_w_field((int)ft_strlen(p->d), spec, 0, is_p);
 		}
 		i += fill_prec_and_print(p->d, p->pd, spec);
 	}
 	else
 	{
-		i += fill_w_field(ft_strlen(p->d), spec, 0, is_prefix);
-		if (is_prefix)
+		i += fill_w_field(ft_strlen(p->d), spec, 0, is_p);
+		if (is_p)
 			i += pp(p->d, spec, NULL);
 		i += fill_prec_and_print(p->d, p->pd, spec);
 	}
@@ -109,24 +90,24 @@ int		print_d_buf(char *digit, t_spec *spec, t_put_prefix pp)
 {
 	int			i;
 	int			is_prefix;
-	char		prefixed_digit[MAX_HEX_BUF_SIZE];
+	char		prefixd[MAX_HEX_BUF_SIZE];
 	t_d_pair	pair;
 
 	i = 0;
 	is_prefix = check_is_prefix(digit, spec, pp);
-	prepare_prefixed_pbuf(digit, spec, prefixed_digit, pp);
+	prepare_pbuf(digit, spec, prefixd, pp);
 	if (spec->flags['-'] == TRUE)
 	{
 		if (is_prefix)
 			i += pp(digit, spec, NULL);
-		i += fill_precision_field((spec->type == 'o' ? prefixed_digit : digit), spec);
+		i += fill_precision_field((spec->type == 'o' ? prefixd : digit), spec);
 		i += print_buf(digit);
 		i += fill_w_field(i, spec, 0, 0);
 	}
 	else
 	{
 		pair.d = digit;
-		pair.pd = prefixed_digit;
+		pair.pd = prefixd;
 		i += print_d_buf_left(&pair, spec, pp, is_prefix);
 	}
 	return (i);

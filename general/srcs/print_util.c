@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:47:22 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/23 16:48:21 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:23:36 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int		print_sign(char sign)
 	return (0);
 }
 
-
-
-int 	fill_w_field(int i, t_spec *spec, char sign, int prefix)
+int		fill_w_field(int i, t_spec *spec, char sign, int prefix)
 {
 	char	ch;
 	int		len;
@@ -62,7 +60,6 @@ int 	fill_w_field(int i, t_spec *spec, char sign, int prefix)
 	}
 	return (i - len);
 }
-
 
 int		fill_precision_field(char *buf, t_spec *spec)
 {
