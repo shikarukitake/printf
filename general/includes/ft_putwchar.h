@@ -20,4 +20,6 @@
 
 void	ft_putwchar(wchar_t wch);
 
+int			ft_wchlen(wchar_t wch);
+
 #endif

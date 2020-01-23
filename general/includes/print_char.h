@@ -20,8 +20,10 @@
 # include "ft_putwchar.h"
 # include "print_str.h"
 
-int	ft_print_c(t_spec *spec, va_list *args);
+int		ft_print_c(t_spec *spec, va_list *args);
 
-int	print_char(int c, t_spec *spec);
+int		print_char(int c, t_spec *spec);
+
+int		ft_print_cc(t_spec *spec, va_list *args);
 
 #endif

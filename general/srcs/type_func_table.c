@@ -16,10 +16,10 @@ static int	g_was_table_init = 0;
 
 int			(*g_type_func_table[MAX_TYPE_FUNC_TABLE])(t_spec *, va_list *);
 
-int			init_type_func_table(void)
+void		init_type_func_table(void)
 {
 	if (g_was_table_init)
-		return (0);
+		return ;
 	g_was_table_init = 1;
 	g_type_func_table[0] = ft_print_empty;
 	g_type_func_table['s'] = ft_print_s;
@@ -31,6 +31,7 @@ int			init_type_func_table(void)
 	g_type_func_table['X'] = ft_print_xx;
 	g_type_func_table['u'] = ft_print_u;
 	g_type_func_table['c'] = ft_print_c;
+	g_type_func_table['C'] = ft_print_cc;
 	g_type_func_table['p'] = ft_print_p;
 	g_type_func_table['f'] = ft_print_f;
 	g_type_func_table['q'] = ft_print_color;
@@ -42,7 +43,6 @@ int			init_type_func_table(void)
 	g_type_func_table['g'] = ft_print_f;
 	g_type_func_table['G'] = ft_print_f;
 	g_type_func_table['D'] = ft_print_dd;
-	return (1);
 }
 
 int			call_print_func(const char *format, va_list *vargs, int offset)

@@ -27,7 +27,7 @@
 
 # define MAX_LD_BUF_SIZE 10000
 
-# define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgGD"
+# define FT_PRINTF_SPEC_TYPES "ncpsdiouxXaAeEfFgGDC"
 
 # define MAX_CHAR_BUF_SIZE 5
 

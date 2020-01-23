@@ -71,7 +71,7 @@ ADD_EXECUTABLE_MU_TEST(pft_f_test test/f_tests/pft_f_test.c)
 ADD_EXECUTABLE_MU_TEST(mouli_f_test test/f_tests/mouli_f_test.c)
 ADD_EXECUTABLE_MU_TEST(big_d_test test/big_d_test/simple_big_d_test.c)
 ADD_EXECUTABLE_MU_TEST(simple_e_test test/e_tests/simple_e_test.c)
-
+ADD_EXECUTABLE_MU_TEST(wchar_test test/bonus/wchar_test.c)
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})

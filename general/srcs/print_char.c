@@ -69,3 +69,13 @@ int			ft_print_c(t_spec *spec, va_list *args)
 		ft_putwchar((wchar_t)va_arg(*args, wint_t));
 	return (1);
 }
+
+int			ft_print_cc(t_spec *spec, va_list *args)
+{
+	wchar_t	wch;
+
+	((void)spec);
+	wch = (wchar_t)va_arg(*args, wint_t);
+	ft_putwchar(wch);
+	return (ft_wchlen(wch));
+}

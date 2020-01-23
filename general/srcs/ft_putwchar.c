@@ -47,14 +47,27 @@ static void	ft_put_oct2(wchar_t wchar)
 	write(1, buf, 2);
 }
 
+int			ft_wchlen(wchar_t wch)
+{
+	if (wch <= 127)
+		return (1);
+	else if (wch > 127 && wch <= 2047)
+		return (2);
+	else if (wch > 2047 && wch < 65535)
+		return (3);
+	else if (wch > 65535 && wch < 1114111)
+		return (4);
+	return (0);
+}
+
 void		ft_putwchar(wchar_t wch)
 {
 	if (wch <= 127)
 		ft_putchar(wch);
-	else if (wch > 127 && wch <= 2047)
+	else if (wch >= 128 && wch <= 2047)
 		ft_put_oct2(wch);
-	else if (wch > 2047 && wch < 65535)
+	else if (wch >= 2049 && wch <= 65535)
 		ft_put_oct3(wch);
-	else if (wch > 65535 && wch < 1114111)
+	else if (wch >= 65536 && wch <= 1114111)
 		ft_put_oct4(wch);
 }
