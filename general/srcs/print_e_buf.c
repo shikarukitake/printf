@@ -7,7 +7,7 @@
 
 int		print_e_buf(char *e, t_spec *spec, char a)
 {
-	print_f_buf(e, spec);
+	print_f(e, spec);
 	ft_putchar(a);
 	return (0);
 }

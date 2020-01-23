@@ -21,9 +21,10 @@
 # include "put_bch.h"
 # include "print_digit_buf.h"
 # include "print_str.h"
+# include "float_util.h"
+# include "round_float.h"
+# include "prepare_f_buf.h"
 
-void	round_float(char *buf, int precision);
-
-int		print_f_buf(char *f, t_spec *spec);
+int		print_f(char *f, t_spec *spec);
 
 #endif

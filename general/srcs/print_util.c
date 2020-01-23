@@ -4,7 +4,6 @@
 
 #include "print_util.h"
 
-
 char	get_sign(char *digit, t_spec *spec)
 {
 	if (digit[0] == '-')

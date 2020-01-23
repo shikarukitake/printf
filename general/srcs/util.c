@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 19:31:48 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/22 19:32:13 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 16:29:48 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t		print_buf(const char *buf)
 	return (ft_strlen(buf));
 }
 
-int		ft_arr_find(const char **str_arr, size_t size, const char *s)
+int			ft_arr_find(const char **str_arr, size_t size, const char *s)
 {
 	int i;
 
