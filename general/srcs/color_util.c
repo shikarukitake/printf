@@ -6,19 +6,18 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 22:54:46 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 22:57:35 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:54:47 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color_util.h"
 
-const t_str_pair	g_colors[] = {
-		{"nrm", KNRM},
-		{"red", KRED},
-		{"grn", KGRN},
-		{"yel", KYEL},
-		{"blu", KBLU},
-		{"eoc", KNRM}};
+const t_str_pair	g_colors[] = {{"nrm", KNRM},
+	{"red", KRED},
+	{"grn", KGRN},
+	{"yel", KYEL},
+	{"blu", KBLU},
+	{"eoc", KNRM}};
 
 int					find_color_id(char color[3])
 {

@@ -14,7 +14,7 @@
 
 char		get_str_fill_ch(t_spec *spec)
 {
-	if (spec->type == 's' &&
+	if ((spec->type == 's' || spec->type == 'c') &&
 			spec->flags['0'] == TRUE &&
 			spec->flags['-'] == FALSE)
 		return ('0');

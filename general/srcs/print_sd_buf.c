@@ -6,28 +6,11 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:51:11 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/23 16:59:17 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:28:51 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print_sd_buf.h"
-
-//int		fill_sign_width_field(int i, t_spec *spec, char sign)
-//{
-//	char	ch;
-//	int		len;
-//	int		diff;
-//
-//	len = i;
-//	diff = get_diff(i, spec);
-//	ch = get_fill_ch(i + (sign > 0), spec);
-//	while (i + diff + (sign > 0) < spec->width.value)
-//	{
-//		ft_putchar(ch);
-//		i++;
-//	}
-//	return (i - len);
-//}
 
 char	prepare_sd_buf(char *digit, t_spec *spec)
 {

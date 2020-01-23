@@ -1,14 +1,22 @@
-//
-// Created by Aletha Yellin on 21/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   long_arithmetic.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 17:42:31 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/23 17:44:49 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "long_arithmetic.h"
 
-void multiply_by_2(char *buf, int size, unsigned n)
+void		multiply_by_2(char *buf, int size, unsigned n)
 {
-	int carry;
-	int i;
-	unsigned p;
+	int			carry;
+	int			i;
+	unsigned	p;
 
 	p = 0;
 	while (p < n)
@@ -20,13 +28,13 @@ void multiply_by_2(char *buf, int size, unsigned n)
 			carry = carry + buf[i] * 2;
 			buf[i] = carry % 10;
 			carry /= 10;
-			i ++;
+			i++;
 		}
-		p ++;
+		p++;
 	}
 }
 
-void set_res(char *result, int i, int swap, int direct)
+void		set_res(char *result, int i, int swap, int direct)
 {
 	if (swap < 10)
 		result[i] = swap;
@@ -40,7 +48,7 @@ void set_res(char *result, int i, int swap, int direct)
 	}
 }
 
-void	long_sum(char *to_sum, char *result, int n, int direct)
+void		long_sum(char *to_sum, char *result, int n, int direct)
 {
 	int i;
 	int swap;
@@ -51,11 +59,11 @@ void	long_sum(char *to_sum, char *result, int n, int direct)
 		swap = result[i] + to_sum[i];
 		if (swap != 0 && to_sum[i] != 0)
 			set_res(result, i, swap, direct);
-		i ++;
+		i++;
 	}
 }
 
-void	divide_by_2(char *divided, int n)
+void		divide_by_2(char *divided, int n)
 {
 	int i;
 
@@ -65,11 +73,11 @@ void	divide_by_2(char *divided, int n)
 		if (divided[i] % 2 == 1)
 			divided[i + 1] += 10;
 		divided[i] /= 2;
-		i ++;
+		i++;
 	}
 }
 
-void	rev_divide_by_2(char *divided, int n)
+void		rev_divide_by_2(char *divided, int n)
 {
 	int i;
 
@@ -80,12 +88,12 @@ void	rev_divide_by_2(char *divided, int n)
 	{
 		if (divided[i] == 0)
 		{
-			i --;
+			i--;
 			continue;
 		}
 		if (divided[i] % 2 == 1 && i != 0)
 			divided[i - 1] += 10;
 		divided[i] /= 2;
-		i --;
+		i--;
 	}
 }
