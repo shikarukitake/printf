@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 21:50:30 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 21:52:01 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:59:26 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "print_hex_buf.h"
 # include "print_digit_buf.h"
 # include "print_d_buf.h"
-#include "print_sd_buf.h"
+# include "print_sd_buf.h"
 
 int		ft_print_d(t_spec *spec, va_list *args);
 

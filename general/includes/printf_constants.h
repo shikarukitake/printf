@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 22:18:20 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 22:29:01 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/23 17:57:41 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define MAX_SPECS 5
 
-#define MAX_TYPE_FUNC_TABLE 255
+# define MAX_TYPE_FUNC_TABLE 255
 
 # define MAX_LL_BUFF_SIZE 80
 
@@ -41,7 +41,7 @@
 
 # define OCT_PREFIX "0"
 
-#define NULL_STR "(null)"
+# define NULL_STR "(null)"
 
 typedef unsigned long long	t_ull;
 

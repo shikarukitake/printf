@@ -1,6 +1,14 @@
-//
-// Created by Aletha Yellin on 22/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_util.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 17:57:16 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/23 17:57:24 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PRINTF_PRINT_UTIL_H
 # define PRINTF_PRINT_UTIL_H
@@ -19,4 +27,4 @@ int		print_sign(char sign);
 
 char	get_sign(char *digit, t_spec *spec);
 
-#endif //PRINTF_PRINT_UTIL_H
+#endif
