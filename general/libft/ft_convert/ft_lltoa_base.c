@@ -1,30 +1,31 @@
-//
-// Created by Aletha Yellin on 29/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lltoa_base.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/27 19:21:49 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/27 19:44:06 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 
-typedef struct s_lldiv
-{
-	long long qout;
-	long long rem;
-
-}				t_lldiv;
-
-static t_lldiv ll_div(long long value, int base)
+static t_lldiv	ll_div(long long value, int base)
 {
 	t_lldiv r;
 
 	r.qout = (value) / base;
-	r.rem  = (value) % base;
+	r.rem = (value) % base;
 	return (r);
 }
 
-static char	ft_convert(long long *ll, int base, char a)
+static char		ft_convert(long long *ll, int base, char a)
 {
-	t_lldiv r;
-	char ch;
+	t_lldiv		r;
+	char		ch;
 
 	r = ll_div(*ll, base);
 	*ll = r.qout;
@@ -32,7 +33,7 @@ static char	ft_convert(long long *ll, int base, char a)
 	return (ch);
 }
 
-static int	ft_is_border(long long *value, int *is_neg, char *str)
+static int		ft_is_border(long long *value, int *is_neg, char *str)
 {
 	if (*value == 0)
 	{
@@ -52,7 +53,7 @@ static int	ft_is_border(long long *value, int *is_neg, char *str)
 	return (0);
 }
 
-char	*ft_lltoa_base(long long ll, char *str, int base, char a)
+char			*ft_lltoa_base(long long ll, char *str, int base, char a)
 {
 	int is_neg;
 	int i;
@@ -73,4 +74,3 @@ char	*ft_lltoa_base(long long ll, char *str, int base, char a)
 	ft_strrev(str);
 	return (str);
 }
-

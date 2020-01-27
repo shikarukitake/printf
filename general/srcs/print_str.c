@@ -6,7 +6,7 @@
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:48:29 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/23 16:50:06 by ayellin          ###   ########.fr       */
+/*   Updated: 2020/01/27 19:47:28 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			fill_str_field(const char *str, t_spec *spec)
 		i = (spec->precision.is_dot == TRUE ? 0 : (int)ft_strlen(str));
 	else
 	{
-		i = MIN(spec->precision.value, (int)ft_strlen(str));
+		i = ft_min(spec->precision.value, (int)ft_strlen(str));
 		if (ft_strlen(str) == 0)
 			i = 0;
 	}

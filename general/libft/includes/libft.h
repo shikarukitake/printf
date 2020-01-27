@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/27 19:09:23 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/27 19:50:11 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -5,36 +17,32 @@
 # include <limits.h>
 
 # ifdef __linux__
-#	include <sys/types.h>
-#	define LONG_LONG_MIN LLONG_MIN
-#	define OPEN_MAX 1024
+#  include <sys/types.h>
+#  define LONG_LONG_MIN LLONG_MIN
+#  define OPEN_MAX 1024
 # endif
 
 typedef unsigned char		t_uchar;
 typedef	unsigned long long	t_ull;
 
-# define FT_INT_MIN (-2147483647 -1)
+# define FT_INT_MIN -2147483648l
 # define FT_INT_MIN_STR "-2147483648"
-# define FT_INT_MAX (2147483647)
+# define FT_INT_MAX 2147483647
 # define FT_LONG_LONG_MIN_STR "-9223372036854775808"
 # define FT_CHAR_MAX 128
-# define FT_NULL ((void*)0)
-# define FT_SIZE_T_MAX  (18446744073709551615u)
-# define FT_NEAR_LLONG_MAX (922337203685477580ul)
-# define ULLONG_MAX_DIGITS (sizeof(t_ull) * 8 + 1)
+# define FT_NULL 0
+# define FT_SIZE_T_MAX  18446744073709551615u
+# define FT_NEAR_LLONG_MAX 922337203685477580ul
+# define ULLONG_MAX_DIGITS 80
 # define FT_LONG_LONG_MIN LONG_LONG_MIN
-
-# define MIN(x, y) ((x) < (y) ? (x) : (y))
-# define MAX(x, y) ((x) > (y) ? (x) : (y))
 
 # define FT_TRUE 1
 # define FT_FALSE 0
 
-
-
 /*
  ** Part1:
 */
+
 size_t			ft_strlen(const char *str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -144,6 +152,8 @@ unsigned		ft_sqrt(unsigned x);
 int				ft_ispsqrt(unsigned x);
 int				ft_count_digits(int n);
 int				ft_power(int base, int n);
+int				ft_min(int a, int b);
+int				ft_max(int a, int b);
 
 /*
  ** Matrix expansion:
@@ -168,19 +178,36 @@ int				get_next_line(const int fd, char **line);
 
 void			ft_init_arr(char *arr, size_t size, int value);
 int				ft_int_arr_cmp(int *a1, int *a2, size_t size);
-void 			ft_exit(void *mem, const char *msg);
-
+void			ft_exit(void *mem, const char *msg);
 
 /*
  ** printf functions
- */
+*/
 
 char			*ft_lltoa(long long ll, char *str);
 void			ft_putll_fd(long long l, const int fd);
 void			ft_putll(long long l);
 char			*ft_itoa_base(int value, char *buffer, int base, char a);
 char			*ft_lltoa_base(long long ll, char *str, int base, char a);
-char			*ft_uitoa_base(unsigned int value, char *buffer, int base, char a);
+char			*ft_uitoa_base(unsigned int v, char *buf, int b, char a);
 char			*ft_ulltoa_base(t_ull ull, char *str, int base, char a);
+
+/*
+ ** Convert funcs and structs
+*/
+
+typedef struct	s_lldiv
+{
+	long long qout;
+	long long rem;
+
+}				t_lldiv;
+
+typedef struct	s_ulldiv
+{
+	t_ull qout;
+	t_ull rem;
+
+}				t_ulldiv;
 
 #endif
