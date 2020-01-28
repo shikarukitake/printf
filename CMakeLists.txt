@@ -3,8 +3,9 @@ project(printf C)
 set(CMAKE_C_STANDARD 11)
 
 
-set(CMAKE_CXX_FLAGS "-Wall -Werror")
+#set(CMAKE_CXX_FLAGS "-Wall -Werror")
 
+set(CMAKE_C_FLAGS  "-O3")
 #includes
 include_directories(general)
 include_directories(test)
@@ -14,8 +15,6 @@ include_directories(test/libmu)
 
 # Usage example of original printf
 add_executable(Usage other/main_usage.c)
-
-
 
 # Libft with getline
 file(GLOB_RECURSE LIBFT_FILES "${PROJECT_SOURCE_DIR}/general/libft/ft_*.c")
@@ -72,7 +71,7 @@ ADD_EXECUTABLE_MU_TEST(pft_f_test test/f_tests/pft_f_test.c)
 ADD_EXECUTABLE_MU_TEST(mouli_f_test test/f_tests/mouli_f_test.c)
 ADD_EXECUTABLE_MU_TEST(big_d_test test/big_d_test/simple_big_d_test.c)
 ADD_EXECUTABLE_MU_TEST(simple_e_test test/e_tests/simple_e_test.c)
-
+ADD_EXECUTABLE_MU_TEST(wchar_test test/bonus/wchar_test.c)
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)
     add_executable(${EXEC_NAME} ${PATH})

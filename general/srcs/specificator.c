@@ -1,11 +1,18 @@
-//
-// Created by Aletha Yellin on 25/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specificator.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 19:27:15 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 19:27:52 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "specificator.h"
 
-
-t_spec	*init_spec()
+t_spec	*init_spec(void)
 {
 	t_spec	*new;
 	int		i;
@@ -23,7 +30,6 @@ t_spec	*init_spec()
 	new->precision.is_dot = FALSE;
 	while (i < MAX_FLAGS)
 		new->flags[i++] = FALSE;
-	new->settings.color_id = -1;
-	new->settings.fd = 1;
+	new->color_id = -1;
 	return (new);
 }

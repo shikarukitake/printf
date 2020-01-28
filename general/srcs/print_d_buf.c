@@ -1,18 +1,28 @@
-//
-// Created by dan on 1/15/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_d_buf.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 17:43:27 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/23 17:43:52 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "print_d_buf.h"
 
-int is_need_wh(const char *buf, t_spec *spec)
+int		is_need_wh(const char *buf, t_spec *spec)
 {
 	return (spec->flags[' '] == TRUE
 			&& spec->flags['+'] == FALSE
 			&& buf[0] != '-'
-			&& (spec->type == 'd' ||spec->type == 'i' || spec->type == 'f'));
+			&& (spec->type == 'd' ||
+				spec->type == 'i' ||
+				spec->type == 'f'));
 }
 
-int put_sign_prefix(const char *buf, t_spec *spec, char *dest)
+int		put_sign_prefix(const char *buf, t_spec *spec, char *dest)
 {
 	int i;
 

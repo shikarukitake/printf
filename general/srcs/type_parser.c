@@ -1,6 +1,14 @@
-//
-// Created by Aletha Yellin on 25/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   type_parser.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 19:28:28 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/22 19:29:47 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "printf_constants.h"
 #include "specificator.h"
@@ -13,8 +21,7 @@ int		parse_type(const char *format, t_spec *spec)
 	ptr = ft_strchr(FT_PRINTF_SPEC_TYPES, format[0]);
 	if (!ptr)
 	{
-
-		if(format[0] == '%')
+		if (format[0] == '%')
 		{
 			spec->type = '%';
 			return (1);

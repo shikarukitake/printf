@@ -22,12 +22,12 @@ static char *digit_test2()
 	return (0);
 }
 
-// EXTRA TEST
-static char *one_percent()
-{
-	mu_assert_printf("one percent and digits", ft_printf, "1%2", MU_NULL);
-	return (0);
-}
+//// EXTRA TEST
+//static char *one_percent()
+//{
+//	mu_assert_printf("one percent and digits", ft_printf, "1%2", MU_NULL);
+//	return (0);
+//}
 
 static char *only_percent()
 {
@@ -53,16 +53,22 @@ static char *zero_flag_test()
     return (0);
 }
 
+static char *percent_return()
+{
+	mu_assert_printf_return("basic", ft_printf, "%%", MU_NULL);
+	return (0);
+}
+
 int main(void)
 {
 	test_all("JUST PERCENT", 8,
 			 simple_test,
 			 digit_test,
 			 digit_test2,
-			 one_percent,
 			 one_percent2,
 			 only_percent,
 			 too_much_wh,
-			 zero_flag_test);
+			 zero_flag_test,
+			 percent_return);
 	return (0);
 }

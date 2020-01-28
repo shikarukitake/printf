@@ -1,27 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ulltoa_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/27 19:42:31 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/27 19:43:50 by ayellin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-#define ULONG_LONG_MAX_DIGITS (sizeof(t_ull) * 8 + 1)
-
-typedef struct s_ulldiv
-{
-	t_ull qout;
-	t_ull rem;
-
-}				t_ulldiv;
-
-static t_ulldiv ull_div(t_ull value, int base)
+static t_ulldiv	ull_div(t_ull value, int base)
 {
 	t_ulldiv r;
 
 	r.qout = (value) / base;
-	r.rem  = (value) % base;
+	r.rem = (value) % base;
 	return (r);
 }
 
-static char	ft_convert(t_ull *ll, int base, char a)
+static char		ft_convert(t_ull *ll, int base, char a)
 {
-	t_ulldiv r;
-	char ch;
+	t_ulldiv	r;
+	char		ch;
 
 	r = ull_div(*ll, base);
 	*ll = r.qout;
@@ -29,7 +32,7 @@ static char	ft_convert(t_ull *ll, int base, char a)
 	return (ch);
 }
 
-static int	ft_is_border(t_ull value, char *str)
+static int		ft_is_border(t_ull value, char *str)
 {
 	if (value == 0)
 	{
@@ -39,7 +42,7 @@ static int	ft_is_border(t_ull value, char *str)
 	return (0);
 }
 
-char	*ft_ulltoa_base(t_ull ull, char *str, int base, char a)
+char			*ft_ulltoa_base(t_ull ull, char *str, int base, char a)
 {
 	int i;
 
