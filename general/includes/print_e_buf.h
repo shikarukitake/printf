@@ -25,4 +25,6 @@
 
 int		print_e_buf(char *e, t_spec *spec, char a, t_ld *ld);
 
+int		place_dot(char *e, int exp);
+
 #endif

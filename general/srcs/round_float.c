@@ -44,7 +44,7 @@ void		round_int_part(char *buf)
 		else
 		{
 			buf[i] += 1;
-			break;
+			break ;
 		}
 		i--;
 	}

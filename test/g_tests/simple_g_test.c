@@ -12,9 +12,9 @@ static char *test_simple()
 {
 	double d;
 
-	d =  881.15625;
+	d =  881.3455432;
 	mu_assert_printf("test1", ft_printf, "%g", d);
-	d = -881.123;
+	d = 881.3455432;
 	mu_assert_printf("test2", ft_printf, "%g", d);
 	return (0);
 }
@@ -95,9 +95,27 @@ static char *test_simple9()
 	return (0);
 }
 
+static char *test_simple10()
+{
+	double d;
+
+	d = 10000;
+	mu_assert_printf("test nines", ft_printf, "%g", d);
+	return (0);
+}
+
+static char *test_simple11()
+{
+	double d;
+
+	d = 23.999999999;
+	mu_assert_printf("test nines", ft_printf, "%#g", d);
+	return (0);
+}
+
 int main()
 {
-	test_all("SIMPLE G TESTS", 9,
+	test_all("SIMPLE G TESTS", 11,
 			test_simple,
 			test_simple2,
 			test_simple3,
@@ -106,6 +124,8 @@ int main()
 			test_simple6,
 			test_simple7,
 			test_simple8,
-			test_simple9);
+			test_simple9,
+			test_simple10,
+			test_simple11);
 	return (0);
 }

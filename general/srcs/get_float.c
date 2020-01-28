@@ -18,6 +18,7 @@ static int	is_double(t_spec *spec)
 			spec->size.value[0] == 'l' ||
 			spec->size.value[0] == 'h');
 }
+
 t_ld		get_general_float(va_list *va_args, t_spec *spec, char *buffer)
 {
 	t_ld	ld;

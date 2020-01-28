@@ -44,16 +44,23 @@ int		ft_print_g(t_spec *spec, va_list *args)
 	char	*buffer;
 	int		count;
 	t_ld	ld;
+	int		p;
+	int		x;
 
+	p = (spec->precision.value == 0 ? 1 : get_float_precision(spec));
 	buffer = ft_memalloc(MAX_LD_BUF_SIZE + 10);
 	ld = get_general_float(args, spec, buffer);
-	ld.round = '5';
-	if (ld.is_float_part)
-		count = print_e_buf(buffer, spec, spec->type == 'g' ? 'e' : 'E', &ld);
+	x = get_exp(buffer);
+	if (p > x && x >= -4)
+	{
+		spec->precision.value = p - (x + 1);
+		count = print_f(buffer, spec, &ld);
+	}
 	else
 	{
-		spec->precision.value = 0;
-		count = print_f(buffer, spec, &ld);
+		ld.round = '5';
+		spec->precision.value = p - 1;
+		count = print_e_buf(buffer, spec, spec->type == 'g' ? 'e' : 'E', &ld);
 	}
 	free(buffer);
 	return (count);

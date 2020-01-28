@@ -28,7 +28,7 @@ int		float_shift_left_one(char *e)
 	return (0);
 }
 
-int 	str_shift_left(char *buf, int from, int to)
+int		str_shift_left(char *buf, int from, int to)
 {
 	int		i;
 	char	temp;
@@ -77,29 +77,11 @@ int		place_dot(char *e, int exp)
 	return (0);
 }
 
-int 	check_carry(char *e, int exp)
-{
-	int i;
-	int new_e;
-
-	new_e = 0;
-	i = ft_strchri(e, '.');
-	if (i >= ( 2 + (e[0] == '-')))
-	{
-		if (exp <= -1)
-			exp++;
-		else
-			new_e = exp + 1;
-		place_dot(e, exp + 1);
-		return (new_e);
-	}
-	return (exp);
-}
 int		print_e_buf(char *e, t_spec *spec, char a, t_ld *ld)
 {
-	int exp;
-	int i;
-	char tmp[2];
+	int		exp;
+	int		i;
+	char	tmp[2];
 
 	i = 0;
 	exp = get_exp(e);
@@ -107,6 +89,7 @@ int		print_e_buf(char *e, t_spec *spec, char a, t_ld *ld)
 	round_float(e, get_float_precision(spec), ld->round);
 	exp = check_carry(e, exp);
 	add_zeros(e, spec);
+	modify_g_buf(e, spec);
 	tmp[0] = a;
 	tmp[1] = '\0';
 	ft_strcat(e, tmp);

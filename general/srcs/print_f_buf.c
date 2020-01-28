@@ -31,6 +31,8 @@ void		add_zeros(char *buf, t_spec *spec)
 	int f_num;
 	int precision;
 
+	if (spec->type == 'g' || spec->type == 'G')
+		return ;
 	precision = get_float_precision(spec);
 	f_num = 0;
 	i = (int)ft_strchri(buf, '.') + 1;
@@ -52,7 +54,7 @@ int			print_float_buf(char *f, t_spec *spec)
 	int i;
 
 	i = 0;
-	while (f[i] != '.')
+	while (f[i] && f[i] != '.')
 		ft_putchar(f[i++]);
 	if (spec->precision.value != 0)
 	{
@@ -116,5 +118,6 @@ int			print_f(char *f, t_spec *spec, t_ld *ld)
 	}
 	sign = get_sign(f, spec);
 	is_dot = (f[ft_strlen(f) - 1] == '.');
+	modify_g_buf(f, spec);
 	return (print_f_buf(f, spec, sign, is_dot));
 }

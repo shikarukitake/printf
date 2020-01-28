@@ -13,11 +13,16 @@
 #ifndef PRINTF_EXP_UTIL_H
 # define PRINTF_EXP_UTIL_H
 # include "libft.h"
+# include "print_e_buf.h"
 
-void	add_exp(int exp, char * e);
+void	add_exp(int exp, char *e);
 
 int		get_exp(char *e);
 
 int		first_digit(char ch);
+
+int		check_carry(char *e, int exp);
+
+void	modify_g_buf(char *g, t_spec *spec);
 
 #endif

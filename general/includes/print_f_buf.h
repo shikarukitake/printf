@@ -21,6 +21,7 @@
 # include "print_digit_buf.h"
 # include "print_str.h"
 # include "float_util.h"
+# include "exp_util.h"
 # include "round_float.h"
 
 int		print_f(char *f, t_spec *spec, t_ld *ld);
