@@ -23,7 +23,6 @@ typedef struct	s_width
 {
 	int			value;
 	t_bool		is_asterisk;
-	t_bool		extra_wh;
 }				t_width;
 
 typedef struct	s_percision
@@ -47,7 +46,6 @@ typedef struct	s_spec
 	t_width		width;
 	t_precision	precision;
 	t_size		size;
-	int			color_id;
 }				t_spec;
 
 t_spec			*init_spec();

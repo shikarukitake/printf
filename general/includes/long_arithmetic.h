@@ -21,8 +21,4 @@ void	divide_by_2(char *divided, int n);
 
 void	rev_divide_by_2(char *divided, int n);
 
-int		sum_direct_long(char *divided, char *result, int n);
-
-int		sum_reverse_int(char *to_sum, char *result, int n);
-
 #endif

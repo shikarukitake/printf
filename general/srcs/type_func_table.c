@@ -37,11 +37,11 @@ void		init_type_func_table(void)
 	g_type_func_table['q'] = ft_print_color;
 	g_type_func_table['a'] = ft_print_f;
 	g_type_func_table['e'] = ft_print_e;
-	g_type_func_table['E'] = ft_print_ee;
+	g_type_func_table['E'] = ft_print_e;
 	g_type_func_table['f'] = ft_print_f;
 	g_type_func_table['F'] = ft_print_f;
-	g_type_func_table['g'] = ft_print_f;
-	g_type_func_table['G'] = ft_print_f;
+	g_type_func_table['g'] = ft_print_g;
+	g_type_func_table['G'] = ft_print_g;
 	g_type_func_table['D'] = ft_print_dd;
 }
 

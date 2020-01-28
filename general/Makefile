@@ -20,7 +20,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -O3
 
-SRC = bit_util.c            \
+SRC = exp_util.c            \
       color_util.c          \
       flags_parser.c        \
       float_util.c          \
@@ -28,18 +28,11 @@ SRC = bit_util.c            \
       ft_printf.c           \
       ft_putwchar.c         \
       get_digit.c           \
-      get_f.c               \
       get_float.c           \
       get_float_part.c      \
-      get_hex.c             \
       get_int_part.c        \
-      get_oct.c             \
-      get_p.c               \
-      get_sd.c              \
-      get_ud.c              \
       long_arithmetic.c     \
       precision_parser.c    \
-      prepare_f_buf.c       \
       print_basic.c         \
       print_char.c          \
       print_d_buf.c         \
@@ -48,9 +41,7 @@ SRC = bit_util.c            \
       print_f_buf.c         \
       print_float.c         \
       print_hex.c           \
-      print_hex_buf.c       \
       print_oct.c           \
-      print_oct_buf.c       \
       print_other.c         \
       print_sd_buf.c        \
       print_str.c           \
@@ -58,7 +49,6 @@ SRC = bit_util.c            \
       print_util.c          \
       print_ws.c            \
       printf_constants.c    \
-      put_buffered_char.c   \
       round_float.c         \
       size_parser.c         \
       spec_format_parser.c  \

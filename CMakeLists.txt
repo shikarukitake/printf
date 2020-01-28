@@ -25,7 +25,7 @@ add_library(ft STATIC ${LIBFT_FILES})
 
 #printf
 file(GLOB_RECURSE PRINTF_FILES "${PROJECT_SOURCE_DIR}/general/srcs/*.c")
-add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES} general/srcs/get_p.c)
+add_library(ftprintf STATIC ${PRINTF_FILES} ${LIBFT_FILES})
 add_dependencies(ftprintf ft)
 
 # minunit
@@ -71,6 +71,7 @@ ADD_EXECUTABLE_MU_TEST(pft_f_test test/f_tests/pft_f_test.c)
 ADD_EXECUTABLE_MU_TEST(mouli_f_test test/f_tests/mouli_f_test.c)
 ADD_EXECUTABLE_MU_TEST(big_d_test test/big_d_test/simple_big_d_test.c)
 ADD_EXECUTABLE_MU_TEST(simple_e_test test/e_tests/simple_e_test.c)
+ADD_EXECUTABLE_MU_TEST(simple_g_test test/g_tests/simple_g_test.c)
 ADD_EXECUTABLE_MU_TEST(wchar_test test/bonus/wchar_test.c)
 
 function(ADD_EXECUTABLE_MAIN_TEST EXEC_NAME PATH)

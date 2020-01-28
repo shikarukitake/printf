@@ -32,27 +32,29 @@ void		change_first_digits(char *buf)
 void		round_int_part(char *buf)
 {
 	int i;
+	int is_sign;
 
 	i = ft_strchri(buf, '.');
-	if (buf[i - 1] < '9')
-		buf[i - 1] += 1;
-	else
+	is_sign = (buf[0] == '-');
+	i--;
+	while (i >= is_sign)
 	{
-		buf[i - 1] = '0';
-		i--;
-		while (i > 0 && buf[i] == '9')
-		{
+		if (buf[i] == '9')
 			buf[i] = '0';
-			i--;
+		else
+		{
+			buf[i] += 1;
+			break;
 		}
-		if (i == 0 && buf[i + 1] == '0')
-			change_first_digits(buf);
+		i--;
 	}
+	if (i == -1 + is_sign && buf[is_sign] == '0')
+		change_first_digits(buf);
 }
 
-int			round_float_part(char *buf, int i, int last)
+int			round_float_part(char *buf, int i, int last, char n)
 {
-	if (buf[i] > '4' && buf[i - 1] != '.')
+	if (buf[i] > n && buf[i - 1] != '.')
 	{
 		i--;
 		if (buf[i] != '9')
@@ -73,7 +75,7 @@ int			round_float_part(char *buf, int i, int last)
 	return (0);
 }
 
-void		round_float(char *buf, int precision)
+void		round_float(char *buf, int precision, char n)
 {
 	int i;
 	int last;
@@ -81,9 +83,9 @@ void		round_float(char *buf, int precision)
 	i = (int)ft_strchri(buf, '.') + precision + 1;
 	buf[i + 1] = '\0';
 	last = i;
-	if (round_float_part(buf, i, last))
+	if (round_float_part(buf, i, last, n))
 		return ;
-	if (buf[i] > '4' && buf[i - 1] == '.')
+	if (buf[i] > n && buf[i - 1] == '.')
 		round_int_part(buf);
 	buf[last] = '\0';
 }

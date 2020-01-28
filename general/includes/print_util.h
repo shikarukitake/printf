@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "spec_util.h"
 # include "float_util.h"
-# include "print_oct_buf.h"
+# include "print_oct.h"
 
 int		fill_precision_field(char *buf, t_spec *spec);
 

@@ -30,6 +30,5 @@ t_spec	*init_spec(void)
 	new->precision.is_dot = FALSE;
 	while (i < MAX_FLAGS)
 		new->flags[i++] = FALSE;
-	new->color_id = -1;
 	return (new);
 }

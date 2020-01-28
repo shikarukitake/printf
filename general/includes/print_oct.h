@@ -15,12 +15,13 @@
 
 # include <stdarg.h>
 # include "specificator.h"
-# include "get_oct.h"
+# include "get_digit.h"
 # include "convert.h"
 # include "print_f_buf.h"
-# include "print_oct_buf.h"
 # include "print_digit_buf.h"
 
 int		ft_print_o(t_spec *spec, va_list *args);
+
+int		is_oct_prefix(t_spec *spec);
 
 #endif

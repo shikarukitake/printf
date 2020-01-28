@@ -12,6 +12,41 @@
 
 #include "print_f_buf.h"
 
+void		add_sing_and_sp(char *f, t_spec *spec)
+{
+	if (ft_strcmp(f, "inf") == 0 && spec->flags['+'] == TRUE)
+	{
+		ft_strcpy(f, "+inf");
+		if (spec->flags[' '] == TRUE)
+			ft_strcpy(f, " +inf");
+		return ;
+	}
+	else if (ft_strcmp(f, "inf") == 0 && spec->flags[' '] == TRUE)
+		ft_strcpy(f, " inf");
+}
+
+void		add_zeros(char *buf, t_spec *spec)
+{
+	int i;
+	int f_num;
+	int precision;
+
+	precision = get_float_precision(spec);
+	f_num = 0;
+	i = (int)ft_strchri(buf, '.') + 1;
+	while (buf[i])
+	{
+		f_num++;
+		i++;
+	}
+	while (f_num < precision)
+	{
+		buf[i++] = '0';
+		f_num++;
+	}
+	buf[i] = '\0';
+}
+
 int			print_float_buf(char *f, t_spec *spec)
 {
 	int i;
@@ -60,7 +95,7 @@ int			print_f_buf(char *f, t_spec *spec, char sign, int is_dot)
 	return ((is_need_wh(f, spec) && (sign <= 0)) ? i + 1 : i);
 }
 
-int			print_f(char *f, t_spec *spec)
+int			print_f(char *f, t_spec *spec, t_ld *ld)
 {
 	char	sign;
 	int		is_dot;
@@ -72,7 +107,7 @@ int			print_f(char *f, t_spec *spec)
 	}
 	if (is_float_null_case(f, spec))
 		return (1);
-	round_float(f, spec->precision.value == -1 ? 6 : spec->precision.value);
+	round_float(f, get_float_precision(spec), ld->round);
 	add_zeros(f, spec);
 	if (is_need_wh(f, spec))
 	{

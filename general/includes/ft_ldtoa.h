@@ -35,6 +35,14 @@ typedef	union			u_ldc
 	}					parts;
 }						t_ldc;
 
-void					ft_ldtoa(long double ld, char *buffer);
+typedef struct			s_ld
+{
+	int					is_float_part;
+	long double			value;
+	char				round;
+
+}						t_ld;
+
+void					ft_ldtoa(t_ld *ld, char *buffer);
 
 #endif

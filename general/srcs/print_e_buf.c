@@ -12,61 +12,21 @@
 
 #include "print_e_buf.h"
 
-int first_digit(char ch)
+int		float_shift_left_one(char *e)
 {
-	return (ch > '0' && ch <= '9');
-}
-
-int get_exp(char *e)
-{
-	int dot;
-	int digit;
-
-	dot = ft_strchri(e, '.');
-	digit = ft_str_find(e, first_digit);
-	if (dot == -1 || digit == -1)
-		return (0);
-	if (digit < dot)
-		return (dot - digit - 1);
-	else
-		return -(digit - dot);
-}
-
-int		display_exp(int exp)
-{
+	int		begin;
 	int		i;
-	char	tmp[80];
 
-	ft_bzero(tmp, 80);
-	i = 1;
-	if (exp < 0)
+	begin = (e[0] == '-' ? 2 : 1);
+	e[begin - 1] = e[begin + 1];
+	i = begin + 1;
+	while (e[i + 1])
 	{
-		ft_putchar('-');
-		exp = -exp;
-	}
-	else
-		ft_putchar('+');
-	if (exp < 10)
-	{
-		ft_putchar('0');
+		e[i] = e[i + 1];
 		i++;
 	}
-	ft_itoa_base(exp, tmp, 10, 'a');
-	ft_putstr(tmp);
-	i += ft_strlen(tmp);
-	return (i);
+	return (0);
 }
-
-/*
- *   [0] [1] [2] [3] [4] [5]
- *   [8] [8] [1] [.] [1] [5]
- *   [8] [8] [8] [.] [1] [5]
- *   [8] [8] [8] [8] [1] [5]
- *   [8] [.] [8] [1] [1] [5]
- *
- *   from = 3
- *   to   = 1
- */
 
 int 	str_shift_left(char *buf, int from, int to)
 {
@@ -84,23 +44,7 @@ int 	str_shift_left(char *buf, int from, int to)
 	return (0);
 }
 
-int		float_shift_left_one(char *e)
-{
-	int		begin;
-	int		i;
-
-	begin = (e[0] == '-' ? 2 : 1);
-	e[begin - 1] = e[begin + 1];
-	i = begin + 1;
-	while (e[i + 1])
-	{
-		e[i] = e[i + 1];
-		i++;
-	}
-	return (0);
-}
-
-int 	float_shift_left_n(char *e, int exp)
+int		float_shift_left_n(char *e, int exp)
 {
 	int	begin;
 	int	i;
@@ -130,24 +74,43 @@ int		place_dot(char *e, int exp)
 		float_shift_left_one(e);
 	else
 		float_shift_left_n(e, exp);
-	//e[begin + 1 + get_float_precision(spec)] = '\0';
 	return (0);
 }
 
-int		print_e_buf(char *e, t_spec *spec, char a)
+int 	check_carry(char *e, int exp)
+{
+	int i;
+	int new_e;
+
+	new_e = 0;
+	i = ft_strchri(e, '.');
+	if (i >= ( 2 + (e[0] == '-')))
+	{
+		if (exp <= -1)
+			exp++;
+		else
+			new_e = exp + 1;
+		place_dot(e, exp + 1);
+		return (new_e);
+	}
+	return (exp);
+}
+int		print_e_buf(char *e, t_spec *spec, char a, t_ld *ld)
 {
 	int exp;
+	int i;
+	char tmp[2];
 
+	i = 0;
 	exp = get_exp(e);
 	place_dot(e, exp);
-	print_f(e, spec);
-	//ft_putstr(e);
-	ft_putchar(a);
-	display_exp(exp);
-	return (0);
+	round_float(e, get_float_precision(spec), ld->round);
+	exp = check_carry(e, exp);
+	add_zeros(e, spec);
+	tmp[0] = a;
+	tmp[1] = '\0';
+	ft_strcat(e, tmp);
+	add_exp(exp, e);
+	i += print_f_buf(e, spec, get_sign(e, spec), (e[ft_strlen(e) - 1] == '.'));
+	return (i);
 }
-
-/*   0  1  2  3  4  5  6        0  1  2  3  4  5
- *  [8, 8, 1, ., 1, 5, 6 ]
- *  [8, ., 8, 1, 1, 5]
- */

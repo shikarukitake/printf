@@ -18,15 +18,14 @@
 
 # include "libft.h"
 # include "printf_constants.h"
-# include "get_sd.h"
-# include "get_ud.h"
-# include "get_p.h"
 # include "print_f_buf.h"
 # include "specificator.h"
 # include "print_hex_buf.h"
 # include "print_digit_buf.h"
 # include "print_d_buf.h"
 # include "print_sd_buf.h"
+# include "convert.h"
+# include "get_digit.h"
 
 int		ft_print_d(t_spec *spec, va_list *args);
 

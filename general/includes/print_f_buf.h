@@ -18,13 +18,13 @@
 # include "libft.h"
 # include "printf_constants.h"
 # include "specificator.h"
-# include "put_bch.h"
 # include "print_digit_buf.h"
 # include "print_str.h"
 # include "float_util.h"
 # include "round_float.h"
-# include "prepare_f_buf.h"
 
-int		print_f(char *f, t_spec *spec);
+int		print_f(char *f, t_spec *spec, t_ld *ld);
+void	add_zeros(char *buf, t_spec *spec);
+int		print_f_buf(char *f, t_spec *spec, char sign, int is_dot);
 
 #endif

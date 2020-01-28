@@ -13,9 +13,9 @@ static char *test_simple()
 	double d;
 
 	d =  881.15625;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "%g", d);
 	d = -881.123;
-	mu_assert_printf("test2", ft_printf, "%e", d);
+	mu_assert_printf("test2", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -24,9 +24,9 @@ static char *test_simple2()
 	double d;
 
 	d =  0.15625;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "%g", d);
 	d = -0.123;
-	mu_assert_printf("test2", ft_printf, "%e", d);
+	mu_assert_printf("test2", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -35,9 +35,9 @@ static char *test_simple3()
 	double d;
 
 	d = 0.999999;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "%g", d);
 	d = 0.9999999;
-	mu_assert_printf("test2", ft_printf, "%e", d);
+	mu_assert_printf("test2", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -46,7 +46,7 @@ static char *test_simple4()
 	double d;
 
 	d = 0.000039;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ static char *test_simple5()
 	double d;
 
 	d = 43.4399999;
-	mu_assert_printf("test1", ft_printf, "%e", d);
+	mu_assert_printf("test1", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ static char *test_simple6()
 	double d;
 
 	d = 0.99999999;
-	mu_assert_printf("test nines", ft_printf, "%e", d);
+	mu_assert_printf("test nines", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -73,7 +73,7 @@ static char *test_simple7()
 	double d;
 
 	d = 23.999999999;
-	mu_assert_printf("test nines", ft_printf, "%e", d);
+	mu_assert_printf("test nines", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -82,7 +82,7 @@ static char *test_simple8()
 	double d;
 
 	d = 999.99999999;
-	mu_assert_printf("test nines", ft_printf, "%e", d);
+	mu_assert_printf("test nines", ft_printf, "%g", d);
 	return (0);
 }
 
@@ -91,13 +91,13 @@ static char *test_simple9()
 	double d;
 
 	d = 999.99999999;
-	mu_assert_printf("test nines", ft_printf, "%10e", d);
+	mu_assert_printf("test nines", ft_printf, "%10g", d);
 	return (0);
 }
 
 int main()
 {
-	test_all("SIMPLE E TESTS", 9,
+	test_all("SIMPLE G TESTS", 9,
 			test_simple,
 			test_simple2,
 			test_simple3,

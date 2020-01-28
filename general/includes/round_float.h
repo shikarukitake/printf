@@ -16,6 +16,6 @@
 # include "printf_constants.h"
 # include "libft.h"
 
-void		round_float(char *buf, int precision);
+void		round_float(char *buf, int precision, char n);
 
 #endif

@@ -15,8 +15,10 @@
 int		ft_print_u(t_spec *spec, va_list *args)
 {
 	char	buffer[MAX_LL_BUFF_SIZE];
+	t_conv	conv;
 
 	ft_bzero(buffer, MAX_LL_BUFF_SIZE);
-	get_ud(args, spec, buffer);
+	conv = (t_conv){10, 'a'};
+	get_general_ud(args, &conv, spec, buffer);
 	return (print_d_buf(buffer, spec, put_sign_prefix));
 }

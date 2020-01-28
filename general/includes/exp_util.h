@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_p.h                                            :+:      :+:    :+:   */
+/*   exp_util.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayellin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 21:46:19 by ayellin           #+#    #+#             */
-/*   Updated: 2020/01/21 21:46:38 by ayellin          ###   ########.fr       */
+/*   Created: 2020/01/28 19:16:47 by ayellin           #+#    #+#             */
+/*   Updated: 2020/01/28 19:17:04 by ayellin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_GET_P_H
-# define PRINTF_GET_P_H
+#ifndef PRINTF_EXP_UTIL_H
+# define PRINTF_EXP_UTIL_H
+# include "libft.h"
 
-# include <stdarg.h>
-# include <specificator.h>
+void	add_exp(int exp, char * e);
 
-void		get_p(va_list *va_args, t_spec *spec, char *buffer);
+int		get_exp(char *e);
+
+int		first_digit(char ch);
 
 #endif

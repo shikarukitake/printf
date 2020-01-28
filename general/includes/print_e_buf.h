@@ -18,11 +18,11 @@
 # include "libft.h"
 # include "printf_constants.h"
 # include "specificator.h"
-# include "put_bch.h"
 # include "print_digit_buf.h"
 # include "print_str.h"
 # include "print_f_buf.h"
+# include "exp_util.h"
 
-int		print_e_buf(char *e, t_spec *spec, char a);
+int		print_e_buf(char *e, t_spec *spec, char a, t_ld *ld);
 
 #endif

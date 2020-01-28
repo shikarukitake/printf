@@ -18,15 +18,17 @@ static int	is_double(t_spec *spec)
 			spec->size.value[0] == 'l' ||
 			spec->size.value[0] == 'h');
 }
-
-void		get_general_float(va_list *va_args, t_spec *spec, char *buffer)
+t_ld		get_general_float(va_list *va_args, t_spec *spec, char *buffer)
 {
-	long double value;
+	t_ld	ld;
 
-	value = 0.0;
+	ld.value = 0.0;
+	ld.is_float_part = 1;
+	ld.round = '4';
 	if (is_double(spec))
-		value = (long double)va_arg(*va_args, double);
+		ld.value = (long double)va_arg(*va_args, double);
 	else if (spec->size.value[0] == 'L')
-		value = va_arg(*va_args, long double);
-	ft_ldtoa(value, buffer);
+		ld.value = va_arg(*va_args, long double);
+	ft_ldtoa(&ld, buffer);
+	return (ld);
 }

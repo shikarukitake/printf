@@ -17,8 +17,7 @@
 
 # include "specificator.h"
 # include "ft_ldtoa.h"
-# include "float_convert.h"
 
-void	get_general_float(va_list *va_args, t_spec *spec, char *buffer);
+t_ld	get_general_float(va_list *va_args, t_spec *spec, char *buffer);
 
 #endif

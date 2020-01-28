@@ -15,7 +15,7 @@
 
 # include "specificator.h"
 # include "stdarg.h"
-# include "get_f.h"
+# include "get_float.h"
 # include "print_f_buf.h"
 # include "print_float.h"
 # include "ft_ldtoa.h"
@@ -27,6 +27,6 @@ int		ft_print_f(t_spec *spec, va_list *args);
 
 int		ft_print_e(t_spec *spec, va_list *args);
 
-int		ft_print_ee(t_spec *spec, va_list *args);
+int		ft_print_g(t_spec *spec, va_list *args);
 
 #endif

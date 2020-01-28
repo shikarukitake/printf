@@ -12,6 +12,14 @@
 
 #include "util.h"
 
+void		put_or_copy(char *dest, const char *prefix)
+{
+	if (dest)
+		ft_strcpy(dest, prefix);
+	else
+		ft_putstr(prefix);
+}
+
 size_t		print_buf(const char *buf)
 {
 	if (buf)

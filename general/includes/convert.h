@@ -15,7 +15,6 @@
 
 typedef struct	s_conv
 {
-	int			is_signed;
 	int			base;
 	char		a;
 }				t_conv;

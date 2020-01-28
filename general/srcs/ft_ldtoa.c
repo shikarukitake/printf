@@ -41,28 +41,31 @@ int			make_int_part(char **int_part, t_ldc *ldc)
 	}
 }
 
-void		make_float_part(char **float_part, t_ldc *ldc, int less_than_one)
+void		make_float_part(char **float_part, t_ldc *ldc, int lho, t_ld *ld)
 {
-	if (ldc->parts.e < 63u || less_than_one == 0)
+	if (ldc->parts.e < 63u || lho == 0)
 	{
 		*float_part = ft_memalloc(MAX_F_BUF_SIZE);
-		get_float_part(ldc->parts.m, ldc->parts.e, *float_part, less_than_one);
+		get_float_part(ldc->parts.m, ldc->parts.e, *float_part, lho);
 	}
 	else
+	{
 		*float_part = ft_strdup("0");
+		ld->is_float_part = 0;
+	}
 }
 
-void		ft_ldtoa(long double ld, char *buffer)
+void		ft_ldtoa(t_ld *ld, char *buffer)
 {
 	char	*int_part_buf;
 	char	*float_part_buf;
 	int		less_than_one;
 	t_ldc	ldc;
 
-	ldc = (t_ldc) {.ld = ld};
-	if (is_reserved_value(ldc, ld, buffer))
+	ldc = (t_ldc) {.ld = ld->value};
+	if (is_reserved_value(ldc, ld->value, buffer))
 		return ;
 	less_than_one = make_int_part(&int_part_buf, &ldc);
-	make_float_part(&float_part_buf, &ldc, less_than_one);
-	make_ld_buf(ld, buffer, int_part_buf, float_part_buf);
+	make_float_part(&float_part_buf, &ldc, less_than_one, ld);
+	make_ld_buf(ld->value, buffer, int_part_buf, float_part_buf);
 }

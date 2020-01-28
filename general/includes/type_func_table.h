@@ -14,6 +14,7 @@
 # define PRINTF_TYPE_FUNC_TABLE_H
 
 # include <stdarg.h>
+
 # include "print_oct.h"
 # include "print_hex.h"
 # include "print_f_buf.h"
