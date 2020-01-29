@@ -24,7 +24,6 @@ t_ld		get_general_float(va_list *va_args, t_spec *spec, char *buffer)
 	t_ld	ld;
 
 	ld.value = 0.0;
-	ld.is_float_part = 1;
 	ld.round = '4';
 	if (is_double(spec))
 		ld.value = (long double)va_arg(*va_args, double);

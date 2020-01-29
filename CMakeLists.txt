@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 #set(CMAKE_CXX_FLAGS "-Wall -Werror")
 
-set(CMAKE_C_FLAGS  "-O3")
+set(CMAKE_C_FLAGS  "-g -Wall -Werror -Wextra")
 #includes
 include_directories(general)
 include_directories(test)
@@ -92,10 +92,6 @@ add_dependencies(ManualTesting mu ft ftprintf)
 add_executable(HexPlay test/x_tests/hex_play.c)
 add_executable(HexPlay2 test/x_tests/hex_convert_play.c)
 
-
-add_executable(BufferTest test/buffer_test/b1_test.c)
-target_link_libraries(BufferTest ${PROJECT_BINARY_DIR}/libftprintf.a)
-add_dependencies(BufferTest mu ft ftprintf)
 
 # Usage example of floating point numbers
 add_executable(Float other/float_usage.c)

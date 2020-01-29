@@ -19,7 +19,7 @@
 
 static void	ft_put_oct4(wchar_t wchar)
 {
-	unsigned int buf[4];
+	unsigned char buf[4];
 
 	buf[0] = (wchar >> 18u) + PREFIX4;
 	buf[1] = ((wchar >> 12u) & 63) + PREFIX1;
@@ -30,7 +30,7 @@ static void	ft_put_oct4(wchar_t wchar)
 
 static void	ft_put_oct3(wchar_t wchar)
 {
-	unsigned int buf[3];
+	unsigned char buf[3];
 
 	buf[0] = (wchar >> 12u) + PREFIX3;
 	buf[1] = ((wchar >> 6u) & 63) + PREFIX1;
@@ -40,7 +40,7 @@ static void	ft_put_oct3(wchar_t wchar)
 
 static void	ft_put_oct2(wchar_t wchar)
 {
-	unsigned int buf[2];
+	unsigned char buf[2];
 
 	buf[0] = (wchar >> 6u) + PREFIX2;
 	buf[1] = (wchar & 63u) + PREFIX1;

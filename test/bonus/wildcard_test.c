@@ -16,7 +16,6 @@ static char *mouli_test()
     return (0);
 }
 
-
 int main()
 {
     test_all("BONUS: WILDCARD", 1, mouli_test);

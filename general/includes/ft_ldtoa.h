@@ -37,7 +37,6 @@ typedef	union			u_ldc
 
 typedef struct			s_ld
 {
-	int					is_float_part;
 	long double			value;
 	char				round;
 

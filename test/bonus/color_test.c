@@ -7,5 +7,4 @@
 int main()
 {
     ft_printf("ololol%{blu}blueblue%{eoc}none");
-
 }
